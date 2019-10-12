@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   }
 
   goTo(route: string) {
+    // recibe el path como string
     this.router.navigate([route]);
   }
 }

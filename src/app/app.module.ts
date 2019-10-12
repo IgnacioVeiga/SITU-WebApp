@@ -33,7 +33,7 @@ import { ComplaintsComponent } from './pages/complaints/list/complaints.componen
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AlertsModule
+    AlertsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
