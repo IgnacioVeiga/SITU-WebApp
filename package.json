@@ -1,6 +1,6 @@
 {
-  "name": "tp6-bo",
-  "version": "0.0.0",
+  "name": "tp6-web",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
