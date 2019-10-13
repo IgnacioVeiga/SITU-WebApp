@@ -1,1 +1,28 @@
-<p>register works!</p>
+<!-- <section> -->
+<form class="form-signin">
+    <div class="card p-4">
+        <div class="text-center mb-2">
+            <img width="160" alt="SITU logo" src="/assets/images/logo.png" />
+        </div>
+
+        <input type="text" id="dni" class="form-control mb-2" placeholder="DNI">
+        <input type="text" id="email" class="form-control mb-2" placeholder="Email">
+        <input type="text" id="repetirEmail" class="form-control mb-2" placeholder="Repetir Email">
+        <input type="password" id="password" class="form-control mb-2" placeholder="Contraseña">
+        <input type="password" id="repetirPassword" class="form-control mb-2" placeholder="Repetir Contraseña">
+
+        <div class="text-center mb-2">
+            <img width="250" alt="recaptcha" src="/assets/images/recaptcha.png" />
+        </div>
+
+        <div class="mb-2">
+            <button type="button" class="btn btn-primary btn-block" (click)="goTo('home')">Registar</button>
+        </div>
+
+        <div class="mb-2">
+            <button type="button" class="btn btn-secondary btn-block" (click)="goTo('login')">Volver</button>
+        </div>
+
+    </div>
+</form>
+<!-- </section> -->
