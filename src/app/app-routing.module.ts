@@ -13,18 +13,72 @@ import { CreateComplaintComponent } from './pages/complaints/create-complaint/cr
 import { ComplaintsComponent } from './pages/complaints/list/complaints.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'my-profile', component: MyProfileComponent },
-  { path: 'complaints', component: ComplaintsComponent },
-  { path: 'create-complaint', component: CreateComplaintComponent },
-  { path: 'info', component: InfoComponent },
-  { path: 'help', component: HelpComponent },
-  { path: 'alerts', component: AlertsComponent },
-  { path: 'create-alert', component: CreateAlertComponent },
-  { path: 'schedule', component: ScheduleComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+
+  // todos
+  {
+    // inicio (todos)
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    // mi perfil (todos)
+    path: 'my-profile',
+    component: MyProfileComponent
+  },
+  {
+    // ingresar (todos)
+    path: 'login',
+    component: LoginComponent
+  },
+
+  // pasajero
+  {
+    // registrar (pasajero)
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    // denunciar (pasajero)
+    path: 'create-complaint',
+    component: CreateComplaintComponent
+  },
+  {
+    // información (pasajero)
+    path: 'info',
+    component: InfoComponent
+  },
+  {
+    // ayuda (pasajero)
+    path: 'help',
+    component: HelpComponent
+  },
+  {
+    // noticias o alertas (pasajero)
+    path: 'alerts',
+    component: AlertsComponent
+  },
+  {
+    // horarios (pasajero)
+    path: 'schedule',
+    component: ScheduleComponent
+  },
+
+  // admin
+  {
+    // lista de incidencias (admin)
+    path: 'complaints',
+    component: ComplaintsComponent
+  },
+  {
+    // generar alerta (admin y chofer)
+    path: 'create-alert',
+    component: CreateAlertComponent
+  }
 ];
 
 @NgModule({
