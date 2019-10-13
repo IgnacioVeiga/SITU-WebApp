@@ -1,34 +1,34 @@
 <!-- <section> -->
-    <form class="form-signin">
-        <div class="card p-4">
-            <div class="text-center mb-2">
-                <img width="160" alt="SITU logo" src="/assets/images/logo.png" />
-            </div>
-
-            <input type="text" id="dni" class="form-control mb-2" placeholder="DNI">
-            <input type="password" id="password" class="form-control mb-2" placeholder="Contraseña">
-
-            <div class="text-center mb-2">
-                <img width="250" alt="recaptcha" src="/assets/images/recaptcha.png" />
-            </div>
-
-            <div class="checkbox mb-2">
-                <label>
-                    <input type="checkbox" value="remember-me"> Remember me
-                </label>
-            </div>
-
-            <div class="card mb-2">
-                <button type="button" class="btn btn-primary">Ingresar</button>
-            </div>
-
-            <div class="card mb-2">
-                <button type="button" class="btn btn-secondary">Omitir</button>
-            </div>
-
-            <div>
-                ¿No tenés una cuenta? <a href=""><span class="">Registrate</span></a>
-            </div>
+<form class="form-signin">
+    <div class="card p-4">
+        <div class="text-center mb-2">
+            <img width="160" alt="SITU logo" src="/assets/images/logo.png" />
         </div>
-    </form>
+
+        <input type="text" id="dni" class="form-control mb-2" placeholder="DNI">
+        <input type="password" id="password" class="form-control mb-2" placeholder="Contraseña">
+
+        <div class="text-center mb-2">
+            <img width="250" alt="recaptcha" src="/assets/images/recaptcha.png" />
+        </div>
+
+        <div class="checkbox mb-2">
+            <label>
+                <input type="checkbox" value="remember-me"> Mantener sesión
+            </label>
+        </div>
+
+        <div class="mb-2">
+            <button type="button" class="btn btn-primary btn-block" (click)="goTo('home')">Ingresar</button>
+        </div>
+
+        <div class="mb-2">
+            <button type="button" class="btn btn-secondary btn-block" (click)="goTo('home')">Omitir</button>
+        </div>
+
+        <div>
+            ¿No tenés una cuenta? <a (click)="goTo('register')" ><span class="text-primary show-pointer">Registrate</span></a>
+        </div>
+    </div>
+</form>
 <!-- </section> -->
