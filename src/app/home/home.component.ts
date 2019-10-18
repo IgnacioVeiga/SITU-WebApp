@@ -6,6 +6,10 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
+  /*
+  esta es la pantalla de inicio,
+  tanto para pasajeros y administradores
+  */
 
   constructor(
     private router: Router

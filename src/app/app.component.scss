@@ -1,14 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 
-.form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: auto;
-  }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-body{
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.fondo {
   background-color: #4890d2 !important;
+  overflow: unset !important;
 }
 
 .show-pointer:hover {

@@ -1,42 +1,62 @@
 <section>
-  <div class="text-center">
-    <img width="160" alt="SITU logo" src="/assets/images/logo.png" />
-  </div>
+  <span class="text-center m-1">
+    <h1 style="color:white">
+      <img width="160" alt="SITU logo" src="/assets/images/logo.png" />
+      Bienvenido a SITU
+    </h1>
+  </span>
 
-  <div class="card m-4">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2" (click)="goTo('schedule')">Horarios y
-            recorridos</button>
+  <div class="row text-center">
+    <div class="col-12">
+      <!-- <img style="width: 100%; height: 300px;" alt="bus" src="/assets/images/bus.jpg" /> -->
+      <h3 class="bold" style="color:white">¿En qué te podemos ayudar?</h3>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <div class="card ml-2">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2" (click)="goTo('schedule')">Horarios
+                y recorridos</button>
+            </div>
+            <div class="col-12">
+              <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2"
+                (click)="goTo('create-complaint')">Denunciar</button>
+            </div>
+            <div class="col-12">
+              <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2" (click)="goTo('alerts')">Noticias o
+                alertas</button>
+            </div>
+            <div class="col-12">
+              <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2"
+                (click)="goTo('info')">Información</button>
+            </div>
+          </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2"
-            (click)="goTo('create-complaint')">Denunciar</button>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2" (click)="goTo('alerts')">Noticias o
-            alertas</button>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2"
-            (click)="goTo('info')">Información</button>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2" (click)="goTo('help')">Ayuda</button>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2" (click)="goTo('complaints')">Ver
-            incidencias</button>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2" (click)="goTo('create-alert')">Generar
-            alertas</button>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12"></div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2" (click)="goTo('my-profile')">Mi
-            perfil</button>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <div class="card m-2">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2"
+                (click)="goTo('help')">Ayuda</button>
+            </div>
+            <div class="col-12">
+              <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2" (click)="goTo('complaints')">Ver
+                incidencias</button>
+            </div>
+            <div class="col-12">
+              <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2"
+                (click)="goTo('create-alert')">Generar
+                alertas</button>
+            </div>
+            <div class="col-12">
+              <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2" (click)="goTo('my-profile')">Mi
+                perfil</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

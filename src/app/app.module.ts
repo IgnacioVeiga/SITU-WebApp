@@ -14,6 +14,7 @@ import { AlertsModule } from './pages/alerts/alerts.module';
 import { ScheduleComponent } from './pages/schedule/schedule.component';
 import { CreateComplaintComponent } from './pages/complaints/create-complaint/create-complaint.component';
 import { ComplaintsComponent } from './pages/complaints/list/complaints.component';
+import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -27,13 +28,18 @@ import { ComplaintsComponent } from './pages/complaints/list/complaints.componen
     HelpComponent,
     AlertsComponent,
     ComplaintsComponent,
-    ScheduleComponent
+    ScheduleComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AlertsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
