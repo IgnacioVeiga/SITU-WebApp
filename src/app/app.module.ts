@@ -15,6 +15,7 @@ import { HorariosComponent } from './pages/horarios/horarios.component';
 import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule } from '@angular/material';
 import { HacerDenunciaComponent } from './pages/denuncias/hacer-denuncia/hacer-denuncia.component';
 import { ListaDenunciasComponent } from './pages/denuncias/lista-denuncias/lista-denuncias.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ListaDenunciasComponent } from './pages/denuncias/lista-denuncias/lista
     HorariosComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
