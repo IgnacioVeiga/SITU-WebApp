@@ -6,11 +6,11 @@ import { RegistrarseComponent } from './pages/usuario/registrarse/registrarse.co
 import { MiPerfilComponent } from './pages/usuario/mi-perfil/mi-perfil.component';
 import { InfoComponent } from './pages/info/info.component';
 import { AyudaComponent } from './pages/ayuda/help.component';
-import { AlertsComponent as NoticiasAlertasComponent } from './pages/noticias-alertas/listar/alerts.component';
 import { HorariosComponent } from './pages/horarios/horarios.component';
 import { HacerDenunciaComponent } from './pages/denuncias/hacer-denuncia/hacer-denuncia.component';
 import { ListaDenunciasComponent } from './pages/denuncias/lista-denuncias/lista-denuncias.component';
 import { GenerarAlertaComponent } from './pages/noticias-alertas/generar-alerta/generar-alerta.component';
+import { NoticiasAlertasComponent } from './pages/noticias-alertas/listado/noticias-alertas.component';
 
 const routes: Routes = [
   {
@@ -59,7 +59,7 @@ const routes: Routes = [
   },
   {
     // noticias o alertas (pasajero)
-    path: 'noticas-alertas',
+    path: 'noticias-alertas',
     component: NoticiasAlertasComponent
   },
   {
@@ -71,7 +71,7 @@ const routes: Routes = [
   // admin
   {
     // lista de incidencias (admin)
-    path: 'denuncias',
+    path: 'lista-denuncias',
     component: ListaDenunciasComponent
   },
   {

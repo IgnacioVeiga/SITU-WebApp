@@ -1,50 +1,50 @@
-<!-- <section> -->
-<form class="form-signin">
-    <div class="card m-4">
-        <div class="card-header">
-            <h4 class="card-title">Hacer denuncia</h4>
-        </div>
-        <div class="card-body">
-            <div class="row">
+<section>
+    <form class="form-signin">
+        <div class="card m-4">
+            <div class="card-header">
+                <h4 class="card-title">Hacer denuncia</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
 
-                <div class="col-12 mb-3">
-                    <h6 class="content-sub-header">Lugar del incidente</h6>
-                    <div class="btn-group btn-group-toggle block" ngbRadioGroup name="lugar">
-                        <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
-                            <input ngbButton type="radio" [value]="1">Mi ubicación actual
-                        </label>
-                        <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
-                            <input ngbButton type="radio" [value]="2">Otro lugar
-                        </label>
+                    <div class="col-12 mb-3">
+                        <h6 class="content-sub-header">Lugar del incidente</h6>
+                        <div class="btn-group btn-group-toggle block" ngbRadioGroup name="lugar">
+                            <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
+                                <input ngbButton type="radio" [value]="1">Mi ubicación actual
+                            </label>
+                            <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
+                                <input ngbButton type="radio" [value]="2">Otro lugar
+                            </label>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-12 mb-3">
-                    <h6 class="content-sub-header">Fecha y hora</h6>
-                    <div class="btn-group btn-group-toggle block" ngbRadioGroup name="fechaHora">
-                        <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
-                            <input ngbButton type="radio" [value]="FHactual">Usar actual
-                        </label>
-                        <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
-                            <input ngbButton type="radio" [value]="otraFH">Otra
-                        </label>
+                    <div class="col-12 mb-3">
+                        <h6 class="content-sub-header">Fecha y hora</h6>
+                        <div class="btn-group btn-group-toggle block" ngbRadioGroup name="fechaHora">
+                            <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
+                                <input ngbButton type="radio" [value]="1">Usar actual
+                            </label>
+                            <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
+                                <input ngbButton type="radio" [value]="2">Otra
+                            </label>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-12 mb-3">
-                    <h6 class="content-sub-header">Es un colectivo en especifico?</h6>
-                    <div class="btn-group btn-group-toggle block" ngbRadioGroup name="colectivo">
-                        <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
-                            <input ngbButton (select)="colectivoEspecifico = true" type="radio" [value]="siC">Si
-                        </label>
-                        <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
-                            <input ngbButton checked (select)="colectivoEspecifico = false" type="radio"
-                                [value]="noC">No
-                        </label>
+                    <div class="col-12 mb-3">
+                        <h6 class="content-sub-header">Es un colectivo en especifico?</h6>
+                        <div class="btn-group btn-group-toggle block" ngbRadioGroup name="colectivo">
+                            <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
+                                <input ngbButton (select)="colectivoEspecifico = true" type="radio" [value]="1">Si
+                            </label>
+                            <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
+                                <input ngbButton checked (select)="colectivoEspecifico = false" type="radio"
+                                    [value]="2">No
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</form>
-<!-- </section> -->
+    </form>
+</section>

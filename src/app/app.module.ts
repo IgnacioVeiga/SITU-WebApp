@@ -9,7 +9,7 @@ import { RegistrarseComponent } from './pages/usuario/registrarse/registrarse.co
 import { MiPerfilComponent } from './pages/usuario/mi-perfil/mi-perfil.component';
 import { InfoComponent } from './pages/info/info.component';
 import { AyudaComponent } from './pages/ayuda/help.component';
-import { AlertsComponent } from './pages/noticias-alertas/listar/alerts.component';
+import { NoticiasAlertasComponent } from './pages/noticias-alertas/listado/noticias-alertas.component';
 import { NoticasAlertasModule } from './pages/noticias-alertas/noticas-alertas.module';
 import { HorariosComponent } from './pages/horarios/horarios.component';
 import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule } from '@angular/material';
@@ -27,7 +27,6 @@ import { FormsModule } from '@angular/forms';
     MiPerfilComponent,
     InfoComponent,
     AyudaComponent,
-    AlertsComponent,
     ListaDenunciasComponent,
     HorariosComponent,
   ],
