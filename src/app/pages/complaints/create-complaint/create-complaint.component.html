@@ -1,1 +1,55 @@
-<p>create complaint works!</p>
+<!-- <section> -->
+<form class="form-signin">
+    <div class="card m-4">
+        <div class="card-header">
+            <h4 class="card-title">Hacer denuncia</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-12">
+                    <h6 class="content-sub-header">Lugar del incidente</h6>
+                    <div class="btn-group btn-group-toggle block" ngbRadioGroup name="lugar">
+                        <label ngbButtonLabel class="btn btn-outline-primary">
+                            <input ngbButton type="radio" [value]="ubicacionActual">Mi ubicación actual
+                        </label>
+                        <label ngbButtonLabel class="btn btn-outline-primary">
+                            <input ngbButton type="radio" [value]="otroLugar">Otro lugar
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <h6 class="content-sub-header">Fecha y hora</h6>
+                    <div class="btn-group btn-group-toggle block" ngbRadioGroup name="lugar">
+                        <label ngbButtonLabel class="btn btn-outline-primary">
+                            <input ngbButton type="radio" [value]="FHactual">Usar actual
+                        </label>
+                        <label ngbButtonLabel class="btn btn-outline-primary">
+                            <input ngbButton type="radio" [value]="otraFH">Otra
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                </div>
+
+                <div class="col-12">
+                    <h6 class="content-sub-header">Es un colectivo en especifico?</h6>
+                    <div class="btn-group btn-group-toggle block" ngbRadioGroup name="lugar">
+                        <label ngbButtonLabel class="btn btn-outline-primary">
+                            <input ngbButton (select)="colectivoEspecifico = true" type="radio" [value]="siC">Si
+                        </label>
+                        <label ngbButtonLabel class="btn btn-outline-primary">
+                            <input ngbButton checked (select)="colectivoEspecifico = false" type="radio" [value]="noC">No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- </section> -->

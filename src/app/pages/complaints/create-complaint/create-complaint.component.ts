@@ -1,14 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-complaint',
   templateUrl: './create-complaint.component.html'
 })
-export class CreateComplaintComponent implements OnInit {
+export class CreateComplaintComponent {
+  otraFH = false;
+  otroLugar = false;
+  colectivoEspecifico = false;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
-  ngOnInit() {
+  goHome() {
+    this.router.navigate(['home']);
   }
 
 }
