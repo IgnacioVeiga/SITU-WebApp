@@ -3,38 +3,38 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './pages/user/login/login.component';
-import { RegisterComponent } from './pages/user/register/register.component';
-import { MyProfileComponent } from './pages/user/my-profile/my-profile.component';
+import { InicioComponent } from './inicio/inicio.component';
+import { IngresarComponent } from './pages/usuario/ingresar/ingresar.component';
+import { RegistrarseComponent } from './pages/usuario/registrarse/registrarse.component';
+import { MiPerfilComponent } from './pages/usuario/mi-perfil/mi-perfil.component';
 import { InfoComponent } from './pages/info/info.component';
-import { HelpComponent } from './pages/help/help.component';
-import { AlertsComponent } from './pages/alerts/list/alerts.component';
-import { AlertsModule } from './pages/alerts/alerts.module';
-import { ScheduleComponent } from './pages/schedule/schedule.component';
-import { CreateComplaintComponent } from './pages/complaints/create-complaint/create-complaint.component';
-import { ComplaintsComponent } from './pages/complaints/list/complaints.component';
+import { AyudaComponent } from './pages/ayuda/help.component';
+import { AlertsComponent } from './pages/noticias-alertas/listar/alerts.component';
+import { NoticasAlertasModule } from './pages/noticias-alertas/noticas-alertas.module';
+import { HorariosComponent } from './pages/horarios/horarios.component';
 import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule } from '@angular/material';
+import { HacerDenunciaComponent } from './pages/denuncias/hacer-denuncia/hacer-denuncia.component';
+import { ListaDenunciasComponent } from './pages/denuncias/lista-denuncias/lista-denuncias.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    LoginComponent,
-    RegisterComponent,
-    CreateComplaintComponent,
-    MyProfileComponent,
+    InicioComponent,
+    IngresarComponent,
+    RegistrarseComponent,
+    HacerDenunciaComponent,
+    MiPerfilComponent,
     InfoComponent,
-    HelpComponent,
+    AyudaComponent,
     AlertsComponent,
-    ComplaintsComponent,
-    ScheduleComponent,
+    ListaDenunciasComponent,
+    HorariosComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AlertsModule,
+    NoticasAlertasModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,

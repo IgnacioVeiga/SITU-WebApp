@@ -9,11 +9,11 @@
 
                 <div class="col-12">
                     <h6 class="content-sub-header">Lugar del incidente</h6>
-                    <div class="btn-group btn-group-toggle block" ngbRadioGroup name="lugar">
-                        <label ngbButtonLabel class="btn btn-outline-primary">
+                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="lugar">
+                        <label ngbButtonLabel class="btn-primary">
                             <input ngbButton type="radio" [value]="ubicacionActual">Mi ubicación actual
                         </label>
-                        <label ngbButtonLabel class="btn btn-outline-primary">
+                        <label ngbButtonLabel class="btn-primary">
                             <input ngbButton type="radio" [value]="otroLugar">Otro lugar
                         </label>
                     </div>
@@ -41,7 +41,8 @@
                             <input ngbButton (select)="colectivoEspecifico = true" type="radio" [value]="siC">Si
                         </label>
                         <label ngbButtonLabel class="btn btn-outline-primary">
-                            <input ngbButton checked (select)="colectivoEspecifico = false" type="radio" [value]="noC">No
+                            <input ngbButton checked (select)="colectivoEspecifico = false" type="radio"
+                                [value]="noC">No
                         </label>
                     </div>
                 </div>

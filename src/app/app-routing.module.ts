@@ -1,51 +1,51 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './pages/user/login/login.component';
-import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './pages/user/register/register.component';
-import { MyProfileComponent } from './pages/user/my-profile/my-profile.component';
+import { IngresarComponent } from './pages/usuario/ingresar/ingresar.component';
+import { InicioComponent } from './inicio/inicio.component';
+import { RegistrarseComponent } from './pages/usuario/registrarse/registrarse.component';
+import { MiPerfilComponent } from './pages/usuario/mi-perfil/mi-perfil.component';
 import { InfoComponent } from './pages/info/info.component';
-import { HelpComponent } from './pages/help/help.component';
-import { AlertsComponent } from './pages/alerts/list/alerts.component';
-import { CreateAlertComponent } from './pages/alerts/create/create-alert.component';
-import { ScheduleComponent } from './pages/schedule/schedule.component';
-import { CreateComplaintComponent } from './pages/complaints/create-complaint/create-complaint.component';
-import { ComplaintsComponent } from './pages/complaints/list/complaints.component';
+import { AyudaComponent } from './pages/ayuda/help.component';
+import { AlertsComponent as NoticiasAlertasComponent } from './pages/noticias-alertas/listar/alerts.component';
+import { HorariosComponent } from './pages/horarios/horarios.component';
+import { HacerDenunciaComponent } from './pages/denuncias/hacer-denuncia/hacer-denuncia.component';
+import { ListaDenunciasComponent } from './pages/denuncias/lista-denuncias/lista-denuncias.component';
+import { GenerarAlertaComponent } from './pages/noticias-alertas/generar-alerta/generar-alerta.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/ingresar',
     pathMatch: 'full'
   },
 
   // todos
   {
     // inicio (todos)
-    path: 'home',
-    component: HomeComponent
+    path: 'inicio',
+    component: InicioComponent
   },
   {
     // mi perfil (todos)
-    path: 'my-profile',
-    component: MyProfileComponent
+    path: 'mi-perfil',
+    component: MiPerfilComponent
   },
   {
     // ingresar (todos)
-    path: 'login',
-    component: LoginComponent
+    path: 'ingresar',
+    component: IngresarComponent
   },
 
   // pasajero
   {
     // registrar (pasajero)
-    path: 'register',
-    component: RegisterComponent
+    path: 'registrarse',
+    component: RegistrarseComponent
   },
   {
     // denunciar (pasajero)
-    path: 'create-complaint',
-    component: CreateComplaintComponent
+    path: 'hacer-denuncia',
+    component: HacerDenunciaComponent
   },
   {
     // información (pasajero)
@@ -54,30 +54,30 @@ const routes: Routes = [
   },
   {
     // ayuda (pasajero)
-    path: 'help',
-    component: HelpComponent
+    path: 'ayuda',
+    component: AyudaComponent
   },
   {
     // noticias o alertas (pasajero)
-    path: 'alerts',
-    component: AlertsComponent
+    path: 'noticas-alertas',
+    component: NoticiasAlertasComponent
   },
   {
     // horarios (pasajero)
-    path: 'schedule',
-    component: ScheduleComponent
+    path: 'horarios',
+    component: HorariosComponent
   },
 
   // admin
   {
     // lista de incidencias (admin)
-    path: 'complaints',
-    component: ComplaintsComponent
+    path: 'denuncias',
+    component: ListaDenunciasComponent
   },
   {
     // generar alerta (admin y chofer)
-    path: 'create-alert',
-    component: CreateAlertComponent
+    path: 'generar-alerta',
+    component: GenerarAlertaComponent
   }
 ];
 

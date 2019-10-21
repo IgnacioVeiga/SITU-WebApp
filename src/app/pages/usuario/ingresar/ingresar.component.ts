@@ -2,14 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html'
+  selector: 'app-ingresar',
+  templateUrl: './ingresar.component.html'
 })
-export class HomeComponent implements OnInit {
-  /*
-  esta es la pantalla de inicio,
-  tanto para pasajeros y administradores
-  */
+export class IngresarComponent implements OnInit {
 
   constructor(
     private router: Router
@@ -19,7 +15,7 @@ export class HomeComponent implements OnInit {
   }
 
   goTo(route: string) {
-    // recibe el path como string
+    // recibe el path como string (ver app-routing.module)
     this.router.navigate([route]);
   }
 }
