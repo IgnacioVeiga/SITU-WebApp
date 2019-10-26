@@ -15,6 +15,8 @@ import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatBu
 import { HacerDenunciaComponent } from './pages/denuncias/hacer-denuncia/hacer-denuncia.component';
 import { ListaDenunciasComponent } from './pages/denuncias/lista-denuncias/lista-denuncias.component';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { FormsModule } from '@angular/forms';
     HorariosComponent,
   ],
   imports: [
+    CommonModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,
@@ -39,7 +42,14 @@ import { FormsModule } from '@angular/forms';
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      tapToDismiss: true,
+      closeButton: true
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
