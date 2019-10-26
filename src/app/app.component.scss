@@ -7,6 +7,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: rgb(255, 254, 251) !important;
 }
 
 .form-signin {
@@ -17,10 +18,50 @@ body {
 }
 
 .fondo {
-  background-color: #4890d2 !important;
+  background-color: rgb(255, 255, 255) !important;
   overflow: unset !important;
 }
 
 .show-pointer:hover {
   cursor: pointer;
+}
+
+.mat-toolbar.mat-primary {
+  background: rgb(255, 166, 0);
+  color: #fff;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #efa51d;
+  border-color: #efa51d;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+a:hover {
+  color: #7b540e;
+  text-decoration: underline;
+}
+
+#footer {
+  padding: 20px 0;
+  border-top: 1px solid #ececec;
+  color: #444;
+  font-size: 20px;
+  text-align: center;
+}
+
+.flex-spacer {
+  flex-grow: 1;
 }

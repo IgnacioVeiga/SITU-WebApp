@@ -3,13 +3,17 @@
         <button mat-icon-button>
             <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
         </button>
-        <h1>SITU</h1>
+        <h1><img width="120" alt="SITU logo" src="/assets/images/logoNombre.png" /></h1>
         <span class="menu-spacer"></span>
         <div>
             <a mat-button [routerLink]="'/inicio'">Inicio</a>
             <a mat-button [routerLink]="'/noticias-alertas'">Noticias o alertas</a>
             <a mat-button [routerLink]="'/ayuda'">Ayuda</a>
             <a mat-button [routerLink]="'/info'">Información</a>
+        </div>
+        <div class="flex-spacer"></div>
+        <div>
+            <a mat-button [routerLink]="'/info'">Mi perfil</a>
         </div>
     </mat-toolbar-row>
 </mat-toolbar>
@@ -24,6 +28,10 @@
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content class="fondo">
-            <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
+        <div class="text-center py-4">
+            © 2019 Developed by <a (click)="goTo('inicio')"><span class="text-primary show-pointer">M.T
+                    Technologies</span></a>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
