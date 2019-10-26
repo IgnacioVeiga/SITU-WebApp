@@ -1,1 +1,103 @@
-<p>schedule works!</p>
+<section>
+    <div class="row text-center p-3">
+
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="row">
+                <div class="card ml-2">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input type="text" id="linea" class="form-control mb-2" placeholder="Linea">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" id="recorrido" class="form-control mb-2" placeholder="Recorrido">
+                            </div>
+                            <div class="col-12">
+                                <button type="button" class="btn btn-primary btn-block"
+                                    (click)="goTo('noticias-alertas')">Buscar paradas</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="card ml-2" style="width: 100%;">
+                    <div class=" card-body">
+                        <div class="row">
+                            <div class="col-12 text-center" style="color:#20285b">
+                                <h4> Próximos colectivos</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-7 text-left">
+                                                Carolina Diaz <br> 1748
+                                            </div>
+                                            <div class="col-5 text-right">Arribando</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-7 text-left">
+                                                Juan Castro <br> 1723
+                                            </div>
+                                            <div class="col-5 text-right">5 min</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item active">
+                                        <div class="row">
+                                            <div class="col-7 text-left">
+                                                Alicia Ferreyra <br> 1769
+                                            </div>
+                                            <div class="col-5 text-right"> 25 min</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-7 text-left">
+                                                Bruno Diaz <br> 1710
+                                            </div>
+                                            <div class="col-5 text-right"> 45 min</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9 col-md-9 col-sm-12">
+            <!-- <div class="mapouter">
+                <div class="gmap_canvas"><iframe width="980" height="540" id="gmap_canvas"
+                        src="https://maps.google.com/maps?q=utn%20Campana&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>Google Maps Generator
+                    by <a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div>
+                <style>
+                    .mapouter {
+                        position: relative;
+                        text-align: right;
+                        height: 540px;
+                        width: 980px;
+                    }
+
+                    .gmap_canvas {
+                        overflow: hidden;
+                        background: none !important;
+                        height: 540px;
+                        width: 980px;
+                    }
+                </style> 
+            </div>-->
+
+            <img alt="SITU logo" src="/assets/images/mapa.jpg" />
+
+        </div>
+
+    </div>
+</section>
