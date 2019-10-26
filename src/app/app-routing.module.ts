@@ -10,7 +10,8 @@ import { HorariosComponent } from './pages/horarios/horarios.component';
 import { HacerDenunciaComponent } from './pages/denuncias/hacer-denuncia/hacer-denuncia.component';
 import { ListaDenunciasComponent } from './pages/denuncias/lista-denuncias/lista-denuncias.component';
 import { GenerarAlertaComponent } from './pages/noticias-alertas/generar-alerta/generar-alerta.component';
-import { NoticiasAlertasComponent } from './pages/noticias-alertas/listado/noticias-alertas.component';
+import { NoticiasComponent } from './pages/noticias-alertas/listado/noticias/noticias.component';
+import { AlertasComponent } from './pages/noticias-alertas/listado/alertas/alertas.component';
 
 const routes: Routes = [
   {
@@ -51,8 +52,12 @@ const routes: Routes = [
     component: AyudaComponent
   },
   {
-    path: 'noticias-alertas',
-    component: NoticiasAlertasComponent
+    path: 'alertas',
+    component: AlertasComponent
+  },
+  {
+    path: 'noticias',
+    component: NoticiasComponent
   },
   {
     path: 'horarios',

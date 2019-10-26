@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GenerarAlertaComponent } from './generar-alerta/generar-alerta.component';
-import { NoticiasAlertasComponent } from './listado/noticias-alertas.component';
+import { NoticiasComponent } from './listado/noticias/noticias.component';
+import { AlertasComponent } from './listado/alertas/alertas.component';
 @NgModule({
   declarations: [
     GenerarAlertaComponent,
-    NoticiasAlertasComponent
+    AlertasComponent,
+    NoticiasComponent
   ],
   imports: [CommonModule]
 })

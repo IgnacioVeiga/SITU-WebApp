@@ -1,0 +1,46 @@
+<section>
+    <form>
+        <div class="row text-center p-3">
+
+            <div class="col-6 m-2">
+                <!-- Nota importante: en angular usamos el evento "keyup" y en ionic en cambio usamos "ionInput" -->
+                <input type='search' class="form-control" placeholder="Buscar noticias" (keyup)='buscar($event)' />
+            </div>
+
+            <!-- Noticias -->
+            <div class="col-12">
+                <h6 *ngIf="cargando">Cargando noticias...</h6>
+            </div>
+
+            <div *ngIf="!cargando">
+                <h6 class="text-center" *ngIf="!noticias.length">Sin resultados</h6>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12" *ngFor="let info of noticias">
+
+                        <div class="card m-2">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <img src="{{info.miniatura}}" alt="miniatura">
+                                    </div>
+                                    <div class="col-9">
+                                        <h2 class="show-pointer">{{info.titulo}}
+                                            <i class="ft-external-link"></i>
+                                        </h2>
+                                        <p>{{info.subtitulo}}</p>
+                                    </div>
+                                    <div class="col-12">
+                                        {{info.fuente}} - {{info.fecha | date: 'dd/MM/yyyy'}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</section>
