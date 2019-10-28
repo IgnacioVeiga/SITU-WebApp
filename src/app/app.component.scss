@@ -4,6 +4,16 @@
   border-radius: 0 !important;
 }
 
+// mat-sidenav-container {
+//   height: calc(100vh - 64px);
+// }
+
+// @media (max-width: 600px) {
+//   mat-sidenav-container {
+//     height: calc(100vh - 56px);
+//   }
+// }
+
 html,
 body {
   height: 100% !important;
@@ -104,3 +114,24 @@ form label {
   vertical-align: middle !important;
 }
 
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+.content-header {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  font-size: 1.6rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.25rem;
+}

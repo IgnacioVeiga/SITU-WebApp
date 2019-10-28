@@ -11,7 +11,9 @@ import { InfoComponent } from './pages/info/info.component';
 import { AyudaComponent } from './pages/ayuda/ayuda.component';
 import { NoticasAlertasModule } from './pages/noticias-alertas/noticas-alertas.module';
 import { HorariosComponent } from './pages/horarios/horarios.component';
-import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule } from '@angular/material';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule, MatPaginatorModule } from '@angular/material';
 import { HacerDenunciaComponent } from './pages/denuncias/hacer-denuncia/hacer-denuncia.component';
 import { ListaDenunciasComponent } from './pages/denuncias/lista-denuncias/lista-denuncias.component';
 import { FormsModule } from '@angular/forms';
@@ -43,6 +45,9 @@ import { ToastrModule } from 'ngx-toastr';
     MatListModule,
     MatButtonModule,
     MatIconModule,
+    MatTableModule,
+    MatInputModule,
+    MatPaginatorModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
