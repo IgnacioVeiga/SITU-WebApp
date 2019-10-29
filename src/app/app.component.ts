@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from './app.service';
 
@@ -12,8 +12,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public appService: AppService,
-    private changeDetectorRef: ChangeDetectorRef
+    public appService: AppService
   ) { }
 
   ngOnInit() {
@@ -22,17 +21,13 @@ export class AppComponent implements OnInit {
 
   goTo(route: string) {
     // recibe el path como string
-    if (route === 'registrarse' || route === 'ingresar') {
+    if (route === 'registrarse') {
       this.appService.mostrarToolbar = false;
+      this.router.navigate([route]);
     } else {
       this.appService.mostrarToolbar = true;
+      this.router.navigate([route]);
     }
-    this.changeDetectorRef.detectChanges();
-    this.router.navigate([route]);
-  }
-
-  salir() {
-    this.appService.mostrarToolbar = false;
   }
 
 }
