@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.appService.mostrarToolbar = false;
   }
 
   goTo(route: string) {

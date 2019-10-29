@@ -21,7 +21,7 @@ export class RegistrarseComponent implements OnInit {
   goTo(route: string) {
     // recibe el path como string (ver app-routing.module)
     this.router.navigate([route]);
-    if (route === 'inicio') {
+    if (route === 'ingresar') {
       this.appService.mostrarToolbar = true;
       this.router.navigate([route]);
     } else {
