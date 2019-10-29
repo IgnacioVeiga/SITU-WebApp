@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngIf="appService.mostrarToolbar">
     <mat-toolbar-row>
         <button mat-icon-button>
             <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
@@ -16,6 +16,7 @@
         <div class="flex-spacer"></div>
         <div>
             <a mat-button [routerLink]="'/mi-perfil'">Mi perfil</a>
+            <a mat-button [routerLink]="'/registrarse'">Salir</a>
         </div>
     </mat-toolbar-row>
 </mat-toolbar>
@@ -31,6 +32,8 @@
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content class="fondo">
+        <div class="text-center py-4" *ngIf="!appService.mostrarToolbar">
+        </div>
         <router-outlet></router-outlet>
         <div class="text-center py-4">
             © 2019 Developed by <a (click)="goTo('inicio')"><span class="text-primary show-pointer">M.T

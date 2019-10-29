@@ -19,6 +19,7 @@ import { ListaDenunciasComponent } from './pages/denuncias/lista-denuncias/lista
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { AppService } from './app.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,9 @@ import { ToastrModule } from 'ngx-toastr';
       closeButton: true
     }),
   ],
-  providers: [],
+  providers: [
+    AppService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

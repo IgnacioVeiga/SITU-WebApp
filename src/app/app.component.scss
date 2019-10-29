@@ -21,7 +21,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: rgb(231, 215, 167) !important;
+  // background-color: rgb(231, 215, 167) !important;
 }
 
 .form-signin {
@@ -50,6 +50,17 @@ body {
   background-color: #efa51d;
   border-color: #efa51d;
 }
+
+// .mat-toolbar.mat-primary {
+//   background: #f3bf4c;
+//   color: #fff;
+// }
+
+// .btn-primary {
+//   color: #fff;
+//   background-color: #f3bf4b;
+//   border-color: #f3bf4c;
+// }
 
 .card {
   position: relative;

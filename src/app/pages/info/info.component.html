@@ -1,1 +1,142 @@
-<p>info works!</p>
+<section>
+    <div class="row p-1 pt-3">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="col-12">
+                <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2"
+                    (click)="changeAcercaDeNosotros()">Acerca
+                    de nosotros</button>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="col-12">
+                <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2"
+                    (click)="changeLineas()">Líneas</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row text-center p-4" *ngIf="acercaDeNosotros">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-12">
+                                <img alt="MTlogo" src="/assets/images/LogoConNombre.jpeg" />
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-12">
+                                <h4> Historia </h4>
+                                <p class="text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                    pariatur.
+                                </p>
+                                <h4> Visión </h4>
+                                <p class="text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et
+                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                    laboris
+                                    nisi ut aliquip
+                                    ex ea commodo consequat.
+                                </p>
+                                <h4> Misión </h4>
+                                <p class="text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et
+                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                    laboris
+                                    nisi ut aliquip
+                                    ex ea commodo consequat.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row text-center p-3" *ngIf="lineas">
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="card ml-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="text" id="linea" class="form-control mb-2" placeholder="Línea">
+                        </div>
+                        <div class="col-12">
+                            <button type="button" class="btn btn-primary btn-block">Buscar
+                                línea</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row pt-4">
+                        <div class="col-lg-8 col-md-8 col-sm-12">
+                            <img alt="194 Plus" width="520" src="/assets/images/194plusd.jpg" />
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="row pt-4"></div>
+                            <div class="row pt-4"></div>
+                            <div class="container-fluid">
+                                <div class="container text-center">
+                                    <b>Teléfono gratuito para información y reclamos</b>
+                                    <br>
+                                    <small>Lunes a Viernes de 8:00 a 20:00 hs</small>
+                                    <h4><a><b>0800-222-6798</b></a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row pt-4">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h3 class="text-center"> 194 Plus </h3>
+                            <p class="text-left">La línea Plus brinda el servicio de autotransporte de pasajeros
+                                transitando,
+                                entre otros puntos, por Once, Plaza Italia, Puente Saavedra, Temaiken, Matheu, Campana y
+                                Zárate.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-lg-8 col-md-8 col-sm-12">
+                            <h5 class="text-center"> Administración </h5>
+                            <p class="text-left">
+                                <b>Dirección:</b> Santo Domingo 3300 - Barracas
+                                <br>
+                                <b>Ante un accidente:</b> Comunicarse con la compañía Protección 4129-7300
+                            </p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <h5 class="text-center"> Cuadro Tarifario </h5>
+                            <p class="text-left">
+                                El valor del boleto en el
+                                tramo Once - Zárate es de:
+                                <br>
+                                $ 74,25 en servicio Común
+                                <br>
+                                $ 129,90 en servicio Expreso.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
