@@ -11,10 +11,11 @@ export class IngresarComponent implements OnInit {
   constructor(
     private router: Router,
     public appService: AppService
-  ) { }
+  ) {
+    this.appService.mostrarToolbar = false;
+  }
 
   ngOnInit() {
-    this.appService.mostrarToolbar = false;
   }
 
   goTo(route: string) {
