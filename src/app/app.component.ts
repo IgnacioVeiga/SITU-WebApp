@@ -21,13 +21,12 @@ export class AppComponent implements OnInit {
 
   goTo(route: string) {
     // recibe el path como string
-    if (route === 'registrarse') {
+    if (route === 'registrarse' || route === 'ingresar') {
       this.appService.mostrarToolbar = false;
-      this.router.navigate([route]);
     } else {
       this.appService.mostrarToolbar = true;
-      this.router.navigate([route]);
     }
+    this.router.navigate([route]);
   }
 
 }

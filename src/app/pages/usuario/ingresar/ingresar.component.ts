@@ -20,12 +20,11 @@ export class IngresarComponent implements OnInit {
 
   goTo(route: string) {
     // recibe el path como string (ver app-routing.module)
-    if (route === 'inicio') {
-      this.appService.mostrarToolbar = true;
-      this.router.navigate([route]);
-    } else {
+    if (route === 'ingresar' || route === 'registrar') {
       this.appService.mostrarToolbar = false;
-      this.router.navigate([route]);
+    } else {
+      this.appService.mostrarToolbar = true;
     }
+    this.router.navigate([route]);
   }
 }
