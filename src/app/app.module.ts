@@ -1,8 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppService } from './app.service';
 import { InicioComponent } from './inicio/inicio.component';
 import { IngresarComponent } from './pages/usuario/ingresar/ingresar.component';
 import { RegistrarseComponent } from './pages/usuario/registrarse/registrarse.component';
@@ -11,15 +15,20 @@ import { InfoComponent } from './pages/info/info.component';
 import { AyudaComponent } from './pages/ayuda/ayuda.component';
 import { NoticasAlertasModule } from './pages/noticias-alertas/noticas-alertas.module';
 import { HorariosComponent } from './pages/horarios/horarios.component';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';
-import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule, MatPaginatorModule } from '@angular/material';
 import { HacerDenunciaComponent } from './pages/denuncias/hacer-denuncia/hacer-denuncia.component';
 import { ListaDenunciasComponent } from './pages/denuncias/lista-denuncias/lista-denuncias.component';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { ToastrModule } from 'ngx-toastr';
-import { AppService } from './app.service';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -41,14 +50,18 @@ import { AppService } from './app.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     NoticasAlertasModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
+
     MatButtonModule,
-    MatIconModule,
-    MatTableModule,
+    MatCardModule,
+    MatCheckboxModule,
     MatInputModule,
+    MatRadioModule,
+    MatToolbarModule,
+    
+    MatListModule,
+    MatIconModule,
     MatPaginatorModule,
+    MatTableModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

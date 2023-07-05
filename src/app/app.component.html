@@ -1,43 +1,19 @@
-<mat-toolbar color="primary" *ngIf="appService.mostrarToolbar">
-    <mat-toolbar-row>
-        <button mat-icon-button>
-            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-        </button>
-        <h1><img class="show-pointer" (click)="goTo('inicio')" width="120" alt="SITU logo"
-                src="/assets/images/logoNombre.png" /></h1>
-        <span class="menu-spacer"></span>
-        <div>
-            <a mat-button [routerLink]="'/inicio'">Inicio</a>
-            <a mat-button [routerLink]="'/alertas'">Alertas</a>
-            <a mat-button [routerLink]="'/noticias'">Noticias</a>
-            <a mat-button [routerLink]="'/ayuda'">Ayuda</a>
-            <a mat-button [routerLink]="'/info'">Información</a>
-        </div>
-        <div class="flex-spacer"></div>
-        <div>
-            <a mat-button [routerLink]="'/mi-perfil'">Mi perfil</a>
-            <a mat-button [routerLink]="'/ingresar'">Salir</a>
-        </div>
-    </mat-toolbar-row>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <img class="logo" (click)="goTo('inicio')" alt="SITU logo" src="/assets/images/logoNombre.png" />
+    <div>
+      <a mat-button [routerLink]="'/inicio'">Inicio</a>
+      <a mat-button [routerLink]="'/alertas'">Alertas</a>
+      <a mat-button [routerLink]="'/noticias'">Noticias</a>
+      <a mat-button [routerLink]="'/ayuda'">Ayuda</a>
+      <a mat-button [routerLink]="'/info'">Información</a>
+      <a mat-button [routerLink]="'/mi-perfil'">Mi perfil</a>
+      <a mat-button [routerLink]="'/ingresar'">Salir</a>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-sidenav-container>
-    <mat-sidenav #sidenav>
-        <mat-nav-list>
-            <a mat-list-item [routerLink]="'/inicio'">Inicio</a>
-            <a mat-list-item [routerLink]="'/alertas'">Alertas</a>
-            <a mat-list-item [routerLink]="'/noticias'">Noticias</a>
-            <a mat-list-item [routerLink]="'/ayuda'">Ayuda</a>
-            <a mat-list-item [routerLink]="'/info'">Información</a>
-        </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content class="fondo">
-        <div class="text-center py-4" *ngIf="!appService.mostrarToolbar">
-        </div>
-        <router-outlet></router-outlet>
-        <div class="text-center py-4">
-            © 2019 Developed by <a (click)="goTo('inicio')"><span class="text-primary show-pointer">M.T
-                    Technologies</span></a>
-        </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+<router-outlet></router-outlet>
+<footer>
+  <small>Developed by M.T Technologies (2019)</small>
+</footer>

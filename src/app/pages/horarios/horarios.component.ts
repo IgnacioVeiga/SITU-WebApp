@@ -1,14 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-horarios',
   templateUrl: './horarios.component.html'
 })
-export class HorariosComponent implements OnInit {
+export class HorariosComponent {
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

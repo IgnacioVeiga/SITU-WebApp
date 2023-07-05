@@ -1,0 +1,46 @@
+// background-color: #efa51d;
+body {
+    background-color: #333333;
+    color: #F1F1F1
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.logon-text {
+    font-style: italic;
+    cursor: pointer;
+}
+
+.logo {
+    width: 120;
+    cursor: pointer;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.row-buttons {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.row-buttons button {
+    margin-right: 20px;
+}
+
+.login-img {
+    width: 160;
+    margin: 10px;
+}
+
+.card {
+    margin: 20px;
+}

@@ -1,45 +1,33 @@
 <section>
-    <form>
-        <div class="row text-center p-3">
+    <!-- Nota importante: en angular usamos el evento "keyup" y en ionic en cambio usamos "ionInput" -->
+    <!-- <input type='search' placeholder="Buscar alertas" (keyup)='buscar($event)' /> -->
+    <mat-form-field>
+        <mat-label>Buscar alertas</mat-label>
+        <input matInput type="search" placeholder="Buscar alertas">
+        <!-- <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button> -->
+    </mat-form-field>
 
-            <div class="col-6 m-2">
-                <!-- Nota importante: en angular usamos el evento "keyup" y en ionic en cambio usamos "ionInput" -->
-                <input type='search' class="form-control" placeholder="Buscar alertas" (keyup)='buscar($event)' />
-            </div>
+    <h6 *ngIf="cargando">Cargando alertas...</h6>
 
-            <!-- Alertas -->
-            <div class="col-12">
-                <h6 *ngIf="cargando">Cargando alertas...</h6>
-            </div>
+    <div *ngIf="!cargando">
+        <h6 class="text-center" *ngIf="!alertas.length">Sin resultados</h6>
 
-            <div *ngIf="!cargando">
-                <h6 class="text-center" *ngIf="!alertas.length">Sin resultados</h6>
-
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-12" *ngFor="let info of alertas">
-
-                        <div class="card m-2">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <h2 class="show-pointer">{{info.titulo}}
-                                            <i class="ft-external-link"></i>
-                                        </h2>
-                                    </div>
-                                    <div class="col-12">
-                                        <p>{{info.subtitulo}}</p>
-                                    </div>
-                                    <div class="col-12">
-                                        {{info.fecha | date: 'dd/MM/yyyy'}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </form>
+        <mat-card class="card" *ngFor="let info of alertas">
+            <mat-card-header>
+                <mat-card-title-group>
+                    <mat-card-title>
+                        {{info.titulo}}
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        {{info.fecha | date: 'dd/MM/yyyy'}}
+                    </mat-card-subtitle>
+                </mat-card-title-group>
+            </mat-card-header>
+            <mat-card-content>
+                <p>{{info.subtitulo}}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </section>

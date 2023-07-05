@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { InformacionDTO } from 'src/app/models/modelos';
+import { Informacion } from 'src/app/models/modelos';
 
 @Component({
   selector: 'app-noticias',
   templateUrl: './noticias.component.html'
 })
 export class NoticiasComponent implements OnInit {
-  cargando: boolean;
-  noticias: InformacionDTO[] = []; // puede ser filtrado y se muestra en pantalla
-  noticiasBackup: InformacionDTO[] = []; // es una copia de seguridad y no se muestra en pantalla
+  cargando: boolean = false;
+  noticias: Informacion[] = []; // puede ser filtrado y se muestra en pantalla
+  noticiasBackup: Informacion[] = []; // es una copia de seguridad y no se muestra en pantalla
 
   constructor() { }
 
@@ -22,7 +22,7 @@ export class NoticiasComponent implements OnInit {
 
   generarNoticias() {
     for (let i = 0; i < 12; i++) {
-      const info = new InformacionDTO();
+      const info = new Informacion();
       info.titulo = 'Noticia ' + ((i + 1) * 321);
       info.subtitulo = 'Lorem ipsum dolor sit amet consectetur adipiscing elit, sem ut vivamus tortor in tincidunt metus...';
       // tslint:disable-next-line: max-line-length
@@ -34,7 +34,7 @@ export class NoticiasComponent implements OnInit {
     this.noticiasBackup = [...this.noticias];
   }
 
-  buscar(event) {
+  buscar(event: { target: { value: any; }; }) {
     // "termino" es lo que escribimos en el buscador
     const termino = event.target.value;
     if (termino.length === 0) {

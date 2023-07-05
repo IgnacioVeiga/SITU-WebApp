@@ -18,8 +18,8 @@ export class ListaDenunciasComponent implements OnInit {
   columnasMostradas: string[] = ['codigo', 'descripcion', 'linea', 'interno', 'importancia'];
   dataSource: MatTableDataSource<Incidencia>;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  // @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor() {
     // Crea 100 incidencias
@@ -27,12 +27,13 @@ export class ListaDenunciasComponent implements OnInit {
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(incidencias);
+    
   }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.paginator._intl.itemsPerPageLabel = 'Cantidad de filas';
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+    // this.paginator._intl.itemsPerPageLabel = 'Cantidad de filas';
   }
 
   applyFilter(filterValue: string) {

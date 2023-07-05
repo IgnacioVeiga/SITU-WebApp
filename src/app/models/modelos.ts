@@ -1,21 +1,21 @@
-export class ItemDeLista { // lo que conociamos como "ListItem"
-    public id: number;
-    public texto: string;
-    public seleccionado: boolean;
+export class ItemDeLista {
+    public id: number | undefined;
+    public texto: string | undefined;
+    public seleccionado: boolean | undefined;
 }
 
-export class InformacionDTO { // para alertas o noticias
-    public titulo: string;
-    public subtitulo: string;
+export class Informacion { // para alertas o noticias
+    public titulo: string | undefined;
+    public subtitulo: string | undefined;
     public miniatura = ''; // base64
-    public fuente: string;
-    public fecha: Date;
+    public fuente: string | undefined;
+    public fecha: Date | undefined;
 }
 
-export class ArchivoDTO {
-    public id: number;
-    public nombre: string;
-    public formato: string;
-    public peso: number;
-    public miniatura: string;
+export class Archivo {
+    public id: number | undefined;
+    public nombre: string | undefined;
+    public formato: string | undefined;
+    public peso: number | undefined;
+    public miniatura: string | undefined;
 }

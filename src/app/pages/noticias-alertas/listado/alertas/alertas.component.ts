@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { InformacionDTO } from 'src/app/models/modelos';
+import { Informacion } from 'src/app/models/modelos';
 
 @Component({
   selector: 'app-alertas',
   templateUrl: './alertas.component.html'
 })
 export class AlertasComponent implements OnInit {
-  cargando: boolean;
-  alertas: InformacionDTO[] = []; // puede ser filtrado y se muestra en pantalla
-  alertasBackup: InformacionDTO[] = []; // es una copia de seguridad y no se muestra en pantalla
+  cargando: boolean = false;
+  alertas: Informacion[] = []; // puede ser filtrado y se muestra en pantalla
+  alertasBackup: Informacion[] = []; // es una copia de seguridad y no se muestra en pantalla
 
   constructor() { }
 
@@ -22,7 +22,7 @@ export class AlertasComponent implements OnInit {
 
   generarAlertas() {
     for (let i = 0; i < 12; i++) {
-      const info = new InformacionDTO();
+      const info = new Informacion();
       info.titulo = 'Alerta ' + ((i + 1) * 321);
       info.subtitulo = 'Lorem ipsum dolor sit amet consectetur adipiscing elit, sem ut vivamus tortor in tincidunt metus...';
       info.fecha = new Date();
@@ -31,7 +31,7 @@ export class AlertasComponent implements OnInit {
     this.alertasBackup = [...this.alertas];
   }
 
-  buscar(event) {
+  buscar(event: { target: { value: any; }; }) {
     // "termino" es lo que escribimos en el buscador
     const termino = event.target.value;
     if (termino.length === 0) {

@@ -1,17 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-info',
   templateUrl: './info.component.html'
 })
-export class InfoComponent implements OnInit {
+export class InfoComponent {
   acercaDeNosotros = false;
   lineas = false;
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   changeAcercaDeNosotros() {
     this.acercaDeNosotros = true;
@@ -22,6 +19,5 @@ export class InfoComponent implements OnInit {
     this.acercaDeNosotros = false;
     this.lineas = true;
   }
-
 
 }

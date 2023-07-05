@@ -1,34 +1,26 @@
-<!-- <section> -->
-<form class="form-signin">
-    <div class="card p-4">
-        <div class="text-center mb-2">
-            <img width="160" alt="SITU logo" src="/assets/images/logo.png" />
-        </div>
+<div class="center">
+    <img class="login-img" alt="SITU logo" src="/assets/images/logo.png" />
 
-        <input type="text" id="dni" class="form-control mb-2" placeholder="DNI">
-        <input type="password" id="password" class="form-control mb-2" placeholder="Contraseña">
+    <mat-form-field>
+        <mat-label>DNI</mat-label>
+        <input matInput type="number" id="dni" min="0" placeholder="00 000 000">
+    </mat-form-field>
 
-        <div class="text-center mb-2">
-            <img width="250" alt="recaptcha" src="/assets/images/recaptcha.png" />
-        </div>
+    <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" id="password" placeholder="****************">
+    </mat-form-field>
 
-        <div class="checkbox mb-2">
-            <label>
-                <input type="checkbox" value="remember-me"> Mantener sesión
-            </label>
-        </div>
+    <img width="250" alt="recaptcha" src="/assets/images/recaptcha.png" />
 
-        <div class="mb-2">
-            <button type="button" class="btn btn-primary btn-block" (click)="goTo('inicio')">Ingresar</button>
-        </div>
+    <mat-checkbox color="primary" value="remember-me">
+        Mantener sesión
+    </mat-checkbox>
 
-        <div class="mb-2">
-            <button type="button" class="btn btn-secondary btn-block" (click)="goTo('inicio')">Omitir</button>
-        </div>
-
-        <div class="text-center">
-            ¿Nuevo en Situ? <a (click)="goTo('registrarse')" ><span class="text-primary show-pointer">Registrate</span></a>
-        </div>
+    <div class="row-buttons">
+        <button mat-raised-button color="primary" type="button" (click)="goTo('inicio')">Ingresar</button>
+        <button mat-raised-button color="secondary" type="button" (click)="goTo('inicio')">Omitir</button>
     </div>
-</form>
-<!-- </section> -->
+
+    <span>¿Nuevo en Situ? <a class="logon-text" (click)="goTo('registrarse')">Registrate</a></span>
+</div>

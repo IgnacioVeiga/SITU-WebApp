@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ArchivoDTO } from 'src/app/models/modelos';
+import { Archivo } from 'src/app/models/modelos';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -11,7 +11,7 @@ export class HacerDenunciaComponent implements OnInit {
   otraFH = false;
   otroLugar = false;
   colectivoEspecifico = false;
-  fotos: ArchivoDTO[] = [];
+  fotos: Archivo[] = [];
   suficientesArchivos = false;
 
   constructor(
@@ -28,7 +28,7 @@ export class HacerDenunciaComponent implements OnInit {
 
   cargarFoto() {
     if (!this.suficientesArchivos) {
-      const foto = new ArchivoDTO();
+      const foto = new Archivo();
       const fechaTextoConcatenado = new Date().getFullYear().toString()
         + (new Date().getMonth() + 1).toString()
         + new Date().getDate().toString();

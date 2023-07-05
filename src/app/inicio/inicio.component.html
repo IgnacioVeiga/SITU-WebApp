@@ -1,59 +1,10 @@
 <section>
-  <span class="text-center m-1">
-    <h1 class="mx-4" style="color:#20285b;">
-      <img width="160" alt="SITU logo" src="/assets/images/logo.png" />
-      Buenos días Karen, bienvenida
-    </h1>
-  </span>
+  <img width="160" alt="SITU logo" src="/assets/images/logo.png" />
+  <h1>Buenos días Karen, bienvenida</h1>
+  <h3>¿En qué te podemos ayudar?</h3>
 
-  <div class="col-12 mx-2">
-    <!-- <img style="width: 100%; height: 300px;" alt="bus" src="/assets/images/bus.jpg" /> -->
-    <h3 class="bold pb-2" style="color:#20285b">¿En qué te podemos ayudar?</h3>
-  </div>
-
-  <div class="row text-center">
-
-    <div class="col-lg-6 col-md-6 col-sm-12">
-      <div class="card ml-2">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12">
-              <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2" (click)="goTo('horarios')">Horarios y recorridos</button>
-            </div>
-            <div class="col-12">
-              <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2"
-                (click)="goTo('generar-alerta')">Generar
-                alertas</button>
-            </div>
-            <div class="col-12">
-              <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2"
-                (click)="goTo('noticias')">Noticias</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-6 col-md-6 col-sm-12">
-      <div class="card ml-2">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12">
-              <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2"
-                (click)="goTo('hacer-denuncia')">Denunciar</button>
-            </div>
-            <div class="col-12">
-              <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2"
-                (click)="goTo('lista-denuncias')">Ver
-                denuncias</button>
-            </div>
-            <div class="col-12">
-              <button type="button" class="btn btn-primary btn-block pb-4 pt-4 m-2"
-                (click)="goTo('alertas')">Alertas</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <button mat-raised-button color="primary" type="button" (click)="goTo('horarios')">Horarios y recorridos</button>
+  <button mat-raised-button color="primary" type="button" (click)="goTo('generar-alerta')">Generar alertas</button>
+  <button mat-raised-button color="primary" type="button" (click)="goTo('hacer-denuncia')">Denunciar</button>
+  <button mat-raised-button color="primary" type="button" (click)="goTo('lista-denuncias')">Ver denuncias</button>
 </section>

@@ -1,92 +1,45 @@
 <section>
-    <form>
-        <h2 class="text-center mt-2">Hacer denuncia</h2>
+    <h3>Hacer denuncia</h3>
 
-        <div class="row m-3">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
+    <label>Lugar del incidente</label>
+    <br>
+    <mat-radio-group>
+        <mat-radio-button value="1">Mi ubicación actual</mat-radio-button>
+        <mat-radio-button value="2">Otro lugar</mat-radio-button>
+    </mat-radio-group>
 
-                            <div class="col-12 mb-3">
-                                <h6 class="content-sub-header">Lugar del incidente</h6>
-                                <div class="btn-group btn-group-toggle block" ngbRadioGroup name="lugar">
-                                    <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
-                                        <input ngbButton type="radio" [value]="1">Mi ubicación actual
-                                    </label>
-                                    <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
-                                        <input ngbButton type="radio" [value]="2">Otro lugar
-                                    </label>
-                                </div>
-                            </div>
+    <br>
+    <label>Fecha y hora</label>
+    <br>
+    <mat-radio-group>
+        <mat-radio-button value="1">Usar actual</mat-radio-button>
+        <mat-radio-button value="2">Otra</mat-radio-button>
+    </mat-radio-group>
 
-                            <div class="col-12 mb-3">
-                                <h6 class="content-sub-header">Fecha y hora</h6>
-                                <div class="btn-group btn-group-toggle block" ngbRadioGroup name="fechaHora">
-                                    <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
-                                        <input ngbButton type="radio" [value]="1">Usar actual
-                                    </label>
-                                    <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
-                                        <input ngbButton type="radio" [value]="2">Otra
-                                    </label>
-                                </div>
-                            </div>
+    <br>
+    <label>Es un colectivo en particular?</label>
+    <br>
+    <mat-radio-group>
+        <mat-radio-button (change)="colectivoEspecifico = true" value="1">Si</mat-radio-button>
+        <mat-radio-button (change)="colectivoEspecifico = false" value="2">No</mat-radio-button>
+    </mat-radio-group>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div *ngIf="colectivoEspecifico">
+        <mat-form-field>
+            <mat-label>Patente</mat-label>
+            <input matInput type="text" id="patente" placeholder="AAA 000 / AA 000 AA">
+        </mat-form-field>
+    </div>
 
+    <div *ngIf="colectivoEspecifico">
+        <mat-form-field>
+            <mat-label>Interno</mat-label>
+            <input matInput type="number" id="interno" min="0" placeholder="0000">
+        </mat-form-field>
+    </div>
 
-
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-
-                            <div class="col-12 mb-3">
-                                <div class="form-group">
-                                    <h6 class="content-sub-header">Es un colectivo en especifico?</h6>
-                                    <div ngbRadioGroup class="btn-group btn-group-toggle block">
-                                        <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
-                                            <input ngbButton (click)="colectivoEspecifico = true" type="radio"
-                                                [value]="1">Si
-                                        </label>
-                                        <label ngbButtonLabel class="btn btn-outline-primary show-pointer">
-                                            <input ngbButton checked (click)="colectivoEspecifico = false" type="radio"
-                                                [value]="2">No
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3" *ngIf="colectivoEspecifico">
-                                    <label>Patente:</label>
-                                    <input type="text" id="patente" class="form-control"
-                                        placeholder="Ej: AAA-000 ó AA-000-AA">
-                                </div>
-
-                                <div *ngIf="colectivoEspecifico">
-                                    <label>Interno:</label>
-                                    <input type="number" id="interno" class="form-control" placeholder="Ej: 0000">
-                                </div>
-                            </div>
-
-                            <div class="col-12 mb-3">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="text-center">
-            <button type="button" class="btn btn-raised btn-secondary mr-1" (click)="goHome()">
-                <i class="ft-chevron-left"></i> Cancelar
-            </button>
-            <button type="button" class="btn btn-raised btn-primary" (click)="denunciar()">
-                <i class="ft-check-square"></i> Denunciar
-            </button>
-        </div>
-    </form>
+    <div class="row-buttons">
+        <button mat-raised-button color="primary" type="button" (click)="denunciar()">Denunciar</button>
+        <button mat-raised-button color="secondary" type="button" (click)="goHome()">Cancelar</button>
+    </div>
 </section>
