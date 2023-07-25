@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IngresarComponent } from './LEGACY/usuario/ingresar/ingresar.component';
-import { InicioComponent } from './LEGACY/inicio/inicio.component';
-import { RegistrarseComponent } from './LEGACY/usuario/registrarse/registrarse.component';
-import { MiPerfilComponent } from './LEGACY/usuario/mi-perfil/mi-perfil.component';
 import { InfoComponent } from './LEGACY/info/info.component';
 import { AyudaComponent } from './LEGACY/ayuda/ayuda.component';
 import { HorariosComponent } from './LEGACY/horarios/horarios.component';
@@ -81,25 +77,7 @@ const routes: Routes = [
     component: GenerateAlertComponent
   },
 
-  // todos
-  {
-    path: 'inicio',
-    component: InicioComponent
-  },
-  {
-    path: 'mi-perfil',
-    component: MiPerfilComponent
-  },
-  {
-    path: 'ingresar',
-    component: IngresarComponent
-  },
-
-  // pasajero
-  {
-    path: 'registrarse',
-    component: RegistrarseComponent
-  },
+  // TODO: borrar
   {
     path: 'hacer-denuncia',
     component: HacerDenunciaComponent

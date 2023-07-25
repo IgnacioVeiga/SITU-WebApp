@@ -8,8 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
 import { InicioComponent } from './LEGACY/inicio/inicio.component';
-import { IngresarComponent } from './LEGACY/usuario/ingresar/ingresar.component';
-import { RegistrarseComponent } from './LEGACY/usuario/registrarse/registrarse.component';
 import { MiPerfilComponent } from './LEGACY/usuario/mi-perfil/mi-perfil.component';
 import { InfoComponent } from './LEGACY/info/info.component';
 import { AyudaComponent } from './LEGACY/ayuda/ayuda.component';
@@ -46,8 +44,6 @@ import { NavbarComponent } from './navbar/navbar.component';
   declarations: [
     AppComponent,
     InicioComponent,
-    IngresarComponent,
-    RegistrarseComponent,
     HacerDenunciaComponent,
     MiPerfilComponent,
     InfoComponent,
