@@ -14,6 +14,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -61,6 +62,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatCheckboxModule,
     MatInputModule,
     MatRadioModule,
+    MatSelectModule,
     MatToolbarModule,
 
     MatListModule,

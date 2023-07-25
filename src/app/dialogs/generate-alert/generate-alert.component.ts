@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./generate-alert.component.scss']
 })
 export class GenerateAlertComponent {
-
+  locationTypes: string[] = ['Especifica', 'General', 'Indefinida'];
+  priorityTypes: string[] = ['Alta', 'Media', 'Baja'];
 }
