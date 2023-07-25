@@ -1,13 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { InfoComponent } from './LEGACY/info/info.component';
-import { AyudaComponent } from './LEGACY/ayuda/ayuda.component';
-import { HorariosComponent } from './LEGACY/horarios/horarios.component';
-import { HacerDenunciaComponent } from './LEGACY/denuncias/hacer-denuncia/hacer-denuncia.component';
-import { ListaDenunciasComponent } from './LEGACY/denuncias/lista-denuncias/lista-denuncias.component';
-import { GenerarAlertaComponent } from './LEGACY/noticias-alertas/generar-alerta/generar-alerta.component';
-import { NoticiasComponent } from './LEGACY/noticias-alertas/listado/noticias/noticias.component';
-import { AlertasComponent } from './LEGACY/noticias-alertas/listado/alertas/alertas.component';
 
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
@@ -31,7 +23,7 @@ const routes: Routes = [
   // Pages
   {
     path: 'home',
-    component: HomepageComponent // TODO: pantalla de inicio de CHATGPT
+    component: HomepageComponent
   },
   {
     path: 'login',
@@ -76,44 +68,6 @@ const routes: Routes = [
     path: 'generate-alert',
     component: GenerateAlertComponent
   },
-
-  // TODO: borrar
-  {
-    path: 'hacer-denuncia',
-    component: HacerDenunciaComponent
-  },
-  {
-    path: 'info',
-    component: InfoComponent
-  },
-  {
-    path: 'ayuda',
-    component: AyudaComponent
-  },
-  {
-    path: 'alertas',
-    component: AlertasComponent
-  },
-  {
-    path: 'noticias',
-    component: NoticiasComponent
-  },
-  {
-    path: 'horarios',
-    component: HorariosComponent
-  },
-
-  // admin
-  {
-    // lista de denuncias (admin)
-    path: 'lista-denuncias',
-    component: ListaDenunciasComponent
-  },
-  {
-    // generar alerta (admin y chofer)
-    path: 'generar-alerta',
-    component: GenerarAlertaComponent
-  }
 ];
 
 @NgModule({

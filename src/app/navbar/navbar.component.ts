@@ -12,4 +12,16 @@ export class NavbarComponent {
   goTo(route: string) {
     this.router.navigate([route]);
   }
+
+  // doSearch(event: { target: { value: any; }; }) {
+  //   // Esto que escribimos en el buscador
+  //   const searchText = event.target.value;
+
+  //   if (searchText.length === 0) {
+  //     // Restaura la lista original
+  //   } else if (searchText.trim().length > 2) {
+  //     // Escribir al menos 2 caracteres para buscar
+  //     alert(searchText)
+  //   }
+  // }
 }
