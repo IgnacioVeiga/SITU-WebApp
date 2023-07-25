@@ -1,14 +1,12 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <img class="logo" (click)="goTo('inicio')" alt="SITU logo" src="/assets/images/logoNombre.png" />
-        <div>
-            <a mat-button [routerLink]="'/inicio'">Inicio</a>
-            <a mat-button [routerLink]="'/alertas'">Alertas</a>
-            <a mat-button [routerLink]="'/noticias'">Noticias</a>
-            <a mat-button [routerLink]="'/ayuda'">Ayuda</a>
-            <a mat-button [routerLink]="'/info'">Información</a>
-            <a mat-button [routerLink]="'/mi-perfil'">Mi perfil</a>
-            <a mat-button [routerLink]="'/ingresar'">Salir</a>
+        <img class="logo" alt="SITU logo" src="/assets/images/logoNombre.png" />
+        <div class="navbar-item-container">
+            <a mat-button [routerLink]="'/report-list'">Denuncias</a>
+            <a mat-button [routerLink]="'/alert-list'">Alertas</a>
+            <a mat-button [routerLink]="'/user-list'">Usuarios</a>
+            <a mat-button [routerLink]="'/bus-routes'">Mapa de recorridos</a>
+            <a mat-button [routerLink]="'/home'">Salir</a>
         </div>
     </mat-toolbar-row>
 </mat-toolbar>
