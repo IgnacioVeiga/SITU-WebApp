@@ -7,16 +7,16 @@ import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
-import { InicioComponent } from './inicio/inicio.component';
-import { IngresarComponent } from './pages/usuario/ingresar/ingresar.component';
-import { RegistrarseComponent } from './pages/usuario/registrarse/registrarse.component';
-import { MiPerfilComponent } from './pages/usuario/mi-perfil/mi-perfil.component';
-import { InfoComponent } from './pages/info/info.component';
-import { AyudaComponent } from './pages/ayuda/ayuda.component';
-import { NoticasAlertasModule } from './pages/noticias-alertas/noticas-alertas.module';
-import { HorariosComponent } from './pages/horarios/horarios.component';
-import { HacerDenunciaComponent } from './pages/denuncias/hacer-denuncia/hacer-denuncia.component';
-import { ListaDenunciasComponent } from './pages/denuncias/lista-denuncias/lista-denuncias.component';
+import { InicioComponent } from './LEGACY/inicio/inicio.component';
+import { IngresarComponent } from './LEGACY/usuario/ingresar/ingresar.component';
+import { RegistrarseComponent } from './LEGACY/usuario/registrarse/registrarse.component';
+import { MiPerfilComponent } from './LEGACY/usuario/mi-perfil/mi-perfil.component';
+import { InfoComponent } from './LEGACY/info/info.component';
+import { AyudaComponent } from './LEGACY/ayuda/ayuda.component';
+import { NoticasAlertasModule } from './LEGACY/noticias-alertas/noticas-alertas.module';
+import { HorariosComponent } from './LEGACY/horarios/horarios.component';
+import { HacerDenunciaComponent } from './LEGACY/denuncias/hacer-denuncia/hacer-denuncia.component';
+import { ListaDenunciasComponent } from './LEGACY/denuncias/lista-denuncias/lista-denuncias.component';
 
 import { ToastrModule } from 'ngx-toastr';
 import { MatInputModule } from '@angular/material/input';
@@ -29,6 +29,18 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
+import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { AlertListComponent } from './pages/alert-list/alert-list.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
+import { ReportListComponent } from './pages/report-list/report-list.component';
+import { BusRoutesComponent } from './pages/bus-routes/bus-routes.component';
+import { GenerateAlertComponent } from './dialogs/generate-alert/generate-alert.component';
+import { AlertDetailsComponent } from './dialogs/alert-details/alert-details.component';
+import { AddUserComponent } from './dialogs/add-user/add-user.component';
+import { EditUserComponent } from './dialogs/edit-user/edit-user.component';
+import { HomepageComponent } from './pages/homepage/homepage.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +54,18 @@ import { MatCardModule } from '@angular/material/card';
     AyudaComponent,
     ListaDenunciasComponent,
     HorariosComponent,
+    LoginComponent,
+    SignupComponent,
+    AlertListComponent,
+    UserListComponent,
+    ReportListComponent,
+    BusRoutesComponent,
+    GenerateAlertComponent,
+    AlertDetailsComponent,
+    AddUserComponent,
+    EditUserComponent,
+    HomepageComponent,
+    NavbarComponent,
   ],
   imports: [
     CommonModule,
@@ -57,7 +81,7 @@ import { MatCardModule } from '@angular/material/card';
     MatInputModule,
     MatRadioModule,
     MatToolbarModule,
-    
+
     MatListModule,
     MatIconModule,
     MatPaginatorModule,

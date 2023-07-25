@@ -1,23 +1,84 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IngresarComponent } from './pages/usuario/ingresar/ingresar.component';
-import { InicioComponent } from './inicio/inicio.component';
-import { RegistrarseComponent } from './pages/usuario/registrarse/registrarse.component';
-import { MiPerfilComponent } from './pages/usuario/mi-perfil/mi-perfil.component';
-import { InfoComponent } from './pages/info/info.component';
-import { AyudaComponent } from './pages/ayuda/ayuda.component';
-import { HorariosComponent } from './pages/horarios/horarios.component';
-import { HacerDenunciaComponent } from './pages/denuncias/hacer-denuncia/hacer-denuncia.component';
-import { ListaDenunciasComponent } from './pages/denuncias/lista-denuncias/lista-denuncias.component';
-import { GenerarAlertaComponent } from './pages/noticias-alertas/generar-alerta/generar-alerta.component';
-import { NoticiasComponent } from './pages/noticias-alertas/listado/noticias/noticias.component';
-import { AlertasComponent } from './pages/noticias-alertas/listado/alertas/alertas.component';
+import { IngresarComponent } from './LEGACY/usuario/ingresar/ingresar.component';
+import { InicioComponent } from './LEGACY/inicio/inicio.component';
+import { RegistrarseComponent } from './LEGACY/usuario/registrarse/registrarse.component';
+import { MiPerfilComponent } from './LEGACY/usuario/mi-perfil/mi-perfil.component';
+import { InfoComponent } from './LEGACY/info/info.component';
+import { AyudaComponent } from './LEGACY/ayuda/ayuda.component';
+import { HorariosComponent } from './LEGACY/horarios/horarios.component';
+import { HacerDenunciaComponent } from './LEGACY/denuncias/hacer-denuncia/hacer-denuncia.component';
+import { ListaDenunciasComponent } from './LEGACY/denuncias/lista-denuncias/lista-denuncias.component';
+import { GenerarAlertaComponent } from './LEGACY/noticias-alertas/generar-alerta/generar-alerta.component';
+import { NoticiasComponent } from './LEGACY/noticias-alertas/listado/noticias/noticias.component';
+import { AlertasComponent } from './LEGACY/noticias-alertas/listado/alertas/alertas.component';
+
+import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { ReportListComponent } from './pages/report-list/report-list.component';
+import { AlertListComponent } from './pages/alert-list/alert-list.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
+import { BusRoutesComponent } from './pages/bus-routes/bus-routes.component';
+import { HomepageComponent } from './pages/homepage/homepage.component';
+import { AddUserComponent } from './dialogs/add-user/add-user.component';
+import { AlertDetailsComponent } from './dialogs/alert-details/alert-details.component';
+import { EditUserComponent } from './dialogs/edit-user/edit-user.component';
+import { GenerateAlertComponent } from './dialogs/generate-alert/generate-alert.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/ingresar',
+    redirectTo: '/home',
     pathMatch: 'full'
+  },
+
+  // Pages
+  {
+    path: 'home',
+    component: HomepageComponent // TODO: pantalla de inicio de CHATGPT
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'signup',
+    component: SignupComponent
+  },
+  {
+    path: 'report-list',
+    component: ReportListComponent
+  },
+  {
+    path: 'alert-list',
+    component: AlertListComponent
+  },
+  {
+    path: 'user-list',
+    component: UserListComponent
+  },
+  {
+    path: 'bus-routes',
+    component: BusRoutesComponent
+  },
+
+  // TODO: Revisar si son necesarios estos 'path'
+  // Dialogs
+  {
+    path: 'add-user',
+    component: AddUserComponent
+  },
+  {
+    path: 'alert-details',
+    component: AlertDetailsComponent
+  },
+  {
+    path: 'edit-user',
+    component: EditUserComponent
+  },
+  {
+    path: 'generate-alert',
+    component: GenerateAlertComponent
   },
 
   // todos
