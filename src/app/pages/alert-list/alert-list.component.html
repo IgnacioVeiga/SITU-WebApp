@@ -1,16 +1,7 @@
 <app-navbar></app-navbar>
-<p>alert-list works!</p>
+<h2>Listado de alertas</h2>
 
 <!-- <section>
-    <input type='search' placeholder="Buscar alertas" (keyup)='buscar($event)' />
-    <mat-form-field>
-        <mat-label>Buscar alertas</mat-label>
-        <input matInput type="search" placeholder="Buscar alertas">
-        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-          <mat-icon>close</mat-icon>
-        </button>
-    </mat-form-field>
-
     <h6 *ngIf="cargando">Cargando alertas...</h6>
 
     <div *ngIf="!cargando">
@@ -33,3 +24,37 @@
         </mat-card>
     </div>
 </section> -->
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+
+        <!-- Columna de Título -->
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef> Título </th>
+            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        </ng-container>
+
+        <!-- Columna de descripción -->
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Descripción </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <!-- Columna de fecha y hora -->
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Fecha y hora </th>
+            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+
+        <!-- Columna de prioridad -->
+        <ng-container matColumnDef="priority">
+            <th mat-header-cell *matHeaderCellDef> Prioridad </th>
+            <td mat-cell *matCellDef="let element"> {{element.priority}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 20, 40, 80, 160]" showFirstLastButtons></mat-paginator>
+</div>
