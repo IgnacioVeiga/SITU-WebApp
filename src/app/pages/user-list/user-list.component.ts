@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ToastrService } from 'ngx-toastr';
 import { AddUserComponent } from 'src/app/dialogs/add-user/add-user.component';
 
 @Component({
@@ -19,13 +20,15 @@ export class UserListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private toastr: ToastrService) { }
 
   openDialog() {
     const dialogRef = this.dialog.open(AddUserComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      if (result) {
+        this.toastr.success('Usuario añadido!');
+      }
     });
   }
 }

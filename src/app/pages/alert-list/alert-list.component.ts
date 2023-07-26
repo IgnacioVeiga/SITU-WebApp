@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { GenerateAlertComponent } from 'src/app/dialogs/generate-alert/generate-alert.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-alert-list',
@@ -19,13 +20,15 @@ export class AlertListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private toastr: ToastrService) { }
 
   openDialog() {
     const dialogRef = this.dialog.open(GenerateAlertComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      if (result) {
+        this.toastr.success('Alerta emitida!');
+      }
     });
   }
 }

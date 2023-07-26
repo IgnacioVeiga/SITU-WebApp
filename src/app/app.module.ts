@@ -78,10 +78,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatTableModule,
     ToastrModule.forRoot({
       timeOut: 3000,
-      positionClass: 'toast-top-right',
-      preventDuplicates: true,
-      tapToDismiss: true,
-      closeButton: true
+      closeButton: true,
+      progressBar: true
     }),
   ],
   providers: [
