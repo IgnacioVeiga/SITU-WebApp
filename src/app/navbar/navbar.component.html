@@ -11,7 +11,7 @@
                 <input matInput type='search' placeholder="Buscar ..." />
             </mat-form-field> -->
 
-            <a mat-button [routerLink]="'/home'">Salir</a>
+            <a mat-button (click)="confirmLogout()">Salir</a>
         </div>
     </mat-toolbar-row>
 </mat-toolbar>
