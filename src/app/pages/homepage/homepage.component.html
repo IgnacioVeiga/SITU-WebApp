@@ -2,7 +2,13 @@
     <span>Te damos la bienvenida a SITU!</span>
 
     <div class="row-buttons">
-        <button mat-raised-button color="primary" type="button" (click)="goTo('login')">Ingresar</button>
-        <button mat-raised-button color="secondary" type="button" (click)="goTo('signup')">Registrate</button>
+        <button mat-raised-button color="primary" type="button" (click)="goTo('login')">
+            <mat-icon>login</mat-icon>
+            Ingresar
+        </button>
+        <button mat-raised-button color="secondary" type="button" (click)="goTo('signup')">
+            <mat-icon>add_business</mat-icon>
+            Registrate
+        </button>
     </div>
 </section>
