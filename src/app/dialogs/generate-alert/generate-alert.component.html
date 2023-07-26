@@ -1,6 +1,6 @@
-<section class="dialog-content">
-    <h3 class="center">Emitir alerta</h3>
+<h1 mat-dialog-title>Emitir alerta</h1>
 
+<mat-dialog-content>
     <div>
         <mat-form-field>
             <mat-label>Título</mat-label>
@@ -14,7 +14,6 @@
     </div>
 
     <div>
-
         <mat-form-field>
             <mat-label>Ubicación</mat-label>
             <mat-select>
@@ -35,9 +34,9 @@
 
         <!-- MAPA ACÁ -->
     </div>
+</mat-dialog-content>
 
-    <div class="row-buttons">
-        <button mat-raised-button color="primary" type="button">Emitir</button>
-        <button mat-raised-button color="secondary" type="button">Cancelar</button>
-    </div>
-</section>
+<mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Emitir</button>
+    <button mat-raised-button color="secondary" mat-dialog-close>Cancelar</button>
+</mat-dialog-actions>

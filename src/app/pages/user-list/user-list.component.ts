@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { AddUserComponent } from 'src/app/dialogs/add-user/add-user.component';
 
 @Component({
   selector: 'app-user-list',
@@ -17,6 +19,15 @@ export class UserListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  constructor(public dialog: MatDialog) { }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(AddUserComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
 
 export interface UserElement {
