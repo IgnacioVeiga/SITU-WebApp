@@ -20,6 +20,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 
 import { MatDialogModule } from '@angular/material/dialog';
 
+import {MatGridListModule} from '@angular/material/grid-list';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
@@ -73,6 +75,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatToolbarModule,
 
     MatListModule,
+    MatGridListModule,
     MatIconModule,
     MatPaginatorModule,
     MatTableModule,
@@ -83,6 +86,8 @@ import { NavbarComponent } from './navbar/navbar.component';
       tapToDismiss: true,
       closeButton: true
     }),
+
+    
   ],
   providers: [
     AppService
