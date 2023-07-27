@@ -7,14 +7,14 @@ import { MatChipInputEvent } from '@angular/material/chips';
   styleUrls: ['./bus-routes.component.scss']
 })
 export class BusRoutesComponent {
-  linea: number = 0;
   lineas: number[] = [];
-  trasbordos: string[] = ['Desde A - Hasta B', 'Desde B - Hasta A', 'Desde C - Hasta D', 'Desde D - Hasta C'];
+  trasbordos: string[] = [];
 
   addLinea(event: MatChipInputEvent): void {
     const value = parseInt((event.value || '').trim());
     if (value) {
       this.lineas.push(value);
+      this.trasbordos = TRASBORDOS_DEMO;
     }
     event.chipInput!.clear();
   }
@@ -24,5 +24,11 @@ export class BusRoutesComponent {
     if (index >= 0) {
       this.lineas.splice(index, 1);
     }
+
+    if (this.lineas.length === 0) {
+      this.trasbordos = [];
+    }
   }
 }
+
+const TRASBORDOS_DEMO: string[] = ['Desde A - Hasta B', 'Desde B - Hasta A', 'Desde C - Hasta D', 'Desde D - Hasta C'];
