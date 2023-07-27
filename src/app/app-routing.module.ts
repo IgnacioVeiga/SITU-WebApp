@@ -48,26 +48,7 @@ const routes: Routes = [
   {
     path: 'bus-routes',
     component: BusRoutesComponent
-  },
-
-  // TODO: Revisar si son necesarios estos 'path'
-  // Dialogs
-  {
-    path: 'add-user',
-    component: AddUserComponent
-  },
-  {
-    path: 'alert-details',
-    component: AlertDetailsComponent
-  },
-  {
-    path: 'edit-user',
-    component: EditUserComponent
-  },
-  {
-    path: 'generate-alert',
-    component: GenerateAlertComponent
-  },
+  }
 ];
 
 @NgModule({
