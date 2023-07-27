@@ -16,3 +16,13 @@ mat-toolbar {
     box-shadow: 0px 10px 20px -15px;
     width: 32rem;
 }
+
+.app-title {
+    font-size: 40px;
+    font-weight: 1000;
+    letter-spacing: 0.1em;
+}
+
+.app-title:hover {
+    cursor: default;
+}
