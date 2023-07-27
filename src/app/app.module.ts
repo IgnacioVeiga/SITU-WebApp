@@ -39,6 +39,7 @@ import { AddUserComponent } from './dialogs/add-user/add-user.component';
 import { EditUserComponent } from './dialogs/edit-user/edit-user.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ConfirmLogoutComponent } from './dialogs/confirm-logout/confirm-logout.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     EditUserComponent,
     HomepageComponent,
     NavbarComponent,
+    ConfirmLogoutComponent,
   ],
   imports: [
     CommonModule,
@@ -81,10 +83,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatTableModule,
     ToastrModule.forRoot({
       timeOut: 3000,
-      positionClass: 'toast-top-right',
-      preventDuplicates: true,
-      tapToDismiss: true,
-      closeButton: true
+      closeButton: true,
+      progressBar: true
     }),
 
     

@@ -52,7 +52,13 @@
     <img width="250" alt="recaptcha" src="/assets/images/recaptcha.png" />
 
     <div class="row-buttons">
-        <button mat-raised-button color="primary" type="button">Enviar</button>
-        <button mat-raised-button color="secondary" type="button" (click)="goTo('home')">Volver</button>
+        <button mat-raised-button color="primary" type="button">
+            <mat-icon>send</mat-icon>
+            Enviar
+        </button>
+        <button mat-raised-button color="secondary" type="button" (click)="goTo('home')">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+            Volver
+        </button>
     </div>
 </div>

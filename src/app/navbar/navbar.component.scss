@@ -1,4 +1,28 @@
-.navbar-item-container {
+mat-toolbar {
     display: flex;
-    gap: 10px;
+    gap: 20px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.searchbar {
+    min-height: 32px;
+    padding: 0.15rem 1.5rem;
+    outline: none;
+    border: aliceblue;
+    line-height: 1.15;
+    box-shadow: 0px 10px 20px -15px;
+    width: 32rem;
+}
+
+.app-title {
+    font-size: 40px;
+    font-weight: 1000;
+    letter-spacing: 0.1em;
+}
+
+.app-title:hover {
+    cursor: default;
 }

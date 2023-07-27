@@ -1,38 +1,61 @@
 <h1 mat-dialog-title>Emitir alerta</h1>
 
-<mat-dialog-content>
-    <div>
+<mat-dialog-content class="row">
+    <div class="column">
         <mat-form-field>
             <mat-label>Título</mat-label>
-            <input matInput type="text" id="title" placeholder="ALERTA">
+            <input matInput type="text" id="title" placeholder="Alerta">
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Mensaje</mat-label>
-            <textarea matInput placeholder="Descripción"></textarea>
+            <mat-label>Descripción</mat-label>
+            <textarea matInput placeholder="Escriba aquí el mensaje"></textarea>
         </mat-form-field>
     </div>
 
-    <div>
+    <div class="column">
         <mat-form-field>
             <mat-label>Ubicación</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let option of locationTypes">
+            <mat-select [(value)]="selectedlocation">
+                <mat-option [value]="option" *ngFor="let option of locationTypes">
                     {{ option }}
                 </mat-option>
             </mat-select>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="selectedlocation == 'Aproximada'">
+            <mat-label>Zona</mat-label>
+            <input matInput type="text" id="zone" placeholder="Ej: CABA">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Prioridad</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let option of priorityTypes">
+            <mat-select [(value)]="selectedPriority">
+                <mat-option [value]="option" *ngFor="let option of priorityTypes">
                     {{ option }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
+    </div>
 
-        <!-- MAPA ACÁ -->
+    <!-- MAPA ACÁ -->
+    <div class="row" *ngIf="selectedlocation == 'Especifica'">
+        <div class="gmap_canvas">
+            <iframe width="500" height="500" id="gmap_canvas" name="mapa" title="mapa"
+                src="https://maps.google.com/maps?q=utn%20Campana&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                scrolling="no" marginheight="0" marginwidth="0"></iframe>
+        </div>
+        <style>
+            .mapouter {
+                position: relative;
+                text-align: right;
+            }
+
+            .gmap_canvas {
+                overflow: hidden;
+                background: none !important;
+            }
+        </style>
     </div>
 </mat-dialog-content>
 
