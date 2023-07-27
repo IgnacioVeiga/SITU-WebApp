@@ -9,10 +9,19 @@ import { ConfirmLogoutComponent } from '../dialogs/confirm-logout/confirm-logout
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+  textToSearch: string = (localStorage.getItem('textToSearch') || '');
+
   constructor(private router: Router, public dialog: MatDialog) { }
 
   goTo(route: string) {
     this.router.navigate([route]);
+  }
+
+  doSearch() {
+    localStorage.setItem('textToSearch', this.textToSearch);
+    if (this.textToSearch.length > 1) {
+      // TODO: realiza la busqueda en la lista correspondiente
+    }
   }
 
   confirmLogout() {

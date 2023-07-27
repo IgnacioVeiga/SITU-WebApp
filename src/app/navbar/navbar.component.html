@@ -1,17 +1,16 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <img class="logo" alt="SITU logo" src="/assets/images/logoNombre.png" />
-        <div class="navbar-item-container">
-            <a mat-button [routerLink]="'/report-list'">Denuncias</a>
-            <a mat-button [routerLink]="'/alert-list'">Alertas</a>
-            <a mat-button [routerLink]="'/user-list'">Usuarios</a>
-            <a mat-button [routerLink]="'/bus-routes'">Mapa de recorridos</a>
+    <span>SITU</span>
 
-            <!-- <mat-form-field>
-                <input matInput type='search' placeholder="Buscar ..." />
-            </mat-form-field> -->
+    <a mat-button [routerLink]="'/report-list'">Denuncias</a>
+    <a mat-button [routerLink]="'/alert-list'">Alertas</a>
+    <a mat-button [routerLink]="'/user-list'">Usuarios</a>
+    <a mat-button [routerLink]="'/bus-routes'">Mapa de recorridos</a>
 
-            <a mat-button (click)="confirmLogout()">Salir</a>
-        </div>
-    </mat-toolbar-row>
+    <span class="spacer"></span>
+
+    <input class="searchbar" type='search' placeholder="Buscar ..." [(ngModel)]="textToSearch" (input)="doSearch()" />
+
+    <span class="spacer"></span>
+
+    <a mat-button (click)="confirmLogout()">Cerrar sesión</a>
 </mat-toolbar>
