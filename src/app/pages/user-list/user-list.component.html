@@ -1,9 +1,12 @@
 <app-navbar></app-navbar>
-<h2>Listado de usuarios de la empresa</h2>
-<button mat-raised-button color="primary" type="button" (click)="openDialog()">
-    <mat-icon>add</mat-icon>
-    Añadir usuario
-</button>
+<div class="title">
+    <h1>Listado de usuarios de la empresa</h1>
+
+    <button mat-raised-button color="primary" type="button" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+        Añadir usuario
+    </button>
+</div>
 
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
