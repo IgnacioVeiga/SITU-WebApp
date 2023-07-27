@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { AddUserComponent } from 'src/app/dialogs/add-user/add-user.component';
 import { EditUserComponent } from 'src/app/dialogs/edit-user/edit-user.component';
+import { UserElement } from 'src/app/models/interfaces';
 
 @Component({
   selector: 'app-user-list',
@@ -48,14 +49,6 @@ export class UserListComponent implements AfterViewInit {
   deleteUser(dni: number) {
     this.toastr.success(dni + ' ya no pertece a la empresa.');
   }
-}
-
-export interface UserElement {
-  dni: number;
-  firstname: string;
-  lastname: string;
-  photo: string;
-  role: string;
 }
 
 const ELEMENT_DATA: UserElement[] = [

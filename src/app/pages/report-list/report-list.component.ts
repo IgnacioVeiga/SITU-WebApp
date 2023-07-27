@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ReportElement } from 'src/app/models/interfaces';
 
 @Component({
   selector: 'app-report-list',
@@ -17,14 +18,6 @@ export class ReportListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-}
-
-export interface ReportElement {
-  number: number;
-  date: string;
-  description: string;
-  photos: string;
-  state: string;
 }
 
 const ELEMENT_DATA: ReportElement[] = [

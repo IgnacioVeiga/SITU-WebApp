@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { GenerateAlertComponent } from 'src/app/dialogs/generate-alert/generate-alert.component';
 import { ToastrService } from 'ngx-toastr';
+import { AlertElement } from 'src/app/models/interfaces';
 
 @Component({
   selector: 'app-alert-list',
@@ -31,13 +32,6 @@ export class AlertListComponent implements AfterViewInit {
       }
     });
   }
-}
-
-export interface AlertElement {
-  title: string;
-  description: string;
-  date: string;
-  priority: string;
 }
 
 const ELEMENT_DATA: AlertElement[] = [
