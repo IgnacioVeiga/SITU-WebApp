@@ -20,8 +20,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 
 import { MatDialogModule } from '@angular/material/dialog';
 
-import {MatGridListModule} from '@angular/material/grid-list';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
@@ -77,7 +75,6 @@ import { ConfirmLogoutComponent } from './dialogs/confirm-logout/confirm-logout.
     MatToolbarModule,
 
     MatListModule,
-    MatGridListModule,
     MatIconModule,
     MatPaginatorModule,
     MatTableModule,

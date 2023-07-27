@@ -1,7 +1,19 @@
-
-.a {
-    width: -webkit-fill-available;
+.element {
+    width: 100%;
     display: grid;
     padding-left: 5%;
     padding-right: 5%;
+}
+
+.container {
+    display: flex;
+}
+
+.text {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.textarea {
+    width: 100%;
 }
