@@ -35,6 +35,7 @@ import { ReportListComponent } from './pages/report-list/report-list.component';
 import { BusRoutesComponent } from './pages/bus-routes/bus-routes.component';
 import { GenerateAlertComponent } from './dialogs/generate-alert/generate-alert.component';
 import { AlertDetailsComponent } from './dialogs/alert-details/alert-details.component';
+import { AfterRegistrationComponent } from './dialogs/after-registration/after.registration.component';
 import { AddUserComponent } from './dialogs/add-user/add-user.component';
 import { EditUserComponent } from './dialogs/edit-user/edit-user.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
@@ -53,6 +54,7 @@ import { HttpClientModule } from '@angular/common/http';
     BusRoutesComponent,
     GenerateAlertComponent,
     AlertDetailsComponent,
+    AfterRegistrationComponent,
     AddUserComponent,
     EditUserComponent,
     HomepageComponent,
