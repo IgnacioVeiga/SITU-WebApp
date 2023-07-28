@@ -6,59 +6,39 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  // Reemplaza con la URL de tu API
+  // TODO: Reemplazar con la URL de la API
   private apiUrl = 'https://tu-api.com';
 
-  // Reemplaza con el token de acceso válido, en un futuro mejor utilizar una cookie
+  // Token de acceso válido, en un futuro mejor utilizar una cookie para almacenarlo
   private authToken = localStorage.getItem('authToken');
+
+  // Encabezado de autorización
+  httpOptions: any = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.authToken}`,
+    }),
+  };
 
   constructor(private http: HttpClient) { }
 
-  // Método para realizar una petición GET a la API con encabezados de autenticación
-  get(endpoint: string): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.authToken}`, // Agregamos el encabezado de autorización
-      }),
-    };
-
-    return this.http.get(`${this.apiUrl}/${endpoint}`, httpOptions);
+  GET(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.get(url, this.httpOptions);
   }
 
-  // Método para realizar una petición POST a la API con encabezados de autenticación
-  post(endpoint: string, data: any): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.authToken}`, // Agregamos el encabezado de autorización
-      }),
-    };
-
-    return this.http.post(`${this.apiUrl}/${endpoint}`, data, httpOptions);
+  POST(endpoint: string, data: any): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.post(url, data, this.httpOptions);
   }
 
-  // Método para realizar una petición DELETE a la API con encabezados de autenticación
-  delete(endpoint: string): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.authToken}`, // Agregamos el encabezado de autorización
-      }),
-    };
-
-    return this.http.delete(`${this.apiUrl}/${endpoint}`, httpOptions);
+  DELETE(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.delete(url, this.httpOptions);
   }
 
-  // Método para realizar una petición PUT a la API con encabezados de autenticación
-  update(endpoint: string, data: any): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.authToken}`, // Agregamos el encabezado de autorización
-      }),
-    };
-
-    return this.http.put(`${this.apiUrl}/${endpoint}`, data, httpOptions);
+  UPDATE(endpoint: string, data: any): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.put(url, data, this.httpOptions);
   }
 }
