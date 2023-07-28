@@ -6,7 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent {
-  dni: string = '12 345 678';
+  apellido: string = '';
+  nombre: string = '';
+  dni: string = '';
   selectedRole: string = '';
   roleTypes: string[] = ['Administrador', 'Control', 'Chofer']
+
+  constructor() {
+    this.apellido = 'Natalia';
+    this.nombre = 'Natalia';
+    this.dni = '12 345 678'
+    this.selectedRole = 'Chofer';
+  }
 }

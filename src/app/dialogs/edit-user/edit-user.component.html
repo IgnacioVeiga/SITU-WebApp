@@ -1,6 +1,5 @@
 <h1 mat-dialog-title>Editar usuario</h1>
 
-
 <mat-dialog-content>
     <div class="row">
         <label>Foto</label>
@@ -18,13 +17,17 @@
 
     <div class="row">
         <mat-form-field>
-            <mat-label>Rol</mat-label>
+            <mat-label>Rol de {{apellido}} {{nombre}}</mat-label>
             <mat-select [(value)]="selectedRole">
                 <mat-option [value]="option" *ngFor="let option of roleTypes">
                     {{ option }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
+    </div>
+
+    <div class="row">
+        <p>Aviso: luego de cambiar el rol, <b>no se podrá cambiar</b> <br>nuevamente hasta dentro de <b>30 días</b>.</p>
     </div>
 </mat-dialog-content>
 
