@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GenerateAlertComponent } from 'src/app/dialogs/generate-alert/generate-alert.component';
 import { ToastrService } from 'ngx-toastr';
 import { AlertElement } from 'src/app/models/interfaces';
+import { AlertDetailsComponent } from 'src/app/dialogs/alert-details/alert-details.component';
 
 @Component({
   selector: 'app-alert-list',
@@ -12,7 +13,7 @@ import { AlertElement } from 'src/app/models/interfaces';
   styleUrls: ['./alert-list.component.scss']
 })
 export class AlertListComponent implements AfterViewInit {
-  displayedColumns: string[] = ['title', 'description', 'date', 'priority'];
+  displayedColumns: string[] = ['title', 'description', 'date', 'priority', 'actions'];
   dataSource: any = new MatTableDataSource<AlertElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
@@ -23,7 +24,7 @@ export class AlertListComponent implements AfterViewInit {
 
   constructor(public dialog: MatDialog, private toastr: ToastrService) { }
 
-  openDialog() {
+  generateAlertDialog() {
     const dialogRef = this.dialog.open(GenerateAlertComponent);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -31,6 +32,10 @@ export class AlertListComponent implements AfterViewInit {
         this.toastr.success('Alerta emitida!');
       }
     });
+  }
+
+  seeAlertDialog() {
+    this.dialog.open(AlertDetailsComponent);
   }
 }
 
