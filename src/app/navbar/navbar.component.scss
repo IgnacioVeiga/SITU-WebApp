@@ -29,7 +29,6 @@ button.hamburger {
 
     button.hamburger {
         display: block;
-        /* Mostrar el botón del menú de hamburguesa en pantallas pequeñas */
     }
 
     .searchbar {
@@ -40,6 +39,18 @@ button.hamburger {
 @media (max-width: 750px) {
     img {
         display: none;
+    }
+
+    #logout {
+        display: none;
+    }
+
+    button.hamburger {
+        display: block;
+    }
+
+    .searchbar {
+        width: 24em;
     }
 }
 

@@ -8,6 +8,7 @@
         <a mat-menu-item [routerLink]="'/alert-list'">Alertas</a>
         <a mat-menu-item [routerLink]="'/user-list'">Usuarios</a>
         <a mat-menu-item [routerLink]="'/bus-routes'">Mapa de recorridos</a>
+        <a mat-menu-item (click)="confirmLogout()">Cerrar sesion</a>
     </mat-menu>
 
     <img src="/assets/images/bus_icon.png" alt="Logo Company" class="logo">
@@ -24,8 +25,9 @@
 
     <input class="searchbar" type='search' placeholder="Buscar ..." [(ngModel)]="textToSearch" (input)="doSearch()" />
 
+    <span class="spacer"></span>
 
-    <a mat-button (click)="confirmLogout()">
+    <a mat-button id="logout" (click)="confirmLogout()">
         <mat-icon>exit_to_app</mat-icon>
         Cerrar sesión
     </a>
