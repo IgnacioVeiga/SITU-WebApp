@@ -38,6 +38,7 @@ import { EditUserComponent } from './dialogs/edit-user/edit-user.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ConfirmLogoutComponent } from './dialogs/confirm-logout/confirm-logout.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { ConfirmLogoutComponent } from './dialogs/confirm-logout/confirm-logout.
     CommonModule,
     FormsModule,
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
 
@@ -84,7 +86,7 @@ import { ConfirmLogoutComponent } from './dialogs/confirm-logout/confirm-logout.
       progressBar: true
     }),
 
-    
+
   ],
   providers: [
     AppService
