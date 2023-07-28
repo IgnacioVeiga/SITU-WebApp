@@ -1,10 +1,24 @@
 <mat-toolbar color="primary">
-    <img src="/assets/images/bus_icon.png" alt="Logo Company">
+    <!-- Hamburguesa - Mostrar solo en pantallas pequeñas -->
+    <button mat-icon-button class="hamburger" [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <a mat-menu-item [routerLink]="'/report-list'">Denuncias</a>
+        <a mat-menu-item [routerLink]="'/alert-list'">Alertas</a>
+        <a mat-menu-item [routerLink]="'/user-list'">Usuarios</a>
+        <a mat-menu-item [routerLink]="'/bus-routes'">Mapa de recorridos</a>
+    </mat-menu>
 
-    <a mat-button [routerLink]="'/report-list'">Denuncias</a>
-    <a mat-button [routerLink]="'/alert-list'">Alertas</a>
-    <a mat-button [routerLink]="'/user-list'">Usuarios</a>
-    <a mat-button [routerLink]="'/bus-routes'">Mapa de recorridos</a>
+    <img src="/assets/images/bus_icon.png" alt="Logo Company" class="logo">
+
+    <!-- Enlaces de la barra de herramientas - Mostrar en pantallas medianas y grandes -->
+    <div class="menu-items">
+        <a mat-button [routerLink]="'/report-list'">Denuncias</a>
+        <a mat-button [routerLink]="'/alert-list'">Alertas</a>
+        <a mat-button [routerLink]="'/user-list'">Usuarios</a>
+        <a mat-button [routerLink]="'/bus-routes'">Mapa de recorridos</a>
+    </div>
 
     <span class="spacer"></span>
 

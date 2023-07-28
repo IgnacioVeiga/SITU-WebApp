@@ -1,6 +1,40 @@
 mat-toolbar {
     display: flex;
+    justify-content: flex-start;
+    /* Alinear los elementos a la izquierda */
+    align-items: center;
+    /* Centrar verticalmente los elementos */
     gap: 20px;
+}
+
+/* Estilo para el botón del menú de hamburguesa */
+button.hamburger {
+    margin-right: 10px;
+    /* Agrega un poco de espacio entre el icono y el resto de elementos */
+    display: none;
+    /* Ocultar el botón del menú de hamburguesa por defecto */
+}
+
+/* Estilo para los enlaces de la barra de herramientas en pantallas medianas y grandes */
+.menu-items {
+    display: flex;
+    gap: 20px;
+}
+
+/* Estilo para ocultar los enlaces de la barra de herramientas cuando el menú de hamburguesa está visible */
+@media (max-width: 1000px) {
+    .menu-items {
+        display: none;
+    }
+
+    button.hamburger {
+        display: block;
+        /* Mostrar el botón del menú de hamburguesa en pantallas pequeñas */
+    }
+
+    .searchbar {
+        width: 10em;
+    }
 }
 
 .spacer {
@@ -14,20 +48,10 @@ mat-toolbar {
     border: aliceblue;
     line-height: 1.15;
     box-shadow: 0px 10px 20px -15px;
-    width: 32rem;
-}
-
-.app-title {
-    font-size: 40px;
-    font-weight: 1000;
-    letter-spacing: 0.1em;
+    width: 32em;
 }
 
 img {
     width: 132px;
     height: 45px;
-}
-
-.app-title:hover {
-    cursor: default;
 }
