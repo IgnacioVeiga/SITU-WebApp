@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent {
-
+  dni: string = '12 345 678';
+  selectedRole: string = '';
+  roleTypes: string[] = ['Administrador', 'Control', 'Chofer']
 }

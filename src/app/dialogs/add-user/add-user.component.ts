@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-user.component.scss']
 })
 export class AddUserComponent {
-
+  selectedRole: string = '';
+  roleTypes: string[] = ['Administrador', 'Control', 'Chofer']
 }
