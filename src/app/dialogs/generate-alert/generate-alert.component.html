@@ -9,22 +9,13 @@
 
         <mat-form-field>
             <mat-label>Descripción</mat-label>
-            <textarea matInput placeholder="Escriba aquí el mensaje"></textarea>
+            <textarea matInput id="description" placeholder="Escriba aquí el mensaje"></textarea>
         </mat-form-field>
     </div>
 
-    <div class="column">
+    <div class="row">
         <mat-form-field>
-            <mat-label>Ubicación</mat-label>
-            <mat-select [(value)]="selectedlocation">
-                <mat-option [value]="option" *ngFor="let option of locationTypes">
-                    {{ option }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field *ngIf="selectedlocation == 'Aproximada'">
-            <mat-label>Zona</mat-label>
+            <mat-label>Ubicación (opcional)</mat-label>
             <input matInput type="text" id="zone" placeholder="Ej: CABA">
         </mat-form-field>
 
@@ -38,11 +29,9 @@
         </mat-form-field>
     </div>
 
-    <!-- MAPA ACÁ -->
-    <div class="row" *ngIf="selectedlocation == 'Especifica'">
-        <div class="gmap_canvas">
+    <!-- <div class="gmap_canvas">
             <iframe width="500" height="500" id="gmap_canvas" name="mapa" title="mapa"
-                src="https://maps.google.com/maps?q=utn%20Campana&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                src="https://maps.google.com/maps?q=palermo&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0"
                 scrolling="no" marginheight="0" marginwidth="0"></iframe>
         </div>
         <style>
@@ -55,8 +44,7 @@
                 overflow: hidden;
                 background: none !important;
             }
-        </style>
-    </div>
+        </style> -->
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">

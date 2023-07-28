@@ -1,34 +1,36 @@
-<div class="center">
-    <div class="title">
-        <h1>Inciar sesión</h1>
+<section>
+    <div class="center">
+        <div class="title">
+            <h1>Iniciar sesión</h1>
+        </div>
+
+        <mat-form-field>
+            <mat-label>DNI</mat-label>
+            <input matInput type="number" id="dni" min="0" placeholder="00 000 000">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input matInput type="password" id="password" placeholder="****************">
+        </mat-form-field>
+
+        <img width="250" alt="recaptcha" src="/assets/images/recaptcha.png" />
+
+        <mat-checkbox class="checkbox" color="primary" value="remember-me">
+            Mantener sesión
+        </mat-checkbox>
+
+        <div class="row-buttons">
+            <button mat-raised-button color="secondary" type="button" (click)="goTo('home')">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+                Volver
+            </button>
+            <button mat-raised-button color="primary" type="button" (click)="goTo('report-list')">
+                <mat-icon>login</mat-icon>
+                Ingresar
+            </button>
+        </div>
+
+        <a>Olvidé mi contraseña</a>
     </div>
-
-    <mat-form-field>
-        <mat-label>DNI</mat-label>
-        <input matInput type="number" id="dni" min="0" placeholder="00 000 000">
-    </mat-form-field>
-
-    <mat-form-field>
-        <mat-label>Contraseña</mat-label>
-        <input matInput type="password" id="password" placeholder="****************">
-    </mat-form-field>
-
-    <img width="250" alt="recaptcha" src="/assets/images/recaptcha.png" />
-
-    <mat-checkbox class="checkbox" color="primary" value="remember-me">
-        Mantener sesión
-    </mat-checkbox>
-
-    <div class="row-buttons">
-        <button mat-raised-button color="secondary" type="button" (click)="goTo('home')">
-            <mat-icon>keyboard_arrow_left</mat-icon>
-            Volver
-        </button>
-        <button mat-raised-button color="primary" type="button" (click)="goTo('report-list')">
-            <mat-icon>login</mat-icon>
-            Ingresar
-        </button>
-    </div>
-
-    <a>Olvidé mi contraseña</a>
-</div>
+</section>
