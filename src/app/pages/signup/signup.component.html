@@ -3,38 +3,40 @@
         <h1>Registrar empresa de transporte urbano</h1>
     </div>
 
-    <div class="container">
+    <form class="container" #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
         <div class="column">
             <mat-form-field>
                 <mat-label>Nombre de la Empresa</mat-label>
-                <input matInput id="companyName" placeholder="Ingrese el nombre de la empresa de transporte">
+                <input matInput id="companyName" name="companyName" required ngModel
+                    placeholder="Ingrese el nombre de la empresa de transporte">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Email</mat-label>
-                <input matInput type="email" id="email" placeholder="Ej: email@empresa.com">
+                <input matInput type="email" id="email" name="email" required ngModel
+                    placeholder="Ej: email@empresa.com">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Teléfono</mat-label>
-                <input matInput type="number" id="phone" placeholder="Ej: +54 9 11 1234 5678">
+                <input matInput type="number" id="phone" name="phone" ngModel placeholder="Ej: +54 9 11 1234 5678">
             </mat-form-field>
         </div>
 
         <div class="column">
             <mat-form-field>
                 <mat-label>Nombre</mat-label>
-                <input matInput id="name" placeholder="Nombre">
+                <input matInput id="firstName" name="firstName" required ngModel placeholder="Nombre">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Apellido</mat-label>
-                <input matInput id="lastName" placeholder="Apellido">
+                <input matInput id="lastName" name="lastName" required ngModel placeholder="Apellido">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>DNI</mat-label>
-                <input matInput type="number" id="IDNumber" placeholder="00 000 000">
+                <input matInput type="number" id="dni" name="dni" required ngModel placeholder="00 000 000">
             </mat-form-field>
         </div>
 
@@ -48,25 +50,23 @@
 
             <mat-form-field>
                 <mat-label>Notas</mat-label>
-                <textarea matInput placeholder="Notas"></textarea>
+                <textarea matInput id="notes" name="notes" ngModel placeholder="Notas"></textarea>
             </mat-form-field>
 
             <span class="center">
                 <img width="250" alt="recaptcha" src="/assets/images/recaptcha.png" />
             </span>
         </div>
-    </div>
 
-    <div class="center">
         <div class="row-buttons">
             <button mat-raised-button color="secondary" type="button" (click)="goTo('home')">
                 <mat-icon>keyboard_arrow_left</mat-icon>
                 Volver
             </button>
-            <button mat-raised-button color="primary" type="button">
+            <button mat-raised-button color="primary" type="button" type="submit" [disabled]="!signupForm.valid">
                 <mat-icon>send</mat-icon>
                 Enviar formulario
             </button>
         </div>
-    </div>
+    </form>
 </section>

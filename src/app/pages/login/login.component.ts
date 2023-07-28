@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,10 +8,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-
   constructor(private router: Router) { }
 
-  goTo(route: string) {
+  goTo(route: string): void {
     this.router.navigate([route]);
+  }
+
+  onSubmit(myForm: NgForm) {
+    console.log(myForm.value);
+
+    // TODO: validar el login por backend
+    // Si está todo OK, redirige a:
+    this.goTo('report-list')
   }
 }

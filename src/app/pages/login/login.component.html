@@ -1,17 +1,17 @@
 <section>
-    <div class="center">
+    <form class="center" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
         <div class="title">
             <h1>Iniciar sesión</h1>
         </div>
 
         <mat-form-field>
             <mat-label>DNI</mat-label>
-            <input matInput type="number" id="dni" min="0" placeholder="00 000 000">
+            <input matInput type="number" id="dni" name="dni" min="0" ngModel required placeholder="00 000 000">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Contraseña</mat-label>
-            <input matInput type="password" id="password" placeholder="****************">
+            <input matInput type="password" id="password" name="password" ngModel required placeholder="********">
         </mat-form-field>
 
         <img width="250" alt="recaptcha" src="/assets/images/recaptcha.png" />
@@ -25,12 +25,12 @@
                 <mat-icon>keyboard_arrow_left</mat-icon>
                 Volver
             </button>
-            <button mat-raised-button color="primary" type="button" (click)="goTo('report-list')">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
                 <mat-icon>login</mat-icon>
                 Ingresar
             </button>
         </div>
 
         <a>Olvidé mi contraseña</a>
-    </div>
+    </form>
 </section>
