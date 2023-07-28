@@ -22,7 +22,7 @@ button.hamburger {
 }
 
 /* Estilo para ocultar los enlaces de la barra de herramientas cuando el menú de hamburguesa está visible */
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
     .menu-items {
         display: none;
     }
@@ -37,6 +37,12 @@ button.hamburger {
     }
 }
 
+@media (max-width: 750px) {
+    img {
+        display: none;
+    }
+}
+
 .spacer {
     flex: 1 1 auto;
 }
@@ -48,7 +54,7 @@ button.hamburger {
     border: aliceblue;
     line-height: 1.15;
     box-shadow: 0px 10px 20px -15px;
-    width: 32em;
+    width: 24em;
 }
 
 img {
