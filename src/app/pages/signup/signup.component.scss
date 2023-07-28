@@ -1,19 +1,15 @@
-.element {
-    width: 100%;
-    display: grid;
-    padding-left: 5%;
-    padding-right: 5%;
-}
-
 .container {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-inline-start: 20%;
+    margin-inline-end: 20%;
 }
 
-.text {
-    padding-left: 5%;
-    padding-right: 5%;
-}
-
-.textarea {
-    width: 100%;
+.note {
+    background-color: lightsteelblue;
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    text-align: justify;
 }
