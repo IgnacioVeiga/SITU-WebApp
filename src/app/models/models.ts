@@ -1,27 +1,41 @@
-/*
-    ACÁ VAN TODOS LAS CLASES QUE USEMOS EN LAS VISTAS/COMPONENTES/PAGINAS
-    Los DTOS los agregamos en otro archivo cuando los necesitemos
-    Lo de abajo está comentado porque es codigo leagado de la versión anterior
-*/
+import { EPriority, EReportState, ERole } from "./enums";
 
-// export class ItemDeLista {
-//     public id: number | undefined;
-//     public texto: string | undefined;
-//     public seleccionado: boolean | undefined;
-// }
+export class CheckListItem {
+    public id: number | undefined;
+    public text: string = '';
+    public checked: boolean = false;
+}
 
-// export class Informacion { // para alertas o noticias
-//     public titulo: string | undefined;
-//     public subtitulo: string | undefined;
-//     public miniatura = ''; // base64
-//     public fuente: string | undefined;
-//     public fecha: Date | undefined;
-// }
+export class BusLine {
+    public LineNumber: number = 0;
+    public Routes: CheckListItem[] = [];
+}
 
-// export class Archivo {
-//     public id: number | undefined;
-//     public nombre: string | undefined;
-//     public formato: string | undefined;
-//     public peso: number | undefined;
-//     public miniatura: string | undefined;
-// }
+export class Alert {
+    public id: number | undefined;
+    public title: string = '';
+    public description: string = '';
+    public date: Date = new Date();
+    public prority: EPriority = EPriority.Baja;
+    public location: string = '';
+}
+
+export class User {
+    public dni: number | undefined;
+    public lastname: string = '';
+    public firstname: string = '';
+    public role: ERole = ERole.Otro;
+
+    // TODO: revisar el tipado de esto
+    public photo: any | undefined;
+}
+
+export class Report {
+    public id: number | undefined;
+    public userId: number | undefined;
+    public description: string = '';
+    public state: EReportState = EReportState.Espera;
+
+    // TODO: revisar el tipado de esto
+    public photos: any[] | undefined;
+}
