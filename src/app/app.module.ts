@@ -42,6 +42,7 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ConfirmLogoutComponent } from './dialogs/confirm-logout/confirm-logout.component';
 import { HttpClientModule } from '@angular/common/http';
+import { EditMyUserComponent } from './dialogs/edit-my-user/edit-my-user.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { HttpClientModule } from '@angular/common/http';
     AfterRegistrationComponent,
     AddUserComponent,
     EditUserComponent,
+    EditMyUserComponent,
     HomepageComponent,
     NavbarComponent,
     ConfirmLogoutComponent,
