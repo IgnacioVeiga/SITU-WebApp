@@ -15,7 +15,7 @@ export class LoginComponent {
   }
 
   onSubmit(myForm: NgForm) {
-    console.log(myForm.value);
+    // console.log(myForm.value);
 
     // TODO: validar el login por backend
     // Si está todo OK, redirige a:
