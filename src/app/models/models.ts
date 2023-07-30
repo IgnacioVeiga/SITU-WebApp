@@ -11,30 +11,30 @@ export class BusLine {
     public Routes: CheckListItem[] = [];
 }
 
-export class Alert {
+export class AlertModel {
     public id: number | undefined;
     public title: string = '';
     public description: string = '';
     public date: Date = new Date();
-    public prority: EPriority = EPriority.Baja;
+    public priority: EPriority = EPriority.Low;
     public location: string = '';
 }
 
-export class User {
+export class UserModel {
     public dni: number | undefined;
     public lastname: string = '';
     public firstname: string = '';
-    public role: ERole = ERole.Otro;
+    public role: ERole = ERole.Other;
 
     // TODO: revisar el tipado de esto
     public photo: any | undefined;
 }
 
-export class Report {
+export class ReportModel {
     public id: number | undefined;
     public userId: number | undefined;
     public description: string = '';
-    public state: EReportState = EReportState.Espera;
+    public state: EReportState = EReportState.Standby;
 
     // TODO: revisar el tipado de esto
     public photos: any[] | undefined;

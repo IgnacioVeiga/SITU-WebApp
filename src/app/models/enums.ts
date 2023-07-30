@@ -1,16 +1,16 @@
 export enum EPriority {
-    Baja = 0,
-    Media = 1,
-    Alta = 2
+    Low = "Baja",
+    Mid = "Media",
+    High = "Alta"
 }
 
 export enum ERole {
-    Admin = 0,
-    Chofer = 1,
-    Otro = 2
+    Admin = "Administrador",
+    Driver = "Chofer",
+    Other = "Otro"
 }
 
 export enum EReportState {
-    Espera = 0,
-    Resuelta = 1
+    Standby = "En espera",
+    Resolved = "Resuelta"
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { User } from 'src/app/models/models';
+import { UserModel } from 'src/app/models/models';
 
 @Component({
   selector: 'app-edit-my-user',
@@ -8,7 +8,7 @@ import { User } from 'src/app/models/models';
   styleUrls: ['./edit-my-user.component.scss']
 })
 export class EditMyUserComponent {
-  user: User = new User();
+  user: UserModel = new UserModel();
 
   constructor() {
     this.user.firstname = 'Natalia';

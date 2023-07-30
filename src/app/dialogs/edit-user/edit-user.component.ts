@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { UserModel } from 'src/app/models/models';
 
 @Component({
   selector: 'app-edit-user',
@@ -6,16 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent {
-  apellido: string = '';
-  nombre: string = '';
-  dni: string = '';
-  selectedRole: string = '';
-  roleTypes: string[] = ['Administrador', 'Control', 'Chofer']
+  roleTypes: string[] = ['Administrador', 'Chofer', 'Otro']
+  user!: UserModel;
 
-  constructor() {
-    this.apellido = 'Natalia';
-    this.nombre = 'Natalia';
-    this.dni = '12 345 678'
-    this.selectedRole = 'Chofer';
+  constructor(@Inject(MAT_DIALOG_DATA) public data: UserModel) {
+    this.user = { ...data };
   }
 }

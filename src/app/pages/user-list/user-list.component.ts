@@ -6,7 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AddUserComponent } from 'src/app/dialogs/add-user/add-user.component';
 import { EditMyUserComponent } from 'src/app/dialogs/edit-my-user/edit-my-user.component';
 import { EditUserComponent } from 'src/app/dialogs/edit-user/edit-user.component';
-import { UserElement } from 'src/app/models/interfaces';
+import { ERole } from 'src/app/models/enums';
+import { UserModel } from 'src/app/models/models';
 
 @Component({
   selector: 'app-user-list',
@@ -14,18 +15,19 @@ import { UserElement } from 'src/app/models/interfaces';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements AfterViewInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = ['dni', 'firstname', 'lastname', 'photo', 'role', 'actions'];
-  dataSource: any = new MatTableDataSource<UserElement>(ELEMENT_DATA);
+  dataSource: any = new MatTableDataSource<UserModel>;
 
   selectedUser: any;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor(public dialog: MatDialog, private toastr: ToastrService) { }
+  constructor(public dialog: MatDialog, private toastr: ToastrService) {
+    this.dataSource.data = ELEMENT_DATA;
+  }
 
   addUser() {
     const dialogRef = this.dialog.open(AddUserComponent);
@@ -37,12 +39,15 @@ export class UserListComponent implements AfterViewInit {
     });
   }
 
-  editUser(dni: number) {
-    const dialogRef = this.dialog.open(EditUserComponent);
+  editUser(user: UserModel) {
+    const dialogRef = this.dialog.open(EditUserComponent, {
+      data: user
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.toastr.success(dni + ' modificado!');
+        this.toastr.success('Usuario modificado!');
+        console.log(result);
       }
     });
   }
@@ -62,36 +67,6 @@ export class UserListComponent implements AfterViewInit {
   }
 }
 
-const ELEMENT_DATA: UserElement[] = [
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: 'Chofer' },
+const ELEMENT_DATA: UserModel[] = [
+  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: ERole.Driver }
 ];

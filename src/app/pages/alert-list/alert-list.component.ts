@@ -4,8 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { GenerateAlertComponent } from 'src/app/dialogs/generate-alert/generate-alert.component';
 import { ToastrService } from 'ngx-toastr';
-import { AlertElement } from 'src/app/models/interfaces';
 import { AlertDetailsComponent } from 'src/app/dialogs/alert-details/alert-details.component';
+import { AlertModel } from 'src/app/models/models';
+import { EPriority } from 'src/app/models/enums';
 
 @Component({
   selector: 'app-alert-list',
@@ -14,7 +15,7 @@ import { AlertDetailsComponent } from 'src/app/dialogs/alert-details/alert-detai
 })
 export class AlertListComponent implements AfterViewInit {
   displayedColumns: string[] = ['title', 'description', 'date', 'priority', 'actions'];
-  dataSource: any = new MatTableDataSource<AlertElement>(ELEMENT_DATA);
+  dataSource: any = new MatTableDataSource<AlertModel>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
@@ -34,52 +35,13 @@ export class AlertListComponent implements AfterViewInit {
     });
   }
 
-  seeAlertDialog() {
-    this.dialog.open(AlertDetailsComponent);
+  seeAlertDialog(alert: AlertModel) {
+    this.dialog.open(AlertDetailsComponent, {
+      data: alert
+    });
   }
 }
 
-const ELEMENT_DATA: AlertElement[] = [
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
-  { title: 'Título', description: 'Descripción de la alerta', date: '25/07/2023 19:30', priority: 'Alta' },
+const ELEMENT_DATA: AlertModel[] = [
+  { id: 0, title: 'Título', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.', date: new Date(), priority: EPriority.High, location: 'CABA' }
 ];

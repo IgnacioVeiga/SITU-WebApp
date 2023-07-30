@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Editar usuario</h1>
+<h1 mat-dialog-title>Editar usuario ({{user.lastname}} {{user.firstname}})</h1>
 
 <mat-dialog-content>
     <div class="row">
@@ -12,13 +12,13 @@
 
     <div class="row">
         <label>DNI</label>
-        <b>{{dni}}</b>
+        <b>{{user.dni}}</b>
     </div>
 
     <div class="row">
         <mat-form-field>
-            <mat-label>Rol de {{apellido}} {{nombre}}</mat-label>
-            <mat-select [(value)]="selectedRole">
+            <mat-label>Rol</mat-label>
+            <mat-select [(value)]="user.role">
                 <mat-option [value]="option" *ngFor="let option of roleTypes">
                     {{ option }}
                 </mat-option>
@@ -32,6 +32,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
-    <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Guardar</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="user" cdkFocusInitial>Guardar</button>
     <button mat-raised-button color="secondary" mat-dialog-close>Cancelar</button>
 </mat-dialog-actions>
