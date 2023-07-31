@@ -1,35 +1,37 @@
-<h1 mat-dialog-title>Añadir usuario</h1>
+<form #addUserForm="ngForm" (ngSubmit)="onSubmit(addUserForm)">
+    <h1 mat-dialog-title>Añadir usuario</h1>
 
-<mat-dialog-content>
-    <div class="row">
-        <label>Foto</label>
-
-        <div class="column center">
-            <img src="../../../assets/images/perfil.png" alt="Foto de perfil" width="46">
-            <button mat-button type="button">Cargar archivo</button>
+    <mat-dialog-content>
+        <div class="row">
+            <label>Foto</label>
+            <div class="column center">
+                <img src="../../../assets/images/perfil.png" alt="Foto de perfil" width="46">
+                <button mat-button type="button">Cargar archivo</button>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <mat-form-field>
-            <mat-label>DNI</mat-label>
-            <input matInput type="text" id="dni" placeholder="00 000 000">
-        </mat-form-field>
-    </div>
+        <div class="row">
+            <mat-form-field>
+                <mat-label>DNI</mat-label>
+                <input matInput type="text" id="dni" name="dni" ngModel required placeholder="00 000 000">
+            </mat-form-field>
+        </div>
 
-    <div class="row">
-        <mat-form-field>
-            <mat-label>Rol</mat-label>
-            <mat-select [(value)]="selectedRole">
-                <mat-option [value]="option" *ngFor="let option of roleTypes">
-                    {{ option }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-</mat-dialog-content>
+        <div class="row">
+            <mat-form-field>
+                <mat-label>Rol</mat-label>
+                <mat-select id="role" name="role" [(value)]="user.role" ngModel required>
+                    <mat-option [value]="option" *ngFor="let option of roleTypes">
+                        {{ option }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
 
-<mat-dialog-actions align="center">
-    <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Añadir</button>
-    <button mat-raised-button color="secondary" mat-dialog-close>Cancelar</button>
-</mat-dialog-actions>
+    <mat-dialog-actions align="center">
+        <button mat-raised-button color="primary" [mat-dialog-close]="true" type="submit"
+            [disabled]="!addUserForm.valid">Añadir</button>
+        <button mat-raised-button color="secondary" type="button" mat-dialog-close>Cancelar</button>
+    </mat-dialog-actions>
+</form>

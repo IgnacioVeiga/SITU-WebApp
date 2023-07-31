@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { UserModel } from 'src/app/models/models';
 
 @Component({
   selector: 'app-add-user',
@@ -6,6 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-user.component.scss']
 })
 export class AddUserComponent {
-  selectedRole: string = '';
-  roleTypes: string[] = ['Administrador', 'Control', 'Chofer']
+  user: UserModel = new UserModel();
+  roleTypes: string[] = ['Administrador', 'Chofer', 'Otro']
+
+  onSubmit(myForm: NgForm) {
+    console.log(myForm.value);
+    // TODO: enviar todo al backend y guardar cambios
+  }
 }
