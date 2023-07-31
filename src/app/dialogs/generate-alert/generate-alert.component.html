@@ -1,53 +1,42 @@
-<h1 mat-dialog-title>Emitir alerta</h1>
+<form #generateAlertFrom="ngForm" (ngSubmit)="onSubmit(generateAlertFrom)">
+    <h1 mat-dialog-title>Emitir alerta</h1>
 
-<mat-dialog-content class="row">
-    <div class="column">
-        <mat-form-field>
-            <mat-label>Título</mat-label>
-            <input matInput type="text" id="title" placeholder="Alerta">
-        </mat-form-field>
+    <mat-dialog-content class="row">
+        <div class="column">
+            <mat-form-field>
+                <mat-label>Título</mat-label>
+                <input matInput type="text" id="title" name="title" ngModel [value]="alert.title" required
+                    placeholder="Alerta">
+            </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>Descripción</mat-label>
-            <textarea matInput id="description" placeholder="Escriba aquí el mensaje"></textarea>
-        </mat-form-field>
-    </div>
-
-    <div class="row">
-        <mat-form-field>
-            <mat-label>Ubicación (opcional)</mat-label>
-            <input matInput type="text" id="zone" placeholder="Ej: CABA">
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Prioridad</mat-label>
-            <mat-select [(value)]="selectedPriority">
-                <mat-option [value]="option" *ngFor="let option of priorityTypes">
-                    {{ option }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-
-    <!-- <div class="gmap_canvas">
-            <iframe width="500" height="500" id="gmap_canvas" name="mapa" title="mapa"
-                src="https://maps.google.com/maps?q=palermo&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0"
-                scrolling="no" marginheight="0" marginwidth="0"></iframe>
+            <mat-form-field>
+                <mat-label>Descripción</mat-label>
+                <textarea matInput id="description" name="description" ngModel [value]="alert.description" required
+                    placeholder="Escriba aquí el mensaje"></textarea>
+            </mat-form-field>
         </div>
-        <style>
-            .mapouter {
-                position: relative;
-                text-align: right;
-            }
 
-            .gmap_canvas {
-                overflow: hidden;
-                background: none !important;
-            }
-        </style> -->
-</mat-dialog-content>
+        <div class="row">
+            <mat-form-field>
+                <mat-label>Ubicación (opcional)</mat-label>
+                <input matInput type="text" id="zone" name="zone" ngModel [value]="alert.location"
+                    placeholder="Ej: CABA">
+            </mat-form-field>
 
-<mat-dialog-actions align="center">
-    <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Emitir</button>
-    <button mat-raised-button color="secondary" mat-dialog-close>Cancelar</button>
-</mat-dialog-actions>
+            <mat-form-field>
+                <mat-label>Prioridad</mat-label>
+                <mat-select id="priority" name="priority" [(value)]="alert.priority" ngModel>
+                    <mat-option [value]="option" *ngFor="let option of priorityTypes">
+                        {{ option }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="center">
+        <button mat-raised-button color="primary" [mat-dialog-close]="true" type="submit"
+            [disabled]="!generateAlertFrom.valid">Emitir</button>
+        <button mat-raised-button color="secondary" mat-dialog-close type="button">Cancelar</button>
+    </mat-dialog-actions>
+</form>

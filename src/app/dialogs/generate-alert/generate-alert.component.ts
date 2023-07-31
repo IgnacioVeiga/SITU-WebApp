@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { AlertModel } from 'src/app/models/models';
 
 @Component({
   selector: 'app-generate-alert',
@@ -6,6 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./generate-alert.component.scss']
 })
 export class GenerateAlertComponent {
+  alert: AlertModel = new AlertModel();
   priorityTypes: string[] = ['Alta', 'Media', 'Baja'];
-  selectedPriority = this.priorityTypes[0];
+
+  onSubmit(myForm: NgForm) {
+    console.log(myForm.value);
+    // TODO: enviar todo al backend y guardar cambios
+  }
 }
