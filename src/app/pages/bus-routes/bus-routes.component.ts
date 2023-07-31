@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { BusLineModel, CheckListItem } from 'src/app/models/models';
 
 @Component({
   selector: 'app-bus-routes',
@@ -7,28 +8,33 @@ import { MatChipInputEvent } from '@angular/material/chips';
   styleUrls: ['./bus-routes.component.scss']
 })
 export class BusRoutesComponent {
-  lineas: number[] = [];
-  trasbordos: string[] = [];
+  busList: BusLineModel[] = [];
 
   addLinea(event: MatChipInputEvent): void {
     const value = parseInt((event.value || '').trim());
     if (value) {
-      this.lineas.push(value);
-      this.trasbordos = TRASBORDOS_DEMO;
+      let line: BusLineModel = new BusLineModel;
+      line.LineNumber = value;
+      line.Routes = this.generarElementosAleatorios(6);
+      this.busList.push(line);
     }
     event.chipInput!.clear();
   }
 
   removeLinea(linea: number) {
-    const index = this.lineas.indexOf(linea);
-    if (index >= 0) {
-      this.lineas.splice(index, 1);
-    }
+    const index = this.busList.findIndex(b => b.LineNumber === linea);
+    this.busList.splice(index, 1);
+  }
 
-    if (this.lineas.length === 0) {
-      this.trasbordos = [];
+  generarElementosAleatorios(cantidad: number): CheckListItem[] {
+    const elementosAleatorios: CheckListItem[] = [];
+    for (let i = 1; i <= cantidad; i++) {
+      const item: CheckListItem = new CheckListItem();
+      item.id = i;
+      item.text = `Trayecto ${i}`;
+      item.checked = Math.random() < 0.5; // Genera aleatoriamente true o false
+      elementosAleatorios.push(item);
     }
+    return elementosAleatorios;
   }
 }
-
-const TRASBORDOS_DEMO: string[] = ['Desde A - Hasta B', 'Desde B - Hasta A', 'Desde C - Hasta D', 'Desde D - Hasta C'];

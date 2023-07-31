@@ -6,7 +6,7 @@
 <mat-stepper orientation="vertical" [linear]="true">
     <mat-step label="1. Seleccionar línea y trasbordos">
         <div class="stepper-buttons">
-            <button mat-button matStepperNext [color]="'primary'" [disabled]="lineas.length == 0">
+            <button mat-button matStepperNext [color]="'primary'" type="button" [disabled]="busList.length == 0">
                 <mat-icon>keyboard_arrow_down</mat-icon>
                 Siguiente
             </button>
@@ -15,27 +15,27 @@
         <mat-form-field class="chips-input">
             <mat-label>Ingrese líneas de colectivos</mat-label>
             <mat-chip-grid #chipGrid aria-label="Añada líneas de colectivos">
-                <mat-chip-row *ngFor="let item of lineas" (removed)="removeLinea(item)">
-                    {{item}}
-                    <button matChipRemove aria-label="'remove ' + item">
+                <mat-chip-row *ngFor="let bus of busList" (removed)="removeLinea(bus.LineNumber)">
+                    {{ bus.LineNumber }}
+                    <button matChipRemove aria-label="'remove ' + bus.LineNumber">
                         <mat-icon>cancel</mat-icon>
                     </button>
                 </mat-chip-row>
             </mat-chip-grid>
-            <input placeholder="000" maxlength="3" [matChipInputFor]="chipGrid"
+            <input placeholder="000" maxlength="4" [matChipInputFor]="chipGrid"
                 (matChipInputTokenEnd)="addLinea($event)" />
         </mat-form-field>
 
-        <div *ngIf="trasbordos.length > 0">
-            <mat-checkbox *ngFor="let item of trasbordos">
-                {{ item }}
+        <div *ngFor="let bus of busList">
+            <mat-checkbox [checked]="route.checked" *ngFor="let route of bus.Routes">
+                {{ route.text }}
             </mat-checkbox>
         </div>
     </mat-step>
 
     <mat-step label="2. Visualizar mapa">
         <div class="stepper-buttons">
-            <button mat-button matStepperPrevious>
+            <button mat-button matStepperPrevious type="button">
                 <mat-icon>keyboard_arrow_up</mat-icon>
                 Anterior
             </button>

@@ -6,7 +6,7 @@ export class CheckListItem {
     public checked: boolean = false;
 }
 
-export class BusLine {
+export class BusLineModel {
     public LineNumber: number = 0;
     public Routes: CheckListItem[] = [];
 }
