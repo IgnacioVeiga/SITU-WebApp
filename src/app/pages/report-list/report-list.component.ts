@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ReportElement } from 'src/app/models/interfaces';
+import { EReportState } from 'src/app/models/enums';
+import { ReportModel } from 'src/app/models/models';
 
 @Component({
   selector: 'app-report-list',
@@ -9,8 +10,8 @@ import { ReportElement } from 'src/app/models/interfaces';
   styleUrls: ['./report-list.component.scss']
 })
 export class ReportListComponent implements AfterViewInit {
-  displayedColumns: string[] = ['number', 'date', 'description', 'photos', 'state'];
-  dataSource: any = new MatTableDataSource<ReportElement>(ELEMENT_DATA);
+  displayedColumns: string[] = ['date', 'description', 'photos', 'state'];
+  dataSource: any = new MatTableDataSource<ReportModel>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
@@ -20,43 +21,6 @@ export class ReportListComponent implements AfterViewInit {
 
 }
 
-const ELEMENT_DATA: ReportElement[] = [
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
-  { number: 0, date: '25/07/2023 19:30', description: 'Descripción de la denuncia', photos: 'No disponible', state: 'Respondida' },
+const ELEMENT_DATA: ReportModel[] = [
+  { id: 0, userId: 0, date: new Date(), description: 'Descripción de la denuncia', photos: [], state: EReportState.Standby }
 ];
