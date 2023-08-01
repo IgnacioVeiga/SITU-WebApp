@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
   // TODO: Reemplazar con la URL de la API
-  private apiUrl = 'https://tu-api.com';
+  private apiUrl = '';
 
   // Token de acceso válido, en un futuro mejor utilizar una cookie para almacenarlo
   private authToken = localStorage.getItem('authToken');
@@ -29,7 +29,12 @@ export class ApiService {
 
   POST(endpoint: string, data: any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
-    return this.http.post(url, data, this.httpOptions);
+
+    if (endpoint === ('login' || 'signup')) {
+      return this.http.post(url, data);
+    } else {
+      return this.http.post(url, data, this.httpOptions);
+    }
   }
 
   DELETE(endpoint: string): Observable<any> {
