@@ -2,9 +2,9 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { GenerateAlertComponent } from 'src/app/dialogs/generate-alert/generate-alert.component';
+import { CreateAlertComponent } from 'src/app/pages/alerts/create/create-alert.component';
 import { ToastrService } from 'ngx-toastr';
-import { AlertDetailsComponent } from 'src/app/dialogs/alert-details/alert-details.component';
+import { AlertDetailsComponent } from 'src/app/pages/alerts/details/alert-details.component';
 import { AlertModel } from 'src/app/models/models';
 import { EPriority } from 'src/app/models/enums';
 
@@ -26,7 +26,7 @@ export class AlertListComponent implements AfterViewInit {
   constructor(public dialog: MatDialog, private toastr: ToastrService) { }
 
   generateAlertDialog() {
-    const dialogRef = this.dialog.open(GenerateAlertComponent);
+    const dialogRef = this.dialog.open(CreateAlertComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {

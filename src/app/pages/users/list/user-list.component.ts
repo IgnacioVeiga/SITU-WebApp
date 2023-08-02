@@ -3,9 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
-import { AddUserComponent } from 'src/app/dialogs/add-user/add-user.component';
-import { EditMyUserComponent } from 'src/app/dialogs/edit-my-user/edit-my-user.component';
-import { EditUserComponent } from 'src/app/dialogs/edit-user/edit-user.component';
+import { ApiService } from 'src/app/services/api.service';
+import { AddUserComponent } from 'src/app/pages/users/add/add-user.component';
+import { EditMyUserComponent } from 'src/app/pages/users/edit-my-user/edit-my-user.component';
+import { EditUserComponent } from 'src/app/pages/users/edit/edit-user.component';
 import { ERole } from 'src/app/models/enums';
 import { UserModel } from 'src/app/models/models';
 
@@ -17,16 +18,31 @@ import { UserModel } from 'src/app/models/models';
 export class UserListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = ['dni', 'firstname', 'lastname', 'photo', 'role', 'actions'];
-  dataSource: any = new MatTableDataSource<UserModel>;
+  dataSource: MatTableDataSource<UserModel> = new MatTableDataSource<UserModel>;
+  userList: UserModel[] = [...LIST_DEMO];
 
   selectedUser: any;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+
+    this.api.GET(`listUsers/${this.paginator.pageIndex}/${this.paginator.pageSize}`)
+      .subscribe({
+        next(resp) {
+          // this.userList = resp;
+        },
+        error(err) {
+          console.error('Error:', err);
+        }
+      });
   }
 
-  constructor(public dialog: MatDialog, private toastr: ToastrService) {
-    this.dataSource.data = ELEMENT_DATA;
+  constructor(
+    public dialog: MatDialog,
+    private toastr: ToastrService,
+    private api: ApiService
+  ) {
+    this.dataSource.data = this.userList;
   }
 
   addUser() {
@@ -67,6 +83,6 @@ export class UserListComponent implements AfterViewInit {
   }
 }
 
-const ELEMENT_DATA: UserModel[] = [
+const LIST_DEMO: UserModel[] = [
   { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: ERole.Driver }
 ];

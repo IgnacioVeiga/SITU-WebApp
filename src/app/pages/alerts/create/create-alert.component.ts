@@ -3,11 +3,11 @@ import { NgForm } from '@angular/forms';
 import { AlertModel } from 'src/app/models/models';
 
 @Component({
-  selector: 'app-generate-alert',
-  templateUrl: './generate-alert.component.html',
-  styleUrls: ['./generate-alert.component.scss']
+  selector: 'app-create-alert',
+  templateUrl: './create-alert.component.html',
+  styleUrls: ['./create-alert.component.scss']
 })
-export class GenerateAlertComponent {
+export class CreateAlertComponent {
   alert: AlertModel = new AlertModel();
   priorityTypes: string[] = ['Alta', 'Media', 'Baja'];
 

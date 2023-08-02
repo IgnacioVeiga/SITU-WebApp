@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component';
-import { ReportListComponent } from './pages/report-list/report-list.component';
-import { AlertListComponent } from './pages/alert-list/alert-list.component';
-import { UserListComponent } from './pages/user-list/user-list.component';
+import { LoginComponent } from './pages/home/login/login.component';
+import { SignupComponent } from './pages/home/signup/signup.component';
+import { ReportListComponent } from './pages/reports/list/report-list.component';
+import { AlertListComponent } from './pages/alerts/list/alert-list.component';
+import { UserListComponent } from './pages/users/list/user-list.component';
 import { BusRoutesComponent } from './pages/bus-routes/bus-routes.component';
-import { HomepageComponent } from './pages/homepage/homepage.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
@@ -19,7 +19,7 @@ const routes: Routes = [
   // Pages
   {
     path: 'home',
-    component: HomepageComponent
+    component: HomeComponent
   },
   {
     path: 'login',

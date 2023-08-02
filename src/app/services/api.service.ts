@@ -7,13 +7,13 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
   // TODO: Reemplazar con la URL de la API
-  private apiUrl = '';
+  private readonly API_URL: string = 'localhost:8080';
 
   // Token de acceso válido, en un futuro mejor utilizar una cookie para almacenarlo
   private authToken = localStorage.getItem('authToken');
 
   // Encabezado de autorización
-  httpOptions: any = {
+  private httpOptions: any = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.authToken}`,
@@ -23,12 +23,12 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   GET(endpoint: string): Observable<any> {
-    const url = `${this.apiUrl}/${endpoint}`;
+    const url = `${this.API_URL}/${endpoint}`;
     return this.http.get(url, this.httpOptions);
   }
 
   POST(endpoint: string, data: any): Observable<any> {
-    const url = `${this.apiUrl}/${endpoint}`;
+    const url = `${this.API_URL}/${endpoint}`;
 
     if (endpoint === ('login' || 'signup')) {
       return this.http.post(url, data);
@@ -38,12 +38,12 @@ export class ApiService {
   }
 
   DELETE(endpoint: string): Observable<any> {
-    const url = `${this.apiUrl}/${endpoint}`;
+    const url = `${this.API_URL}/${endpoint}`;
     return this.http.delete(url, this.httpOptions);
   }
 
   UPDATE(endpoint: string, data: any): Observable<any> {
-    const url = `${this.apiUrl}/${endpoint}`;
+    const url = `${this.API_URL}/${endpoint}`;
     return this.http.put(url, data, this.httpOptions);
   }
 }
