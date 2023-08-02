@@ -24,29 +24,23 @@ export class SignupComponent {
   }
 
   onSubmit(myForm: NgForm) {
-    this.api.POST('signup', myForm.value).subscribe({
-      next: (resp) => {
-        if (resp) {
-          console.log('Formulario de inscripción enviado con exito.');
-          this.dialog.open(AfterRegistrationComponent).afterClosed()
-            .subscribe(() => {
-              this.goTo('/home');
-            });
+    // this.api.POST('signup', myForm.value).subscribe({
+    //   next: (resp) => {
+    //     if (resp) {
+    //       console.log('Formulario de inscripción enviado con exito.');
+    //       this.dialog.open(AfterRegistrationComponent).afterClosed()
+    //         .subscribe(() => {
+    //           this.goTo('/home');
+    //         });
 
-        } else {
-          console.error('Error, no se recibió respuesta del servidor.');
-        }
-      },
-      error: (err) => {
-        console.error('Error:', err);
-
-        // TODO: quitar esto cuando el Backend esté listo
-        this.dialog.open(AfterRegistrationComponent).afterClosed()
-          .subscribe(() => {
-            this.goTo('/home');
-          });
-      }
-    });
+    //     } else {
+    //       console.error('Error, no se recibió respuesta del servidor.');
+    //     }
+    //   },
+    //   error: (err) => {
+    //     console.error('Error:', err);
+    //   }
+    // });
     const dialogRef = this.dialog.open(AfterRegistrationComponent);
 
     dialogRef.afterClosed().subscribe(() => {

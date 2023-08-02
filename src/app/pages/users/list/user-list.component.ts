@@ -26,15 +26,15 @@ export class UserListComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
 
-    this.api.GET(`listUsers/${this.paginator.pageIndex}/${this.paginator.pageSize}`)
-      .subscribe({
-        next(resp) {
-          // this.userList = resp;
-        },
-        error(err) {
-          console.error('Error:', err);
-        }
-      });
+    // this.api.GET(`listUsers/${this.paginator.pageIndex}/${this.paginator.pageSize}`)
+    //   .subscribe({
+    //     next(resp) {
+    //       // this.userList = resp;
+    //     },
+    //     error(err) {
+    //       console.error('Error:', err);
+    //     }
+    //   });
   }
 
   constructor(
