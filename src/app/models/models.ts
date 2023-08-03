@@ -30,9 +30,11 @@ export class UserModel {
     public lastname: string = 'Natalia';
     public firstname: string = 'Natalia';
     public role: ERole = ERole.Other;
+    public photoURL: string = './assets/images/perfil.png';
 
-    // TODO: revisar el tipado de esto
-    public photo: any | undefined;
+    // TODO: SEPARAR, solo disponible para el usuario logeado
+    public email: string = '';
+    public password: string = '';
 }
 
 export class ReportModel {

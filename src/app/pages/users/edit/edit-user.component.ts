@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserModel } from 'src/app/models/models';
 
@@ -12,6 +12,18 @@ export class EditUserComponent {
 
   constructor(
     public dialogRef: MatDialogRef<EditUserComponent>,
-    @Inject(MAT_DIALOG_DATA) public userData: UserModel
+    @Inject(MAT_DIALOG_DATA) public user: UserModel
   ) { }
+
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+
+    // Previsualización de la imagen antes de subirla al servidor
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.user.photoURL = e.target?.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
 }

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { UserModel } from 'src/app/models/models';
 
 @Component({
@@ -10,15 +9,14 @@ import { UserModel } from 'src/app/models/models';
 export class EditMyUserComponent {
   user: UserModel = new UserModel();
 
-  constructor() {
-    this.user.firstname = 'Natalia';
-    this.user.lastname = 'Natalia';
-    this.user.dni = 12345678;
-    this.user.photo = undefined;
-  }
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
 
-  onSubmit(myForm: NgForm) {
-    console.log(myForm.value);
-    // TODO: enviar todo al backend y guardar cambios
+    // Previsualización de la imagen antes de subirla al servidor
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.user.photoURL = e.target?.result as string;
+    };
+    reader.readAsDataURL(file);
   }
 }

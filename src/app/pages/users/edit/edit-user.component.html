@@ -1,24 +1,25 @@
-<h1 mat-dialog-title>Editar usuario ({{userData.lastname}} {{userData.firstname}})</h1>
+<h1 mat-dialog-title>Editar usuario ({{user.lastname}} {{user.firstname}})</h1>
 
 <mat-dialog-content>
     <div class="row">
         <label>Foto</label>
 
         <div class="column center">
-            <img src="../../../assets/images/perfil.png" alt="Foto de perfil" width="46">
-            <button mat-button type="button">Cargar archivo</button>
+            <img [src]="user.photoURL" alt="Foto de perfil" width="46">
+            <input type="file" id="photoURL" name="photoURL" placeholder="Cargar archivo"
+                (change)="onFileSelected($event)" />
         </div>
     </div>
 
     <div class="row">
         <label>DNI</label>
-        <b>{{userData.dni}}</b>
+        <b>{{user.dni}}</b>
     </div>
 
     <div class="row">
         <mat-form-field>
             <mat-label>Rol</mat-label>
-            <mat-select id="role" name="role" [(ngModel)]="userData.role">
+            <mat-select id="role" name="role" [(ngModel)]="user.role">
                 <mat-option [value]="option" *ngFor="let option of roleTypes">
                     {{ option }}
                 </mat-option>
@@ -33,7 +34,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
-    <button mat-raised-button color="primary" [mat-dialog-close]="userData" type="button"
-        cdkFocusInitial>Guardar</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="user" type="button" cdkFocusInitial>Guardar</button>
     <button mat-raised-button color="secondary" mat-dialog-close type="button">Cancelar</button>
 </mat-dialog-actions>

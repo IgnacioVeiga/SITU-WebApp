@@ -1,24 +1,26 @@
-<form #editUserForm="ngForm" (ngSubmit)="onSubmit(editUserForm)">
+<form #editUserForm="ngForm">
     <h1 mat-dialog-title>Editar mi usuario ({{user.firstname}} {{user.lastname}})</h1>
 
     <mat-dialog-content>
         <div class="row">
             <label>Foto</label>
-            <div class="column center">
-                <img src="../../../assets/images/perfil.png" alt="Foto de perfil" width="46">
-                <button mat-button type="button">Cargar archivo</button>
-            </div>
+
+            <img [src]="user.photoURL" alt="Foto de perfil" width="46">
+            <input type="file" id="photoURL" name="photoURL" placeholder="Cargar archivo"
+                (change)="onFileSelected($event)" />
         </div>
 
         <div class="column">
             <mat-form-field>
                 <mat-label>Email</mat-label>
-                <input matInput type="email" id="email" name="email" ngModel placeholder="Ej: email@empresa.com">
+                <input matInput type="email" id="email" name="email" [(ngModel)]="user.email"
+                    placeholder="Ej: email@empresa.com">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Contraseña</mat-label>
-                <input matInput type="password" id="password" name="password" ngModel required placeholder="********">
+                <input matInput type="password" id="password" name="password" [(ngModel)]="user.password" required
+                    placeholder="********">
             </mat-form-field>
 
             <!-- <mat-form-field>
@@ -35,7 +37,7 @@
     </mat-dialog-content>
 
     <mat-dialog-actions align="center">
-        <button mat-raised-button color="primary" [mat-dialog-close]="true" type="submit"
+        <button mat-raised-button color="primary" [mat-dialog-close]="user" type="button"
             [disabled]="!editUserForm.valid">Guardar</button>
         <button mat-raised-button color="secondary" type="button" mat-dialog-close>Cancelar</button>
     </mat-dialog-actions>

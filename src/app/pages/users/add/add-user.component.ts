@@ -11,16 +11,14 @@ export class AddUserComponent {
   user: UserModel = new UserModel();
   roleTypes: string[] = ['Administrador', 'Chofer', 'Otro']
 
-  constructor(
-    private userService: UserService
-  ) { }
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
 
-  onSubmit() {
-    this.userService.CreateUser(this.user).subscribe(
-      (data: any): void => {
-        console.log(data);
-        // TODO: verificar si el usuario fue creado con exito
-      }
-    );
+    // Previsualización de la imagen antes de subirla al servidor
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.user.photoURL = e.target?.result as string;
+    };
+    reader.readAsDataURL(file);
   }
 }

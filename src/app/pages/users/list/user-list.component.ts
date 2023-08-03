@@ -43,7 +43,13 @@ export class UserListComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.toastr.success('Usuario añadido!');
+        // Si se hizo clic en guardar en el diálogo, actualiza los datos en la base de datos
+        this.userService.CreateUser(result).subscribe(
+          () => {
+            this.toastr.success('Usuario añadido!');
+            // TODO: refescar la tabla
+          }
+        );
       }
     });
   }
