@@ -13,4 +13,8 @@ export class AlertService {
   GetAlerts(pageIndex?: number, pageSize?: number): Observable<AlertModel> {
     return this.api.GET<AlertModel>('alerts');
   }
+
+  CreateAlert(alert: AlertModel): Observable<AlertModel> {
+    return this.api.POST<AlertModel>('alerts', alert);
+  }
 }

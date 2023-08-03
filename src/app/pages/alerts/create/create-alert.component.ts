@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { AlertModel } from 'src/app/models/models';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-create-alert',
@@ -11,8 +11,16 @@ export class CreateAlertComponent {
   alert: AlertModel = new AlertModel();
   priorityTypes: string[] = ['Alta', 'Media', 'Baja'];
 
-  onSubmit(myForm: NgForm) {
-    console.log(myForm.value);
-    // TODO: enviar todo al backend y guardar cambios
+  constructor(
+    private alertService: AlertService
+  ) { }
+
+  onSubmit() {
+    this.alertService.CreateAlert(this.alert).subscribe(
+      (data: any): void => {
+        console.log(data);
+        // TODO: verificar si la alerta fue creada con exito
+      }
+    );
   }
 }

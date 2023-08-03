@@ -32,17 +32,18 @@ export class AlertListComponent implements AfterViewInit {
   loadAlerts(): void {
     this.alertService.GetAlerts(this.paginator.pageIndex, this.paginator.pageSize).subscribe(
       (data: any) => {
-        this.dataSource.data = [...data];
+        this.dataSource.data = data;
       }
     );
   }
 
-  generateAlertDialog() {
+  CreateAlertDialog() {
     const dialogRef = this.dialog.open(CreateAlertComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.toastr.success('Alerta emitida!');
+        // TODO: actualizar listado
       }
     });
   }
