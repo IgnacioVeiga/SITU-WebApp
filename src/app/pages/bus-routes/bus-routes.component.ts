@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { BusLineModel, CheckListItem } from 'src/app/models/models';
+import { BusLineModel, CheckListItem } from 'src/app/models/bus.model';
 
 @Component({
   selector: 'app-bus-routes',

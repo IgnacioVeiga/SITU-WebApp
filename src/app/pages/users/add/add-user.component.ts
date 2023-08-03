@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { UserModel } from 'src/app/models/models';
-import { UserService } from 'src/app/services/user.service';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-add-user',

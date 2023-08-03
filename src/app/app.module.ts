@@ -91,9 +91,7 @@ import { EditMyUserComponent } from './pages/users/edit-my-user/edit-my-user.com
       timeOut: 3000,
       closeButton: true,
       progressBar: true
-    }),
-
-
+    })
   ],
   providers: [
     ApiService

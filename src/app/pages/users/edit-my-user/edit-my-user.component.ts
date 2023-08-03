@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserModel } from 'src/app/models/models';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-edit-my-user',
