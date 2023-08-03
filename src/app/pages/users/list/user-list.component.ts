@@ -38,7 +38,7 @@ export class UserListComponent implements AfterViewInit {
     );
   }
 
-  addUser() {
+  addUser(): void {
     const dialogRef = this.dialog.open(AddUserComponent);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -48,7 +48,7 @@ export class UserListComponent implements AfterViewInit {
     });
   }
 
-  editUser(userData: UserModel) {
+  editUser(userData: UserModel): void {
     const dialogRef = this.dialog.open(EditUserComponent, {
       data: { ...userData }
     });
@@ -66,17 +66,23 @@ export class UserListComponent implements AfterViewInit {
     });
   }
 
-  editMyUser() {
+  editMyUser(): void {
     const dialogRef = this.dialog.open(EditMyUserComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.toastr.success('Tu usuario fue modificado!');
+        // TODO: refescar la tabla
       }
     });
   }
 
-  deleteUser(dni: number) {
-    this.toastr.success(dni + ' ya no pertece a la empresa.');
+  deleteUser(id: number): void {
+    this.userService.RemoveUser(id).subscribe(
+      (): void => {
+        this.toastr.success('El usuario ya no pertece a la empresa.');
+        // TODO: refescar la tabla
+      }
+    );
   }
 }

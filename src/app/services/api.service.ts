@@ -6,7 +6,7 @@ import { Observable, catchError, retry, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  // TODO: Reemplazar con la URL de la API
+  // URL de la API de "json-server"
   private readonly API_URL: string = 'http://localhost:3000';
 
   // Token de acceso válido, en un futuro mejor utilizar una cookie para almacenarlo
@@ -24,27 +24,32 @@ export class ApiService {
 
   GET<T>(endpoint: string): Observable<any> {
     const url = `${this.API_URL}/${endpoint}`;
-    return this.http.get<T>(url, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
+    return this.http.get<T>(url, this.httpOptions)
+      .pipe(retry(1), catchError(this.errorHandl));
   }
 
   POST<T>(endpoint: string, data: any): Observable<any> {
     const url = `${this.API_URL}/${endpoint}`;
 
     if (endpoint === ('login' || 'signup')) {
-      return this.http.post<T>(url, data);
+      return this.http.post<T>(url, data)
+        .pipe(retry(1), catchError(this.errorHandl));
     } else {
-      return this.http.post<T>(url, data, this.httpOptions);
+      return this.http.post<T>(url, data, this.httpOptions)
+        .pipe(retry(1), catchError(this.errorHandl));
     }
-  }
-
-  DELETE(endpoint: string): Observable<any> {
-    const url = `${this.API_URL}/${endpoint}`;
-    return this.http.delete(url, this.httpOptions);
   }
 
   UPDATE<T>(endpoint: string, data: any): Observable<any> {
     const url = `${this.API_URL}/${endpoint}`;
-    return this.http.put<T>(url, data, this.httpOptions);
+    return this.http.put<T>(url, data, this.httpOptions)
+      .pipe(retry(1), catchError(this.errorHandl));
+  }
+
+  DELETE<T>(endpoint: string): Observable<any> {
+    const url = `${this.API_URL}/${endpoint}`;
+    return this.http.delete<T>(url, this.httpOptions)
+      .pipe(retry(1), catchError(this.errorHandl));
   }
 
   // Error handling
