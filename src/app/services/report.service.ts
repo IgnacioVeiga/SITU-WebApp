@@ -7,10 +7,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ReportService {
+  private readonly TABLE_NAME = 'reports';
 
   constructor(private api: ApiService) { }
 
-  GetReports(pageIndex?: number, pageSize?: number): Observable<ReportModel> {
-    return this.api.GET<ReportModel>('reports');
+  GetReports(pageIndex: number, pageSize: number): Observable<ReportModel> {
+    return this.api.GET<ReportModel>(`${this.TABLE_NAME}?_page=${pageIndex}&_limit=${pageSize}`);
   }
 }
