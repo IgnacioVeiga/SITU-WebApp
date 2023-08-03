@@ -1,14 +1,13 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
-import { ApiService } from 'src/app/services/api.service';
 import { AddUserComponent } from 'src/app/pages/users/add/add-user.component';
 import { EditMyUserComponent } from 'src/app/pages/users/edit-my-user/edit-my-user.component';
 import { EditUserComponent } from 'src/app/pages/users/edit/edit-user.component';
-import { ERole } from 'src/app/models/enums';
 import { UserModel } from 'src/app/models/models';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-list',
@@ -18,31 +17,25 @@ import { UserModel } from 'src/app/models/models';
 export class UserListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = ['dni', 'firstname', 'lastname', 'photo', 'role', 'actions'];
-  dataSource: MatTableDataSource<UserModel> = new MatTableDataSource<UserModel>;
-  userList: UserModel[] = [...LIST_DEMO];
-
-  selectedUser: any;
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-
-    // this.api.GET(`listUsers/${this.paginator.pageIndex}/${this.paginator.pageSize}`)
-    //   .subscribe({
-    //     next(resp) {
-    //       // this.userList = resp;
-    //     },
-    //     error(err) {
-    //       console.error('Error:', err);
-    //     }
-    //   });
-  }
+  dataSource: any = new MatTableDataSource<UserModel>;
 
   constructor(
     public dialog: MatDialog,
     private toastr: ToastrService,
-    private api: ApiService
-  ) {
-    this.dataSource.data = this.userList;
+    private userService: UserService
+  ) { }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.loadUsers();
+  }
+
+  loadUsers(): void {
+    this.userService.GetUsers(this.paginator.pageIndex, this.paginator.pageSize).subscribe(
+      (data: any): void => {
+        this.dataSource.data = [...data];
+      }
+    );
   }
 
   addUser() {
@@ -82,7 +75,3 @@ export class UserListComponent implements AfterViewInit {
     this.toastr.success(dni + ' ya no pertece a la empresa.');
   }
 }
-
-const LIST_DEMO: UserModel[] = [
-  { dni: 12345678, firstname: 'Natalia', lastname: 'Natalia', photo: 'No disponible', role: ERole.Driver }
-];

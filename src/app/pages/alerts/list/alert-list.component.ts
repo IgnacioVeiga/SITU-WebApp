@@ -13,19 +13,10 @@ import { AlertService } from 'src/app/services/alert.service';
   templateUrl: './alert-list.component.html',
   styleUrls: ['./alert-list.component.scss']
 })
-export class AlertListComponent implements AfterViewInit, OnInit {
+export class AlertListComponent implements AfterViewInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = ['title', 'description', 'date', 'priority', 'actions'];
   dataSource: any = new MatTableDataSource<AlertModel>;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
-
-  ngOnInit(): void {
-    this.loadAlerts();
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-  }
 
   constructor(
     public dialog: MatDialog,
@@ -33,8 +24,13 @@ export class AlertListComponent implements AfterViewInit, OnInit {
     private alertService: AlertService
   ) { }
 
-  loadAlerts() {
-    return this.alertService.GetAlerts().subscribe(
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.loadAlerts();
+  }
+
+  loadAlerts(): void {
+    this.alertService.GetAlerts(this.paginator.pageIndex, this.paginator.pageSize).subscribe(
       (data: any) => {
         this.dataSource.data = [...data];
       }

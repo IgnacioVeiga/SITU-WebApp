@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { EReportState } from 'src/app/models/enums';
 import { ReportModel } from 'src/app/models/models';
+import { ReportService } from 'src/app/services/report.service';
 
 @Component({
   selector: 'app-report-list',
@@ -10,17 +10,24 @@ import { ReportModel } from 'src/app/models/models';
   styleUrls: ['./report-list.component.scss']
 })
 export class ReportListComponent implements AfterViewInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = ['date', 'description', 'photos', 'state'];
-  dataSource: any = new MatTableDataSource<ReportModel>(ELEMENT_DATA);
+  dataSource: any = new MatTableDataSource<ReportModel>;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+  constructor(
+    private reportService: ReportService
+  ) { }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.loadReports();
   }
 
+  loadReports(): void {
+    this.reportService.GetReports(this.paginator.pageIndex, this.paginator.pageSize).subscribe(
+      (data: any): void => {
+        this.dataSource.data = [...data];
+      }
+    );
+  }
 }
-
-const ELEMENT_DATA: ReportModel[] = [
-  { id: 0, userId: 0, date: new Date(), description: 'Descripción de la denuncia', photos: [], state: EReportState.Standby }
-];
