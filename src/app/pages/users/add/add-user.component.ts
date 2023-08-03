@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { UserModel } from 'src/app/models/models';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-add-user',
@@ -11,8 +11,16 @@ export class AddUserComponent {
   user: UserModel = new UserModel();
   roleTypes: string[] = ['Administrador', 'Chofer', 'Otro']
 
-  onSubmit(myForm: NgForm) {
-    console.log(myForm.value);
-    // TODO: enviar todo al backend y guardar cambios
+  constructor(
+    private userService: UserService
+  ) { }
+
+  onSubmit() {
+    this.userService.CreateUser(this.user).subscribe(
+      (data: any): void => {
+        console.log(data);
+        // TODO: verificar si el usuario fue creado con exito
+      }
+    );
   }
 }

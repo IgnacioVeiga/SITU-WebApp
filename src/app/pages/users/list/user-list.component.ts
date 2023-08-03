@@ -48,15 +48,20 @@ export class UserListComponent implements AfterViewInit {
     });
   }
 
-  editUser(user: UserModel) {
+  editUser(userData: UserModel) {
     const dialogRef = this.dialog.open(EditUserComponent, {
-      data: user
+      data: { ...userData }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.toastr.success('Usuario modificado!');
-        console.log(result);
+        // Si se hizo clic en guardar en el diálogo, actualiza los datos en la base de datos
+        this.userService.EditUser(result).subscribe(
+          () => {
+            this.toastr.success('Usuario modificado!');
+            // TODO: refescar la tabla
+          }
+        );
       }
     });
   }

@@ -21,9 +21,12 @@ export class AlertModel {
 }
 
 export class UserModel {
-    public dni: number | undefined;
-    public lastname: string = '';
-    public firstname: string = '';
+    // Para la base de datos
+    public id!: number;
+
+    public dni!: number;
+    public lastname: string = 'Natalia';
+    public firstname: string = 'Natalia';
     public role: ERole = ERole.Other;
 
     // TODO: revisar el tipado de esto

@@ -13,4 +13,12 @@ export class UserService {
   GetUsers(pageIndex?: number, pageSize?: number): Observable<UserModel> {
     return this.api.GET<UserModel>('users');
   }
+
+  CreateUser(user: UserModel): Observable<any> {
+    return this.api.POST<UserModel>('users', user);
+  }
+
+  EditUser(user: UserModel): Observable<any> {
+    return this.api.UPDATE<UserModel>(`users/${user.id}`, user);
+  }
 }

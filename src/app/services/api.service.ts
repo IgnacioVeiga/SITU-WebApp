@@ -27,13 +27,13 @@ export class ApiService {
     return this.http.get<T>(url, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
   }
 
-  POST(endpoint: string, data: any): Observable<any> {
+  POST<T>(endpoint: string, data: any): Observable<any> {
     const url = `${this.API_URL}/${endpoint}`;
 
     if (endpoint === ('login' || 'signup')) {
-      return this.http.post(url, data);
+      return this.http.post<T>(url, data);
     } else {
-      return this.http.post(url, data, this.httpOptions);
+      return this.http.post<T>(url, data, this.httpOptions);
     }
   }
 
@@ -42,9 +42,9 @@ export class ApiService {
     return this.http.delete(url, this.httpOptions);
   }
 
-  UPDATE(endpoint: string, data: any): Observable<any> {
+  UPDATE<T>(endpoint: string, data: any): Observable<any> {
     const url = `${this.API_URL}/${endpoint}`;
-    return this.http.put(url, data, this.httpOptions);
+    return this.http.put<T>(url, data, this.httpOptions);
   }
 
   // Error handling

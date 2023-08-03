@@ -1,4 +1,4 @@
-<form #addUserForm="ngForm" (ngSubmit)="onSubmit(addUserForm)">
+<form #addUserForm="ngForm" (ngSubmit)="onSubmit()">
     <h1 mat-dialog-title>Añadir usuario</h1>
 
     <mat-dialog-content>
@@ -13,7 +13,8 @@
         <div class="row">
             <mat-form-field>
                 <mat-label>DNI</mat-label>
-                <input matInput type="text" id="dni" name="dni" ngModel required placeholder="00 000 000">
+                <input matInput type="text" id="dni" name="dni" [(ngModel)]="user.dni" ngModel required
+                    placeholder="00 000 000">
             </mat-form-field>
         </div>
 

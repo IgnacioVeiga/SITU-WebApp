@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Editar usuario ({{user.lastname}} {{user.firstname}})</h1>
+<h1 mat-dialog-title>Editar usuario ({{userData.lastname}} {{userData.firstname}})</h1>
 
 <mat-dialog-content>
     <div class="row">
@@ -12,13 +12,13 @@
 
     <div class="row">
         <label>DNI</label>
-        <b>{{user.dni}}</b>
+        <b>{{userData.dni}}</b>
     </div>
 
     <div class="row">
         <mat-form-field>
             <mat-label>Rol</mat-label>
-            <mat-select [(value)]="user.role">
+            <mat-select id="role" name="role" [(ngModel)]="userData.role">
                 <mat-option [value]="option" *ngFor="let option of roleTypes">
                     {{ option }}
                 </mat-option>
@@ -27,11 +27,13 @@
     </div>
 
     <div class="row">
-        <p>Aviso: luego de cambiar el rol, <b>no se podrá cambiar</b> <br>nuevamente hasta dentro de <b>30 días</b>.</p>
+        <p>Aviso: luego de cambiar el rol, <b>no se podrá cambiar</b> <br>nuevamente hasta dentro de <b>30 días</b>.
+        </p>
     </div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
-    <button mat-raised-button color="primary" [mat-dialog-close]="user" cdkFocusInitial>Guardar</button>
-    <button mat-raised-button color="secondary" mat-dialog-close>Cancelar</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="userData" type="button"
+        cdkFocusInitial>Guardar</button>
+    <button mat-raised-button color="secondary" mat-dialog-close type="button">Cancelar</button>
 </mat-dialog-actions>
