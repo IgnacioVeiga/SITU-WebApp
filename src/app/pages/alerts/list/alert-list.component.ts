@@ -43,7 +43,8 @@ export class AlertListComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.toastr.success('Alerta emitida!');
-        // TODO: actualizar listado
+        //Refresca la tabla
+        this.loadAlerts();
       }
     });
   }
