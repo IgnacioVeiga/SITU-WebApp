@@ -50,7 +50,7 @@ export class UserListComponent implements AfterViewInit {
         this.userService.CreateUser(result).subscribe(
           () => {
             this.toastr.success('Usuario añadido!');
-            // TODO: refescar la tabla
+            //Refresca la tabla
             this.loadUsers();
           }
         );
@@ -69,7 +69,7 @@ export class UserListComponent implements AfterViewInit {
         this.userService.EditUser(result).subscribe(
           () => {
             this.toastr.success('Usuario modificado!');
-            // TODO: refescar la tabla
+            //Refresca la tabla
             this.loadUsers();
           }
         );
@@ -92,7 +92,7 @@ export class UserListComponent implements AfterViewInit {
     this.userService.RemoveUser(id).subscribe(
       (): void => {
         this.toastr.success('El usuario ya no pertece a la empresa.');
-        // TODO: refescar la tabla
+        //Refresca la tabla
         this.loadUsers();
       }
     );
