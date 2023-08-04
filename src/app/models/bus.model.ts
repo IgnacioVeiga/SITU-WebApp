@@ -15,7 +15,7 @@ export interface Route {
     selected: boolean;
 }
 
-export class BusCompany {
+export class BusCompanyModel {
     public id!: number;
     public name: string = '';
     public logo: string = './assets/images/bus_icon.png';

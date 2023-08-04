@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmLogoutComponent } from '../dialogs/confirm-logout/confirm-logout.component';
+import { BusService } from '../services/bus.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
@@ -10,11 +12,24 @@ import { ConfirmLogoutComponent } from '../dialogs/confirm-logout/confirm-logout
 })
 export class NavbarComponent {
   textToSearch: string = (localStorage.getItem('textToSearch') || '');
+  logoURL: string = './assets/images/bus_icon.png';
 
-  constructor(private router: Router, public dialog: MatDialog) { }
-
-  goTo(route: string) {
-    this.router.navigate([route]);
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private toastr: ToastrService,
+    public busService: BusService
+  ) {
+    // TODO: traer el id de la empresa del usuario logeado
+    const BUS_COMPANY_ID = 1;
+    this.busService.GetCompanyLogo(BUS_COMPANY_ID).subscribe({
+      next: (resp: any) => {
+        this.logoURL = resp[0].logo;
+      },
+      error: () => {
+        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
+      }
+    });
   }
 
   doSearch() {
@@ -33,16 +48,4 @@ export class NavbarComponent {
       }
     });
   }
-
-  // doSearch(event: { target: { value: any; }; }) {
-  //   // Esto que escribimos en el buscador
-  //   const searchText = event.target.value;
-
-  //   if (searchText.length === 0) {
-  //     // Restaura la lista original
-  //   } else if (searchText.trim().length > 2) {
-  //     // Escribir al menos 2 caracteres para buscar
-  //     alert(searchText)
-  //   }
-  // }
 }

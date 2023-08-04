@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
-import { BusLineModel } from '../models/bus.model';
+import { BusCompanyModel, BusLineModel } from '../models/bus.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BusService {
-  private readonly TABLE_NAME = 'buses';
-
   constructor(private api: ApiService) { }
 
   GetBuses(): Observable<BusLineModel> {
-    return this.api.GET<BusLineModel>(`${this.TABLE_NAME}`);
+    return this.api.GET<BusLineModel>(`buses`);
+  }
+
+  GetCompanyLogo(companyId: number): Observable<BusCompanyModel> {
+    return this.api.GET<BusCompanyModel>(`busCompanies?id=${companyId}`);
   }
 }
