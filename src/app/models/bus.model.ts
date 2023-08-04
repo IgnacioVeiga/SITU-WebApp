@@ -1,9 +1,3 @@
-// export class CheckListItem {
-//     private id!: number;
-//     public text: string = '';
-//     public checked: boolean = false;
-// }
-
 export class BusLineModel {
     public id!: number;
     public lineNumber: number = 0;
@@ -21,4 +15,8 @@ export interface Route {
     selected: boolean;
 }
 
-// TODO: Refactorizar estas clases/interfaces
+export class BusCompany {
+    public id!: number;
+    public name: string = '';
+    public logo: string = './assets/images/bus_icon.png';
+}

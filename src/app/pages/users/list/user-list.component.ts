@@ -31,7 +31,10 @@ export class UserListComponent implements AfterViewInit {
   }
 
   loadUsers(): void {
-    this.userService.GetUsers(this.paginator.pageIndex, this.paginator.pageSize).subscribe({
+    // TODO: traer el id de la empresa del usuario logeado
+    const BUS_COMPANY_ID = 1;
+
+    this.userService.GetUsers(this.paginator.pageIndex, this.paginator.pageSize, BUS_COMPANY_ID).subscribe({
       next: (data) => {
         this.dataSource.data = data;
       },

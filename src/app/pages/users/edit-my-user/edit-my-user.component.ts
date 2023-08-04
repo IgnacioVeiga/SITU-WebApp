@@ -8,6 +8,8 @@ import { UserModel } from 'src/app/models/user.model';
 })
 export class EditMyUserComponent {
   user: UserModel = new UserModel();
+  email: string = '';
+  password: string = '';
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];

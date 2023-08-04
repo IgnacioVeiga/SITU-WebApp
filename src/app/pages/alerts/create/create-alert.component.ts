@@ -13,7 +13,10 @@ export class CreateAlertComponent {
 
   constructor(
     private alertService: AlertService
-  ) { }
+  ) {
+    const MY_ID = 1;
+    this.alert.userId = MY_ID;
+  }
 
   onSubmit() {
     this.alertService.CreateAlert(this.alert).subscribe(

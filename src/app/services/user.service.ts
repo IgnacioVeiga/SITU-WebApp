@@ -11,8 +11,15 @@ export class UserService {
 
   constructor(private api: ApiService) { }
 
-  GetUsers(pageIndex: number, pageSize: number): Observable<UserModel> {
-    return this.api.GET<UserModel>(`${this.TABLE_NAME}?_page=${pageIndex}&_limit=${pageSize}`);
+  GetUsers(pageIndex: number, pageSize: number, companyId?: number): Observable<UserModel> {
+    if (!companyId) {
+      companyId = 0;
+    }
+    return this.api.GET<UserModel>(`${this.TABLE_NAME}?companyId=${companyId}&_page=${pageIndex}&_limit=${pageSize}`);
+  }
+
+  GetUserFullname(id: number): Observable<UserModel> {
+    return this.api.GET<UserModel>(`${this.TABLE_NAME}?id=${id}`);
   }
 
   CreateUser(user: UserModel): Observable<any> {
