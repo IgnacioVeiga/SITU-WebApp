@@ -50,13 +50,16 @@ export class UserListComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         // Si se hizo clic en guardar en el diálogo, actualiza los datos en la base de datos
-        this.userService.CreateUser(result).subscribe(
-          () => {
+        this.userService.CreateUser(result).subscribe({
+          next: () => {
             this.toastr.success('Usuario añadido!');
             //Refresca la tabla
             this.loadUsers();
+          },
+          error: () => {
+            this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
           }
-        );
+        });
       }
     });
   }
@@ -69,13 +72,16 @@ export class UserListComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         // Si se hizo clic en guardar en el diálogo, actualiza los datos en la base de datos
-        this.userService.EditUser(result).subscribe(
-          () => {
+        this.userService.EditUser(result).subscribe({
+          next: () => {
             this.toastr.success('Usuario modificado!');
             //Refresca la tabla
             this.loadUsers();
+          },
+          error: () => {
+            this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
           }
-        );
+        });
       }
     });
   }
@@ -92,12 +98,15 @@ export class UserListComponent implements AfterViewInit {
   }
 
   deleteUser(id: number): void {
-    this.userService.RemoveUser(id).subscribe(
-      (): void => {
+    this.userService.RemoveUser(id).subscribe({
+      next: (): void => {
         this.toastr.success('El usuario ya no pertece a la empresa.');
         //Refresca la tabla
         this.loadUsers();
+      },
+      error: () => {
+        this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
       }
-    );
+    });
   }
 }

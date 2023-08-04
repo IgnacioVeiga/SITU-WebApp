@@ -30,11 +30,14 @@ export class AlertListComponent implements AfterViewInit {
   }
 
   loadAlerts(): void {
-    this.alertService.GetAlerts(this.paginator.pageIndex, this.paginator.pageSize).subscribe(
-      (data: any) => {
+    this.alertService.GetAlerts(this.paginator.pageIndex, this.paginator.pageSize).subscribe({
+      next: (data: any) => {
         this.dataSource.data = data;
+      },
+      error: () => {
+        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
       }
-    );
+    });
   }
 
   CreateAlertDialog() {

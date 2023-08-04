@@ -1,4 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BusLineModel, Line, Route } from 'src/app/models/bus.model';
 import { BusService } from 'src/app/services/bus.service';
 
@@ -13,12 +14,13 @@ export class BusRoutesComponent implements AfterViewInit {
   routes: Route[] = [];
 
   constructor(
-    private busService: BusService
+    private busService: BusService,
+    private toastr: ToastrService
   ) { }
 
   ngAfterViewInit(): void {
-    this.busService.GetBuses().subscribe(
-      (resp: any): void => {
+    this.busService.GetBuses().subscribe({
+      next: (resp: any): void => {
         let list: BusLineModel[] = [...resp]
         // Transformar el array de BusLineModel a Line y Route
         this.lines = list.map((busLine) => {
@@ -38,8 +40,11 @@ export class BusRoutesComponent implements AfterViewInit {
             });
           });
         });
+      },
+      error: () => {
+        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
       }
-    );
+    });
   }
 
   get selectedLines(): Line[] {

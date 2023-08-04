@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class LoginComponent {
   constructor(
     private router: Router,
+    private toastr: ToastrService,
     private api: ApiService
   ) { }
 
@@ -19,22 +21,22 @@ export class LoginComponent {
   }
 
   onSubmit(myForm: NgForm) {
-    // this.api.POST('login', myForm.value).subscribe({
-    //   next: (resp) => {
-    //     // Aquí asumimos que el backend devuelve un token de autorización en 'data.token'
-    //     if (resp && resp.token) {
-    //       // Guardar el token en el local storage
-    //       localStorage.setItem('authToken', resp.token);
-    //       console.log('Login exitoso. Token almacenado en el local storage.');
-    //       // Si está todo OK, redirige a:
+    this.api.POST('login', myForm.value).subscribe({
+      next: (resp) => {
+        // Aquí asumimos que el backend devuelve un token de autorización en 'data.token'
+        if (resp && resp.token) {
+          localStorage.setItem('authToken', resp.token);
+          this.goTo('report-list')
+        } else {
+          this.toastr.error('Error en el inicio de sesión', 'Intentelo más tarde');
+        }
+      },
+      error: () => {
+        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
+      }
+    });
+
+    // TODO: eliminar esto una vez implementado el backend
     this.goTo('report-list')
-    //     } else {
-    //       console.error('Error en el inicio de sesión. No se recibió el token.');
-    //     }
-    //   },
-    //   error: (err) => {
-    //     console.error('Error en el inicio de sesión:', err);
-    //   }
-    // });
   }
 }
