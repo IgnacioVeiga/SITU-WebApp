@@ -31,11 +31,14 @@ export class UserListComponent implements AfterViewInit {
   }
 
   loadUsers(): void {
-    this.userService.GetUsers(this.paginator.pageIndex, this.paginator.pageSize).subscribe(
-      (data: any): void => {
+    this.userService.GetUsers(this.paginator.pageIndex, this.paginator.pageSize).subscribe({
+      next: (data) => {
         this.dataSource.data = data;
+      },
+      error: () => {
+        this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
       }
-    );
+    });
   }
 
   addUser(): void {
