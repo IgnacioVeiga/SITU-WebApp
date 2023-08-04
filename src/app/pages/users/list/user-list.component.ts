@@ -89,10 +89,9 @@ export class UserListComponent implements AfterViewInit {
   editMyUser(): void {
     const dialogRef = this.dialog.open(EditMyUserComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+    dialogRef.afterClosed().subscribe(ok => {
+      if (ok) {
         this.toastr.success('Tu usuario fue modificado!');
-        // TODO: refescar la tabla
       }
     });
   }

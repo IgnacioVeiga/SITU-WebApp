@@ -13,32 +13,37 @@
         <div class="column">
             <mat-form-field>
                 <mat-label>Email</mat-label>
-                <input matInput type="email" id="email" name="email" [(ngModel)]="email"
+                <input matInput type="email" id="email" name="email" [(ngModel)]="loginData.email"
                     placeholder="Ej: email@empresa.com">
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Contraseña</mat-label>
-                <input matInput type="password" id="password" name="password" [(ngModel)]="password" required
+                <mat-label>Contraseña actual</mat-label>
+                <input matInput type="password" id="password" name="password" [(ngModel)]="loginData.password" required
                     placeholder="********">
-            </mat-form-field>
-
-            <!-- <mat-form-field>
-                <mat-label>Nueva contraseña</mat-label>
-                <input matInput type="password" id="newPassword" name="newPassword" ngModel placeholder="********">
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Repetir contraseña</mat-label>
-                <input matInput type="password" id="repeatPassword" ngValidateEqual="newPassword" ngModel
+                <mat-label>Nueva contraseña</mat-label>
+                <input matInput type="password" id="newPassword" name="newPassword" [(ngModel)]="newPassword"
                     placeholder="********">
-            </mat-form-field> -->
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Repetir nueva contraseña</mat-label>
+                <input matInput type="password" id="confirmPassword" name="confirmPassword"
+                    [(ngModel)]="confirmPassword" placeholder="********">
+            </mat-form-field>
+
+            <div *ngIf="(newPassword !== confirmPassword)">
+                <mat-error>La nueva contraseña debe concidir.</mat-error>
+            </div>
         </div>
     </mat-dialog-content>
 
     <mat-dialog-actions align="center">
-        <button mat-raised-button color="primary" [mat-dialog-close]="user" type="button"
-            [disabled]="!editUserForm.valid">Guardar</button>
+        <button mat-raised-button color="primary" type="button" (click)="sendForm()"
+            [disabled]="!editUserForm.valid || (newPassword !== confirmPassword)">Guardar</button>
         <button mat-raised-button color="secondary" type="button" mat-dialog-close>Cancelar</button>
     </mat-dialog-actions>
 </form>

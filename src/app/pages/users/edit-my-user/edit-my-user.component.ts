@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { UserModel } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-edit-my-user',
@@ -8,8 +11,31 @@ import { UserModel } from 'src/app/models/user.model';
 })
 export class EditMyUserComponent {
   user: UserModel = new UserModel();
-  email: string = '';
-  password: string = '';
+  newPassword: string = '';
+  confirmPassword: string = '';
+
+  loginData: any = {
+    email: '',
+    password: ''
+  }
+
+  constructor(
+    public dialogRef: MatDialogRef<EditMyUserComponent>,
+    private toastr: ToastrService,
+    private userService: UserService
+  ) {
+    // TODO: traer el id del usuario logeado
+    const USER_ID = 1;
+    this.userService.GetUserFullname(USER_ID).subscribe({
+      next: (resp: any) => {
+        this.user = resp[0];
+        // TODO: si es posible autocompletar el email
+      },
+      error: () => {
+        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
+      }
+    });
+  }
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
@@ -20,5 +46,13 @@ export class EditMyUserComponent {
       this.user.photoURL = e.target?.result as string;
     };
     reader.readAsDataURL(file);
+  }
+
+  sendForm() {
+    // TODO: Verificar por backend si la contraseña actual es correcta
+    if (this.newPassword) {
+      this.loginData.password = this.newPassword;
+    }
+    this.dialogRef.close(true);
   }
 }
