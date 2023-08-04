@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReportModel } from 'src/app/models/report.model';
@@ -13,6 +13,8 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ReportListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  // @ViewChild('myDiv', { static: false })myDiv!: ElementRef;
+  
   displayedColumns: string[] = ['date', 'description', 'photos', 'state', 'actions'];
   dataSource: any = new MatTableDataSource<ReportModel>;
 
@@ -32,6 +34,7 @@ export class ReportListComponent implements AfterViewInit {
         this.dataSource.data = data;
       }
     );
+    // this.calculateDivLength();
   }
 
 
@@ -40,4 +43,20 @@ export class ReportListComponent implements AfterViewInit {
       data: alert
     });
   }
+
+  transform(value: string, limit: number): any {
+    if(limit && value.length > limit) {
+      return value.substring(0, limit).concat('...');
+    }
+    return value;
+  }
+
+  // calculateDivLength() {
+  //   const divElement: HTMLElement = this.myDiv.nativeElement;
+  //   const divLength: number = divElement.offsetWidth;
+  //   console.log('Longitud del div:', divLength, 'px');
+  //   return divLength;
+  // }
+
+  
 }
