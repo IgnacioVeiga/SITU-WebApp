@@ -48,6 +48,7 @@ export class UserListComponent implements AfterViewInit {
           () => {
             this.toastr.success('Usuario añadido!');
             // TODO: refescar la tabla
+            this.loadUsers();
           }
         );
       }
@@ -66,6 +67,7 @@ export class UserListComponent implements AfterViewInit {
           () => {
             this.toastr.success('Usuario modificado!');
             // TODO: refescar la tabla
+            this.loadUsers();
           }
         );
       }
@@ -88,6 +90,7 @@ export class UserListComponent implements AfterViewInit {
       (): void => {
         this.toastr.success('El usuario ya no pertece a la empresa.');
         // TODO: refescar la tabla
+        this.loadUsers();
       }
     );
   }
