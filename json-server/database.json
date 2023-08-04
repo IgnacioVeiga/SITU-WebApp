@@ -9,6 +9,32 @@
       "id": 1
     }
   ],
+  "buses": [
+    {
+      "id": 1,
+      "lineNumber": 276,
+      "routes": [
+        "Luján - Cazador",
+        "Cazador - Luján",
+        "Pilar - Paraná",
+        "Paraná - Pilar",
+        "Zelaya - Escobar",
+        "Escobar - Zelaya"
+      ]
+    },
+    {
+      "id": 2,
+      "lineNumber": 194,
+      "routes": [
+        "Zarate - Once [Común]",
+        "Once - Zarate [Común]",
+        "Zarate - Once [Expreso]",
+        "Once - Zarate [Expreso]",
+        "Zarate - Once [Directo]",
+        "Once - Zarate [Directo]"
+      ]
+    }
+  ],
   "reports": [
     {
       "id": 1,

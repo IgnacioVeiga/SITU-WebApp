@@ -3,44 +3,36 @@
     <h1>Mapa de recorridos</h1>
 </div>
 
-<mat-stepper orientation="vertical" [linear]="true">
+<mat-stepper>
     <mat-step label="1. Seleccionar línea y trasbordos">
-        <div class="stepper-buttons">
-            <button mat-button matStepperNext [color]="'primary'" type="button" [disabled]="busList.length == 0">
-                <mat-icon>keyboard_arrow_down</mat-icon>
-                Siguiente
-            </button>
-        </div>
+        <!-- <mat-chip-listbox #lines aria-label="Seleccionar línea" selectable multiple>
+            <mat-chip-option *ngFor="let busLine of busList"
+                (selectionChange)="toggleSelection($event.selected, busLine.lineNumber)">
+                {{busLine.lineNumber}}
+            </mat-chip-option>
+        </mat-chip-listbox>
 
-        <mat-form-field class="chips-input">
-            <mat-label>Ingrese líneas de colectivos</mat-label>
-            <mat-chip-grid #chipGrid aria-label="Añada líneas de colectivos">
-                <mat-chip-row *ngFor="let bus of busList" (removed)="removeLinea(bus.LineNumber)">
-                    {{ bus.LineNumber }}
-                    <button matChipRemove aria-label="'remove ' + bus.LineNumber">
-                        <mat-icon>cancel</mat-icon>
-                    </button>
-                </mat-chip-row>
-            </mat-chip-grid>
-            <input placeholder="000" maxlength="4" [matChipInputFor]="chipGrid"
-                (matChipInputTokenEnd)="addLinea($event)" />
-        </mat-form-field>
+        <div *ngFor="let bus of busList" aria-label="'Seleccionar recorridos de la línea' + bus">
+            <mat-checkbox *ngFor="let route of bus.routes">
+                {{ route }}
+            </mat-checkbox>
+        </div> -->
 
-        <div *ngFor="let bus of busList">
-            <mat-checkbox [checked]="route.checked" *ngFor="let route of bus.Routes">
-                {{ route.text }}
+        <mat-chip-listbox selectable multiple>
+            <mat-chip-option *ngFor="let line of lines" [selected]="line.selected" (click)="toggleLineSelection(line)">
+                {{ line.number }}
+            </mat-chip-option>
+        </mat-chip-listbox>
+
+        <div *ngIf="selectedLines.length > 0">
+            <h3>Recorridos seleccionados:</h3>
+            <mat-checkbox *ngFor="let route of selectedRoutes" [(ngModel)]="route.selected">
+                {{ route.name }}
             </mat-checkbox>
         </div>
     </mat-step>
 
     <mat-step label="2. Visualizar mapa">
-        <div class="stepper-buttons">
-            <button mat-button matStepperPrevious type="button">
-                <mat-icon>keyboard_arrow_up</mat-icon>
-                Anterior
-            </button>
-        </div>
-
         <iframe width="1000" height="700" name="gmap" title="gmap"
             src="https://maps.google.com/maps?q=palermo&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
     </mat-step>

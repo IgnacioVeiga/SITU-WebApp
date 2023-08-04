@@ -1,40 +1,58 @@
-import { Component } from '@angular/core';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { BusLineModel, CheckListItem } from 'src/app/models/bus.model';
+import { AfterViewInit, Component } from '@angular/core';
+import { BusLineModel, Line, Route } from 'src/app/models/bus.model';
+import { BusService } from 'src/app/services/bus.service';
 
 @Component({
   selector: 'app-bus-routes',
   templateUrl: './bus-routes.component.html',
   styleUrls: ['./bus-routes.component.scss']
 })
-export class BusRoutesComponent {
-  busList: BusLineModel[] = [];
+export class BusRoutesComponent implements AfterViewInit {
+  // busList: BusLineModel[] = [];
+  lines: Line[] = [];
+  routes: Route[] = [];
 
-  addLinea(event: MatChipInputEvent): void {
-    const value = parseInt((event.value || '').trim());
-    if (value) {
-      let line: BusLineModel = new BusLineModel;
-      line.LineNumber = value;
-      line.Routes = this.generarElementosAleatorios(6);
-      this.busList.push(line);
-    }
-    event.chipInput!.clear();
+  constructor(
+    private busService: BusService
+  ) { }
+
+  ngAfterViewInit(): void {
+    this.busService.GetBuses().subscribe(
+      (resp: any): void => {
+        let list: BusLineModel[] = [...resp]
+        // Transformar el array de BusLineModel a Line y Route
+        this.lines = list.map((busLine) => {
+          return {
+            number: busLine.lineNumber,
+            selected: false,
+          };
+        });
+
+        this.routes = [];
+        list.forEach((busLine) => {
+          busLine.routes.forEach((routeName) => {
+            this.routes.push({
+              name: routeName,
+              line: busLine.lineNumber,
+              selected: false,
+            });
+          });
+        });
+      }
+    );
   }
 
-  removeLinea(linea: number) {
-    const index = this.busList.findIndex(b => b.LineNumber === linea);
-    this.busList.splice(index, 1);
+  get selectedLines(): Line[] {
+    return this.lines.filter((line) => line.selected);
   }
 
-  generarElementosAleatorios(cantidad: number): CheckListItem[] {
-    const elementosAleatorios: CheckListItem[] = [];
-    for (let i = 1; i <= cantidad; i++) {
-      const item: CheckListItem = new CheckListItem();
-      item.id = i;
-      item.text = `Trayecto ${i}`;
-      item.checked = Math.random() < 0.5; // Genera aleatoriamente true o false
-      elementosAleatorios.push(item);
-    }
-    return elementosAleatorios;
+  get selectedRoutes(): Route[] {
+    return this.routes.filter((route) => {
+      return this.selectedLines.some((line) => line.number === route.line && line.selected);
+    });
+  }
+
+  toggleLineSelection(line: Line): void {
+    line.selected = !line.selected;
   }
 }
