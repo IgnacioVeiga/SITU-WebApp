@@ -28,4 +28,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Fake Backend server
 - Run `npm i -g json-server`
-- Run `json-server --watch json-server/database.json`
+- Run `json-server -w db.json`
