@@ -33,7 +33,7 @@ export class UserListComponent implements AfterViewInit {
   loadUsers(): void {
     this.userService.GetUsers(this.paginator.pageIndex, this.paginator.pageSize).subscribe(
       (data: any): void => {
-        this.dataSource.data = [...data];
+        this.dataSource.data = data;
       }
     );
   }

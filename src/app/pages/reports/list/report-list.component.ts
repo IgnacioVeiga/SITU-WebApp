@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReportModel } from 'src/app/models/report.model';
 import { ReportService } from 'src/app/services/report.service';
+import { ReportDetailsComponent } from '../details/report-details.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-report-list',
@@ -11,10 +13,11 @@ import { ReportService } from 'src/app/services/report.service';
 })
 export class ReportListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns: string[] = ['date', 'description', 'photos', 'state'];
+  displayedColumns: string[] = ['date', 'description', 'photos', 'state', 'actions'];
   dataSource: any = new MatTableDataSource<ReportModel>;
 
   constructor(
+    public dialog: MatDialog,
     private reportService: ReportService
   ) { }
 
@@ -26,8 +29,15 @@ export class ReportListComponent implements AfterViewInit {
   loadReports(): void {
     this.reportService.GetReports(this.paginator.pageIndex, this.paginator.pageSize).subscribe(
       (data: any): void => {
-        this.dataSource.data = [...data];
+        this.dataSource.data = data;
       }
     );
+  }
+
+
+  seeReportDialog(alert: ReportModel) {
+    this.dialog.open(ReportDetailsComponent, {
+      data: alert
+    });
   }
 }

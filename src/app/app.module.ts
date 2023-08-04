@@ -32,6 +32,7 @@ import { SignupComponent } from './pages/home/signup/signup.component';
 import { AlertListComponent } from './pages/alerts/list/alert-list.component';
 import { UserListComponent } from './pages/users/list/user-list.component';
 import { ReportListComponent } from './pages/reports/list/report-list.component';
+import { ReportDetailsComponent } from './pages/reports/details/report-details.component';
 import { BusRoutesComponent } from './pages/bus-routes/bus-routes.component';
 import { CreateAlertComponent } from './pages/alerts/create/create-alert.component';
 import { AlertDetailsComponent } from './pages/alerts/details/alert-details.component';
@@ -52,6 +53,7 @@ import { EditMyUserComponent } from './pages/users/edit-my-user/edit-my-user.com
     AlertListComponent,
     UserListComponent,
     ReportListComponent,
+    ReportDetailsComponent,
     BusRoutesComponent,
     CreateAlertComponent,
     AlertDetailsComponent,
