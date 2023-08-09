@@ -5,6 +5,7 @@ export class ReportModel {
     public userId!: number;
     public description: string = '';
     public date: Date = new Date();
+    public reason: string = '';
     public state: EReportState = EReportState.Standby;
     public photoURLs: string[] = [];
 }
