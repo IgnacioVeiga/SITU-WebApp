@@ -12,27 +12,27 @@
             <td mat-cell *matCellDef="let element"> {{element.date | date: 'dd/MM/yyyy HH:MM'}} </td>
         </ng-container>
 
+        <!-- Columna de la persona que reclama -->
+        <ng-container matColumnDef="claimant">
+            <th mat-header-cell *matHeaderCellDef> Reclama </th>
+            <td mat-cell *matCellDef="let element"> Pepe Argento </td>
+        </ng-container>
+
+        <!-- Columna del motivo -->
+        <!-- <ng-container matColumnDef="reason">
+            <th mat-header-cell *matHeaderCellDef> Motivo </th>
+            <td mat-cell *matCellDef="let element"> {{element.reason}}</td>
+        </ng-container> -->
+
         <!-- Columna de descripción -->
         <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef> Descripción </th>
-            <td mat-cell *matCellDef="let element"> {{transform(element.description, 130)}} </td>
-        </ng-container>
-
-        <!-- Columna de fotos en miniatura -->
-        <ng-container matColumnDef="photos">
-            <th mat-header-cell *matHeaderCellDef> Fotos </th>
-            <td mat-cell *matCellDef="let element"> {{element.photoURLs.length}} fotos. </td>
-        </ng-container>
-
-        <!-- Columna de estado -->
-        <ng-container matColumnDef="state">
-            <th mat-header-cell *matHeaderCellDef> Estado </th>
-            <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+            <th mat-header-cell *matHeaderCellDef> Motivo y Descripción </th>
+            <td mat-cell *matCellDef="let element"> <b>{{element.reason}}</b> - {{transform(element.description, 110)}} </td>
         </ng-container>
 
         <!-- Columna con botones -->
         <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <th mat-header-cell *matHeaderCellDef> Detalles </th>
             <td mat-cell *matCellDef="let element">
                 <button mat-icon-button (click)="seeReportDialog(element)">
                     <mat-icon>info</mat-icon>

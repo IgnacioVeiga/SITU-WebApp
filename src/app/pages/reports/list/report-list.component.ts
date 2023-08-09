@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReportModel } from 'src/app/models/report.model';
@@ -14,12 +14,14 @@ import { MatDialog } from '@angular/material/dialog';
 export class ReportListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  displayedColumns: string[] = ['date', 'description', 'photos', 'state', 'actions'];
+  // displayedColumns: string[] = ['date', 'claimant', 'reason', 'description', 'actions'];
+  displayedColumns: string[] = ['date', 'claimant', 'description', 'actions'];
+
   dataSource: any = new MatTableDataSource<ReportModel>;
 
   constructor(
     public dialog: MatDialog,
-    private reportService: ReportService
+    private reportService: ReportService,
   ) { }
 
   ngAfterViewInit(): void {
