@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AlertModel } from 'src/app/models/alert.model';
-import { AlertService } from 'src/app/services/alert.service';
+import { AlertModel } from 'src/app/shared/models/alert.model';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
   selector: 'app-create-alert',

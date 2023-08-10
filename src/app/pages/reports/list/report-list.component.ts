@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ReportModel } from 'src/app/models/report.model';
-import { ReportService } from 'src/app/services/report.service';
+import { ReportModel } from 'src/app/shared/models/report.model';
+import { ReportService } from 'src/app/shared/services/report.service';
 import { ReportDetailsComponent } from '../details/report-details.component';
 import { MatDialog } from '@angular/material/dialog';
 

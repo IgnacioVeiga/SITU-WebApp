@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { ReportModel } from 'src/app/models/report.model';
-import { UserService } from 'src/app/services/user.service';
+import { ReportModel } from 'src/app/shared/models/report.model';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-report-details',

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { BusLineModel, Line, Route } from 'src/app/models/bus.model';
-import { BusService } from 'src/app/services/bus.service';
+import { BusLineModel, Line, Route } from 'src/app/shared/models/bus.model';
+import { BusService } from 'src/app/shared/services/bus.service';
 
 @Component({
   selector: 'app-bus-routes',

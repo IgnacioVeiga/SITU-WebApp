@@ -1,5 +1,3 @@
-import { EReportState } from "./enums";
-
 export class ReportModel {
     public id!: number;
     public userId!: number;
@@ -8,4 +6,9 @@ export class ReportModel {
     public reason: string = '';
     public state: EReportState = EReportState.Standby;
     public photoURLs: string[] = [];
+}
+
+export enum EReportState {
+    Standby = "En espera",
+    Resolved = "Resuelta"
 }

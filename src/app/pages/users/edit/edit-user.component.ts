@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { UserModel } from 'src/app/models/user.model';
+import { UserModel } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-edit-user',

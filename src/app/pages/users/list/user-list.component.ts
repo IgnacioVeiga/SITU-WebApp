@@ -6,8 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AddUserComponent } from 'src/app/pages/users/add/add-user.component';
 import { EditMyUserComponent } from 'src/app/pages/users/edit-my-user/edit-my-user.component';
 import { EditUserComponent } from 'src/app/pages/users/edit/edit-user.component';
-import { UserModel } from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
+import { UserModel } from 'src/app/shared/models/user.model';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-user-list',

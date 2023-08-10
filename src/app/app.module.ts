@@ -25,7 +25,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ApiService } from './services/api.service';
+import { ApiService } from './shared/services/api.service';
 
 import { LoginComponent } from './pages/home/login/login.component';
 import { SignupComponent } from './pages/home/signup/signup.component';
@@ -43,7 +43,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ConfirmLogoutComponent } from './dialogs/confirm-logout/confirm-logout.component';
 import { EditMyUserComponent } from './pages/users/edit-my-user/edit-my-user.component';
-import { LongTextPipe } from './shared/long-text.pipe';
+import { LongTextPipe } from './shared/pipes/long-text.pipe';
 
 @NgModule({
   declarations: [

@@ -1,5 +1,3 @@
-import { ERole } from "./enums";
-
 export class UserModel {
     // Para la base de datos
     public id!: number;
@@ -10,4 +8,10 @@ export class UserModel {
     public firstname: string = 'Natalia';
     public role: ERole = ERole.Other;
     public photoURL: string = './assets/images/perfil.png';
+}
+
+export enum ERole {
+    Admin = "Administrador",
+    Driver = "Chofer",
+    Other = "Otro"
 }
