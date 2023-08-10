@@ -57,11 +57,4 @@ export class AlertListComponent implements AfterViewInit {
       data: alert
     });
   }
-
-  transform(value: string, limit: number): any {
-    if (limit && value.length > limit) {
-      return value.substring(0, limit).concat('...');
-    }
-    return value;
-  }
 }

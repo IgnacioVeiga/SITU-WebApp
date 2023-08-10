@@ -37,19 +37,9 @@ export class ReportListComponent implements AfterViewInit {
     );
   }
 
-
   seeReportDialog(alert: ReportModel) {
     this.dialog.open(ReportDetailsComponent, {
       data: alert
     });
   }
-
-
-  transform(value: string, limit: number): any {
-    if (limit && value.length > limit) {
-      return value.substring(0, limit).concat('...');
-    }
-    return value;
-  }
-
 }

@@ -27,7 +27,7 @@
         <!-- Columna de descripción -->
         <ng-container matColumnDef="description">
             <th mat-header-cell *matHeaderCellDef> Motivo y Descripción </th>
-            <td mat-cell *matCellDef="let element"> <b>{{element.reason}}</b> - {{transform(element.description, 110)}} </td>
+            <td mat-cell *matCellDef="let element"> <b>{{element.reason}}</b> - {{element.description | longText:110}} </td>
         </ng-container>
 
         <!-- Columna con botones -->

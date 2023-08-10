@@ -43,6 +43,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ConfirmLogoutComponent } from './dialogs/confirm-logout/confirm-logout.component';
 import { EditMyUserComponent } from './pages/users/edit-my-user/edit-my-user.component';
+import { LongTextPipe } from './shared/long-text.pipe';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { EditMyUserComponent } from './pages/users/edit-my-user/edit-my-user.com
     EditMyUserComponent,
     NavbarComponent,
     ConfirmLogoutComponent,
+    LongTextPipe,
   ],
   imports: [
     CommonModule,
