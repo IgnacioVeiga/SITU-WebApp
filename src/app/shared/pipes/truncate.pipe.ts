@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'longText'
+  name: 'truncate'
 })
-export class LongTextPipe implements PipeTransform {
+export class TruncatePipe implements PipeTransform {
 
   transform(value: string, limit: number): string {
     if (limit && value.length > limit) {
