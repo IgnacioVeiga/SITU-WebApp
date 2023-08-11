@@ -6,13 +6,11 @@ import { ApiService } from 'src/app/shared/services/api.service';
 import { AfterSignUpComponent } from 'src/app/pages/home/signup/after.signup.component';
 import { ToastrService } from 'ngx-toastr';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
 
 @Component({
-  selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
   standalone: true,

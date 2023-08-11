@@ -10,7 +10,6 @@ import { UserModel } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
-  selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })

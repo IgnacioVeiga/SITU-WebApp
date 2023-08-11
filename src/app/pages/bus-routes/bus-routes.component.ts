@@ -4,7 +4,6 @@ import { BusLineModel, Line, Route } from 'src/app/shared/models/bus.model';
 import { BusService } from 'src/app/shared/services/bus.service';
 
 @Component({
-  selector: 'app-bus-routes',
   templateUrl: './bus-routes.component.html',
   styleUrls: ['./bus-routes.component.scss']
 })

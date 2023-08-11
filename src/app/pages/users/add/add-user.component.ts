@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { UserModel } from 'src/app/shared/models/user.model';
 
 @Component({
-  selector: 'app-add-user',
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.scss']
 })

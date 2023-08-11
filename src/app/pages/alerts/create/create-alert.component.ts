@@ -3,7 +3,6 @@ import { AlertModel } from 'src/app/shared/models/alert.model';
 import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
-  selector: 'app-create-alert',
   templateUrl: './create-alert.component.html',
   styleUrls: ['./create-alert.component.scss']
 })

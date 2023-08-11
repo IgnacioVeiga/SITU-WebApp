@@ -5,7 +5,6 @@ import { AlertModel } from 'src/app/shared/models/alert.model';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
-  selector: 'app-alert-details',
   templateUrl: './alert-details.component.html',
   styleUrls: ['./alert-details.component.scss']
 })

@@ -9,7 +9,6 @@ import { AlertModel } from 'src/app/shared/models/alert.model';
 import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
-  selector: 'app-alert-list',
   templateUrl: './alert-list.component.html',
   styleUrls: ['./alert-list.component.scss']
 })

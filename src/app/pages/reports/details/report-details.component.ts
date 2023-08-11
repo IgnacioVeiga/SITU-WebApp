@@ -5,7 +5,6 @@ import { ReportModel } from 'src/app/shared/models/report.model';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
-  selector: 'app-report-details',
   templateUrl: './report-details.component.html',
   styleUrls: ['./report-details.component.scss']
 })

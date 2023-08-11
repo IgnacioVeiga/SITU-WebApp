@@ -9,7 +9,6 @@ import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/shared/services/api.service';
 
 @Component({
-  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,

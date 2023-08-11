@@ -5,7 +5,6 @@ import { UserModel } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
-  selector: 'app-edit-my-user',
   templateUrl: './edit-my-user.component.html',
   styleUrls: ['./edit-my-user.component.scss']
 })
