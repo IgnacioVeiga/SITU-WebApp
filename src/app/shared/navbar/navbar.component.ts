@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ConfirmLogoutComponent } from '../dialogs/confirm-logout/confirm-logout.component';
-import { BusService } from '../shared/services/bus.service';
+import { ConfirmLogoutComponent } from '../../pages/home/login/confirm-logout.component';
+import { BusService } from '../services/bus.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

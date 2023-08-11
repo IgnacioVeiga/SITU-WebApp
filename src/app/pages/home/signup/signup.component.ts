@@ -1,16 +1,27 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { AfterRegistrationComponent } from 'src/app/dialogs/after-registration/after.registration.component';
+import { AfterSignUpComponent } from 'src/app/pages/home/signup/after.signup.component';
 import { ToastrService } from 'ngx-toastr';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
+  standalone: true,
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule
+  ]
 })
 export class SignupComponent {
 
@@ -31,7 +42,7 @@ export class SignupComponent {
         if (resp) {
           console.log();
           this.toastr.success('Formulario de inscripción enviado con exito.', 'Espere respuesta vía email.');
-          this.dialog.open(AfterRegistrationComponent).afterClosed()
+          this.dialog.open(AfterSignUpComponent).afterClosed()
             .subscribe(() => {
               this.goTo('/home');
             });
@@ -46,7 +57,7 @@ export class SignupComponent {
     });
 
     // TODO: eliminar esto una vez implementado el backend
-    this.dialog.open(AfterRegistrationComponent).afterClosed()
+    this.dialog.open(AfterSignUpComponent).afterClosed()
       .subscribe(() => {
         this.goTo('/home');
       });
