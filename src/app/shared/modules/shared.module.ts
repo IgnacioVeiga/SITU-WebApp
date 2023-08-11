@@ -24,6 +24,7 @@ import { TruncatePipe } from "../pipes/truncate.pipe";
 import { ToastrModule } from "ngx-toastr";
 import { BusRoutesComponent } from "src/app/pages/bus-routes/bus-routes.component";
 import { NavbarComponent } from "../navbar/navbar.component";
+import { BrowserModule } from "@angular/platform-browser";
 
 @NgModule({
     declarations: [
@@ -40,6 +41,7 @@ import { NavbarComponent } from "../navbar/navbar.component";
         MatStepperModule,
         MatToolbarModule,
 
+        BrowserModule,
         FormsModule,
         RouterModule,
         ToastrModule.forRoot({
