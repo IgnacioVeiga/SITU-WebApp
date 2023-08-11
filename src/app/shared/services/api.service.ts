@@ -9,14 +9,14 @@ export class ApiService {
   // URL de la API de "json-server"
   private readonly API_URL: string = 'http://localhost:3000';
 
-  // Token de acceso válido, en un futuro mejor utilizar una cookie para almacenarlo
+  // TODO: mejor utilizar cookies
   private authToken = localStorage.getItem('authToken');
 
   // Encabezado de autorización
   private httpOptions: any = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      // Authorization: `Bearer ${this.authToken}`,
+      Authorization: `Bearer ${this.authToken}`,
     }),
   };
 

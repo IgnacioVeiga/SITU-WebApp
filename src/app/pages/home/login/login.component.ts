@@ -35,8 +35,10 @@ export class LoginComponent {
   onSubmit(myForm: NgForm) {
     this.api.POST('login', myForm.value).subscribe({
       next: (resp) => {
-        // Aquí asumimos que el backend devuelve un token de autorización en 'data.token'
+        // El backend devuelve un token de autorización
         if (resp && resp.token) {
+
+          // TODO: mejor utilizar cookies
           localStorage.setItem('authToken', resp.token);
           this.goTo('report-list')
         } else {

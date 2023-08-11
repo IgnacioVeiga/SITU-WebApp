@@ -8,9 +8,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { SharedModule } from './shared/modules/shared.module';
-import { UserModule } from './shared/modules/user.module';
-import { ReportModule } from './shared/modules/report.module';
-import { AlertModule } from './shared/modules/alert.module';
+import { UserModule } from './pages/users/user.module';
+import { ReportModule } from './pages/reports/report.module';
+import { AlertModule } from './pages/alerts/alert.module';
 
 @NgModule({
   imports: [

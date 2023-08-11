@@ -5,7 +5,7 @@ import { EditMyUserComponent } from "src/app/pages/users/edit-my-user/edit-my-us
 import { EditUserComponent } from "src/app/pages/users/edit/edit-user.component";
 import { UserListComponent } from "src/app/pages/users/list/user-list.component";
 
-import { SharedModule } from "./shared.module";
+import { SharedModule } from "../../shared/modules/shared.module";
 
 @NgModule({
     declarations: [
