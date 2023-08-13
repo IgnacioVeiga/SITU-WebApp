@@ -14,4 +14,8 @@ export class ReportService {
   GetReports(pageIndex: number, pageSize: number): Observable<ReportModel> {
     return this.api.GET<ReportModel>(`${this.TABLE_NAME}?_page=${pageIndex}&_limit=${pageSize}`);
   }
+
+  GetReport(reportId: number): Observable<ReportModel> {
+    return this.api.GET<ReportModel>(`${this.TABLE_NAME}/${reportId}`);
+  }
 }

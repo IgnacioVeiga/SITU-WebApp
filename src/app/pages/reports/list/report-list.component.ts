@@ -3,8 +3,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReportModel } from 'src/app/shared/models/report.model';
 import { ReportService } from 'src/app/shared/services/report.service';
-import { ReportDetailsComponent } from '../details/report-details.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   templateUrl: './report-list.component.html',
@@ -12,8 +13,6 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ReportListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  // displayedColumns: string[] = ['date', 'claimant', 'reason', 'description', 'actions'];
   displayedColumns: string[] = ['date', 'claimant', 'description', 'actions'];
 
   dataSource: any = new MatTableDataSource<ReportModel>;
@@ -21,6 +20,8 @@ export class ReportListComponent implements AfterViewInit {
   constructor(
     public dialog: MatDialog,
     private reportService: ReportService,
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   ngAfterViewInit(): void {
@@ -29,16 +30,18 @@ export class ReportListComponent implements AfterViewInit {
   }
 
   loadReports(): void {
-    this.reportService.GetReports(this.paginator.pageIndex, this.paginator.pageSize).subscribe(
-      (data: any): void => {
-        this.dataSource.data = data;
-      }
-    );
+    this.reportService.GetReports(this.paginator.pageIndex, this.paginator.pageSize)
+      .subscribe({
+        next: (data) => {
+          this.dataSource.data = data;
+        },
+        error: () => {
+          this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
+        }
+      });
   }
 
-  seeReportDialog(alert: ReportModel) {
-    this.dialog.open(ReportDetailsComponent, {
-      data: alert
-    });
+  seeReport(id: number) {
+    this.router.navigate(['report-item/', id]);
   }
 }
