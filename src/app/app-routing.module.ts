@@ -8,6 +8,7 @@ import { AlertListComponent } from './pages/alerts/list/alert-list.component';
 import { UserListComponent } from './pages/users/list/user-list.component';
 import { BusRoutesComponent } from './pages/bus-routes/bus-routes.component';
 import { HomeComponent } from './pages/home/home.component';
+import { SeeReportComponent } from './pages/reports/see-report/see-report.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'report-list',
     component: ReportListComponent
+  },
+  {
+    path: 'report-item/:id',
+    component: SeeReportComponent
   },
   {
     path: 'alert-list',
