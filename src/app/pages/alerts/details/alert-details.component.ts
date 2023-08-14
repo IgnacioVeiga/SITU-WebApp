@@ -16,9 +16,9 @@ export class AlertDetailsComponent {
     private toastr: ToastrService,
     private userService: UserService
   ) {
-    this.userService.GetUserFullname(data.userId).subscribe({
+    this.userService.GetUser(data.userId).subscribe({
       next: (resp: any) => {
-        this.generatedBy = `${resp[0].lastname} ${resp[0].firstname}`;
+        this.generatedBy = `${resp.lastname} ${resp.firstname}`;
       },
       error: () => {
         this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');

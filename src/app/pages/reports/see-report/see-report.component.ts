@@ -40,10 +40,10 @@ export class SeeReportComponent implements OnInit {
     }
 
     GetClaimantFullname() {
-        this.userService.GetUserFullname(this.data.userId).subscribe({
+        this.userService.GetUser(this.data.userId).subscribe({
             next: (resp: any) => {
                 if (resp) {
-                    this.claimantFullname = `${resp[0].lastname} ${resp[0].firstname}`;
+                    this.claimantFullname = `${resp.lastname} ${resp.firstname}`;
                 }
             },
             error: () => {

@@ -25,9 +25,9 @@ export class EditMyUserComponent {
   ) {
     // TODO: traer el id del usuario logeado
     const USER_ID = 1;
-    this.userService.GetUserFullname(USER_ID).subscribe({
+    this.userService.GetUser(USER_ID).subscribe({
       next: (resp: any) => {
-        this.user = resp[0];
+        this.user = resp;
         // TODO: si es posible autocompletar el email
       },
       error: () => {

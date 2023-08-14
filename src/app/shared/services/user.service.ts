@@ -18,8 +18,8 @@ export class UserService {
     return this.api.GET<UserModel>(`${this.TABLE_NAME}?companyId=${companyId}&_page=${pageIndex}&_limit=${pageSize}`);
   }
 
-  GetUserFullname(userId: number): Observable<UserModel> {
-    return this.api.GET<UserModel>(`${this.TABLE_NAME}?id=${userId}`);
+  GetUser(userId: number): Observable<any> {
+    return this.api.GET<any>(`${this.TABLE_NAME}/${userId}`);
   }
 
   CreateUser(user: UserModel): Observable<any> {
