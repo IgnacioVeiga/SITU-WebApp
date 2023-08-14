@@ -18,8 +18,8 @@ export class UserService {
     return this.api.GET<UserModel>(`${this.TABLE_NAME}?companyId=${companyId}&_page=${pageIndex}&_limit=${pageSize}`);
   }
 
-  GetUserFullname(id: number): Observable<UserModel> {
-    return this.api.GET<UserModel>(`${this.TABLE_NAME}?id=${id}`);
+  GetUserFullname(userId: number): Observable<UserModel> {
+    return this.api.GET<UserModel>(`${this.TABLE_NAME}?id=${userId}`);
   }
 
   CreateUser(user: UserModel): Observable<any> {
@@ -30,7 +30,7 @@ export class UserService {
     return this.api.UPDATE<UserModel>(`${this.TABLE_NAME}/${user.id}`, user);
   }
 
-  RemoveUser(id: number): Observable<any> {
-    return this.api.DELETE<UserModel>(`${this.TABLE_NAME}/${id}`);
+  RemoveUser(userId: number): Observable<any> {
+    return this.api.DELETE<UserModel>(`${this.TABLE_NAME}/${userId}`);
   }
 }
