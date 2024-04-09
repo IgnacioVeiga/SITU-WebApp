@@ -24,7 +24,7 @@
 
             <mat-form-field>
                 <mat-label>Prioridad</mat-label>
-                <mat-select id="priority" name="priority" [(ngModel)]="alert.priority" required>
+                <mat-select id="priority" name="priority" [(ngModel)]="alert.alertPriority" required>
                     <mat-option [value]="option" *ngFor="let option of priorityTypes">
                         {{ option }}
                     </mat-option>

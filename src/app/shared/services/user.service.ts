@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
+import { ApiClientService } from './api-client.service';
 import { Observable } from 'rxjs';
-import { UserModel } from '../models/user.model';
+import { User } from '../models/user.model';
+import { Page } from '../models/page.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,28 +10,34 @@ import { UserModel } from '../models/user.model';
 export class UserService {
   private readonly TABLE_NAME = 'users';
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiClientService) { }
 
-  GetUsers(pageIndex: number, pageSize: number, companyId?: number): Observable<UserModel> {
-    if (!companyId) {
-      companyId = 0;
-    }
-    return this.api.GET<UserModel>(`${this.TABLE_NAME}?companyId=${companyId}&_page=${pageIndex}&_limit=${pageSize}`);
+  GetUsers(pageIndex: number, pageSize: number, companyId: number): Observable<Page<User>> {
+    return this.api.GET<any>(`${this.TABLE_NAME}/list/${pageIndex}/${pageSize}/${companyId}`);
   }
 
-  GetUser(userId: number): Observable<any> {
-    return this.api.GET<any>(`${this.TABLE_NAME}/${userId}`);
+  GetUser(id: number): Observable<User> {
+    return this.api.GET<User>(`${this.TABLE_NAME}/get/${id}`);
   }
 
-  CreateUser(user: UserModel): Observable<any> {
-    return this.api.POST<UserModel>(this.TABLE_NAME, user);
+  CreateUser(user: User): Observable<User> {
+    return this.api.POST<User>(this.TABLE_NAME, user);
   }
 
-  EditUser(user: UserModel): Observable<any> {
-    return this.api.UPDATE<UserModel>(`${this.TABLE_NAME}/${user.id}`, user);
+  EditUser(user: User): Observable<User> {
+    return this.api.PUT<User>(`${this.TABLE_NAME}/${user.id}`, user);
   }
 
-  RemoveUser(userId: number): Observable<any> {
-    return this.api.DELETE<UserModel>(`${this.TABLE_NAME}/${userId}`);
+  SetProfilePic(imgFile: File, dni: number, userId: number): Observable<any> {
+    const formData = new FormData();
+    formData.append('imgFile', imgFile, imgFile.name);
+    formData.append('dni', dni.toString());
+    formData.append('userId', userId.toString())
+
+    return this.api.POST<any>('images/upload/user-profile', formData);
+  }
+
+  RemoveUser(userId: number): Observable<boolean> {
+    return this.api.DELETE<any>(`${this.TABLE_NAME}/${userId}`);
   }
 }

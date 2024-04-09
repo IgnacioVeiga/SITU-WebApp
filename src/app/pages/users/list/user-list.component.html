@@ -25,20 +25,20 @@
         <!-- Columna de Nombre -->
         <ng-container matColumnDef="firstname">
             <th mat-header-cell *matHeaderCellDef> Nombre </th>
-            <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
         </ng-container>
 
         <!-- Columna de Apellido -->
         <ng-container matColumnDef="lastname">
             <th mat-header-cell *matHeaderCellDef> Apellido </th>
-            <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
         </ng-container>
 
         <!-- Columna de Foto -->
         <ng-container matColumnDef="photo">
             <th mat-header-cell *matHeaderCellDef> Foto </th>
             <td mat-cell *matCellDef="let element">
-                <img [src]="element.photoURL" alt="Foto de perfil" width="46" />
+                <img [src]="'/situ/images/user-profile/' + element.profileImage.filename" alt=" " width="46" />
             </td>
         </ng-container>
 

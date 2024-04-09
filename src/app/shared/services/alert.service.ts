@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
+import { ApiClientService } from './api-client.service';
 import { Observable } from 'rxjs';
-import { AlertModel } from '../models/alert.model';
+import { Alert } from '../models/alert.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +9,13 @@ import { AlertModel } from '../models/alert.model';
 export class AlertService {
   private readonly TABLE_NAME = 'alerts';
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiClientService) { }
 
-  GetAlerts(pageIndex: number, pageSize: number): Observable<AlertModel> {
-    return this.api.GET<AlertModel>(`${this.TABLE_NAME}?_page=${pageIndex}&_limit=${pageSize}`);
+  GetAlerts(pageIndex: number, pageSize: number): Observable<Alert[]> {
+    return this.api.GET<any>(`${this.TABLE_NAME}/list/${pageIndex}/${pageSize}`);
   }
 
-  CreateAlert(alert: AlertModel): Observable<AlertModel> {
-    return this.api.POST<AlertModel>(this.TABLE_NAME, alert);
+  CreateAlert(alert: Alert): Observable<Alert> {
+    return this.api.POST<Alert>(`${this.TABLE_NAME}/create`, alert);
   }
 }

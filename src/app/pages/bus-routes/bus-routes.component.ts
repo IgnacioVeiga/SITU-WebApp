@@ -19,7 +19,7 @@ export class BusRoutesComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.busService.GetBuses().subscribe({
-      next: (resp: any): void => {
+      next: (resp: BusLineModel[]): void => {
         let list: BusLineModel[] = [...resp]
         // Transformar el array de BusLineModel a Line y Route
         this.lines = list.map((busLine) => {

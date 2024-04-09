@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { ApiClientService } from 'src/app/shared/services/api-client.service';
 
 @Component({
   templateUrl: './login.component.html',
@@ -24,7 +24,7 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private toastr: ToastrService,
-    private api: ApiService
+    private api: ApiClientService
   ) { }
 
   goTo(route: string): void {
@@ -32,13 +32,10 @@ export class LoginComponent {
   }
 
   onSubmit(myForm: NgForm) {
-    this.api.POST('login', myForm.value).subscribe({
+    this.api.POST('auth/login', myForm.value).subscribe({
       next: (resp) => {
-        // El backend devuelve un token de autorización
-        if (resp && resp.token) {
-
-          // TODO: mejor utilizar cookies
-          localStorage.setItem('authToken', resp.token);
+        // TODO: El backend debe devolver un token de autorización
+        if (resp) {
           this.goTo('report-list')
         } else {
           this.toastr.error('Error en el inicio de sesión', 'Intentelo más tarde');
@@ -49,7 +46,7 @@ export class LoginComponent {
       }
     });
 
-    // TODO: eliminar esto una vez implementado el backend
-    this.goTo('report-list')
+    // // TODO: eliminar esto una vez implementado el backend
+    // this.goTo('report-list')
   }
 }

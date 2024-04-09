@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateAlertComponent } from 'src/app/pages/alerts/create/create-alert.component';
 import { ToastrService } from 'ngx-toastr';
 import { AlertDetailsComponent } from 'src/app/pages/alerts/details/alert-details.component';
-import { AlertModel } from 'src/app/shared/models/alert.model';
+import { Alert } from 'src/app/shared/models/alert.model';
 import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { AlertService } from 'src/app/shared/services/alert.service';
 export class AlertListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = ['title', 'description', 'date', 'priority', 'actions'];
-  dataSource: any = new MatTableDataSource<AlertModel>;
+  dataSource: any = new MatTableDataSource<Alert>;
 
   constructor(
     public dialog: MatDialog,
@@ -30,7 +30,7 @@ export class AlertListComponent implements AfterViewInit {
 
   loadAlerts(): void {
     this.alertService.GetAlerts(this.paginator.pageIndex, this.paginator.pageSize).subscribe({
-      next: (data: any) => {
+      next: (data: Alert[]) => {
         this.dataSource.data = data;
       },
       error: () => {
@@ -51,7 +51,7 @@ export class AlertListComponent implements AfterViewInit {
     });
   }
 
-  seeAlertDialog(alert: AlertModel) {
+  seeAlertDialog(alert: Alert) {
     this.dialog.open(AlertDetailsComponent, {
       data: alert
     });

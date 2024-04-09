@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
+import { ApiClientService } from './api-client.service';
 import { Observable } from 'rxjs';
 import { BusCompanyModel, BusLineModel } from '../models/bus.model';
 
@@ -7,13 +7,15 @@ import { BusCompanyModel, BusLineModel } from '../models/bus.model';
   providedIn: 'root'
 })
 export class BusService {
-  constructor(private api: ApiService) { }
+  private readonly TABLE_NAME = 'bus';
 
-  GetBuses(): Observable<BusLineModel> {
-    return this.api.GET<BusLineModel>(`buses`);
+  constructor(private api: ApiClientService) { }
+
+  GetBuses(): Observable<BusLineModel[]> {
+    return this.api.GET<any>(`${this.TABLE_NAME}/list`);
   }
 
   GetCompanyLogo(companyId: number): Observable<BusCompanyModel> {
-    return this.api.GET<BusCompanyModel>(`busCompanies?id=${companyId}`);
+    return this.api.GET<BusCompanyModel>(`${this.TABLE_NAME}/companyLogo/${companyId}`);
   }
 }

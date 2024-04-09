@@ -1,15 +1,7 @@
-<h1 mat-dialog-title>Editar usuario ({{user.lastname}} {{user.firstname}})</h1>
+<h1 mat-dialog-title>Editar usuario ({{user.lastName}} {{user.firstName}})</h1>
 
 <mat-dialog-content>
-    <div class="row">
-        <label>Foto</label>
-
-        <div class="column center">
-            <img [src]="user.photoURL" alt="Foto de perfil" width="46">
-            <input type="file" id="photoURL" name="photoURL" placeholder="Cargar archivo"
-                (change)="onFileSelected($event)" />
-        </div>
-    </div>
+    <file-uploader [imgUrl]="'/situ/images/user-profile/' + user.profileImage.filename"></file-uploader>
 
     <div class="row">
         <label>DNI</label>
@@ -20,8 +12,8 @@
         <mat-form-field>
             <mat-label>Rol</mat-label>
             <mat-select id="role" name="role" [(ngModel)]="user.role">
-                <mat-option [value]="option" *ngFor="let option of roleTypes">
-                    {{ option }}
+                <mat-option [value]="option.value" *ngFor="let option of roleTypes">
+                    {{ option.text }}
                 </mat-option>
             </mat-select>
         </mat-form-field>

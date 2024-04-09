@@ -1,17 +1,18 @@
-export class UserModel {
-    // Para la base de datos
-    public id!: number;
-    public companyId: number = 0;
+import { Company } from "./company.model";
+import { Image } from "./image.model";
 
-    public dni!: number;
-    public lastname: string = 'Natalia';
-    public firstname: string = 'Natalia';
-    public role: ERole = ERole.Other;
-    public photoURL: string = './assets/images/perfil.png';
+export class User {
+    id: number = 0;
+    company: Company = new Company();
+    profileImage: Image = new Image();
+    dni: number = 0;
+    firstName: string = '';
+    lastName: string = '';
+    role: UserRole = UserRole.OTHER;
 }
 
-export enum ERole {
-    Admin = "Administrador",
-    Driver = "Chofer",
-    Other = "Otro"
+export enum UserRole {
+    ADMIN = "Administrador",
+    DRIVER = "Chofer",
+    OTHER = "Otro"
 }

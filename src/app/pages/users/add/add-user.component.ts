@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { UserModel } from 'src/app/shared/models/user.model';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.scss']
 })
 export class AddUserComponent {
-  user: UserModel = new UserModel();
+  user: User = new User();
   roleTypes: string[] = ['Administrador', 'Chofer', 'Otro']
 
   onFileSelected(event: any): void {
@@ -15,7 +15,7 @@ export class AddUserComponent {
     // Previsualización de la imagen antes de subirla al servidor
     const reader = new FileReader();
     reader.onload = (e) => {
-      this.user.photoURL = e.target?.result as string;
+      this.user.profileImage.filename = e.target?.result as string;
     };
     reader.readAsDataURL(file);
   }

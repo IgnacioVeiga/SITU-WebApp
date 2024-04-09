@@ -1,17 +1,17 @@
-export class AlertModel {
-    // Para la base de datos
-    public id!: number;
-    public userId!: number;
+import { User } from "./user.model";
 
+export class Alert {
+    public id: number = 0;
+    public user: User = new User();
     public title: string = '';
     public description: string = '';
-    public date: Date = new Date();
-    public priority: EPriority = EPriority.Low;
+    public alertDate: Date = new Date();
+    public alertPriority: AlertPriority = AlertPriority.HIGH;
     public location: string = '';
 }
 
-export enum EPriority {
-    Low = "Baja",
-    Mid = "Media",
-    High = "Alta"
+export enum AlertPriority {
+    HIGH = "Alta",
+    MEDIUM = "Media",
+    LOW = "Baja"
 }

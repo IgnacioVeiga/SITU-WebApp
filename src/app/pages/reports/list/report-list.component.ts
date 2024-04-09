@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ReportModel } from 'src/app/shared/models/report.model';
+import { Report } from 'src/app/shared/models/report.model';
 import { ReportService } from 'src/app/shared/services/report.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ export class ReportListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = ['date', 'claimant', 'description', 'actions'];
 
-  dataSource: any = new MatTableDataSource<ReportModel>;
+  dataSource: any = new MatTableDataSource<Report>;
 
   constructor(
     public dialog: MatDialog,
@@ -32,7 +32,7 @@ export class ReportListComponent implements AfterViewInit {
   loadReports(): void {
     this.reportService.GetReports(this.paginator.pageIndex, this.paginator.pageSize)
       .subscribe({
-        next: (data) => {
+        next: (data: Report[]) => {
           this.dataSource.data = data;
         },
         error: () => {

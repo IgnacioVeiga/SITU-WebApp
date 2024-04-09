@@ -6,7 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AddUserComponent } from 'src/app/pages/users/add/add-user.component';
 import { EditMyUserComponent } from 'src/app/pages/users/edit-my-user/edit-my-user.component';
 import { EditUserComponent } from 'src/app/pages/users/edit/edit-user.component';
-import { UserModel } from 'src/app/shared/models/user.model';
+import { Page } from 'src/app/shared/models/page.model';
+import { User } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -16,7 +17,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class UserListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = ['dni', 'firstname', 'lastname', 'photo', 'role', 'actions'];
-  dataSource: any = new MatTableDataSource<UserModel>;
+  dataSource: any = new MatTableDataSource<User>;
 
   constructor(
     public dialog: MatDialog,
@@ -34,8 +35,8 @@ export class UserListComponent implements AfterViewInit {
     const BUS_COMPANY_ID = 1;
 
     this.userService.GetUsers(this.paginator.pageIndex, this.paginator.pageSize, BUS_COMPANY_ID).subscribe({
-      next: (data) => {
-        this.dataSource.data = data;
+      next: (data: Page<User>) => {
+        this.dataSource.data = data.content;
       },
       error: () => {
         this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
@@ -63,7 +64,7 @@ export class UserListComponent implements AfterViewInit {
     });
   }
 
-  editUser(userData: UserModel): void {
+  editUser(userData: User): void {
     const dialogRef = this.dialog.open(EditUserComponent, {
       data: { ...userData }
     });

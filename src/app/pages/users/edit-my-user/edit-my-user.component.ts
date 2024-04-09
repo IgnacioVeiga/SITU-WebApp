@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { UserModel } from 'src/app/shared/models/user.model';
+import { User } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   templateUrl: './edit-my-user.component.html',
   styleUrls: ['./edit-my-user.component.scss']
 })
-export class EditMyUserComponent {
-  user: UserModel = new UserModel();
+export class EditMyUserComponent implements OnInit {
+  user: User = new User();
   newPassword: string = '';
   confirmPassword: string = '';
 
@@ -22,7 +22,9 @@ export class EditMyUserComponent {
     public dialogRef: MatDialogRef<EditMyUserComponent>,
     private toastr: ToastrService,
     private userService: UserService
-  ) {
+  ) { }
+
+  ngOnInit(): void {
     // TODO: traer el id del usuario logeado
     const USER_ID = 1;
     this.userService.GetUser(USER_ID).subscribe({
@@ -34,17 +36,6 @@ export class EditMyUserComponent {
         this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
       }
     });
-  }
-
-  onFileSelected(event: any): void {
-    const file: File = event.target.files[0];
-
-    // Previsualización de la imagen antes de subirla al servidor
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      this.user.photoURL = e.target?.result as string;
-    };
-    reader.readAsDataURL(file);
   }
 
   sendForm() {

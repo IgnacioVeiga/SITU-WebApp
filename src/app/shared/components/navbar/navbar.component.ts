@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ConfirmLogoutComponent } from '../../pages/home/login/confirm-logout.component';
-import { BusService } from '../services/bus.service';
+import { ConfirmLogoutComponent } from '../../../pages/home/login/confirm-logout.component';
+import { BusService } from '../../services/bus.service';
 import { ToastrService } from 'ngx-toastr';
+import { BusCompanyModel } from '../../models/bus.model';
 
 @Component({
   selector: 'app-navbar',
@@ -23,8 +24,8 @@ export class NavbarComponent {
     // TODO: traer el id de la empresa del usuario logeado
     const BUS_COMPANY_ID = 1;
     this.busService.GetCompanyLogo(BUS_COMPANY_ID).subscribe({
-      next: (resp: any) => {
-        this.logoURL = resp[0].logo;
+      next: (resp: BusCompanyModel) => {
+        this.logoURL = resp.logo;
       },
       error: () => {
         this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');

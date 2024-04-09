@@ -23,12 +23,14 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { TruncatePipe } from "../pipes/truncate.pipe";
 import { ToastrModule } from "ngx-toastr";
 import { BusRoutesComponent } from "src/app/pages/bus-routes/bus-routes.component";
-import { NavbarComponent } from "../navbar/navbar.component";
+import { NavbarComponent } from "../components/navbar/navbar.component";
 import { BrowserModule } from "@angular/platform-browser";
+import { FileUploaderComponent } from "../components/file-uploader/file-uploader.component";
 
 @NgModule({
     declarations: [
         NavbarComponent,
+        FileUploaderComponent,
         BusRoutesComponent,
         TruncatePipe
     ],
@@ -72,6 +74,7 @@ import { BrowserModule } from "@angular/platform-browser";
         ToastrModule,
         
         NavbarComponent,
+        FileUploaderComponent,
         TruncatePipe
     ]
 })

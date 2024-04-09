@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertModel } from 'src/app/shared/models/alert.model';
+import { Alert } from 'src/app/shared/models/alert.model';
 import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
@@ -7,15 +7,12 @@ import { AlertService } from 'src/app/shared/services/alert.service';
   styleUrls: ['./create-alert.component.scss']
 })
 export class CreateAlertComponent {
-  alert: AlertModel = new AlertModel();
-  priorityTypes: string[] = ['Alta', 'Media', 'Baja'];
+  alert: Alert = new Alert();
+  priorityTypes: string[] = ['ALTA', 'MEDIA', 'BAJA'];
 
   constructor(
     private alertService: AlertService
-  ) {
-    const MY_ID = 1;
-    this.alert.userId = MY_ID;
-  }
+  ) {}
 
   onSubmit() {
     this.alertService.CreateAlert(this.alert).subscribe(
