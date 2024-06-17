@@ -8,9 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { SharedModule } from './shared/modules/shared.module';
-import { UserModule } from './pages/users/user.module';
 import { ReportModule } from './pages/reports/report.module';
-import { AlertModule } from './pages/alerts/alert.module';
 
 @NgModule({
   imports: [
@@ -21,8 +19,6 @@ import { AlertModule } from './pages/alerts/alert.module';
     BrowserAnimationsModule,
 
     SharedModule,
-    AlertModule,
-    UserModule,
     ReportModule
   ],
   declarations: [AppComponent],
