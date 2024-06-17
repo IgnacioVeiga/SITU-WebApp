@@ -1,31 +1,33 @@
 <h1 mat-dialog-title>Editar usuario ({{user.lastName}} {{user.firstName}})</h1>
 
 <mat-dialog-content>
-    <file-uploader [imgUrl]="'/situ/images/user-profile/' + user.profileImage.filename"></file-uploader>
+  <file-uploader [imgUrl]="'/situ/images/user-profile/' + user.profileImage.filename"></file-uploader>
 
-    <div class="row">
-        <label>DNI</label>
-        <b>{{user.dni}}</b>
-    </div>
+  <div class="row">
+    <label>DNI</label>
+    <b>{{user.dni}}</b>
+  </div>
 
-    <div class="row">
-        <mat-form-field>
-            <mat-label>Rol</mat-label>
-            <mat-select id="role" name="role" [(ngModel)]="user.role">
-                <mat-option [value]="option.value" *ngFor="let option of roleTypes">
-                    {{ option.text }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
+  <div class="row">
+    <mat-form-field>
+      <mat-label>Rol</mat-label>
+      <mat-select id="role" name="role" [(ngModel)]="user.role">
+        @for (option of roleTypes; track option) {
+          <mat-option [value]="option.value">
+            {{ option.text }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-    <div class="row">
-        <p>Aviso: luego de cambiar el rol, <b>no se podrá cambiar</b> <br>nuevamente hasta dentro de <b>30 días</b>.
-        </p>
-    </div>
+  <div class="row">
+    <p>Aviso: luego de cambiar el rol, <b>no se podrá cambiar</b> <br>nuevamente hasta dentro de <b>30 días</b>.
+  </p>
+</div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
-    <button mat-raised-button color="primary" [mat-dialog-close]="user" type="button" cdkFocusInitial>Guardar</button>
-    <button mat-raised-button color="secondary" mat-dialog-close type="button">Cancelar</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="user" type="button" cdkFocusInitial>Guardar</button>
+  <button mat-raised-button color="secondary" mat-dialog-close type="button">Cancelar</button>
 </mat-dialog-actions>

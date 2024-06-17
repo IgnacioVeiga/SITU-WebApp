@@ -1,13 +1,17 @@
 <div class="row">
-    <label for="photoURL">Foto</label>
+  <label for="photoURL">Foto</label>
 
-    <img [src]="imgUrl" alt="Foto de perfil" width="46">
-    <input type="file" id="photoURL" name="photoURL" placeholder="Cargar archivo"
-        (change)="onFileSelected($event)" />
+  <img [src]="imgUrl" alt="Foto de perfil" width="46">
+  <input type="file" id="photoURL" name="photoURL" placeholder="Cargar archivo"
+    (change)="onFileSelected($event)" />
 </div>
 
 <div class="row">
-    <button (click)="upload()">Subir</button>
-    <div *ngIf="processing">Subiendo, por favor espere ...</div>
-    <div *ngIf="imgUrl">{{ imgUrl }}</div>
+  <button (click)="upload()">Subir</button>
+  @if (processing) {
+    <div>Subiendo, por favor espere ...</div>
+  }
+  @if (imgUrl) {
+    <div>{{ imgUrl }}</div>
+  }
 </div>

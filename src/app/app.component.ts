@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     standalone: true,
-    imports: [RouterOutlet, NgIf, MatProgressSpinnerModule]
+    imports: [RouterOutlet, MatProgressSpinnerModule]
 })
 export class AppComponent implements OnInit {
   isLoading: boolean = true;
@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {
         this.isLoading = true;
       } else if (event instanceof NavigationEnd || event instanceof NavigationError || event instanceof NavigationCancel) {

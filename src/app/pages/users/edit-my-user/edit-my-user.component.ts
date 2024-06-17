@@ -8,13 +8,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FileUploaderComponent } from '../../../shared/components/file-uploader/file-uploader.component';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+
 
 @Component({
     templateUrl: './edit-my-user.component.html',
     styleUrls: ['./edit-my-user.component.scss'],
     standalone: true,
-    imports: [NgIf, FormsModule, MatDialogModule, FileUploaderComponent, MatFormFieldModule, MatInputModule, MatButtonModule]
+    imports: [FormsModule, MatDialogModule, FileUploaderComponent, MatFormFieldModule, MatInputModule, MatButtonModule]
 })
 export class EditMyUserComponent implements OnInit {
   user: User = new User();

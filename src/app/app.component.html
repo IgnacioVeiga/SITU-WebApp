@@ -1,6 +1,8 @@
 <router-outlet></router-outlet>
 
 <!-- Spinner de carga -->
-<div class="spinner" *ngIf="isLoading">
+@if (isLoading) {
+  <div class="spinner">
     <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
-</div>
+  </div>
+}

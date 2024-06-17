@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { User } from 'src/app/shared/models/user.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
-import { NgFor } from '@angular/common';
+
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
     templateUrl: './add-user.component.html',
     styleUrls: ['./add-user.component.scss'],
     standalone: true,
-    imports: [FormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, NgFor, MatOptionModule, MatButtonModule]
+    imports: [FormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatOptionModule, MatButtonModule]
 })
 export class AddUserComponent {
   user: User = new User();

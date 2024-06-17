@@ -1,41 +1,43 @@
 <form #generateAlertFrom="ngForm" (ngSubmit)="onSubmit()">
-    <h1 mat-dialog-title>Emitir alerta</h1>
+  <h1 mat-dialog-title>Emitir alerta</h1>
 
-    <mat-dialog-content class="row">
-        <div class="column">
-            <mat-form-field>
-                <mat-label>Título</mat-label>
-                <input matInput type="text" id="title" name="title" [(ngModel)]="alert.title" required
-                    placeholder="Alerta">
-            </mat-form-field>
+  <mat-dialog-content class="row">
+    <div class="column">
+      <mat-form-field>
+        <mat-label>Título</mat-label>
+        <input matInput type="text" id="title" name="title" [(ngModel)]="alert.title" required
+          placeholder="Alerta">
+      </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Descripción</mat-label>
-                <textarea matInput id="description" name="description" [(ngModel)]="alert.description" required
-                    placeholder="Escriba aquí el mensaje"></textarea>
-            </mat-form-field>
-        </div>
+      <mat-form-field>
+        <mat-label>Descripción</mat-label>
+        <textarea matInput id="description" name="description" [(ngModel)]="alert.description" required
+        placeholder="Escriba aquí el mensaje"></textarea>
+      </mat-form-field>
+    </div>
 
-        <div class="row">
-            <mat-form-field>
-                <mat-label>Ubicación (opcional)</mat-label>
-                <input matInput type="text" id="zone" name="zone" [(ngModel)]="alert.location" placeholder="Ej: CABA">
-            </mat-form-field>
+    <div class="row">
+      <mat-form-field>
+        <mat-label>Ubicación (opcional)</mat-label>
+        <input matInput type="text" id="zone" name="zone" [(ngModel)]="alert.location" placeholder="Ej: CABA">
+      </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Prioridad</mat-label>
-                <mat-select id="priority" name="priority" [(ngModel)]="alert.alertPriority" required>
-                    <mat-option [value]="option" *ngFor="let option of priorityTypes">
-                        {{ option }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-    </mat-dialog-content>
+      <mat-form-field>
+        <mat-label>Prioridad</mat-label>
+        <mat-select id="priority" name="priority" [(ngModel)]="alert.alertPriority" required>
+          @for (option of priorityTypes; track option) {
+            <mat-option [value]="option">
+              {{ option }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
 
-    <mat-dialog-actions align="center">
-        <button mat-raised-button color="primary" [mat-dialog-close]="true" type="submit"
-            [disabled]="!generateAlertFrom.valid">Emitir</button>
-        <button mat-raised-button color="secondary" mat-dialog-close type="button">Cancelar</button>
-    </mat-dialog-actions>
+  <mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" type="submit"
+    [disabled]="!generateAlertFrom.valid">Emitir</button>
+    <button mat-raised-button color="secondary" mat-dialog-close type="button">Cancelar</button>
+  </mat-dialog-actions>
 </form>

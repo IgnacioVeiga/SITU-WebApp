@@ -4,7 +4,7 @@ import { BusLineModel, Line, Route } from 'src/app/shared/models/bus.model';
 import { BusService } from 'src/app/shared/services/bus.service';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { NgFor, NgIf } from '@angular/common';
+
 import { MatChipsModule } from '@angular/material/chips';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
@@ -13,7 +13,7 @@ import { NavbarComponent } from '../../shared/components/navbar/navbar.component
     templateUrl: './bus-routes.component.html',
     styleUrls: ['./bus-routes.component.scss'],
     standalone: true,
-    imports: [NavbarComponent, MatStepperModule, MatChipsModule, NgFor, NgIf, MatCheckboxModule, FormsModule]
+    imports: [NavbarComponent, MatStepperModule, MatChipsModule, MatCheckboxModule, FormsModule]
 })
 export class BusRoutesComponent implements AfterViewInit {
   // busList: BusLineModel[] = [];

@@ -1,39 +1,45 @@
 <app-navbar></app-navbar>
 <div class="title">
-    <h1>Mapa de recorridos</h1>
+  <h1>Mapa de recorridos</h1>
 </div>
 
 <mat-stepper>
-    <mat-step label="1. Seleccionar línea y trasbordos">
-        <!-- <mat-chip-listbox #lines aria-label="Seleccionar línea" selectable multiple>
-            <mat-chip-option *ngFor="let busLine of busList"
-                (selectionChange)="toggleSelection($event.selected, busLine.lineNumber)">
-                {{busLine.lineNumber}}
-            </mat-chip-option>
-        </mat-chip-listbox>
+  <mat-step label="1. Seleccionar línea y trasbordos">
+    <!-- <mat-chip-listbox #lines aria-label="Seleccionar línea" selectable multiple>
+    <mat-chip-option *ngFor="let busLine of busList"
+      (selectionChange)="toggleSelection($event.selected, busLine.lineNumber)">
+      {{busLine.lineNumber}}
+    </mat-chip-option>
+  </mat-chip-listbox>
 
-        <div *ngFor="let bus of busList" aria-label="'Seleccionar recorridos de la línea' + bus">
-            <mat-checkbox *ngFor="let route of bus.routes">
-                {{ route }}
-            </mat-checkbox>
-        </div> -->
+  <div *ngFor="let bus of busList" aria-label="'Seleccionar recorridos de la línea' + bus">
+    <mat-checkbox *ngFor="let route of bus.routes">
+      {{ route }}
+    </mat-checkbox>
+  </div> -->
 
-        <mat-chip-listbox selectable multiple>
-            <mat-chip-option *ngFor="let line of lines" [selected]="line.selected" (click)="toggleLineSelection(line)">
-                {{ line.number }}
-            </mat-chip-option>
-        </mat-chip-listbox>
+  <mat-chip-listbox selectable multiple>
+    @for (line of lines; track line) {
+      <mat-chip-option [selected]="line.selected" (click)="toggleLineSelection(line)">
+        {{ line.number }}
+      </mat-chip-option>
+    }
+  </mat-chip-listbox>
 
-        <div *ngIf="selectedLines.length > 0">
-            <h3>Recorridos seleccionados:</h3>
-            <mat-checkbox *ngFor="let route of selectedRoutes" [(ngModel)]="route.selected">
-                {{ route.name }}
-            </mat-checkbox>
-        </div>
-    </mat-step>
+  @if (selectedLines.length > 0) {
+    <div>
+      <h3>Recorridos seleccionados:</h3>
+      @for (route of selectedRoutes; track route) {
+        <mat-checkbox [(ngModel)]="route.selected">
+          {{ route.name }}
+        </mat-checkbox>
+      }
+    </div>
+  }
+</mat-step>
 
-    <mat-step label="2. Visualizar mapa">
-        <iframe width="1000" height="700" name="gmap" title="gmap"
-            src="https://maps.google.com/maps?q=palermo&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
-    </mat-step>
+<mat-step label="2. Visualizar mapa">
+  <iframe width="1000" height="700" name="gmap" title="gmap"
+  src="https://maps.google.com/maps?q=palermo&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+</mat-step>
 </mat-stepper>
