@@ -10,43 +10,43 @@ import { SeeReportComponent } from "./pages/reports/see-report/see-report.compon
 import { UserListComponent } from "./pages/users/list/user-list.component";
 
 export const routes: Routes = [
-    {
-      path: '',
-      redirectTo: '/home',
-      pathMatch: 'full'
-    },
-  
-    // Pages
-    {
-      path: 'home',
-      component: HomeComponent
-    },
-    {
-      path: 'login',
-      component: LoginComponent
-    },
-    {
-      path: 'signup',
-      component: SignupComponent
-    },
-    {
-      path: 'report-list',
-      component: ReportListComponent
-    },
-    {
-      path: 'report-item/:id',
-      component: SeeReportComponent
-    },
-    {
-      path: 'alert-list',
-      component: AlertListComponent
-    },
-    {
-      path: 'user-list',
-      component: UserListComponent
-    },
-    {
-      path: 'bus-routes',
-      component: BusRoutesComponent
-    }
-  ];
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+
+  // Pages
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'signup',
+    component: SignupComponent
+  },
+  {
+    path: 'report-list',
+    component: ReportListComponent
+  },
+  {
+    path: 'report-item/:id',
+    component: SeeReportComponent
+  },
+  {
+    path: 'alert-list',
+    component: AlertListComponent
+  },
+  {
+    path: 'user-list',
+    component: UserListComponent
+  },
+  {
+    path: 'bus-routes',
+    component: BusRoutesComponent
+  }
+];
