@@ -1,15 +1,22 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ConfirmLogoutComponent } from '../../../pages/home/login/confirm-logout.component';
 import { BusService } from '../../services/bus.service';
 import { ToastrService } from 'ngx-toastr';
 import { BusCompanyModel } from '../../models/bus.model';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss'],
+    standalone: true,
+    imports: [MatToolbarModule, MatButtonModule, MatMenuModule, MatIconModule, RouterLink, FormsModule]
 })
 export class NavbarComponent {
   textToSearch: string = (localStorage.getItem('textToSearch') || '');

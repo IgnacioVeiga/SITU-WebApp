@@ -28,12 +28,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FileUploaderComponent } from "../components/file-uploader/file-uploader.component";
 
 @NgModule({
-    declarations: [
-        NavbarComponent,
-        FileUploaderComponent,
-        BusRoutesComponent,
-        TruncatePipe
-    ],
     imports: [
         MatButtonModule,
         MatCheckboxModule,
@@ -42,14 +36,17 @@ import { FileUploaderComponent } from "../components/file-uploader/file-uploader
         MatMenuModule,
         MatStepperModule,
         MatToolbarModule,
-
         BrowserModule,
         FormsModule,
         RouterModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          progressBar: true
-        })
+            closeButton: true,
+            progressBar: true
+        }),
+        NavbarComponent,
+        FileUploaderComponent,
+        BusRoutesComponent,
+        TruncatePipe
     ],
     exports: [
         MatButtonModule,
@@ -68,11 +65,9 @@ import { FileUploaderComponent } from "../components/file-uploader/file-uploader
         MatStepperModule,
         MatTableModule,
         MatToolbarModule,
-
         CommonModule,
         FormsModule,
         ToastrModule,
-        
         NavbarComponent,
         FileUploaderComponent,
         TruncatePipe

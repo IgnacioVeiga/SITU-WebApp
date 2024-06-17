@@ -1,9 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'file-uploader',
-    templateUrl: './file-uploader.component.html'
+    templateUrl: './file-uploader.component.html',
+    standalone: true,
+    imports: [NgIf]
 })
 export class FileUploaderComponent {
     @Input() imgUrl!: string;

@@ -7,13 +7,11 @@ import { AlertListComponent } from "src/app/pages/alerts/list/alert-list.compone
 import { SharedModule } from "../../shared/modules/shared.module";
 
 @NgModule({
-    declarations: [
+    imports: [
+        SharedModule,
         AlertListComponent,
         CreateAlertComponent,
-        AlertDetailsComponent,
-    ],
-    imports: [
-        SharedModule
+        AlertDetailsComponent
     ]
 })
 export class AlertModule { }

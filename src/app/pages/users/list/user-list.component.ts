@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { AddUserComponent } from 'src/app/pages/users/add/add-user.component';
 import { EditMyUserComponent } from 'src/app/pages/users/edit-my-user/edit-my-user.component';
@@ -9,10 +9,15 @@ import { EditUserComponent } from 'src/app/pages/users/edit/edit-user.component'
 import { Page } from 'src/app/shared/models/page.model';
 import { User } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 
 @Component({
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss']
+    templateUrl: './user-list.component.html',
+    styleUrls: ['./user-list.component.scss'],
+    standalone: true,
+    imports: [NavbarComponent, MatButtonModule, MatIconModule, MatTableModule, MatPaginatorModule]
 })
 export class UserListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;

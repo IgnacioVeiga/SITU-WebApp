@@ -1,12 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FileUploaderComponent } from '../../../shared/components/file-uploader/file-uploader.component';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
-  templateUrl: './edit-my-user.component.html',
-  styleUrls: ['./edit-my-user.component.scss']
+    templateUrl: './edit-my-user.component.html',
+    styleUrls: ['./edit-my-user.component.scss'],
+    standalone: true,
+    imports: [NgIf, FormsModule, MatDialogModule, FileUploaderComponent, MatFormFieldModule, MatInputModule, MatButtonModule]
 })
 export class EditMyUserComponent implements OnInit {
   user: User = new User();

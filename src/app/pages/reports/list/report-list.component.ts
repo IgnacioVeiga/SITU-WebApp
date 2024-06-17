@@ -1,15 +1,22 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Report } from 'src/app/shared/models/report.model';
 import { ReportService } from 'src/app/shared/services/report.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { TruncatePipe } from '../../../shared/pipes/truncate.pipe';
+import { DatePipe } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 
 @Component({
-  templateUrl: './report-list.component.html',
-  styleUrls: ['./report-list.component.scss']
+    templateUrl: './report-list.component.html',
+    styleUrls: ['./report-list.component.scss'],
+    standalone: true,
+    imports: [NavbarComponent, MatTableModule, MatButtonModule, MatIconModule, MatPaginatorModule, DatePipe, TruncatePipe]
 })
 export class ReportListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;

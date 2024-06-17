@@ -6,12 +6,10 @@ import { SeeReportComponent } from "./see-report/see-report.component";
 import { SharedModule } from "../../shared/modules/shared.module";
 
 @NgModule({
-    declarations: [
+    imports: [
+        SharedModule,
         ReportListComponent,
         SeeReportComponent
-    ],
-    imports: [
-        SharedModule
     ]
 })
 export class ReportModule { }

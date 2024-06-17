@@ -3,10 +3,14 @@ import { ActivatedRoute } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { Report } from "src/app/shared/models/report.model";
 import { ReportService } from "src/app/shared/services/report.service";
+import { DatePipe } from "@angular/common";
+import { NavbarComponent } from "../../../shared/components/navbar/navbar.component";
 
 @Component({
     templateUrl: './see-report.component.html',
-    styleUrls: ['./see-report.component.scss']
+    styleUrls: ['./see-report.component.scss'],
+    standalone: true,
+    imports: [NavbarComponent, DatePipe]
 })
 export class SeeReportComponent implements OnInit {
     data: Report = new Report();

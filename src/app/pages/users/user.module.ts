@@ -8,14 +8,12 @@ import { UserListComponent } from "src/app/pages/users/list/user-list.component"
 import { SharedModule } from "../../shared/modules/shared.module";
 
 @NgModule({
-    declarations: [
+    imports: [
+        SharedModule,
         UserListComponent,
         AddUserComponent,
         EditUserComponent,
-        EditMyUserComponent,
-    ],
-    imports: [
-        SharedModule
+        EditMyUserComponent
     ]
 })
 export class UserModule { }
