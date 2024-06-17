@@ -3,7 +3,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Report } from 'src/app/shared/models/report.model';
 import { ReportService } from 'src/app/shared/services/report.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TruncatePipe } from '../../../shared/pipes/truncate.pipe';
@@ -13,10 +13,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 
 @Component({
-    templateUrl: './report-list.component.html',
-    styleUrls: ['./report-list.component.scss'],
-    standalone: true,
-    imports: [NavbarComponent, MatTableModule, MatButtonModule, MatIconModule, MatPaginatorModule, DatePipe, TruncatePipe]
+  templateUrl: './report-list.component.html',
+  styleUrls: ['./report-list.component.scss'],
+  standalone: true,
+  imports: [NavbarComponent, MatDialogModule, MatTableModule, MatButtonModule, MatIconModule, MatPaginatorModule, DatePipe, TruncatePipe]
 })
 export class ReportListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -28,7 +28,7 @@ export class ReportListComponent implements AfterViewInit {
     public dialog: MatDialog,
     private reportService: ReportService,
     private router: Router,
-    private toastr: ToastrService
+    // private toastr: ToastrService
   ) { }
 
   ngAfterViewInit(): void {
@@ -43,7 +43,7 @@ export class ReportListComponent implements AfterViewInit {
           this.dataSource.data = data;
         },
         error: () => {
-          this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
+          // this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
         }
       });
   }

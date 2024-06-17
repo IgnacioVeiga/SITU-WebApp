@@ -28,7 +28,7 @@ export class EditMyUserComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<EditMyUserComponent>,
-    private toastr: ToastrService,
+    // private toastr: ToastrService,
     private userService: UserService
   ) { }
 
@@ -41,7 +41,7 @@ export class EditMyUserComponent implements OnInit {
         // TODO: si es posible autocompletar el email
       },
       error: () => {
-        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
+        // this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
       }
     });
   }

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CreateAlertComponent } from 'src/app/pages/alerts/create/create-alert.component';
 import { ToastrService } from 'ngx-toastr';
 import { AlertDetailsComponent } from 'src/app/pages/alerts/details/alert-details.component';
@@ -17,7 +17,7 @@ import { NavbarComponent } from '../../../shared/components/navbar/navbar.compon
     templateUrl: './alert-list.component.html',
     styleUrls: ['./alert-list.component.scss'],
     standalone: true,
-    imports: [NavbarComponent, MatButtonModule, MatIconModule, MatTableModule, MatPaginatorModule, DatePipe, TruncatePipe]
+    imports: [NavbarComponent, MatButtonModule, MatDialogModule, MatIconModule, MatTableModule, MatPaginatorModule, DatePipe, TruncatePipe]
 })
 export class AlertListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -26,7 +26,7 @@ export class AlertListComponent implements AfterViewInit {
 
   constructor(
     public dialog: MatDialog,
-    private toastr: ToastrService,
+    // private toastr: ToastrService,
     private alertService: AlertService
   ) { }
 
@@ -41,7 +41,7 @@ export class AlertListComponent implements AfterViewInit {
         this.dataSource.data = data;
       },
       error: () => {
-        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
+        // this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
       }
     });
   }
@@ -51,7 +51,7 @@ export class AlertListComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.toastr.success('Alerta emitida!');
+        // this.toastr.success('Alerta emitida!');
         //Refresca la tabla
         this.loadAlerts();
       }

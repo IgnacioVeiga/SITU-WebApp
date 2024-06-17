@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Router, RouterLink } from '@angular/router';
 import { ConfirmLogoutComponent } from '../../../pages/home/login/confirm-logout.component';
 import { BusService } from '../../services/bus.service';
@@ -12,11 +12,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
-    selector: 'app-navbar',
-    templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.scss'],
-    standalone: true,
-    imports: [MatToolbarModule, MatButtonModule, MatMenuModule, MatIconModule, RouterLink, FormsModule]
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
+  standalone: true,
+  imports: [MatToolbarModule, MatButtonModule, MatDialogModule, MatMenuModule, MatIconModule, RouterLink, FormsModule]
 })
 export class NavbarComponent {
   textToSearch: string = (localStorage.getItem('textToSearch') || '');
@@ -25,7 +25,7 @@ export class NavbarComponent {
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private toastr: ToastrService,
+    // private toastr: ToastrService,
     public busService: BusService
   ) {
     // TODO: traer el id de la empresa del usuario logeado
@@ -35,7 +35,7 @@ export class NavbarComponent {
         this.logoURL = resp.logo;
       },
       error: () => {
-        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
+        // this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
       }
     });
   }

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
@@ -14,10 +14,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 
 @Component({
-    templateUrl: './user-list.component.html',
-    styleUrls: ['./user-list.component.scss'],
-    standalone: true,
-    imports: [NavbarComponent, MatButtonModule, MatIconModule, MatTableModule, MatPaginatorModule]
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.scss'],
+  standalone: true,
+  imports: [NavbarComponent, MatButtonModule, MatDialogModule, MatIconModule, MatTableModule, MatPaginatorModule]
 })
 export class UserListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -26,7 +26,7 @@ export class UserListComponent implements AfterViewInit {
 
   constructor(
     public dialog: MatDialog,
-    private toastr: ToastrService,
+    // private toastr: ToastrService,
     private userService: UserService
   ) { }
 
@@ -44,7 +44,7 @@ export class UserListComponent implements AfterViewInit {
         this.dataSource.data = data.content;
       },
       error: () => {
-        this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
+        // this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
       }
     });
   }
@@ -57,12 +57,12 @@ export class UserListComponent implements AfterViewInit {
         // Si se hizo clic en guardar en el diálogo, actualiza los datos en la base de datos
         this.userService.CreateUser(result).subscribe({
           next: () => {
-            this.toastr.success('Usuario añadido!');
+            // this.toastr.success('Usuario añadido!');
             //Refresca la tabla
             this.loadUsers();
           },
           error: () => {
-            this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
+            // this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
           }
         });
       }
@@ -79,12 +79,12 @@ export class UserListComponent implements AfterViewInit {
         // Si se hizo clic en guardar en el diálogo, actualiza los datos en la base de datos
         this.userService.EditUser(result).subscribe({
           next: () => {
-            this.toastr.success('Usuario modificado!');
+            // this.toastr.success('Usuario modificado!');
             //Refresca la tabla
             this.loadUsers();
           },
           error: () => {
-            this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
+            // this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
           }
         });
       }
@@ -96,7 +96,7 @@ export class UserListComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe(ok => {
       if (ok) {
-        this.toastr.success('Tu usuario fue modificado!');
+        // this.toastr.success('Tu usuario fue modificado!');
       }
     });
   }
@@ -104,12 +104,12 @@ export class UserListComponent implements AfterViewInit {
   deleteUser(id: number): void {
     this.userService.RemoveUser(id).subscribe({
       next: (): void => {
-        this.toastr.success('El usuario ya no pertece a la empresa.');
+        // this.toastr.success('El usuario ya no pertece a la empresa.');
         //Refresca la tabla
         this.loadUsers();
       },
       error: () => {
-        this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
+        // this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
       }
     });
   }

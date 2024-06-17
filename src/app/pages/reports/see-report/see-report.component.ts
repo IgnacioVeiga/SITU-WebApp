@@ -18,7 +18,7 @@ export class SeeReportComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private reportService: ReportService,
-        private toastr: ToastrService
+        // private toastr: ToastrService
     ) { }
 
     ngOnInit(): void {
@@ -32,7 +32,7 @@ export class SeeReportComponent implements OnInit {
                 this.data = resp;
             },
             error: () => {
-                this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
+                // this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
             }
         });
     }

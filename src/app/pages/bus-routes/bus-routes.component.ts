@@ -22,7 +22,7 @@ export class BusRoutesComponent implements AfterViewInit {
 
   constructor(
     private busService: BusService,
-    private toastr: ToastrService
+    // private toastr: ToastrService
   ) { }
 
   ngAfterViewInit(): void {
@@ -49,7 +49,7 @@ export class BusRoutesComponent implements AfterViewInit {
         });
       },
       error: () => {
-        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
+        // this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
       }
     });
   }
