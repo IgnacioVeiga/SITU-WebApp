@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Router, RouterLink } from '@angular/router';
 import { ConfirmLogoutComponent } from '../../../pages/home/login/confirm-logout.component';
@@ -18,16 +18,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   standalone: true,
   imports: [MatToolbarModule, MatButtonModule, MatDialogModule, MatMenuModule, MatIconModule, RouterLink, FormsModule]
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   textToSearch: string = (localStorage.getItem('textToSearch') || '');
   logoURL: string = './assets/images/bus_icon.png';
 
-  constructor(
-    private router: Router,
-    public dialog: MatDialog,
-    // private toastr: ToastrService,
-    public busService: BusService
-  ) {
+  private toastr = inject(ToastrService);
+  private busService = inject(BusService);
+  private dialog = inject(MatDialog);
+  private router = inject(Router);
+
+  ngOnInit() {
     // TODO: traer el id de la empresa del usuario logeado
     const BUS_COMPANY_ID = 1;
     this.busService.GetCompanyLogo(BUS_COMPANY_ID).subscribe({
@@ -35,7 +35,7 @@ export class NavbarComponent {
         this.logoURL = resp.logo;
       },
       error: () => {
-        // this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
+        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
       }
     });
   }

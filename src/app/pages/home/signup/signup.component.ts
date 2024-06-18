@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -23,12 +23,10 @@ import { MatInputModule } from '@angular/material/input';
   ]
 })
 export class SignupComponent {
-
-  constructor(
-    public dialog: MatDialog,
-    private router: Router,
-    private api: ApiClientService
-  ) { }
+  private toastr = inject(ToastrService);
+  private dialog = inject(MatDialog);
+  private router = inject(Router);
+  private api = inject(ApiClientService);
 
   goTo(route: string) {
     this.router.navigate([route]);
@@ -46,11 +44,11 @@ export class SignupComponent {
             });
 
         } else {
-          // this.toastr.error('No se recibió respuesta del servidor', 'Intentelo más tarde');
+          this.toastr.error('No se recibió respuesta del servidor', 'Intentelo más tarde');
         }
       },
       error: () => {
-        // this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
+        this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
       }
     });
 

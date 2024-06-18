@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -24,11 +24,9 @@ export class AlertListComponent implements AfterViewInit {
   displayedColumns: string[] = ['title', 'description', 'date', 'priority', 'actions'];
   dataSource: any = new MatTableDataSource<Alert>;
 
-  constructor(
-    public dialog: MatDialog,
-    // private toastr: ToastrService,
-    private alertService: AlertService
-  ) { }
+  private dialog = inject(MatDialog);
+  private toastr = inject(ToastrService);
+  private alertService = inject(AlertService);
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -41,7 +39,7 @@ export class AlertListComponent implements AfterViewInit {
         this.dataSource.data = data;
       },
       error: () => {
-        // this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
+        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
       }
     });
   }
@@ -51,7 +49,7 @@ export class AlertListComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // this.toastr.success('Alerta emitida!');
+        this.toastr.success('Alerta emitida!');
         //Refresca la tabla
         this.loadAlerts();
       }

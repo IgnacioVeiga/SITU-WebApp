@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ApiClientService } from 'src/app/shared/services/api-client.service';
 
 @Component({
@@ -20,10 +21,9 @@ import { ApiClientService } from 'src/app/shared/services/api-client.service';
   ]
 })
 export class LoginComponent {
-  constructor(
-    private router: Router,
-    private api: ApiClientService
-  ) { }
+  private toastr = inject(ToastrService);
+  private router = inject(Router);
+  private api = inject(ApiClientService);
 
   goTo(route: string): void {
     this.router.navigate([route]);
@@ -36,11 +36,11 @@ export class LoginComponent {
         if (resp) {
           this.goTo('report')
         } else {
-          // this.toastr.error('Error en el inicio de sesión', 'Intentelo más tarde');
+          this.toastr.error('Error en el inicio de sesión', 'Intentelo más tarde');
         }
       },
       error: () => {
-        // this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
+        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
       }
     });
 

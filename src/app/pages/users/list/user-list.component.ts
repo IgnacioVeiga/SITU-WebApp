@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -24,11 +24,9 @@ export class UserListComponent implements AfterViewInit {
   displayedColumns: string[] = ['dni', 'firstname', 'lastname', 'photo', 'role', 'actions'];
   dataSource: any = new MatTableDataSource<User>;
 
-  constructor(
-    public dialog: MatDialog,
-    // private toastr: ToastrService,
-    private userService: UserService
-  ) { }
+  private dialog = inject(MatDialog);
+  private toastr = inject(ToastrService);
+  private userService = inject(UserService);
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -44,7 +42,7 @@ export class UserListComponent implements AfterViewInit {
         this.dataSource.data = data.content;
       },
       error: () => {
-        // this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
+        this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
       }
     });
   }
@@ -57,12 +55,12 @@ export class UserListComponent implements AfterViewInit {
         // Si se hizo clic en guardar en el diálogo, actualiza los datos en la base de datos
         this.userService.CreateUser(result).subscribe({
           next: () => {
-            // this.toastr.success('Usuario añadido!');
+            this.toastr.success('Usuario añadido!');
             //Refresca la tabla
             this.loadUsers();
           },
           error: () => {
-            // this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
+            this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
           }
         });
       }
@@ -79,12 +77,12 @@ export class UserListComponent implements AfterViewInit {
         // Si se hizo clic en guardar en el diálogo, actualiza los datos en la base de datos
         this.userService.EditUser(result).subscribe({
           next: () => {
-            // this.toastr.success('Usuario modificado!');
+            this.toastr.success('Usuario modificado!');
             //Refresca la tabla
             this.loadUsers();
           },
           error: () => {
-            // this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
+            this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
           }
         });
       }
@@ -104,12 +102,12 @@ export class UserListComponent implements AfterViewInit {
   deleteUser(id: number): void {
     this.userService.RemoveUser(id).subscribe({
       next: (): void => {
-        // this.toastr.success('El usuario ya no pertece a la empresa.');
+        this.toastr.success('El usuario ya no pertece a la empresa.');
         //Refresca la tabla
         this.loadUsers();
       },
       error: () => {
-        // this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
+        this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
       }
     });
   }

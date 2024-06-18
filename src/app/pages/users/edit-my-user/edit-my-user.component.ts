@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/shared/models/user.model';
@@ -25,11 +25,11 @@ export class EditMyUserComponent implements OnInit {
     email: '',
     password: ''
   }
+  private toastr = inject(ToastrService);
+  private userService = inject(UserService);
 
   constructor(
-    public dialogRef: MatDialogRef<EditMyUserComponent>,
-    // private toastr: ToastrService,
-    private userService: UserService
+    public dialogRef: MatDialogRef<EditMyUserComponent>
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +41,7 @@ export class EditMyUserComponent implements OnInit {
         // TODO: si es posible autocompletar el email
       },
       error: () => {
-        // this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
+        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
       }
     });
   }

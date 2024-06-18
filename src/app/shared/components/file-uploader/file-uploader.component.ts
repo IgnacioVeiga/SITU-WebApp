@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
 
 
@@ -13,8 +13,8 @@ export class FileUploaderComponent {
     selectedFile: File | undefined;
     processing = false;
 
-    constructor(private userService: UserService) { }
-
+    private userService = inject(UserService);
+    
     onFileSelected(event: any) {
         this.selectedFile = event.target.files[0];
     }

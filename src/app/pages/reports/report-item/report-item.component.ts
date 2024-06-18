@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { Report } from "src/app/shared/models/report.model";
@@ -15,11 +15,9 @@ import { NavbarComponent } from "../../../shared/components/navbar/navbar.compon
 export class ReportItemComponent implements OnInit {
     data: Report = new Report();
 
-    constructor(
-        private route: ActivatedRoute,
-        private reportService: ReportService,
-        // private toastr: ToastrService
-    ) { }
+    private route = inject(ActivatedRoute);
+    private reportService = inject(ReportService);
+    private toastr = inject(ToastrService);
 
     ngOnInit(): void {
         this.LoadReport();
@@ -32,7 +30,7 @@ export class ReportItemComponent implements OnInit {
                 this.data = resp;
             },
             error: () => {
-                // this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
+                this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
             }
         });
     }

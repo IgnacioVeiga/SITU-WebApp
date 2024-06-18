@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BusLineModel, Line, Route } from 'src/app/shared/models/bus.model';
 import { BusService } from 'src/app/shared/services/bus.service';
@@ -20,10 +20,8 @@ export class BusRoutesComponent implements AfterViewInit {
   lines: Line[] = [];
   routes: Route[] = [];
 
-  constructor(
-    private busService: BusService,
-    // private toastr: ToastrService
-  ) { }
+  private busService = inject(BusService);
+  private toastr = inject(ToastrService);
 
   ngAfterViewInit(): void {
     this.busService.GetBuses().subscribe({
@@ -49,7 +47,7 @@ export class BusRoutesComponent implements AfterViewInit {
         });
       },
       error: () => {
-        // this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
+        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
       }
     });
   }
