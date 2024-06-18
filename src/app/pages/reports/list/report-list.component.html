@@ -34,7 +34,7 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Atender </th>
             <td mat-cell *matCellDef="let element">
-                <button mat-icon-button (click)="seeReport(element.id)">
+                <button mat-icon-button (click)="openReport(element.id)">
                     <mat-icon>drafts</mat-icon>
                 </button>
             </td>

@@ -7,12 +7,12 @@ import { DatePipe } from "@angular/common";
 import { NavbarComponent } from "../../../shared/components/navbar/navbar.component";
 
 @Component({
-    templateUrl: './see-report.component.html',
-    styleUrls: ['./see-report.component.scss'],
+    templateUrl: './report-item.component.html',
+    styleUrls: ['./report-item.component.scss'],
     standalone: true,
     imports: [NavbarComponent, DatePipe]
 })
-export class SeeReportComponent implements OnInit {
+export class ReportItemComponent implements OnInit {
     data: Report = new Report();
 
     constructor(

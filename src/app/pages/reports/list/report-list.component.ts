@@ -48,7 +48,7 @@ export class ReportListComponent implements AfterViewInit {
       });
   }
 
-  seeReport(id: number) {
-    this.router.navigate(['report-item/', id]);
+  openReport(id: number) {
+    this.router.navigate(['item/', id]);
   }
 }

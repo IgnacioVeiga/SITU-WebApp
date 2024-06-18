@@ -1,52 +1,37 @@
 import { Routes } from "@angular/router";
 
-import { AlertListComponent } from "./pages/alerts/list/alert-list.component";
-import { BusRoutesComponent } from "./pages/bus-routes/bus-routes.component";
-import { HomeComponent } from "./pages/home/home.component";
-import { LoginComponent } from "./pages/home/login/login.component";
-import { SignupComponent } from "./pages/home/signup/signup.component";
-import { ReportListComponent } from "./pages/reports/list/report-list.component";
-import { SeeReportComponent } from "./pages/reports/see-report/see-report.component";
-import { UserListComponent } from "./pages/users/list/user-list.component";
-
 export const routes: Routes = [
   {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
   },
-
-  // Pages
   {
     path: 'home',
-    component: HomeComponent
+    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
   },
   {
     path: 'login',
-    component: LoginComponent
+    loadComponent: () => import('./pages/home/login/login.component').then(m => m.LoginComponent)
   },
   {
     path: 'signup',
-    component: SignupComponent
+    loadComponent: () => import('./pages/home/signup/signup.component').then(m => m.SignupComponent)
   },
   {
-    path: 'report-list',
-    component: ReportListComponent
+    path: 'report',
+    loadChildren: () => import('./pages/reports/reports.routes').then(m => m.routes)
   },
   {
-    path: 'report-item/:id',
-    component: SeeReportComponent
+    path: 'alert',
+    loadChildren: () => import('./pages/alerts/alerts.routes').then(m => m.routes)
   },
   {
-    path: 'alert-list',
-    component: AlertListComponent
+    path: 'user',
+    loadChildren: () => import('./pages/users/users.routes').then(m => m.routes)
   },
   {
-    path: 'user-list',
-    component: UserListComponent
-  },
-  {
-    path: 'bus-routes',
-    component: BusRoutesComponent
+    path: 'bus',
+    loadComponent: () => import('./pages/bus-routes/bus-routes.component').then(m => m.BusRoutesComponent)
   }
 ];

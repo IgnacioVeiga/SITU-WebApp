@@ -4,10 +4,10 @@
         <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-        <a mat-menu-item [routerLink]="'/report-list'">Reclamos</a>
-        <a mat-menu-item [routerLink]="'/alert-list'">Alertas</a>
-        <a mat-menu-item [routerLink]="'/user-list'">Usuarios</a>
-        <a mat-menu-item [routerLink]="'/bus-routes'">Mapa de recorridos</a>
+        <a mat-menu-item [routerLink]="'/report'">Reclamos</a>
+        <a mat-menu-item [routerLink]="'/alert'">Alertas</a>
+        <a mat-menu-item [routerLink]="'/user'">Usuarios</a>
+        <a mat-menu-item [routerLink]="'/bus'">Mapa de recorridos</a>
         <a mat-menu-item (click)="confirmLogout()">Cerrar sesion</a>
     </mat-menu>
 
@@ -15,10 +15,10 @@
 
     <!-- Enlaces de la barra de herramientas - Mostrar en pantallas medianas y grandes -->
     <div class="menu-items">
-        <a mat-button [routerLink]="'/report-list'">Reclamos</a>
-        <a mat-button [routerLink]="'/alert-list'">Alertas</a>
-        <a mat-button [routerLink]="'/user-list'">Usuarios</a>
-        <a mat-button [routerLink]="'/bus-routes'">Mapa de recorridos</a>
+        <a mat-button [routerLink]="'/report'">Reclamos</a>
+        <a mat-button [routerLink]="'/alert'">Alertas</a>
+        <a mat-button [routerLink]="'/user'">Usuarios</a>
+        <a mat-button [routerLink]="'/bus'">Mapa de recorridos</a>
     </div>
 
     <span class="spacer"></span>
