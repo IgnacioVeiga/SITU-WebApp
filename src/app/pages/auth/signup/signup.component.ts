@@ -3,7 +3,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ApiClientService } from 'src/app/shared/services/api-client.service';
-import { AfterSignUpComponent } from 'src/app/pages/home/signup/after.signup.component';
+import { AfterSignUpComponent } from 'src/app/pages/auth/signup/after.signup.component';
 import { ToastrService } from 'ngx-toastr';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -51,11 +51,5 @@ export class SignupComponent {
         this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
       }
     });
-
-    // // TODO: eliminar esto una vez implementado el backend
-    // this.dialog.open(AfterSignUpComponent).afterClosed()
-    //   .subscribe(() => {
-    //     this.goTo('/home');
-    //   });
   }
 }

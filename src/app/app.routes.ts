@@ -3,7 +3,7 @@ import { Routes } from "@angular/router";
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -11,27 +11,38 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
   },
   {
-    path: 'login',
-    loadComponent: () => import('./pages/home/login/login.component').then(m => m.LoginComponent)
+    path: 'auth',
+    loadChildren: () => import('./pages/auth/auth.routes').then(m => m.routes)
   },
   {
-    path: 'signup',
-    loadComponent: () => import('./pages/home/signup/signup.component').then(m => m.SignupComponent)
+    path: '',
+    loadComponent: () => import('./shared/components/layout/layout.component').then(m => m.LayoutComponent),
+    children: [
+      {
+        path: 'dashboard',
+        loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent)
+
+      },
+      {
+        path: 'report',
+        loadChildren: () => import('./pages/reports/reports.routes').then(m => m.routes)
+      },
+      {
+        path: 'alert',
+        loadChildren: () => import('./pages/alerts/alerts.routes').then(m => m.routes)
+      },
+      {
+        path: 'user',
+        loadChildren: () => import('./pages/users/users.routes').then(m => m.routes)
+      },
+      {
+        path: 'bus',
+        loadComponent: () => import('./pages/bus-routes/bus-routes.component').then(m => m.BusRoutesComponent)
+      }
+    ],
   },
   {
-    path: 'report',
-    loadChildren: () => import('./pages/reports/reports.routes').then(m => m.routes)
+    path: '**',
+    loadComponent: () => import('./pages/not-found/not-found.component').then(m => m.NotFoundComponent)
   },
-  {
-    path: 'alert',
-    loadChildren: () => import('./pages/alerts/alerts.routes').then(m => m.routes)
-  },
-  {
-    path: 'user',
-    loadChildren: () => import('./pages/users/users.routes').then(m => m.routes)
-  },
-  {
-    path: 'bus',
-    loadComponent: () => import('./pages/bus-routes/bus-routes.component').then(m => m.BusRoutesComponent)
-  }
 ];

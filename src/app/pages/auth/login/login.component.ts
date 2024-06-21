@@ -34,7 +34,7 @@ export class LoginComponent {
       next: (resp) => {
         // TODO: El backend debe devolver un token de autorización
         if (resp) {
-          this.goTo('report')
+          this.goTo('dashboard')
         } else {
           this.toastr.error('Error en el inicio de sesión', 'Intentelo más tarde');
         }
@@ -44,7 +44,6 @@ export class LoginComponent {
       }
     });
 
-    // // TODO: eliminar esto una vez implementado el backend
-    // this.goTo('report-list')
+    this.goTo('dashboard')
   }
 }

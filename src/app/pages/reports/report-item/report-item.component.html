@@ -1,11 +1,14 @@
-<app-navbar></app-navbar>
 <div class="title" id="myDiv">
     <h1>Detalles del reclamo</h1>
 </div>
 
-<h2>{{ data.reportDate | date: 'dd/MM/yyyy HH:MM'}}</h2>
-<article>
-    <h5>Emitida por {{ data.user.lastName }} {{ data.user.firstName }} - Estado actual: {{ data.state }}</h5>
-    <p>{{ data.description }}</p>
-</article>
-<img [src]="data.reportImage.filename" alt="Imagen adjunta" />
+<div class="center">
+    <h2>{{ data.reportDate | date: 'dd/MM/yyyy HH:MM'}}</h2>
+    <article>
+        <h5>Emitida por {{ data.user.lastName }} {{ data.user.firstName }} - Estado actual: {{ data.state }}</h5>
+        <p>{{ data.description }}</p>
+    </article>
+    @if (data.reportImage.filename) {
+    <img [src]="data.reportImage.filename" alt="Imagen adjunta" />
+    }
+</div>
