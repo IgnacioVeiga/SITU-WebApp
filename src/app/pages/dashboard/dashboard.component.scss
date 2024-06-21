@@ -1,14 +1,23 @@
-.dashboard {
+.card-content {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.card {
-    flex: 1 1 calc(50% - 1rem);
-    padding: 1rem;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
+.alert-info,
+.report-info {
+    flex: 1;
+    padding-right: 16px;
+}
+
+.chart-placeholder {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    background-color: #f5f5f5;
     border-radius: 4px;
-    text-align: center;
+    min-width: 400px;
 }

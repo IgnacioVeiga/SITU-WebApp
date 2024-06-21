@@ -1,6 +1,45 @@
-<div class="dashboard">
-    <div class="card">Card 1</div>
-    <div class="card">Card 2</div>
-    <div class="card">Card 3</div>
-    <div class="card">Card 4</div>
+<div class="title">
+    <h1>Dashboard</h1>
 </div>
+
+<mat-grid-list cols="2" rowHeight="4:3">
+    <mat-grid-tile>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Alertas</mat-card-title>
+                <mat-card-subtitle>Total: 5</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="card-content">
+                    <div class="alert-info">
+                        <p>Nuevas alertas hoy: 2</p>
+                        <p>Alertas resueltas: 3</p>
+                    </div>
+                    <div class="chart-placeholder">
+                        <canvas #alertChart></canvas>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Reportes</mat-card-title>
+                <mat-card-subtitle>Total: 10</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="card-content">
+                    <div class="report-info">
+                        <p>Reportes nuevos hoy: 4</p>
+                        <p>Reportes en progreso: 6</p>
+                    </div>
+                    <div class="chart-placeholder">
+                        <canvas #reportChart></canvas>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
