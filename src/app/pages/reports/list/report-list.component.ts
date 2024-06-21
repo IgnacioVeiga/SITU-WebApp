@@ -10,6 +10,7 @@ import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
+import { Page } from 'src/app/shared/models/page.model';
 
 @Component({
   templateUrl: './report-list.component.html',
@@ -34,8 +35,8 @@ export class ReportListComponent implements AfterViewInit {
   loadReports(): void {
     this.reportService.GetReports(this.paginator.pageIndex, this.paginator.pageSize)
       .subscribe({
-        next: (data: Report[]) => {
-          this.dataSource.data = data;
+        next: (data: Page<Report>) => {
+          this.dataSource.data = data.content;
         },
         error: () => {
           this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
@@ -44,6 +45,6 @@ export class ReportListComponent implements AfterViewInit {
   }
 
   openReport(id: number) {
-    this.router.navigate(['item/', id]);
+    this.router.navigate(['report/item/', id]);
   }
 }

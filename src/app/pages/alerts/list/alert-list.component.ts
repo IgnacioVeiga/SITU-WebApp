@@ -12,6 +12,7 @@ import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
+import { Page } from 'src/app/shared/models/page.model';
 
 @Component({
     templateUrl: './alert-list.component.html',
@@ -35,8 +36,8 @@ export class AlertListComponent implements AfterViewInit {
 
   loadAlerts(): void {
     this.alertService.GetAlerts(this.paginator.pageIndex, this.paginator.pageSize).subscribe({
-      next: (data: Alert[]) => {
-        this.dataSource.data = data;
+      next: (data: Page<Alert>) => {
+        this.dataSource.data = data.content;
       },
       error: () => {
         this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiClientService } from './api-client.service';
 import { Observable } from 'rxjs';
 import { Alert } from '../models/alert.model';
+import { Page } from '../models/page.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AlertService {
 
   constructor(private api: ApiClientService) { }
 
-  GetAlerts(pageIndex: number, pageSize: number): Observable<Alert[]> {
+  GetAlerts(pageIndex: number, pageSize: number): Observable<Page<Alert>> {
     return this.api.GET<any>(`${this.TABLE_NAME}/list/${pageIndex}/${pageSize}`);
   }
 
