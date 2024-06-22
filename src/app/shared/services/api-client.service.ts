@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -8,7 +9,6 @@ import { Router } from '@angular/router';
 })
 export class ApiClientService {
   private readonly API_URL: string = '/situ';
-  private loginRequired: boolean = false;
 
   constructor(
     private readonly httpClient: HttpClient,
@@ -29,7 +29,7 @@ export class ApiClientService {
         }
       }
     }
-    
+
     return this.httpClient.get<T>(url, httpOptions)
       .pipe(
         catchError((error) => this.handleError(error))
@@ -44,9 +44,6 @@ export class ApiClientService {
       );
   }
 
-  /**
-   * Update full object
-   */
   PUT<T>(endpoint: string, body: any): Observable<T> {
     const url = `${this.API_URL}/${endpoint}`;
     return this.httpClient.put<T>(url, body)
@@ -55,9 +52,6 @@ export class ApiClientService {
       );
   }
 
-  /**
-   * Update some properties of object
-   */
   PATCH<T>(endpoint: string, body: any): Observable<T> {
     const url = `${this.API_URL}/${endpoint}`;
     return this.httpClient.patch<T>(url, body)
@@ -65,7 +59,6 @@ export class ApiClientService {
         catchError((error) => this.handleError(error))
       );
   }
-
 
   DELETE<T>(endpoint: string): Observable<T> {
     const url = `${this.API_URL}/${endpoint}`;
@@ -75,40 +68,9 @@ export class ApiClientService {
       );
   }
 
-
   private handleError(error: HttpErrorResponse) {
-    const timestamp = new Date().toISOString();
-    const requestMethod = error.url?.split('/').pop(); // Extract the last part of the URL
-    let idx = 0;
-    if (error.url) {
-      idx = error.url.lastIndexOf(this.API_URL) + this.API_URL.length;
-    }
-    const endpoint = error.url?.substring(idx, error.url?.length - 1);
-    const errorMessage = {
-      timestamp: timestamp,
-      method: requestMethod,
-      endpoint: endpoint,
-      status: error.status,
-      statusText: error.statusText,
-      message: error.error.message || 'An error occurred',
-      details: error.error.details || ''
-    };
-    const message = JSON.stringify(errorMessage, null, 2);
-
-    // Send the error to a centralized logging service
-    this.logErrorToService(message);
-
-    if (error.status === 401) {
-      this.loginRequired = true;
-      this.router.navigate(['/login']);
-    }
-
-    return throwError(() => new Error('Problems processing the request'));
-  }
-
-
-  private logErrorToService(errorMessage: string) {
-    // Implement sending the error message to your logging service
-    console.log(errorMessage);
+    const errorMessage = `Error: ${error.status}, ${error.message}`;
+    console.error(errorMessage);
+    return throwError(() => new Error(errorMessage));
   }
 }

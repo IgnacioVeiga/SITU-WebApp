@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ApiClientService } from 'src/app/shared/services/api-client.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   templateUrl: './login.component.html',
@@ -23,27 +23,20 @@ import { ApiClientService } from 'src/app/shared/services/api-client.service';
 export class LoginComponent {
   private toastr = inject(ToastrService);
   private router = inject(Router);
-  private api = inject(ApiClientService);
+  private authService = inject(AuthService);
 
   goTo(route: string): void {
     this.router.navigate([route]);
   }
 
   onSubmit(myForm: NgForm) {
-    this.api.POST('auth/login', myForm.value).subscribe({
-      next: (resp) => {
-        // TODO: El backend debe devolver un token de autorización
-        if (resp) {
-          this.goTo('dashboard')
-        } else {
-          this.toastr.error('Error en el inicio de sesión', 'Intentelo más tarde');
-        }
+    this.authService.login(myForm.value.email, myForm.value.password).subscribe({
+      next: () => {
+        this.goTo('dashboard');
       },
-      error: () => {
-        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
+      error: (err) => {
+        this.toastr.error(err);
       }
     });
-
-    this.goTo('dashboard')
   }
 }
