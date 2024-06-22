@@ -11,8 +11,7 @@ export class ApiClientService {
   private readonly API_URL: string = '/situ';
 
   constructor(
-    private readonly httpClient: HttpClient,
-    private readonly router: Router
+    private readonly httpClient: HttpClient
   ) { }
 
   GET<T>(endpoint: string, args?: any): Observable<T> {

@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { LogInForm } from 'src/app/shared/models/auth.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -21,6 +22,12 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   ]
 })
 export class LoginComponent {
+  loginForm: LogInForm = {
+    email: '',
+    password: '',
+    rememberMe: false
+  }
+
   private toastr = inject(ToastrService);
   private router = inject(Router);
   private authService = inject(AuthService);
@@ -29,8 +36,8 @@ export class LoginComponent {
     this.router.navigate([route]);
   }
 
-  onSubmit(myForm: NgForm) {
-    this.authService.login(myForm.value.email, myForm.value.password).subscribe({
+  onSubmit() {
+    this.authService.login(this.loginForm).subscribe({
       next: () => {
         this.goTo('dashboard');
       },

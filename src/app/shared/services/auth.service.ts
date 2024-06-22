@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { ApiClientService } from './api-client.service';
+import { Router } from '@angular/router';
+import { LogInForm } from '../models/auth.model';
 
 @Injectable({
     providedIn: 'root'
@@ -9,28 +10,19 @@ import { ApiClientService } from './api-client.service';
 export class AuthService {
     private readonly TABLE_NAME = 'auth';
 
-    constructor(private api: ApiClientService) { }
+    constructor(private api: ApiClientService, private router: Router) { }
 
-    login(email: string, password: string): Observable<any> {
-        return this.api.POST<any>(`${this.TABLE_NAME}/login`, { email, password })
-            .pipe(
-                tap(response => {
-                    if (response && response.token) {
-                        this.saveToken(response.token);
-                    }
-                })
-            );
+    login(form: LogInForm): Observable<void> {
+        return this.api.POST<void>(`${this.TABLE_NAME}/login`, form);
     }
 
-    saveToken(token: string): void {
-        localStorage.setItem('authToken', token);
+    signup(form: any): Observable<string> {
+        return this.api.POST<any>(`${this.TABLE_NAME}/signup`, form);
     }
-
-    getToken(): string | null {
-        return localStorage.getItem('authToken');
-    }
-
+    
     logout(): void {
-        localStorage.removeItem('authToken');
+        this.api.POST<any>(`${this.TABLE_NAME}/logout`, {}).subscribe(() => {
+            this.router.navigate(['/home']);
+        });
     }
 }

@@ -1,22 +1,22 @@
 <section>
-    <form class="center" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+    <form class="center" #form="ngForm" (ngSubmit)="onSubmit()">
         <div class="title">
             <h1>Iniciar sesión</h1>
         </div>
 
         <mat-form-field>
             <mat-label>Email</mat-label>
-            <input matInput type="email" id="email" name="email" ngModel required placeholder="myemail@example.com">
+            <input matInput type="email" id="email" name="email" [(ngModel)]="loginForm.email" required placeholder="myemail@example.com">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Contraseña</mat-label>
-            <input matInput type="password" id="password" name="password" ngModel required placeholder="********">
+            <input matInput type="password" id="password" name="password" [(ngModel)]="loginForm.password" required placeholder="********">
         </mat-form-field>
 
         <img width="250" alt="recaptcha" src="/assets/images/recaptcha.png" />
 
-        <mat-checkbox class="checkbox" color="primary" id="remember-me" name="remember-me" ngModel>
+        <mat-checkbox class="checkbox" color="primary" id="rememberMe" name="rememberMe" [(ngModel)]="loginForm.rememberMe">
             Mantener sesión
         </mat-checkbox>
 
@@ -25,7 +25,7 @@
                 <mat-icon>keyboard_arrow_left</mat-icon>
                 Volver
             </button>
-            <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
                 <mat-icon>login</mat-icon>
                 Ingresar
             </button>
