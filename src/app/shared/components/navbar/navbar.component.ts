@@ -4,12 +4,13 @@ import { Router, RouterLink } from '@angular/router';
 import { ConfirmLogoutComponent } from '../../../pages/auth/login/confirm-logout.component';
 import { BusService } from '../../services/bus.service';
 import { ToastrService } from 'ngx-toastr';
-import { BusCompanyModel } from '../../models/bus.model';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { AuthService } from '../../services/auth.service';
+import { SessionDTO } from '../../models/auth.model';
 
 @Component({
   selector: 'app-navbar',
@@ -23,20 +24,18 @@ export class NavbarComponent implements OnInit {
   logoURL: string = './assets/images/bus_icon.png';
 
   private toastr = inject(ToastrService);
-  private busService = inject(BusService);
   private dialog = inject(MatDialog);
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   ngOnInit() {
-    // TODO: traer el id de la empresa del usuario logeado
-    const BUS_COMPANY_ID = 1;
-    this.busService.GetCompanyLogo(BUS_COMPANY_ID).subscribe({
-      next: (resp: BusCompanyModel) => {
-        this.logoURL = resp.logo;
+    this.authService.getSession().subscribe({
+      next: (session: SessionDTO) => {
+        if (session) {
+          this.logoURL = session.logoImageURL;
+        }
       },
-      error: () => {
-        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
-      }
+      error: (err) => this.toastr.error('Error del servidor', err.message)
     });
   }
 
