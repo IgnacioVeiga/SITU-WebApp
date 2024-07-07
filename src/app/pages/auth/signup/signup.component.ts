@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { AfterSignUpComponent } from './after.signup.component';
+import { SignUpForm } from 'src/app/shared/models/auth.model';
 
 
 @Component({
@@ -23,6 +24,16 @@ import { AfterSignUpComponent } from './after.signup.component';
   ]
 })
 export class SignupComponent {
+  form: SignUpForm = {
+    companyName: '',
+    dni: undefined,
+    email: '',
+    firstName: '',
+    lastName: '',
+    note: undefined,
+    phone: ''
+  }
+
   private toastr = inject(ToastrService);
   private dialog = inject(MatDialog);
   private router = inject(Router);
@@ -32,11 +43,11 @@ export class SignupComponent {
     this.router.navigate([route]);
   }
 
-  onSubmit(myForm: NgForm) {
-    this.authService.signup(myForm.value).subscribe({
+  onSubmit() {
+    this.authService.signup(this.form).subscribe({
       next: (resp: string) => {
         console.info(resp)
-        this.toastr.success('Formulario de inscripción enviado con exito.', 'Espere respuesta vía email.');
+        this.toastr.success('Formulario de inscripción enviado con exito.', 'Revisa tu email.');
         this.dialog.open(AfterSignUpComponent).afterClosed()
           .subscribe(() => {
             this.goTo('/home');

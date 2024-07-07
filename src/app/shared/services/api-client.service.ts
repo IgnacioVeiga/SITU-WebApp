@@ -66,7 +66,7 @@ export class ApiClientService {
       );
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse) {   
     const errorMessage = `Error: ${error.status}, ${error.message}`;
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));

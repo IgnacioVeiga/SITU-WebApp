@@ -3,59 +3,61 @@
         <h1>Registrar empresa de transporte urbano</h1>
     </div>
 
-    <form class="container" #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
+    <form class="container" #signupForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="column">
             <mat-form-field>
                 <mat-label>Nombre de la Empresa</mat-label>
-                <input matInput id="companyName" name="companyName" required ngModel
+                <input matInput id="companyName" name="companyName" required [(ngModel)]="form.companyName"
                     placeholder="Ingrese el nombre de la empresa de transporte">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Email</mat-label>
-                <input matInput type="email" id="email" name="email" required ngModel
+                <input matInput type="email" id="email" name="email" required [(ngModel)]="form.email"
                     placeholder="Ej: email@empresa.com">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Teléfono</mat-label>
-                <input matInput type="number" id="phone" name="phone" ngModel placeholder="Ej: +54 9 11 1234 5678">
+                <input matInput type="number" id="phone" name="phone" [(ngModel)]="form.phone" placeholder="Ej: +54 9 11 1234 5678">
             </mat-form-field>
         </div>
 
         <div class="column">
             <mat-form-field>
                 <mat-label>Nombre</mat-label>
-                <input matInput id="firstName" name="firstName" required ngModel placeholder="Nombre">
+                <input matInput id="firstName" name="firstName" required [(ngModel)]="form.firstName" placeholder="Nombre">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Apellido</mat-label>
-                <input matInput id="lastName" name="lastName" required ngModel placeholder="Apellido">
+                <input matInput id="lastName" name="lastName" required [(ngModel)]="form.lastName" placeholder="Apellido">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>DNI</mat-label>
-                <input matInput type="number" id="dni" name="dni" required ngModel placeholder="00 000 000">
+                <input matInput type="number" id="dni" name="dni" required [(ngModel)]="form.dni" placeholder="00 000 000">
             </mat-form-field>
         </div>
 
         <div class="column">
             <p class="note">
-                Si sos el responsable de tu empresa, para realizar el registro completá el formulario. Una vez enviado,
-                serás contactado vía email para otorgarte tu cuenta de usuario administrador junto a una guia de inicio
-                dentro de aproximadamente 24hs. Cualquier detalle, duda, aclaración y/o observación necesaria deberá ser
-                escrita en "Notas".
+                Para realizar el registro debes ser el responsable de la empresa y completar el formulario. Una vez enviado,
+                serás contactado vía email para otorgarte tu cuenta de usuario administrador junto a tu contraseña generada
+                aleatoriamente dentro de aproximadamente 24hs. Cualquier detalle, duda, aclaración y/o observación necesaria
+                para nuestro equipo de desarolladores debe ser escrita en "Notas".
             </p>
 
             <mat-form-field>
                 <mat-label>Notas</mat-label>
-                <textarea matInput id="notes" name="notes" ngModel placeholder="Notas"></textarea>
+                <textarea matInput id="notes" name="notes" [(ngModel)]="form.note" placeholder="Notas"></textarea>
             </mat-form-field>
 
             <span class="center">
                 <img width="250" alt="recaptcha" src="/assets/images/recaptcha.png" />
             </span>
+
+            <!-- TODO: checkbox de aceptar terminos y condiciones de uso y el enlace a donde leerlos -->
         </div>
 
         <div class="row-buttons">

@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
 import { ApiClientService } from './api-client.service';
 import { Router } from '@angular/router';
-import { LogInForm, SessionDTO } from '../models/auth.model';
+import { LogInForm, SessionDTO, SignUpForm } from '../models/auth.model';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
@@ -34,8 +34,8 @@ export class AuthService {
         });
     }
 
-    signup(form: any): Observable<any> {
-        return this.api.POST<any>(`${this.TABLE_NAME}/signup`, form);
+    signup(form: SignUpForm): Observable<string> {
+        return this.api.POST<string>(`${this.TABLE_NAME}/signup`, form);
     }
 
     logout(): void {
