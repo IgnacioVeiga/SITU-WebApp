@@ -8,12 +8,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
+import { MapComponent } from 'src/app/shared/components/map/map.component';
 
 @Component({
     templateUrl: './bus-routes.component.html',
     styleUrls: ['./bus-routes.component.scss'],
     standalone: true,
-    imports: [NavbarComponent, MatStepperModule, MatChipsModule, MatCheckboxModule, FormsModule]
+    imports: [NavbarComponent, MatStepperModule, MatChipsModule, MatCheckboxModule, FormsModule, MapComponent]
 })
 export class BusRoutesComponent implements AfterViewInit {
   // busList: BusLineModel[] = [];

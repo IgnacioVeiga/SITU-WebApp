@@ -73,3 +73,9 @@ body {
 .content {
     padding: 2rem;
 }
+
+// Fixes leaflet's icons
+.leaflet-container {
+    height: 100%;
+    width: 100%;
+}
