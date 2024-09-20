@@ -2,7 +2,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Router, RouterLink } from '@angular/router';
 import { ConfirmLogoutComponent } from '../../../pages/auth/login/confirm-logout.component';
-import { BusService } from '../../services/bus.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
