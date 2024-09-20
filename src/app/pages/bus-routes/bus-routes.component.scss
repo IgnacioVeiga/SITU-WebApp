@@ -1,0 +1,14 @@
+.box {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.box-item {
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 16px 32px;
+}
+
+.map-box {
+    padding: 0px 12px 12px 12px;
+}

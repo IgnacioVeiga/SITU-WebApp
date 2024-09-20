@@ -17,4 +17,17 @@ export class LineService {
     getLineById(lineId: number): Observable<any> {
         return this.api.GET<any>(`${this.TABLE_NAME}/${lineId}`);
     }
+
+    createLine(line: any): Observable<any> {
+        return this.api.POST<any>(`${this.TABLE_NAME}`, line);
+    }
+
+    updateLine(lineId: number, line: any): Observable<any> {
+        return this.api.PUT<any>(`${this.TABLE_NAME}/${lineId}`, line);
+    }
+
+    deleteLine(lineId: number): Observable<any> {
+        return this.api.DELETE<any>(`${this.TABLE_NAME}/${lineId}`);
+    }
 }
+

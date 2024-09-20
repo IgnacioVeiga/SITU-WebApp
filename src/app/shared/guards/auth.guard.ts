@@ -8,11 +8,12 @@ export const authGuard: CanActivateFn = (_route, _state) => {
     const toastr = inject(ToastrService);
     const router = inject(Router);
 
-    if (authService.requireLogin) {
-        toastr.error('Credenciales invalidas', 'Inicia sesión');
-        router.navigate(['/auth/login']);
-        return false;
-    } else {
+    // TODO: uncomment and refactor
+    // if (authService.requireLogin) {
+    //     toastr.error('Credenciales invalidas', 'Inicia sesión');
+    //     router.navigate(['/auth/login']);
+    //     return false;
+    // } else {
         return true;
-    }
+    // }
 };

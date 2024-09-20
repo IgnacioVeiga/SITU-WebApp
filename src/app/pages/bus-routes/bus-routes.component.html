@@ -2,31 +2,37 @@
   <h1>Mapa de recorridos</h1>
 </div>
 
-<div>
-  <h2>1. Seleccionar líneas</h2>
-  <ul>
-    @for (line of busLines; track $index) {
-    <li>
-      <input type="checkbox" [(ngModel)]="line.selected" /> {{ line.name }}
-    </li>
-    }
-  </ul>
-  <button (click)="loadRoutes()">Cargar recorridos</button>
+<div class="box">
+  <div class="box-item">
+    <h2>1. Seleccionar líneas</h2>
+    <ul>
+      @for (line of busLines; track $index) {
+      <li>
+        <input type="checkbox" [(ngModel)]="line.selected" /> {{ line.name }}
+      </li>
+      }
+    </ul>
+    <button (click)="loadRoutes()">Cargar recorridos</button>
+  </div>
+
+  @if (selectedLineRoutes.length > 0) {
+  <div class="box-item">
+    <h2>2. Seleccionar recorridos</h2>
+    <ul>
+      @for (route of selectedLineRoutes; track $index) {
+      <li>
+        <input type="checkbox" [(ngModel)]="route.selected" /> {{ route.name }}
+      </li>
+      }
+    </ul>
+    <button (click)="showMap()">Visualizar en mapa</button>
+  </div>
+  }
 </div>
 
-@if (selectedLineRoutes.length > 0) {
-<h2>2. Seleccionar recorridos</h2>
-<ul>
-  @for (route of selectedLineRoutes; track $index) {
-  <li>
-    <input type="checkbox" [(ngModel)]="route.selected" /> {{ route.name }}
-  </li>
-  }
-</ul>
-<button (click)="showMap()">Visualizar en mapa</button>
-}
-
-@if (selectedRoutes.length > 0) {
-<h2>3. Visualizar mapa</h2>
-<app-map [routes]="selectedRoutes"></app-map>
+@if (stops.length > 0) {
+<div class="map-box">
+  <h2>3. Visualizar mapa</h2>
+  <app-map [routes]="selectedRoutes" [stops]="stops"></app-map>
+</div>
 }

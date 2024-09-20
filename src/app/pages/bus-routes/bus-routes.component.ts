@@ -7,6 +7,8 @@ import { RouteService } from 'src/app/shared/services/route.service';
 import { MapComponent } from 'src/app/shared/components/map/map.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { StopService } from 'src/app/shared/services/stop.service';
+import { BusStop } from 'src/app/shared/models/bus-stop.model';
 
 @Component({
   selector: 'app-bus-routes',
@@ -19,17 +21,19 @@ export class BusRoutesComponent {
   toastr = inject(ToastrService);
   lineService = inject(LineService);
   routeService = inject(RouteService);
+  stopService = inject(StopService);
 
   busLines: BusLine[] = [];
   selectedLineRoutes: BusRoute[] = [];
   selectedRoutes: BusRoute[] = [];
+  stops: BusStop[] = [];
 
   ngOnInit() {
     this.lineService.getAllLines().subscribe({
       next: (lines) => {
         this.busLines = lines;
       },
-      error: (err) => {
+      error: () => {
         this.toastr.error('Error al cargar líneas de autobuses');
       }
     });
@@ -51,10 +55,23 @@ export class BusRoutesComponent {
     });
   }
 
+  loadStops() {
+    this.selectedRoutes.forEach(route => {
+      this.stopService.getStopsByRoute(route.id).subscribe({
+        next: (stops) => {
+          this.stops.push(...stops);
+        },
+        error: () => {
+          this.toastr.error('Error al cargar paradas');
+        }
+      });
+    });
+  }
+
   showMap() {
     this.selectedRoutes = this.selectedLineRoutes.filter(route => route.selected);
-    if (this.selectedRoutes.length === 0) {
-      this.toastr.warning('No se seleccionaron recorridos');
+    if (this.selectedRoutes.length > 0) {
+      this.loadStops();
     }
   }
 }
