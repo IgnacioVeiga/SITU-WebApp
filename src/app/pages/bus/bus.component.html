@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="sidebar">
+    <!-- Selector de líneas -->
+    <div class="sidebar-content">
+      <h2>1. Seleccionar líneas</h2>
+      <ul>
+        @for (line of busLines; track $index) {
+        <li>
+          <input type="checkbox" (change)="loadBusRoutes()" [(ngModel)]="line.selected" /> {{ line.name }}
+        </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Footer con botones -->
+    <div class="sidebar-footer">
+      @if (busRoutes.length > 0) {
+      <h2>2. Seleccionar recorridos</h2>
+      <ul>
+        @for (route of busRoutes; track $index) {
+        <li>
+          <input type="checkbox" (change)="loadBusStops()" [(ngModel)]="route.selected" /> {{ route.name }}
+        </li>
+        }
+      </ul>
+
+      <button (click)="resetSelection()">Limpiar todo</button>
+      }
+    </div>
+  </div>
+
+  <!-- Mapa -->
+  <div class="map-container">
+    @if (busStops.length > 0) {
+    <h2>Mapa</h2>
+    <app-map [busRoutes]="selectedRoutes" [busStops]="busStops"></app-map>
+    }
+  </div>
+</div>

@@ -39,7 +39,7 @@ export const routes: Routes = [
       },
       {
         path: 'bus',
-        loadComponent: () => import('./pages/bus-routes/bus-routes.component').then(m => m.BusRoutesComponent)
+        loadComponent: () => import('./pages/bus/bus.component').then(m => m.BusComponent)
       }
     ],
   },

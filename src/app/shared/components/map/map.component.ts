@@ -1,29 +1,32 @@
 import { Component, AfterViewInit, input } from '@angular/core';
 import * as L from 'leaflet';
-import { BusRoute } from '../../models/bus-route.model';
-import { BusStop } from '../../models/bus-stop.model';
+import { BusRoute, BusStop } from '../../models/bus.model';
 
 @Component({
   selector: 'app-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss'],
+  template: `<div id="map" style="height: 100%; width: 100%;"></div>`,
+  styles: `
+  #map {
+    height: 100vh;
+  }`,
   standalone: true,
   imports: []
 })
 export class MapComponent implements AfterViewInit {
-  routes = input<BusRoute[]>([]);
-  stops = input<BusStop[]>([]);
+  busRoutes = input<BusRoute[]>([]);
+  busStops = input<BusStop[]>([]);
   private map!: L.Map;
 
   ngAfterViewInit(): void {
     this.initMap();
 
-    if (this.routes().length > 0) {
-      this.drawRoutes();
+    if (this.busRoutes().length > 0) {
+      this.clearMap();
+      this.drawBusRoutes();
     }
 
-    if (this.stops().length > 0) {
-      this.drawStops();
+    if (this.busStops().length > 0) {
+      this.drawBusStops();
     }
   }
 
@@ -39,8 +42,16 @@ export class MapComponent implements AfterViewInit {
     }).addTo(this.map);
   }
 
-  private drawRoutes(): void {
-    this.routes().forEach(route => {
+  private clearMap(): void {
+    this.map.eachLayer((layer) => {
+      if (!(layer instanceof L.TileLayer)) {
+        this.map.removeLayer(layer);
+      }
+    });
+  }
+
+  private drawBusRoutes(): void {
+    this.busRoutes().forEach(route => {
       const geoJson = JSON.parse(route.coordinates);
 
       if (geoJson.type === 'LineString') {
@@ -58,13 +69,13 @@ export class MapComponent implements AfterViewInit {
     });
   }
 
-  private drawStops(): void {
-    this.stops().forEach((stop: any) => {
+  private drawBusStops(): void {
+    this.busStops().forEach(stop => {
       const stopGeoJson = JSON.parse(stop.location);
 
       if (stopGeoJson.type === 'Point' && stopGeoJson.coordinates.length >= 2) {
         const stopCoordinates: L.LatLngTuple = [stopGeoJson.coordinates[1], stopGeoJson.coordinates[0]];
-            
+
         L.marker(stopCoordinates).bindPopup(`<b>${stop.name}</b>`).addTo(this.map);
       }
     });

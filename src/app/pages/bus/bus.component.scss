@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.sidebar-footer {
+    margin-top: 16px;
+}
+
+.map-container {
+    flex: 1;
+    padding: 12px;
+    position: relative;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #3f51b5;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+    background-color: #515faf;
+}
+
+li {
+    list-style-type: none;
+    font-weight: 500;
+}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiClientService } from './api-client.service';
 import { Observable } from 'rxjs';
-import { BusRoute } from '../models/bus-route.model';
+import { BusRoute } from '../models/bus.model';
 
 @Injectable({
     providedIn: 'root'
