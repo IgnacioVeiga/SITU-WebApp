@@ -2,7 +2,7 @@ import { UserRole } from "./user.model"
 
 export interface SignUpForm {
     companyName: string,
-    email: string,
+    email: string,  
     phone: string | undefined,
     firstName: string,
     lastName: string,

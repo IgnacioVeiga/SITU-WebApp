@@ -1,8 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { ConfirmLogoutComponent } from '../../../pages/auth/login/confirm-logout.component';
-import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -22,9 +21,7 @@ export class NavbarComponent implements OnInit {
   textToSearch: string = (localStorage.getItem('textToSearch') || '');
   logoURL: string = './assets/images/bus_icon.png';
 
-  private toastr = inject(ToastrService);
   private dialog = inject(MatDialog);
-  private router = inject(Router);
   private authService = inject(AuthService);
 
   ngOnInit() {
@@ -33,8 +30,7 @@ export class NavbarComponent implements OnInit {
         if (session) {
           this.logoURL = session.logoImageURL;
         }
-      },
-      error: (err) => this.toastr.error('Error del servidor', err.message)
+      }
     });
   }
 
@@ -50,7 +46,7 @@ export class NavbarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.router.navigate(['/home']);
+        this.authService.logout();
       }
     });
   }

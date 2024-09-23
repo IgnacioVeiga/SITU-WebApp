@@ -8,10 +8,12 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    // TODO: redirigir al dashboard si tiene sesión activa
     path: 'home',
     loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
   },
   {
+    // TODO: redirigir al dashboard si tiene sesión activa
     path: 'auth',
     loadChildren: () => import('./pages/auth/auth.routes').then(m => m.routes)
   },

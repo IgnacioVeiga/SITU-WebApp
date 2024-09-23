@@ -10,22 +10,16 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AuthService {
     private readonly TABLE_NAME = 'auth';
-    private _session: SessionDTO | null;
-    public requireLogin: boolean = true;
+    private _session: SessionDTO | null = null;
 
-    private toastr = inject(ToastrService);
     private api = inject(ApiClientService);
+    private toastr = inject(ToastrService);
     private router = inject(Router);
-
-    constructor() {
-        this._session = null;        
-    }
 
     login(form: LogInForm): void {
         this.api.POST<SessionDTO>(`${this.TABLE_NAME}/login`, form).subscribe({
             next: (session) => {
                 this._session = session;
-                this.requireLogin = false;
                 this.router.navigate(['/dashboard']);
             },
             error: (err) => {
@@ -39,10 +33,11 @@ export class AuthService {
     }
 
     logout(): void {
-        this.api.POST<any>(`${this.TABLE_NAME}/logout`, {}).subscribe(() => {
-            this.requireLogin = true;
-            this._session = null;
-            this.router.navigate(['/home']);
+        this.api.POST<any>(`${this.TABLE_NAME}/logout`, {}).subscribe({
+            next: () => {
+                this._session = null;
+                this.router.navigate(['/home']);
+            }
         });
     }
 
@@ -50,11 +45,11 @@ export class AuthService {
         if (this._session) {
             return of(this._session);
         }
-        
+
         return this.api.GET<SessionDTO>(`${this.TABLE_NAME}/get-session`).pipe(
             map(session => {
                 this._session = session;
-                return session
+                return session;
             })
         );
     }
@@ -64,7 +59,7 @@ export class AuthService {
             map(session => {
                 return (session) ? true : false;
             }),
-            catchError(err => {
+            catchError(() => {
                 return of(false);
             })
         );
