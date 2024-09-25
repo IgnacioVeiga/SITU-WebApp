@@ -13,11 +13,11 @@ export interface SignUpForm {
 export interface LogInForm {
     email: string,
     password: string,
-    rememberMe: boolean
+    rememberMe: boolean // may be unnecesary
 }
 
 export interface SessionDTO {
-    userId: number,
+    userId: number, // may be unnecesary
     companyId: number,
     logoImageURL: string,
     email: string,

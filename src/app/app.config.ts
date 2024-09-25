@@ -12,7 +12,7 @@ export const appConfig: ApplicationConfig = {
         provideHttpClient(withInterceptorsFromDi()),
         provideAnimations(),
         provideToastr({
-            timeOut: 3000,
+            timeOut: 5000,
             closeButton: true,
             preventDuplicates: true,
             progressBar: true

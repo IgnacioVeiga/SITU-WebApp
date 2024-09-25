@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -12,7 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export class AppComponent implements OnInit {
   isLoading: boolean = true;
 
-  constructor(private router: Router) { }
+  private router = inject(Router);
 
   ngOnInit() {
     this.router.events.subscribe((event: any) => {
