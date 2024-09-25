@@ -6,7 +6,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export class ErrorInterceptor implements HttpInterceptor {
     authService = inject(AuthService);
     toastr = inject(ToastrService);
     router = inject(Router);
@@ -14,15 +14,21 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(
             catchError((error: HttpErrorResponse) => {
-                if (error.status === 401) {
-                    this.toastr.error('Tu sesión ha expirado', 'Sesión expirada');
-                    this.authService.logout();
-                    this.router.navigate(['/auth/login']);
-                } else {
-                    this.toastr.error('Ocurrió un error inesperado', `Error ${error.status}`);
+                switch (error.status) {
+                    case 400 || 401:
+                        this.toastr.error('Credenciales invalidas', 'Inicie sesión');
+                        break;
+
+                    case 500:
+                        this.toastr.error(error.message, 'Problema en el servidor');
+                        break;
+
+                    // DEBUG: remove later
+                    default:
+                        this.toastr.error(error.message, `${error.status}`);
+                        break;
                 }
                 return throwError(() => error);
-
             })
         );
     }

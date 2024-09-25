@@ -3,41 +3,34 @@ import { Observable, catchError, map, of } from 'rxjs';
 import { ApiClientService } from './api-client.service';
 import { Router } from '@angular/router';
 import { LogInForm, SessionDTO, SignUpForm } from '../models/auth.model';
-import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    private readonly TABLE_NAME = 'auth';
     private _session: SessionDTO | null = null;
 
     private api = inject(ApiClientService);
-    private toastr = inject(ToastrService);
     private router = inject(Router);
 
+    signup(form: SignUpForm): Observable<string> {
+        return this.api.POST<string>('auth/signup', form);
+    }
+
     login(form: LogInForm): void {
-        this.api.POST<SessionDTO>(`${this.TABLE_NAME}/login`, form).subscribe({
-            next: (session) => {
+        this.api.POST<SessionDTO>('auth/login', form).subscribe({
+            next: (session => {
                 this._session = session;
-                this.router.navigate(['/dashboard']);
-            },
-            error: (err) => {
-                this.toastr.error(err);
-            }
+                this.router.navigate(['/dashboard'])
+            })
         });
     }
 
-    signup(form: SignUpForm): Observable<string> {
-        return this.api.POST<string>(`${this.TABLE_NAME}/signup`, form);
-    }
-
     logout(): void {
-        this.api.POST<any>(`${this.TABLE_NAME}/logout`, {}).subscribe({
-            next: () => {
+        this.api.POST<any>('auth/logout', {}).subscribe({
+            next: (() => {
                 this._session = null;
-                this.router.navigate(['/home']);
-            }
+            })
         });
     }
 
@@ -46,7 +39,7 @@ export class AuthService {
             return of(this._session);
         }
 
-        return this.api.GET<SessionDTO>(`${this.TABLE_NAME}/get-session`).pipe(
+        return this.api.GET<SessionDTO>('auth/get-session').pipe(
             map(session => {
                 this._session = session;
                 return session;

@@ -4,7 +4,7 @@ import { provideAnimations } from "@angular/platform-browser/animations";
 import { provideRouter } from "@angular/router";
 import { routes } from "./app.routes";
 import { provideToastr } from "ngx-toastr";
-import { AuthInterceptor } from "./shared/interceptors/auth.interceptor";
+import { ErrorInterceptor } from "./shared/interceptors/error.interceptor";
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -19,7 +19,7 @@ export const appConfig: ApplicationConfig = {
         }),
         {
             provide: HTTP_INTERCEPTORS,
-            useClass: AuthInterceptor,
+            useClass: ErrorInterceptor,
             multi: true
         }
     ]

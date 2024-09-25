@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ConfirmLogoutComponent } from '../../../pages/auth/login/confirm-logout.component';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
 
   private dialog = inject(MatDialog);
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   ngOnInit() {
     this.authService.getSession().subscribe({
@@ -47,6 +48,7 @@ export class NavbarComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.authService.logout();
+        this.router.navigate(['/home']);
       }
     });
   }
