@@ -16,6 +16,11 @@ export interface LogInForm {
     rememberMe: boolean // may be unnecesary
 }
 
+export interface ChangePasswordDTO {
+    currentPassword: string,
+    newPassword: string
+}
+
 export interface SessionDTO {
     userId: number, // may be unnecesary
     companyId: number,

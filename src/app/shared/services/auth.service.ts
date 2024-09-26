@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { ApiClientService } from './api-client.service';
 import { Router } from '@angular/router';
-import { LogInForm, SessionDTO, SignUpForm } from '../models/auth.model';
+import { ChangePasswordDTO, LogInForm, SessionDTO, SignUpForm } from '../models/auth.model';
 
 @Injectable({
     providedIn: 'root'
@@ -32,6 +32,10 @@ export class AuthService {
                 this._session = null;
             })
         });
+    }
+
+    updatePassword(form: ChangePasswordDTO): Observable<any> {
+        return this.api.POST<any>('auth/password', form)
     }
 
     public getSession(): Observable<SessionDTO> {
