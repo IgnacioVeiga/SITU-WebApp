@@ -9,13 +9,23 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthService } from '../../services/auth.service';
 import { SessionDTO } from '../../models/auth.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatDialogModule, MatMenuModule, MatIconModule, RouterLink, FormsModule]
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatIconModule,
+    FormsModule,
+    TranslateModule,
+    RouterLink,
+  ]
 })
 export class NavbarComponent implements OnInit {
   textToSearch: string = (localStorage.getItem('textToSearch') || '');

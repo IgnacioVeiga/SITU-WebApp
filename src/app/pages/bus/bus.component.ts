@@ -7,13 +7,19 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { StopService } from 'src/app/shared/services/stop.service';
 import { BusLine, BusRoute, BusStop } from 'src/app/shared/models/bus.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-bus',
   templateUrl: './bus.component.html',
   styleUrls: ['./bus.component.scss'],
   standalone: true,
-  imports: [FormsModule, CommonModule, MapComponent]
+  imports: [
+    FormsModule,
+    CommonModule,
+    TranslateModule,
+    MapComponent
+  ]
 })
 export class BusComponent {
   busLines: BusLine[] = [];
@@ -51,6 +57,7 @@ export class BusComponent {
         this.busLines = lines;
       },
       error: () => {
+        // TODO: review, organize and translate all these types of toastr messages.
         this.toastr.error('Error al cargar líneas de autobuses');
       }
     });
@@ -66,6 +73,7 @@ export class BusComponent {
           this.busRoutes.push(...routes);
         },
         error: () => {
+          // TODO: review, organize and translate all these types of toastr messages.
           this.toastr.error('Error al cargar recorridos');
         }
       });
@@ -81,6 +89,7 @@ export class BusComponent {
           this.busStops.push(...stops);
         },
         error: () => {
+          // TODO: review, organize and translate all these types of toastr messages.
           this.toastr.error('Error al cargar paradas');
         }
       });

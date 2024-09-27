@@ -1,36 +1,36 @@
 <mat-toolbar color="primary">
-    <!-- Hamburguesa - Mostrar solo en pantallas pequeñas -->
+    <!-- Phone -->
     <button mat-icon-button class="hamburger" [matMenuTriggerFor]="menu">
         <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-        <a mat-menu-item [routerLink]="'/dashboard'">Dashboard</a>
-        <a mat-menu-item [routerLink]="'/report'">Reclamos</a>
-        <a mat-menu-item [routerLink]="'/alert'">Alertas</a>
-        <a mat-menu-item [routerLink]="'/user'">Usuarios</a>
-        <a mat-menu-item [routerLink]="'/bus'">Mapa de recorridos</a>
-        <a mat-menu-item (click)="confirmLogout()">Cerrar sesion</a>
+        <a mat-menu-item [routerLink]="'/dashboard'">{{'DASHBOARD' | translate}}</a>
+        <a mat-menu-item [routerLink]="'/report'">{{'REPORTS' | translate}}</a>
+        <a mat-menu-item [routerLink]="'/alert'">{{'ALERTS' | translate}}</a>
+        <a mat-menu-item [routerLink]="'/user'">{{'USERS' | translate}}</a>
+        <a mat-menu-item [routerLink]="'/bus'">{{'BUS_MAP' | translate}}</a>
+        <a mat-menu-item (click)="confirmLogout()">{{'LOGOUT' | translate}}</a>
     </mat-menu>
 
     <img [src]="logoURL" alt="Logo Company" class="logo">
 
-    <!-- Enlaces de la barra de herramientas - Mostrar en pantallas medianas y grandes -->
+    <!-- Desktop -->
     <div class="menu-items">
-        <a mat-button [routerLink]="'/dashboard'">Dashboard</a>
-        <a mat-button [routerLink]="'/report'">Reclamos</a>
-        <a mat-button [routerLink]="'/alert'">Alertas</a>
-        <a mat-button [routerLink]="'/user'">Usuarios</a>
-        <a mat-button [routerLink]="'/bus'">Mapa de recorridos</a>
+        <a mat-button [routerLink]="'/dashboard'">{{'DASHBOARD' | translate}}</a>
+        <a mat-button [routerLink]="'/report'">{{'REPORTS' | translate}}</a>
+        <a mat-button [routerLink]="'/alert'">{{'ALERTS' | translate}}</a>
+        <a mat-button [routerLink]="'/user'">{{'USERS' | translate}}</a>
+        <a mat-button [routerLink]="'/bus'">{{'BUS_MAP' | translate}}</a>
     </div>
 
     <span class="spacer"></span>
 
-    <input class="searchbar" type='search' placeholder="Buscar ..." [(ngModel)]="textToSearch" (input)="doSearch()" />
+    <input class="searchbar" type='search' placeholder="{{'SEARCH' | translate}} ..." [(ngModel)]="textToSearch" (input)="doSearch()" />
 
     <span class="spacer"></span>
 
     <a mat-button id="logout" (click)="confirmLogout()">
         <mat-icon>exit_to_app</mat-icon>
-        Cerrar sesión
+        {{'LOGOUT' | translate}}
     </a>
 </mat-toolbar>

@@ -1,12 +1,15 @@
 import { Component, Input, inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
     selector: 'file-uploader',
     templateUrl: './file-uploader.component.html',
     standalone: true,
-    imports: []
+    imports: [
+        TranslateModule
+    ]
 })
 export class FileUploaderComponent {
     @Input() imgUrl!: string;

@@ -1,8 +1,7 @@
 <div class="container">
   <div class="sidebar">
-    <!-- Selector de líneas -->
     <div class="sidebar-content">
-      <h2>1. Seleccionar líneas</h2>
+      <h2>1. {{'BUS_LINES' | translate}}</h2>
       <ul>
         @for (line of busLines; track $index) {
         <li>
@@ -12,10 +11,9 @@
       </ul>
     </div>
 
-    <!-- Footer con botones -->
     <div class="sidebar-footer">
       @if (busRoutes.length > 0) {
-      <h2>2. Seleccionar recorridos</h2>
+      <h2>2. {{'BUS_ROUTES' | translate}}</h2>
       <ul>
         @for (route of busRoutes; track $index) {
         <li>
@@ -24,15 +22,13 @@
         }
       </ul>
 
-      <button (click)="resetSelection()">Limpiar todo</button>
+      <button (click)="resetSelection()">{{'CLEAR' | translate}}</button>
       }
     </div>
   </div>
 
-  <!-- Mapa -->
   <div class="map-container">
     @if (busStops.length > 0) {
-    <h2>Mapa</h2>
     <app-map [busRoutes]="selectedRoutes" [busStops]="busStops"></app-map>
     }
   </div>

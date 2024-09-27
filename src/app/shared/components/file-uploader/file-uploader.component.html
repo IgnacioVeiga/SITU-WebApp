@@ -1,17 +1,16 @@
 <div class="row">
-  <label for="photoURL">Foto</label>
+  <label for="photoURL">{{'PHOTO' | translate}}</label>
 
   <img [src]="imgUrl" alt="Foto de perfil" width="46">
-  <input type="file" id="photoURL" name="photoURL" placeholder="Cargar archivo"
-    (change)="onFileSelected($event)" />
+  <input type="file" id="photoURL" name="photoURL" (change)="onFileSelected($event)" />
 </div>
 
 <div class="row">
-  <button (click)="upload()">Subir</button>
+  <button (click)="upload()">{{'UPLOAD' | translate}}</button>
   @if (processing) {
-    <div>Subiendo, por favor espere ...</div>
+  <div>{{'UPLOADING_WAIT' |translate}}</div>
   }
   @if (imgUrl) {
-    <div>{{ imgUrl }}</div>
+  <div>{{ imgUrl }}</div>
   }
 </div>

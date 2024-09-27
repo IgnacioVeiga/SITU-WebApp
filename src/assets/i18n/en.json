@@ -10,7 +10,11 @@
   "LOGOUT_QUESTION": "Do you want to log out?",
   "GO_BACK": "Go back",
   "CLOSE": "Close",
+  "CLEAR": "Clear",
   "APPLY": "Apply",
+  "UPLOAD": "Upload",
+  "UPLOADING_WAIT": "Uploading, please wait ...",
+  "PHOTO": "Photo",
   "PASSWORD": "Password",
   "CURRENT_PASSWORD": "Current password",
   "FORGOT_PASSWORD": "I forgot my password",
@@ -23,5 +27,13 @@
   "SUBMIT": "Submit",
   "SIGNUP_NOTE": "This form must be completed by a person responsible for the company who will be assigned the role of administrator. Once submitted, check the inbox of the email used, you will receive an email from us with a randomly generated password for you to enter. Remember to change the password for greater security.",
   "AFTER_SIGNUP_TITLE": "Thank you for signing up!",
-  "AFTER_SIGNUP_TEXT": "Your password was sent to <b>{{email}}</b>, we recommend that you change it for better security."
+  "AFTER_SIGNUP_TEXT": "Your password was sent to <b>{{email}}</b>, we recommend that you change it for better security.",
+  "BUS_LINES": "Bus lines",
+  "BUS_ROUTES": "Bus routes",
+  "DASHBOARD": "Dashboard",
+  "REPORTS": "Reports",
+  "ALERTS": "Alerts",
+  "USERS": "Users",
+  "BUS_MAP": "Bus map",
+  "SEARCH": "Search"
 }
