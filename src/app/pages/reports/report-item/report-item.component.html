@@ -1,11 +1,11 @@
 <div class="title" id="myDiv">
-    <h1>Detalles del reclamo</h1>
+    <h1>{{'DETAILS' | translate}}</h1>
 </div>
 
 <div class="center">
     <h2>{{ data.reportDate | date: 'dd/MM/yyyy HH:MM'}}</h2>
     <article>
-        <h5>Emitida por {{ data.user.lastName }} {{ data.user.firstName }} - Estado actual: {{ data.state }}</h5>
+        <h5>{{ data.user.lastName }} {{ data.user.firstName }} - {{'ACTUAL_STATE' | translate}}: {{ data.state }}</h5>
         <p>{{ data.description }}</p>
     </article>
     @if (data.reportImage.filename) {

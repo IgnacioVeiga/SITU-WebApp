@@ -1,9 +1,9 @@
 <form #addUserForm="ngForm">
-  <h1 mat-dialog-title>Añadir usuario</h1>
+  <h1 mat-dialog-title>{{'ADD_USER' | translate}}</h1>
 
   <mat-dialog-content>
     <div class="row">
-      <label>Foto</label>
+      <label>{{'PHOTO' | translate}}</label>
       <div class="column center">
         <img [src]="user.profileImage.filename" alt="Foto de perfil" width="46">
         <input type="file" id="photoURL" name="photoURL" placeholder="Cargar archivo"
@@ -21,7 +21,7 @@
 
     <div class="row">
       <mat-form-field>
-        <mat-label>Rol</mat-label>
+        <mat-label>{{'ROLE' | translate}}</mat-label>
         <mat-select id="role" name="role" [(ngModel)]="user.role" required>
           @for (option of roleTypes; track option) {
             <mat-option [value]="option">
@@ -35,7 +35,7 @@
 
   <mat-dialog-actions align="center">
     <button mat-raised-button color="primary" [mat-dialog-close]="user" type="button"
-    [disabled]="!addUserForm.valid">Añadir</button>
-    <button mat-raised-button color="secondary" type="button" mat-dialog-close>Cancelar</button>
+    [disabled]="!addUserForm.valid">{{'ADD' | translate}}</button>
+    <button mat-raised-button color="secondary" type="button" mat-dialog-close>{{'CANCEL' | translate}}</button>
   </mat-dialog-actions>
 </form>

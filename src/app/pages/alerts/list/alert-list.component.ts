@@ -13,12 +13,23 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 import { Page } from 'src/app/shared/models/page.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-    templateUrl: './alert-list.component.html',
-    styleUrls: ['./alert-list.component.scss'],
-    standalone: true,
-    imports: [NavbarComponent, MatButtonModule, MatDialogModule, MatIconModule, MatTableModule, MatPaginatorModule, DatePipe, TruncatePipe]
+  templateUrl: './alert-list.component.html',
+  styleUrls: ['./alert-list.component.scss'],
+  standalone: true,
+  imports: [
+    NavbarComponent,
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+    TranslateModule,
+    DatePipe,
+    TruncatePipe
+  ]
 })
 export class AlertListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -40,6 +51,7 @@ export class AlertListComponent implements AfterViewInit {
         this.dataSource.data = data.content;
       },
       error: () => {
+        // TODO: review, organize and translate all these types of toastr messages.
         this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
       }
     });
@@ -50,7 +62,6 @@ export class AlertListComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.toastr.success('Alerta emitida!');
         //Refresca la tabla
         this.loadAlerts();
       }

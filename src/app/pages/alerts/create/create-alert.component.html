@@ -1,29 +1,27 @@
-<form #generateAlertFrom="ngForm" (ngSubmit)="onSubmit()">
-  <h1 mat-dialog-title>Emitir alerta</h1>
+<form #createAlertForm="ngForm" (ngSubmit)="onSubmit()">
+  <h1 mat-dialog-title>{{'ALERT' | translate}}</h1>
 
   <mat-dialog-content class="row">
     <div class="column">
       <mat-form-field>
-        <mat-label>Título</mat-label>
-        <input matInput type="text" id="title" name="title" [(ngModel)]="alert.title" required
-          placeholder="Alerta">
+        <mat-label>{{'TITLE' | translate}}</mat-label>
+        <input matInput type="text" id="title" name="title" [(ngModel)]="alert.title" required>
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Descripción</mat-label>
-        <textarea matInput id="description" name="description" [(ngModel)]="alert.description" required
-        placeholder="Escriba aquí el mensaje"></textarea>
+        <mat-label>{{'DESCRIPTION' | translate}}</mat-label>
+        <textarea matInput id="description" name="description" [(ngModel)]="alert.description" required></textarea>
       </mat-form-field>
     </div>
 
     <div class="row">
       <mat-form-field>
-        <mat-label>Ubicación (opcional)</mat-label>
+        <mat-label>{{'LOCATION' | translate}}</mat-label>
         <input matInput type="text" id="zone" name="zone" [(ngModel)]="alert.location" placeholder="Ej: CABA">
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Prioridad</mat-label>
+        <mat-label>{{'PRIORITY' | translate}}</mat-label>
         <mat-select id="priority" name="priority" [(ngModel)]="alert.alertPriority" required>
           @for (option of priorityTypes; track option) {
             <mat-option [value]="option">
@@ -37,7 +35,7 @@
 
   <mat-dialog-actions align="center">
     <button mat-raised-button color="primary" [mat-dialog-close]="true" type="submit"
-    [disabled]="!generateAlertFrom.valid">Emitir</button>
-    <button mat-raised-button color="secondary" mat-dialog-close type="button">Cancelar</button>
+    [disabled]="!createAlertForm.valid">{{'CREATE' | translate}}</button>
+    <button mat-raised-button color="secondary" mat-dialog-close type="button">{{'CANCEL' | translate}}</button>
   </mat-dialog-actions>
 </form>

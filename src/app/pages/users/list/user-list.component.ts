@@ -12,12 +12,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 import { UpdatePasswordComponent } from '../../auth/update-password/update-password.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss'],
   standalone: true,
-  imports: [NavbarComponent, MatButtonModule, MatDialogModule, MatIconModule, MatTableModule, MatPaginatorModule]
+  imports: [
+    NavbarComponent,
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+    TranslateModule
+  ]
 })
 export class UserListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -42,6 +51,7 @@ export class UserListComponent implements AfterViewInit {
         this.dataSource.data = data.content;
       },
       error: () => {
+        // TODO: review, organize and translate all these types of toastr messages.
         this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
       }
     });
@@ -55,11 +65,10 @@ export class UserListComponent implements AfterViewInit {
         // Si se hizo clic en guardar en el diálogo, actualiza los datos en la base de datos
         this.userService.CreateUser(result).subscribe({
           next: () => {
-            this.toastr.success('Usuario añadido!');
-            //Refresca la tabla
             this.loadUsers();
           },
           error: () => {
+            // TODO: review, organize and translate all these types of toastr messages.
             this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
           }
         });
@@ -77,11 +86,10 @@ export class UserListComponent implements AfterViewInit {
         // Si se hizo clic en guardar en el diálogo, actualiza los datos en la base de datos
         this.userService.EditUser(result).subscribe({
           next: () => {
-            this.toastr.success('Usuario modificado!');
-            //Refresca la tabla
             this.loadUsers();
           },
           error: () => {
+            // TODO: review, organize and translate all these types of toastr messages.
             this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
           }
         });
@@ -91,17 +99,16 @@ export class UserListComponent implements AfterViewInit {
 
   updatePassword(): void {
     const dialogRef = this.dialog.open(UpdatePasswordComponent);
-    dialogRef.afterClosed().subscribe(() => {});
+    dialogRef.afterClosed().subscribe(() => { });
   }
 
   deleteUser(id: number): void {
     this.userService.RemoveUser(id).subscribe({
       next: (): void => {
-        this.toastr.success('El usuario ya no pertece a la empresa.');
-        //Refresca la tabla
         this.loadUsers();
       },
       error: () => {
+        // TODO: review, organize and translate all these types of toastr messages.
         this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
       }
     });

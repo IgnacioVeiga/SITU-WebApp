@@ -9,12 +9,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-    templateUrl: './create-alert.component.html',
-    styleUrls: ['./create-alert.component.scss'],
-    standalone: true,
-    imports: [FormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatOptionModule, MatButtonModule]
+  templateUrl: './create-alert.component.html',
+  styleUrls: ['./create-alert.component.scss'],
+  standalone: true,
+  imports: [
+    FormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatButtonModule,
+    TranslateModule
+  ]
 })
 export class CreateAlertComponent {
   alert: Alert = new Alert();
@@ -22,14 +32,13 @@ export class CreateAlertComponent {
 
   constructor(
     private alertService: AlertService
-  ) {}
+  ) { }
 
   onSubmit() {
-    this.alertService.CreateAlert(this.alert).subscribe(
-      (data: any): void => {
+    this.alertService.CreateAlert(this.alert).subscribe({
+      next: (data: any) => {
         console.log(data);
-        // TODO: verificar si la alerta fue creada con exito
       }
-    );
+    });
   }
 }

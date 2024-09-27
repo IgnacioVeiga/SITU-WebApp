@@ -11,12 +11,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 import { Page } from 'src/app/shared/models/page.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   templateUrl: './report-list.component.html',
   styleUrls: ['./report-list.component.scss'],
   standalone: true,
-  imports: [NavbarComponent, MatTableModule, MatButtonModule, MatIconModule, MatPaginatorModule, DatePipe, TruncatePipe]
+  imports: [
+    NavbarComponent,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatPaginatorModule,
+    TranslateModule,
+    DatePipe,
+    TruncatePipe
+  ]
 })
 export class ReportListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -39,6 +49,7 @@ export class ReportListComponent implements AfterViewInit {
           this.dataSource.data = data.content;
         },
         error: () => {
+          // TODO: review, organize and translate all these types of toastr messages.
           this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
         }
       });

@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Editar usuario ({{user.lastName}} {{user.firstName}})</h1>
+<h1 mat-dialog-title>({{user.lastName}} {{user.firstName}})</h1>
 
 <mat-dialog-content>
   <file-uploader [imgUrl]="'/situ/images/user-profile/' + user.profileImage.filename"></file-uploader>
@@ -10,24 +10,24 @@
 
   <div class="row">
     <mat-form-field>
-      <mat-label>Rol</mat-label>
+      <mat-label>{{'ROLE' | translate}}</mat-label>
       <mat-select id="role" name="role" [(ngModel)]="user.role">
         @for (option of roleTypes; track option) {
-          <mat-option [value]="option.value">
-            {{ option.text }}
-          </mat-option>
+        <mat-option [value]="option.value">
+          {{ option.text }}
+        </mat-option>
         }
       </mat-select>
     </mat-form-field>
   </div>
 
   <div class="row">
-    <p>Aviso: luego de cambiar el rol, <b>no se podrá cambiar</b> <br>nuevamente hasta dentro de <b>30 días</b>.
-  </p>
-</div>
+    <p>{{'CHANGE_ROLE_WARNING' | translate}}</p>
+  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
-  <button mat-raised-button color="primary" [mat-dialog-close]="user" type="button" cdkFocusInitial>Guardar</button>
-  <button mat-raised-button color="secondary" mat-dialog-close type="button">Cancelar</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="user" type="button" cdkFocusInitial>{{'APPLY' |
+    translate}}</button>
+  <button mat-raised-button color="secondary" mat-dialog-close type="button">{{'CANCEL' | translate}}</button>
 </mat-dialog-actions>

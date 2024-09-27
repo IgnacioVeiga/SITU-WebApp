@@ -5,6 +5,8 @@
   "LOGIN": "Ingresar",
   "SIGNUP": "Registrarse",
   "NOT_ROBOT": "No soy un robot",
+  "CREATE": "Crear",
+  "ADD": "Añadir",
   "CANCEL": "Cancelar",
   "LOGOUT": "Cerrar sesión",
   "LOGOUT_QUESTION": "¿Desea cerrar la sesión?",
@@ -23,6 +25,7 @@
   "REPEAT_PASSWORD": "Repetir contraseña",
   "FIRSTNAME": "Nombre",
   "LASTNAME": "Apellido",
+  "ROLE": "Rol",
   "COMPANY": "Empresa",
   "SUBMIT": "Enviar",
   "SIGNUP_NOTE": "Este formulario deberá ser completado por un responsable de la empresa a quien se le asignará el rol de administrador. Una vez enviado, revisa la bandeja de entrada del email utilizado, recibirás un correo nuestro con una contraseña generada aleatoriamente para que ingreses. Recuerda cambiar la contraseña para mayor seguridad.",
@@ -35,5 +38,15 @@
   "ALERTS": "Alertas",
   "USERS": "Usuarios",
   "BUS_MAP": "Mapa de colectivos",
-  "SEARCH": "Buscar"
+  "SEARCH": "Buscar",
+  "TITLE": "Título",
+  "DESCRIPTION": "Descripción",
+  "DATETIME": "Fecha y hora",
+  "PRIORITY": "Prioridad",
+  "DETAIL": "Detalle",
+  "LOCATION": "Ubiación",
+  "CLAIM": "Reclama",
+  "ACTUAL_STATE": "Estado actual",
+  "ADD_USER": "Añadir usuario",
+  "CHANGE_ROLE_WARNING": "Nota: después de cambiar el rol, no podrá volver a cambiarlo durante 30 días."
 }

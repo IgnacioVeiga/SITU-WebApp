@@ -5,6 +5,8 @@
   "LOGIN": "Login",
   "SIGNUP": "Sign up",
   "NOT_ROBOT": "I'm not a robot",
+  "CREATE": "Create",
+  "ADD": "Add",
   "CANCEL": "Cancel",
   "LOGOUT": "Log out",
   "LOGOUT_QUESTION": "Do you want to log out?",
@@ -23,6 +25,7 @@
   "REPEAT_PASSWORD": "Repeat password",
   "FIRSTNAME": "Firstname",
   "LASTNAME": "Lastname",
+  "ROLE": "Role",
   "COMPANY": "Company",
   "SUBMIT": "Submit",
   "SIGNUP_NOTE": "This form must be completed by a person responsible for the company who will be assigned the role of administrator. Once submitted, check the inbox of the email used, you will receive an email from us with a randomly generated password for you to enter. Remember to change the password for greater security.",
@@ -35,5 +38,15 @@
   "ALERTS": "Alerts",
   "USERS": "Users",
   "BUS_MAP": "Bus map",
-  "SEARCH": "Search"
+  "SEARCH": "Search",
+  "TITLE": "Title",
+  "DESCRIPTION": "Description",
+  "DATETIME": "Date and time",
+  "PRIORITY": "Priority",
+  "DETAIL": "Detail",
+  "LOCATION": "Location",
+  "CLAIM": "Claimant",
+  "ACTUAL_STATE": "Actual state",
+  "ADD_USER": "Add user",
+  "CHANGE_ROLE_WARNING": "Note: after changing the role, you will not be able to change it again for 30 days."
 }
