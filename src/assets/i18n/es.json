@@ -1,4 +1,27 @@
 {
-    "WELCOME": "¡Te damos la bienvenida a SITU!"
-  }
-  
+  "PAGE_NOT_FOUND_TITLE": "Página no encontrada",
+  "PAGE_NOT_FOUND_TEXT": "Lo sentimos, la página que busca no existe.",
+  "WELCOME": "¡Te damos la bienvenida a SITU!",
+  "LOGIN": "Ingresar",
+  "SIGNUP": "Registrarse",
+  "NOT_ROBOT": "No soy un robot",
+  "CANCEL": "Cancelar",
+  "LOGOUT": "Cerrar sesión",
+  "LOGOUT_QUESTION": "¿Desea cerrar la sesión?",
+  "GO_BACK": "Volver",
+  "CLOSE": "Cerrar",
+  "APPLY": "Aplicar",
+  "PASSWORD": "Contraseña",
+  "CURRENT_PASSWORD": "Contraseña actual",
+  "FORGOT_PASSWORD": "Olvidé mi contraseña",
+  "UPDATE_PASSWORD": "Actualizar contraseña",
+  "NEW_PASSWORD": "Nueva contraseña",
+  "REPEAT_PASSWORD": "Repetir contraseña",
+  "FIRSTNAME": "Nombre",
+  "LASTNAME": "Apellido",
+  "COMPANY": "Empresa",
+  "SUBMIT": "Enviar",
+  "SIGNUP_NOTE": "Este formulario deberá ser completado por un responsable de la empresa a quien se le asignará el rol de administrador. Una vez enviado, revisa la bandeja de entrada del email utilizado, recibirás un correo nuestro con una contraseña generada aleatoriamente para que ingreses. Recuerda cambiar la contraseña para mayor seguridad.",
+  "AFTER_SIGNUP_TITLE": "¡Gracias por registrarte!",
+  "AFTER_SIGNUP_TEXT": "Tu contraseña fue enviada a <b>{{email}}</b>, te recomendamos que la modifiques para mayor seguridad."
+}

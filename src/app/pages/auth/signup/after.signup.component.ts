@@ -1,21 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, Inject, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: `
+    <h1 mat-dialog-title>{{'AFTER_SIGNUP_TITLE' | translate}}</h1>
     <mat-dialog-content>
-      <p>¡Gracias por registrarte! Te enviamos tu contraseña temporal al email que registraste,
-        te recomendamos que la modifiques cuanto antes para mayor seguridad.</p>
+      <p [innerHTML]="'AFTER_SIGNUP_TEXT' | translate: {email: email}"></p>
     </mat-dialog-content>
     <mat-dialog-actions align="center">
-      <button mat-raised-button color="primary" mat-dialog-close>Cerrar</button>
+      <button mat-raised-button color="primary" mat-dialog-close>{{'CLOSE' | translate}}</button>
     </mat-dialog-actions>
 `,
   standalone: true,
   imports: [
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    TranslateModule
   ]
 })
-export class AfterSignUpComponent { }
+export class AfterSignUpComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public email: string) { }
+}

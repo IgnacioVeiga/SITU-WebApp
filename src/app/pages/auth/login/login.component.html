@@ -1,39 +1,39 @@
 <section>
     <form class="center" #form="ngForm" (ngSubmit)="onSubmit()">
         <div class="title">
-            <h1>Iniciar sesión</h1>
+            <h1>{{'LOGIN' | translate}}</h1>
         </div>
 
         <mat-form-field>
             <mat-label>Email</mat-label>
             <input matInput type="email" id="email" name="email" [(ngModel)]="loginForm.email" required
-                placeholder="myemail@example.com">
+                placeholder="email@example.com">
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Contraseña</mat-label>
+            <mat-label>{{'PASSWORD' | translate}}</mat-label>
             <input matInput type="password" id="password" name="password" [(ngModel)]="loginForm.password" required
                 placeholder="********">
         </mat-form-field>
 
         <captcha></captcha>
 
-        <mat-checkbox class="checkbox" color="primary" id="rememberMe" name="rememberMe"
+        <!-- <mat-checkbox class="checkbox" color="primary" id="rememberMe" name="rememberMe"
             [(ngModel)]="loginForm.rememberMe">
             Mantener sesión
-        </mat-checkbox>
+        </mat-checkbox> -->
 
         <div class="row-buttons">
             <button mat-raised-button color="secondary" type="button" (click)="goTo('home')">
                 <mat-icon>keyboard_arrow_left</mat-icon>
-                Volver
+                {{'GO_BACK' | translate}}
             </button>
             <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
                 <mat-icon>login</mat-icon>
-                Ingresar
+                {{'LOGIN' | translate}}
             </button>
         </div>
 
-        <a>Olvidé mi contraseña</a>
+        <a>{{'FORGOT_PASSWORD' | translate}}</a>
     </form>
 </section>

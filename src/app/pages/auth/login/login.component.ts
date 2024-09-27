@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { LogInForm } from 'src/app/shared/models/auth.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CaptchaComponent } from "../captcha/captcha.component";
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   templateUrl: './login.component.html',
@@ -19,7 +20,8 @@ import { CaptchaComponent } from "../captcha/captcha.component";
     MatCheckboxModule,
     MatIconModule,
     MatInputModule,
-    CaptchaComponent
+    CaptchaComponent,
+    TranslateModule
 ]
 })
 export class LoginComponent {

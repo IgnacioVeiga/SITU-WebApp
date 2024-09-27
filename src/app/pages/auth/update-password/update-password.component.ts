@@ -8,12 +8,21 @@ import { FileUploaderComponent } from '../../../shared/components/file-uploader/
 import { FormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ChangePasswordDTO } from 'src/app/shared/models/auth.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   templateUrl: './update-password.component.html',
   styleUrls: ['./update-password.component.scss'],
   standalone: true,
-  imports: [FormsModule, MatDialogModule, FileUploaderComponent, MatFormFieldModule, MatInputModule, MatButtonModule]
+  imports: [
+    FormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    FileUploaderComponent,
+    TranslateModule
+  ]
 })
 export class UpdatePasswordComponent {
   form: ChangePasswordDTO = {

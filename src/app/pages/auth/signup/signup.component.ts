@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { AfterSignUpComponent } from './after.signup.component';
 import { SignUpForm } from 'src/app/shared/models/auth.model';
 import { CaptchaComponent } from "../captcha/captcha.component";
-
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   templateUrl: './signup.component.html',
@@ -22,8 +22,9 @@ import { CaptchaComponent } from "../captcha/captcha.component";
     MatDialogModule,
     MatIconModule,
     MatInputModule,
-    CaptchaComponent
-]
+    CaptchaComponent,
+    TranslateModule
+  ]
 })
 export class SignupComponent {
   form: SignUpForm = {
@@ -47,15 +48,14 @@ export class SignupComponent {
 
   onSubmit() {
     this.authService.signup(this.form).subscribe({
-      next: (resp: string) => {
-        console.info(resp)
-        this.toastr.success('Formulario de inscripción enviado con exito.', 'Revisa tu email.');
-        this.dialog.open(AfterSignUpComponent).afterClosed()
-          .subscribe(() => {
+      next: (resp: any) => {
+        this.dialog.open(AfterSignUpComponent, { data: this.form.email })
+          .afterClosed().subscribe(() => {
             this.goTo('/home');
           });
       },
       error: () => {
+        // TODO: review, organize and translate all these types of toastr messages.
         this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
       }
     });

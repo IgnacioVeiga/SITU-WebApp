@@ -1,64 +1,52 @@
 <section class="center">
     <div class="title">
-        <h1>Registrar empresa de transporte urbano</h1>
+        <h1>{{'SIGNUP' | translate}}</h1>
     </div>
 
     <form class="container" #signupForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="column">
             <mat-form-field>
-                <mat-label>Nombre de la Empresa</mat-label>
-                <input matInput id="companyName" name="companyName" required [(ngModel)]="form.companyName"
-                    placeholder="Ingrese el nombre de la empresa de transporte">
+                <mat-label>{{'COMPANY' | translate}}</mat-label>
+                <input matInput id="companyName" name="companyName" required [(ngModel)]="form.companyName">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Email</mat-label>
-                <input matInput type="email" id="email" name="email" required [(ngModel)]="form.email"
-                    placeholder="Ej: email@empresa.com">
+                <input matInput type="email" id="email" name="email" required [(ngModel)]="form.email">
             </mat-form-field>
 
-            <mat-form-field>
+            <!-- <mat-form-field>
                 <mat-label>Teléfono</mat-label>
-                <input matInput type="number" id="phone" name="phone" [(ngModel)]="form.phone"
-                    placeholder="Ej: +54 9 11 1234 5678">
-            </mat-form-field>
+                <input matInput type="number" id="phone" name="phone" [(ngModel)]="form.phone">
+            </mat-form-field> -->
         </div>
 
         <div class="column">
             <mat-form-field>
-                <mat-label>Nombre</mat-label>
-                <input matInput id="firstName" name="firstName" required [(ngModel)]="form.firstName"
-                    placeholder="Nombre">
+                <mat-label>{{'FIRSTNAME' | translate}}</mat-label>
+                <input matInput id="firstName" name="firstName" required [(ngModel)]="form.firstName">
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Apellido</mat-label>
-                <input matInput id="lastName" name="lastName" required [(ngModel)]="form.lastName"
-                    placeholder="Apellido">
+                <mat-label>{{'LASTNAME' | translate}}</mat-label>
+                <input matInput id="lastName" name="lastName" required [(ngModel)]="form.lastName">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>DNI</mat-label>
-                <input matInput type="number" id="dni" name="dni" required [(ngModel)]="form.dni"
-                    placeholder="00 000 000">
+                <input matInput type="number" id="dni" name="dni" required [(ngModel)]="form.dni">
             </mat-form-field>
         </div>
 
         <div class="column">
             <p class="note">
-                Para realizar el registro debes ser el responsable de la empresa y completar el formulario. Una vez
-                enviado,
-                serás contactado vía email para otorgarte tu cuenta de usuario administrador junto a tu contraseña
-                generada
-                aleatoriamente dentro de aproximadamente 24hs. Cualquier detalle, duda, aclaración y/o observación
-                necesaria
-                para nuestro equipo de desarolladores debe ser escrita en "Notas".
+                {{'SIGNUP_NOTE' | translate}}
             </p>
 
-            <mat-form-field>
+            <!-- <mat-form-field>
                 <mat-label>Notas</mat-label>
                 <textarea matInput id="notes" name="notes" [(ngModel)]="form.note" placeholder="Notas"></textarea>
-            </mat-form-field>
+            </mat-form-field> -->
 
             <span class="center">
                 <captcha></captcha>
@@ -70,11 +58,11 @@
         <div class="row-buttons">
             <button mat-raised-button color="secondary" type="button" (click)="goTo('home')">
                 <mat-icon>keyboard_arrow_left</mat-icon>
-                Volver
+                {{'GO_BACK' | translate}}
             </button>
             <button mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid">
                 <mat-icon>send</mat-icon>
-                Enviar formulario
+                {{'SUBMIT' | translate}}
             </button>
         </div>
     </form>
