@@ -1,20 +1,30 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    standalone: true,
-    imports: [RouterOutlet, MatProgressSpinnerModule]
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [RouterOutlet, MatProgressSpinnerModule, TranslateModule]
 })
 export class AppComponent implements OnInit {
   isLoading: boolean = true;
 
+  get currentLanguage() {
+    return this.translate.currentLang;
+  }
+
   private router = inject(Router);
+  private translate = inject(TranslateService);
 
   ngOnInit() {
+    this.translate.addLangs(['en', 'es']);
+    this.translate.setDefaultLang('es');
+    this.translate.use('es');
+
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {
         this.isLoading = true;
@@ -29,5 +39,17 @@ export class AppComponent implements OnInit {
         // this.isLoading = false;
       }
     });
+  }
+
+  toggleLanguage() {
+    switch (this.currentLanguage) {
+      case 'es':
+        this.translate.use('en')
+        break;
+
+      default:
+        this.translate.use('es');
+        break;
+    }
   }
 }

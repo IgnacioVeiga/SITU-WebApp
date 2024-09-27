@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   templateUrl: './home.component.html',
@@ -9,7 +10,8 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    TranslateModule
   ]
 })
 export class HomeComponent {

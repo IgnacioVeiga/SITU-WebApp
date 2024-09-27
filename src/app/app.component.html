@@ -1,8 +1,14 @@
 <router-outlet></router-outlet>
 
+<div class="language-switcher">
+  <button (click)="toggleLanguage()">
+    🌐 {{ currentLanguage }}
+  </button>
+</div>
+
 <!-- Spinner de carga -->
 @if (isLoading) {
-  <div class="spinner">
-    <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
-  </div>
+<div class="spinner">
+  <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+</div>
 }
