@@ -6,17 +6,20 @@
 
         <mat-form-field>
             <mat-label>Email</mat-label>
-            <input matInput type="email" id="email" name="email" [(ngModel)]="loginForm.email" required placeholder="myemail@example.com">
+            <input matInput type="email" id="email" name="email" [(ngModel)]="loginForm.email" required
+                placeholder="myemail@example.com">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Contraseña</mat-label>
-            <input matInput type="password" id="password" name="password" [(ngModel)]="loginForm.password" required placeholder="********">
+            <input matInput type="password" id="password" name="password" [(ngModel)]="loginForm.password" required
+                placeholder="********">
         </mat-form-field>
 
-        <img width="250" alt="recaptcha" src="/assets/images/recaptcha.png" />
+        <captcha></captcha>
 
-        <mat-checkbox class="checkbox" color="primary" id="rememberMe" name="rememberMe" [(ngModel)]="loginForm.rememberMe">
+        <mat-checkbox class="checkbox" color="primary" id="rememberMe" name="rememberMe"
+            [(ngModel)]="loginForm.rememberMe">
             Mantener sesión
         </mat-checkbox>
 

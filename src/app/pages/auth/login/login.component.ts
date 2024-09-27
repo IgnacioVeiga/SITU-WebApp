@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { LogInForm } from 'src/app/shared/models/auth.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { CaptchaComponent } from "../captcha/captcha.component";
 
 @Component({
   templateUrl: './login.component.html',
@@ -17,8 +18,9 @@ import { AuthService } from 'src/app/shared/services/auth.service';
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
-    MatInputModule
-  ]
+    MatInputModule,
+    CaptchaComponent
+]
 })
 export class LoginComponent {
   loginForm: LogInForm = {

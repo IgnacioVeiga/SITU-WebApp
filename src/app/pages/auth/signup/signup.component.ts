@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { AfterSignUpComponent } from './after.signup.component';
 import { SignUpForm } from 'src/app/shared/models/auth.model';
+import { CaptchaComponent } from "../captcha/captcha.component";
 
 
 @Component({
@@ -20,8 +21,9 @@ import { SignUpForm } from 'src/app/shared/models/auth.model';
     MatButtonModule,
     MatDialogModule,
     MatIconModule,
-    MatInputModule
-  ]
+    MatInputModule,
+    CaptchaComponent
+]
 })
 export class SignupComponent {
   form: SignUpForm = {
