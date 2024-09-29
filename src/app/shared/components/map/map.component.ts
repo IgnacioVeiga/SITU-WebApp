@@ -1,25 +1,43 @@
 import { Component, AfterViewInit, input } from '@angular/core';
-import * as L from 'leaflet';
 import { BusRoute, BusStop } from '../../models/bus.model';
+import { LeafletModule } from '@bluehalo/ngx-leaflet';
+import { LeafletDrawModule } from '@bluehalo/ngx-leaflet-draw';
+import { DrawEvents, featureGroup, FeatureGroup, latLng, tileLayer, polyline, marker, MapOptions, Control, icon, Icon, Layer } from 'leaflet';
 
 @Component({
   selector: 'app-map',
-  template: `<div id="map" style="height: 100%; width: 100%;"></div>`,
-  styles: `
-  #map {
-    height: 100vh;
-  }`,
+  templateUrl: 'map.component.html',
   standalone: true,
-  imports: []
+  imports: [
+    LeafletModule,
+    LeafletDrawModule
+  ],
 })
 export class MapComponent implements AfterViewInit {
   busRoutes = input<BusRoute[]>([]);
   busStops = input<BusStop[]>([]);
-  private map!: L.Map;
+
+  options: MapOptions = {
+    layers: [
+      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+    ],
+    zoom: 10,
+    center: latLng(-34.581231, -58.420862)
+  };
+
+  drawnItems: FeatureGroup = featureGroup();
+
+  drawOptions: Control.DrawConstructorOptions = {
+    edit: {
+      featureGroup: this.drawnItems
+    }
+  };
+
+  public onDrawCreated(e: any) {
+    this.drawnItems.addLayer((e as DrawEvents.Created).layer);
+  }
 
   ngAfterViewInit(): void {
-    this.initMap();
-
     if (this.busRoutes().length > 0) {
       this.clearMap();
       this.drawBusRoutes();
@@ -30,28 +48,12 @@ export class MapComponent implements AfterViewInit {
     }
   }
 
-  private initMap(): void {
-    this.map = L.map('map', {
-      center: [-34.581231, -58.420862],
-      zoom: 15
-    });
-
-    // OpenStreetMap layer
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 20,
-    }).addTo(this.map);
-  }
-
   private clearMap(): void {
-    this.map.eachLayer((layer) => {
-      if (!(layer instanceof L.TileLayer)) {
-        this.map.removeLayer(layer);
-      }
-    });
+    this.drawnItems.clearLayers();
   }
 
   private drawBusRoutes(): void {
-    this.busRoutes().forEach(route => {
+    this.busRoutes().forEach((route) => {
       const geoJson = JSON.parse(route.coordinates);
 
       if (geoJson.type === 'LineString') {
@@ -62,22 +64,45 @@ export class MapComponent implements AfterViewInit {
 
         // Make sure that polylinePoints has at least one valid point before drawing
         if (polylinePoints.length > 0) {
-          const polyline = L.polyline(polylinePoints as L.LatLngTuple[], { color: 'blue' }).addTo(this.map);
-          this.map.fitBounds(polyline.getBounds());
+          const routeLine = polyline(polylinePoints as L.LatLngTuple[], { color: 'blue' });
+
+          this.attachClickEvent(routeLine);
+          this.drawnItems.addLayer(routeLine);
         }
       }
     });
   }
 
   private drawBusStops(): void {
-    this.busStops().forEach(stop => {
+    this.busStops().forEach((stop) => {
       const stopGeoJson = JSON.parse(stop.location);
 
       if (stopGeoJson.type === 'Point' && stopGeoJson.coordinates.length >= 2) {
-        const stopCoordinates: L.LatLngTuple = [stopGeoJson.coordinates[1], stopGeoJson.coordinates[0]];
+        const stopCoordinates: L.LatLngTuple = [
+          stopGeoJson.coordinates[1],
+          stopGeoJson.coordinates[0],
+        ];
 
-        L.marker(stopCoordinates).bindPopup(`<b>${stop.name}</b>`).addTo(this.map);
+        const stopMarker = marker(stopCoordinates, {
+          icon: icon({
+            ...Icon.Default.prototype.options,
+            iconUrl: 'assets/marker-icon.png',
+            iconRetinaUrl: 'assets/marker-icon-2x.png',
+            shadowUrl: 'assets/marker-shadow.png'
+          })
+        }).bindPopup(`<b>${stop.name}</b>`);
+
+        this.attachClickEvent(stopMarker);
+        this.drawnItems.addLayer(stopMarker);
       }
+    });
+  }
+
+  private attachClickEvent(layer: Layer): void {
+    layer.on('click', (event: any) => {
+      const layerType = layer instanceof polyline ? 'LineString' : 'Point';
+      const coordinates = event.latlng;
+      console.log(layerType + "\n" + coordinates);
     });
   }
 }
