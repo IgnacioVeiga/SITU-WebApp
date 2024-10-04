@@ -48,7 +48,7 @@ export class NavbarComponent implements OnInit {
   doSearch() {
     localStorage.setItem('textToSearch', this.textToSearch);
     if (this.textToSearch.length > 1) {
-      // TODO: realiza la busqueda en la lista correspondiente
+      // TODO
     }
   }
 

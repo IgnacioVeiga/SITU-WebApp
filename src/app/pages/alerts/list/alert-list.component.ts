@@ -62,7 +62,6 @@ export class AlertListComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        //Refresca la tabla
         this.loadAlerts();
       }
     });

@@ -32,7 +32,7 @@ export class AddUserComponent {
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
 
-    // Previsualización de la imagen antes de subirla al servidor
+    // Preview the image before uploading it to the server.
     const reader = new FileReader();
     reader.onload = (e) => {
       this.user.profileImage.filename = e.target?.result as string;

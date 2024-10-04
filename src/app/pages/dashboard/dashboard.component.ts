@@ -29,7 +29,6 @@ export class DashboardComponent implements AfterViewInit {
   @ViewChild('reportChart') reportChartRef!: ElementRef<HTMLCanvasElement>;
 
   constructor() {
-    // Registrar todos los componentes de Chart.js
     Chart.register(...registerables);
   }
 

@@ -83,7 +83,7 @@ export class UserListComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // Si se hizo clic en guardar en el diálogo, actualiza los datos en la base de datos
+        // If “save” was clicked in the dialog, it updates the data in the database.
         this.userService.EditUser(result).subscribe({
           next: () => {
             this.loadUsers();
