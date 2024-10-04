@@ -1,4 +1,5 @@
 # SITU WebApp (beta)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/057e7688-e016-4b30-b9fa-85e8f53ae186/deploy-status)](https://app.netlify.com/sites/situ-app/deploys)
 
 ## About "SITU"
 /// To be redacted ///
