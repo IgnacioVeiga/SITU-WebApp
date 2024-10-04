@@ -7,8 +7,8 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiClientService {
-  private readonly _API_URL: string = environment.API_URL;
+export class GenericAPIService {
+  private readonly _API_URL: string = environment.API_URL + '/api/situ';
   private readonly httpClient = inject(HttpClient);
 
   GET<T>(endpoint: string, args?: any): Observable<T> {
@@ -70,7 +70,6 @@ export class ApiClientService {
 
   private handleError(error: HttpErrorResponse) {
     const errorMessage = `Error: ${error.status}, ${error.message}`;
-    console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
   }
 }

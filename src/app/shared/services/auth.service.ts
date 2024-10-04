@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
-import { ApiClientService } from './api-client.service';
+import { GenericAPIService } from './generic-api.service';
 import { Router } from '@angular/router';
 import { ChangePasswordDTO, LogInForm, SessionDTO, SignUpForm } from '../models/auth.model';
 
@@ -10,7 +10,7 @@ import { ChangePasswordDTO, LogInForm, SessionDTO, SignUpForm } from '../models/
 export class AuthService {
     private _session: SessionDTO | null = null;
 
-    private api = inject(ApiClientService);
+    private api = inject(GenericAPIService);
     private router = inject(Router);
 
     signup(form: SignUpForm): Observable<string> {

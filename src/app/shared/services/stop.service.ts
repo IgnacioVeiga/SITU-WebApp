@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { ApiClientService } from './api-client.service';
+import { inject, Injectable } from '@angular/core';
+import { GenericAPIService } from './generic-api.service';
 import { Observable } from 'rxjs';
 import { BusStop } from '../models/bus.model';
 
@@ -7,23 +7,21 @@ import { BusStop } from '../models/bus.model';
     providedIn: 'root'
 })
 export class StopService {
-    private readonly TABLE_NAME = 'stops';
-
-    constructor(private api: ApiClientService) { }
+    private api = inject(GenericAPIService);
 
     getStopsByRoute(routeId: number): Observable<BusStop[]> {
-        return this.api.GET<BusStop[]>(`${this.TABLE_NAME}/route/${routeId}`);
+        return this.api.GET<BusStop[]>(`stops/route/${routeId}`);
     }
 
     createStop(stop: any): Observable<any> {
-        return this.api.POST<any>(`${this.TABLE_NAME}`, stop);
+        return this.api.POST<any>('stops', stop);
     }
 
     updateStop(stopId: number, stop: any): Observable<any> {
-        return this.api.PUT<any>(`${this.TABLE_NAME}/${stopId}`, stop);
+        return this.api.PUT<any>(`stops/${stopId}`, stop);
     }
 
     deleteStop(stopId: number): Observable<any> {
-        return this.api.DELETE<any>(`${this.TABLE_NAME}/${stopId}`);
+        return this.api.DELETE<any>(`stops/${stopId}`);
     }
 }

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { ApiClientService } from './api-client.service';
+import { inject, Injectable } from '@angular/core';
+import { GenericAPIService } from './generic-api.service';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { Page } from '../models/page.model';
@@ -8,24 +8,22 @@ import { Page } from '../models/page.model';
   providedIn: 'root'
 })
 export class UserService {
-  private readonly TABLE_NAME = 'users';
-
-  constructor(private api: ApiClientService) { }
+  private api = inject(GenericAPIService);
 
   GetUsers(pageIndex: number, pageSize: number, companyId: number): Observable<Page<User>> {
-    return this.api.GET<any>(`${this.TABLE_NAME}/list/${pageIndex}/${pageSize}/${companyId}`);
+    return this.api.GET<any>(`users/list/${pageIndex}/${pageSize}/${companyId}`);
   }
 
   GetUser(id: number): Observable<User> {
-    return this.api.GET<User>(`${this.TABLE_NAME}/get/${id}`);
+    return this.api.GET<User>(`users/get/${id}`);
   }
 
   CreateUser(user: User): Observable<User> {
-    return this.api.POST<User>(this.TABLE_NAME, user);
+    return this.api.POST<User>('users', user);
   }
 
   EditUser(user: User): Observable<User> {
-    return this.api.PUT<User>(`${this.TABLE_NAME}/${user.id}`, user);
+    return this.api.PUT<User>(`users/${user.id}`, user);
   }
 
   SetProfilePic(imgFile: File, dni: number, userId: number): Observable<any> {
@@ -38,6 +36,6 @@ export class UserService {
   }
 
   RemoveUser(userId: number): Observable<boolean> {
-    return this.api.DELETE<any>(`${this.TABLE_NAME}/${userId}`);
+    return this.api.DELETE<any>(`users/${userId}`);
   }
 }

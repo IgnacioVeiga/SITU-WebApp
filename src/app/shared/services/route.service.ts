@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { ApiClientService } from './api-client.service';
+import { inject, Injectable } from '@angular/core';
+import { GenericAPIService } from './generic-api.service';
 import { Observable } from 'rxjs';
 import { BusRoute } from '../models/bus.model';
 
@@ -7,23 +7,21 @@ import { BusRoute } from '../models/bus.model';
     providedIn: 'root'
 })
 export class RouteService {
-    private readonly TABLE_NAME = 'routes';
-
-    constructor(private api: ApiClientService) { }
+    private api = inject(GenericAPIService);
 
     getRoutesByLine(lineId: number): Observable<BusRoute[]> {
-        return this.api.GET<BusRoute[]>(`${this.TABLE_NAME}/line/${lineId}`);
+        return this.api.GET<BusRoute[]>(`routes/line/${lineId}`);
     }
 
     createRoute(route: BusRoute): Observable<BusRoute> {
-        return this.api.POST<BusRoute>(`${this.TABLE_NAME}`, route);
+        return this.api.POST<BusRoute>('routes', route);
     }
 
     updateRoute(routeId: number, route: BusRoute): Observable<BusRoute> {
-        return this.api.PUT<BusRoute>(`${this.TABLE_NAME}/${routeId}`, route);
+        return this.api.PUT<BusRoute>(`routes/${routeId}`, route);
     }
 
     deleteRoute(routeId: number): Observable<any> {
-        return this.api.DELETE<any>(`${this.TABLE_NAME}/${routeId}`);
+        return this.api.DELETE<any>(`routes/${routeId}`);
     }
 }

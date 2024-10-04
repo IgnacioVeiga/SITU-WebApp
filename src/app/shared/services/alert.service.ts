@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { ApiClientService } from './api-client.service';
+import { inject, Injectable } from '@angular/core';
+import { GenericAPIService } from './generic-api.service';
 import { Observable } from 'rxjs';
 import { Alert } from '../models/alert.model';
 import { Page } from '../models/page.model';
@@ -8,15 +8,13 @@ import { Page } from '../models/page.model';
   providedIn: 'root'
 })
 export class AlertService {
-  private readonly TABLE_NAME = 'alerts';
-
-  constructor(private api: ApiClientService) { }
+  private api = inject(GenericAPIService);
 
   GetAlerts(pageIndex: number, pageSize: number): Observable<Page<Alert>> {
-    return this.api.GET<any>(`${this.TABLE_NAME}/list/${pageIndex}/${pageSize}`);
+    return this.api.GET<any>(`alerts/list/${pageIndex}/${pageSize}`);
   }
 
   CreateAlert(alert: Alert): Observable<Alert> {
-    return this.api.POST<Alert>(`${this.TABLE_NAME}/create`, alert);
+    return this.api.POST<Alert>('alerts/create', alert);
   }
 }
