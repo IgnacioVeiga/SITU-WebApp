@@ -25,18 +25,13 @@ export class AppComponent implements OnInit {
     this.translate.setDefaultLang('es');
     this.translate.use('es');
 
-    this.router.events.subscribe((event: any) => {
-      if (event instanceof NavigationStart) {
-        this.isLoading = true;
-      } else if (event instanceof NavigationEnd || event instanceof NavigationError || event instanceof NavigationCancel) {
-
-        // Esto simula tiempo de carga, eliminar cuando tengamos el backend
-        setTimeout(() => {
+    this.router.events.subscribe({
+      next: (event: any) => {
+        if (event instanceof NavigationStart) {
+          this.isLoading = true;
+        } else if (event instanceof NavigationEnd || event instanceof NavigationError || event instanceof NavigationCancel) {
           this.isLoading = false;
-        }, 300);
-
-        // Esto es para cuando tengamos el Backend
-        // this.isLoading = false;
+        }
       }
     });
   }
