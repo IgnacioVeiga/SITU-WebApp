@@ -9,6 +9,7 @@ import { LogInForm } from 'src/app/shared/models/auth.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CaptchaComponent } from "../captcha/captcha.component";
 import { TranslateModule } from '@ngx-translate/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   templateUrl: './login.component.html',
@@ -21,8 +22,9 @@ import { TranslateModule } from '@ngx-translate/core';
     MatIconModule,
     MatInputModule,
     CaptchaComponent,
-    TranslateModule
-]
+    TranslateModule,
+    MatProgressSpinnerModule
+  ]
 })
 export class LoginComponent {
   loginForm: LogInForm = {
@@ -30,6 +32,7 @@ export class LoginComponent {
     password: '',
     rememberMe: false
   }
+  isLoading = false;
 
   private router = inject(Router);
   private authService = inject(AuthService);
@@ -39,6 +42,15 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.authService.login(this.loginForm);
+    this.isLoading = true;
+    this.authService.login(this.loginForm).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.router.navigate(['/dashboard'])
+      },
+      error: () => {
+        this.isLoading = false;
+      }
+    });
   }
 }

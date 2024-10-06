@@ -37,3 +37,9 @@
         <a>{{'FORGOT_PASSWORD' | translate}}</a>
     </form>
 </section>
+
+@if (isLoading) {
+<div class="spinner">
+    <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+</div>
+}

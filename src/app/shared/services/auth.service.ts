@@ -17,13 +17,12 @@ export class AuthService {
         return this.api.POST<string>('auth/signup', form);
     }
 
-    login(form: LogInForm): void {
-        this.api.POST<SessionDTO>('auth/login', form).subscribe({
-            next: (session => {
+    login(form: LogInForm): Observable<any> {
+        return this.api.POST<any>('auth/login', form).pipe(
+            map(session => {
                 this._session = session;
-                this.router.navigate(['/dashboard'])
             })
-        });
+        );
     }
 
     logout(): void {
