@@ -9,8 +9,9 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { AfterSignUpComponent } from './after.signup.component';
 import { SignUpForm } from 'src/app/shared/models/auth.model';
-import { CaptchaComponent } from "../captcha/captcha.component";
+import { FakeCaptchaComponent } from 'src/app/shared/components/fake-captcha/fake-captcha.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   templateUrl: './signup.component.html',
@@ -22,7 +23,8 @@ import { TranslateModule } from '@ngx-translate/core';
     MatDialogModule,
     MatIconModule,
     MatInputModule,
-    CaptchaComponent,
+    MatCardModule,
+    FakeCaptchaComponent,
     TranslateModule
   ]
 })
@@ -51,7 +53,7 @@ export class SignupComponent {
       next: (resp: any) => {
         this.dialog.open(AfterSignUpComponent, { data: this.form.email })
           .afterClosed().subscribe(() => {
-            this.goTo('/home');
+            this.goTo('auth/login');
           });
       },
       error: () => {

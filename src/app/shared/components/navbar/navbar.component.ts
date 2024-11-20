@@ -58,7 +58,7 @@ export class NavbarComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.authService.logout();
-        this.router.navigate(['/home']);
+        this.router.navigate(['auth/login']);
       }
     });
   }

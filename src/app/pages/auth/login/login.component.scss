@@ -1,4 +1,22 @@
-section {
-    position: sticky;
-    top: 25%;
+mat-card {
+    .form-group {
+        display: flex;
+        gap: 1rem;
+    }
+
+    mat-card-title {
+        font-size: 1.5rem;
+        color: #3f51b5;
+    }
+
+    mat-card-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    mat-card-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+    }
 }

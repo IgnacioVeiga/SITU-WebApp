@@ -20,7 +20,6 @@ import { TranslateModule } from '@ngx-translate/core';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    FileUploaderComponent,
     TranslateModule
   ]
 })

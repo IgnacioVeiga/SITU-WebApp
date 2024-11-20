@@ -1,16 +1,12 @@
 import { Routes } from "@angular/router";
 import { authGuard } from "./shared/guards/auth.guard";
 
-// TODO: 'auth' and 'home' should redirect to dashboard if there is an active session
+// TODO: 'auth' should redirect to dashboard if there is an active session
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'auth',
     pathMatch: 'full'
-  },
-  {
-    path: 'home',
-    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
   },
   {
     path: 'auth',

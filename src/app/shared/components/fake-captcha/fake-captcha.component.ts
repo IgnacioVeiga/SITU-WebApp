@@ -2,12 +2,12 @@ import { Component } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
-    selector: 'captcha',
-    templateUrl: './captcha.component.html',
-    styleUrls: ['./captcha.component.scss'],
+    selector: 'fake-captcha',
+    templateUrl: './fake-captcha.component.html',
+    styleUrls: ['./fake-captcha.component.scss'],
     standalone: true,
     imports: [TranslateModule]
 })
-export class CaptchaComponent {
+export class FakeCaptchaComponent {
     
 }

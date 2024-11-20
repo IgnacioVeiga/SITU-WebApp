@@ -1,69 +1,74 @@
-<section class="center">
-    <div class="title">
-        <h1>{{'SIGNUP' | translate}}</h1>
-    </div>
+<form #signupForm="ngForm" (ngSubmit)="onSubmit()">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ 'SIGNUP' | translate }}</mat-card-title>
+        </mat-card-header>
 
-    <form class="container" #signupForm="ngForm" (ngSubmit)="onSubmit()">
-        <div class="column">
-            <mat-form-field>
-                <mat-label>{{'COMPANY' | translate}}</mat-label>
-                <input matInput id="companyName" name="companyName" required [(ngModel)]="form.companyName">
-            </mat-form-field>
+        <mat-card-content>
+            <div class="form-group">
+                <div class="column">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{'COMPANY' | translate}}</mat-label>
+                        <input matInput id="companyName" name="companyName" required [(ngModel)]="form.companyName">
+                    </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Email</mat-label>
-                <input matInput type="email" id="email" name="email" required [(ngModel)]="form.email">
-            </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" id="email" name="email" required [(ngModel)]="form.email">
+                    </mat-form-field>
 
-            <!-- <mat-form-field>
-                <mat-label>Teléfono</mat-label>
-                <input matInput type="number" id="phone" name="phone" [(ngModel)]="form.phone">
-            </mat-form-field> -->
-        </div>
+                    <!-- <mat-form-field appearance="fill">
+                    <mat-label>Teléfono</mat-label>
+                    <input matInput type="number" id="phone" name="phone" [(ngModel)]="form.phone">
+                </mat-form-field> -->
+                </div>
 
-        <div class="column">
-            <mat-form-field>
-                <mat-label>{{'FIRSTNAME' | translate}}</mat-label>
-                <input matInput id="firstName" name="firstName" required [(ngModel)]="form.firstName">
-            </mat-form-field>
+                <div class="column">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ 'FIRSTNAME' | translate }}</mat-label>
+                        <input matInput required [(ngModel)]="form.firstName" name="firstName" />
+                    </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>{{'LASTNAME' | translate}}</mat-label>
-                <input matInput id="lastName" name="lastName" required [(ngModel)]="form.lastName">
-            </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ 'LASTNAME' | translate }}</mat-label>
+                        <input matInput required [(ngModel)]="form.lastName" name="lastName" />
+                    </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>DNI</mat-label>
-                <input matInput type="number" id="dni" name="dni" required [(ngModel)]="form.dni">
-            </mat-form-field>
-        </div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>DNI</mat-label>
+                        <input matInput type="number" id="dni" name="dni" required [(ngModel)]="form.dni">
+                    </mat-form-field>
+                </div>
 
-        <div class="column">
-            <p class="note">
-                {{'SIGNUP_NOTE' | translate}}
-            </p>
+                <div class="column">
+                    <p class="note">
+                        {{'SIGNUP_NOTE' | translate}}
+                    </p>
 
-            <!-- <mat-form-field>
-                <mat-label>Notas</mat-label>
-                <textarea matInput id="notes" name="notes" [(ngModel)]="form.note" placeholder="Notas"></textarea>
-            </mat-form-field> -->
+                    <!-- <mat-form-field appearance="fill">
+                        <mat-label>Notas</mat-label>
+                        <textarea matInput id="notes" name="notes" [(ngModel)]="form.note" placeholder="Notas"></textarea>
+                    </mat-form-field> -->
 
-            <span class="center">
-                <captcha></captcha>
-            </span>
+                    <span class="center">
+                        <fake-captcha></fake-captcha>
+                    </span>
 
-            <!-- TODO: checkbox de aceptar terminos y condiciones de uso y el enlace a donde leerlos -->
-        </div>
+                    <!-- TODO: checkbox de aceptar terminos y condiciones de uso y el enlace a donde leerlos -->
+                </div>
+            </div>
+        </mat-card-content>
 
-        <div class="row-buttons">
-            <button mat-raised-button color="secondary" type="button" (click)="goTo('home')">
+        <mat-card-actions>
+            <button mat-button color="secondary" type="button" (click)="goTo('auth/login')">
                 <mat-icon>keyboard_arrow_left</mat-icon>
-                {{'GO_BACK' | translate}}
+                {{ 'LOGIN' | translate }}
             </button>
-            <button mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid">
+
+            <button mat-raised-button color="primary" [disabled]="!signupForm.valid" type="submit">
                 <mat-icon>send</mat-icon>
-                {{'SUBMIT' | translate}}
+                {{ 'SUBMIT' | translate }}
             </button>
-        </div>
-    </form>
-</section>
+        </mat-card-actions>
+    </mat-card>
+</form>

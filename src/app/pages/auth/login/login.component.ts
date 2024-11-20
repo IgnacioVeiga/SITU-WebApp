@@ -7,9 +7,10 @@ import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { LogInForm } from 'src/app/shared/models/auth.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { CaptchaComponent } from "../captcha/captcha.component";
+import { FakeCaptchaComponent } from 'src/app/shared/components/fake-captcha/fake-captcha.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   templateUrl: './login.component.html',
@@ -21,13 +22,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatCheckboxModule,
     MatIconModule,
     MatInputModule,
-    CaptchaComponent,
+    MatCardModule,
+    FakeCaptchaComponent,
     TranslateModule,
     MatProgressSpinnerModule
   ]
 })
 export class LoginComponent {
-  loginForm: LogInForm = {
+  form: LogInForm = {
     email: '',
     password: '',
     rememberMe: false
@@ -43,7 +45,7 @@ export class LoginComponent {
 
   onSubmit() {
     this.isLoading = true;
-    this.authService.login(this.loginForm).subscribe({
+    this.authService.login(this.form).subscribe({
       next: () => {
         this.isLoading = false;
         this.router.navigate(['/dashboard'])

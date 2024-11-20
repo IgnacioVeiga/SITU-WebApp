@@ -7,7 +7,6 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [CommonModule, TranslateModule],
   template: `
-    <img src="../../../assets/svg/wave.svg" alt="wave">
     <div class="not-found">
       <h1><b>{{'PAGE_NOT_FOUND_TITLE' | translate}}</b></h1>
       <p>{{'PAGE_NOT_FOUND_TEXT' | translate}}</p>
