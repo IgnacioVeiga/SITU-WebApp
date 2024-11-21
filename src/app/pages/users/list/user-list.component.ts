@@ -10,7 +10,6 @@ import { User } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 import { UpdatePasswordComponent } from '../../auth/update-password/update-password.component';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -19,7 +18,6 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrls: ['./user-list.component.scss'],
   standalone: true,
   imports: [
-    NavbarComponent,
     MatButtonModule,
     MatDialogModule,
     MatIconModule,

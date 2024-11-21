@@ -4,7 +4,6 @@ import { ToastrService } from "ngx-toastr";
 import { Report } from "src/app/shared/models/report.model";
 import { ReportService } from "src/app/shared/services/report.service";
 import { DatePipe } from "@angular/common";
-import { NavbarComponent } from "../../../shared/components/navbar/navbar.component";
 import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
@@ -12,7 +11,6 @@ import { TranslateModule } from "@ngx-translate/core";
     styleUrls: ['./report-item.component.scss'],
     standalone: true,
     imports: [
-        NavbarComponent,
         TranslateModule,
         DatePipe
     ]

@@ -5,14 +5,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { Chart, registerables } from 'chart.js';
-import { NgClass } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    NgClass,
     MatCardModule,
     MatIconModule,
     MatToolbarModule,

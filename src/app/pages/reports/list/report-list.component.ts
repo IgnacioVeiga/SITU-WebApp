@@ -9,7 +9,6 @@ import { TruncatePipe } from '../../../shared/pipes/truncate.pipe';
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 import { Page } from 'src/app/shared/models/page.model';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -18,7 +17,6 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrls: ['./report-list.component.scss'],
   standalone: true,
   imports: [
-    NavbarComponent,
     MatTableModule,
     MatButtonModule,
     MatIconModule,

@@ -4,7 +4,6 @@ import { ToastrService } from 'ngx-toastr';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FileUploaderComponent } from '../../../shared/components/file-uploader/file-uploader.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ChangePasswordDTO } from 'src/app/shared/models/auth.model';

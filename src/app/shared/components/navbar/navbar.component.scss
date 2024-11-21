@@ -1,27 +1,20 @@
 mat-toolbar {
     display: flex;
     justify-content: flex-start;
-    /* Alinear los elementos a la izquierda */
     align-items: center;
-    /* Centrar verticalmente los elementos */
     gap: 20px;
 }
 
-/* Estilo para el botón del menú de hamburguesa */
 button.hamburger {
     margin-right: 10px;
-    /* Agrega un poco de espacio entre el icono y el resto de elementos */
     display: none;
-    /* Ocultar el botón del menú de hamburguesa por defecto */
 }
 
-/* Estilo para los enlaces de la barra de herramientas en pantallas medianas y grandes */
 .menu-items {
     display: flex;
     gap: 20px;
 }
 
-/* Estilo para ocultar los enlaces de la barra de herramientas cuando el menú de hamburguesa está visible */
 @media (max-width: 1200px) {
     .menu-items {
         display: none;
