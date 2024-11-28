@@ -40,7 +40,7 @@ export class AuthService {
             return of(this._session);
         }
 
-        return this.api.GET<SessionDTO>('auth/get-session').pipe(
+        return this.api.GET<SessionDTO>('auth/session').pipe(
             map(session => {
                 this._session = session;
                 return session;
