@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { tap } from 'rxjs';
+import { map, tap } from 'rxjs';
 
 export const authGuard: CanActivateFn = (_route, _state) => {
     const authService = inject(AuthService);
@@ -12,9 +12,8 @@ export const authGuard: CanActivateFn = (_route, _state) => {
             if (!isAuthenticated) {
                 authService.logout();
                 router.navigate(['/auth/login']);
-                return false;
             }
-            return true;
-        })
+        }),
+        map(isAuthenticated => isAuthenticated)
     );
 };
