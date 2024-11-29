@@ -1,35 +1,47 @@
-import { HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse, HttpEvent } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    authService = inject(AuthService);
-    toastr = inject(ToastrService);
-    router = inject(Router);
+    private toastr = inject(ToastrService);
+    private router = inject(Router);
+    private translate = inject(TranslateService);
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(
             catchError((error: HttpErrorResponse) => {
-                switch (error.status) {
-                    // TODO: get messages like this from backend
-                    case 400:
-                        this.toastr.error('El servidor no pudo interpretar la solicitud', 'Error');
-                        break;
-                    case 401:
-                        this.toastr.error('Credenciales invalidas', 'Inicie sesión');
-                        break;
-                    case 500:
-                        this.toastr.error(error.message, 'Problema en el servidor');
-                        break;
-                    default:
-                        break;
+                const { status, error: errorBody } = error;
+                // TODO: move, don't show all error messages here
+                if (errorBody && errorBody.message) {
+                    const messageKey = errorBody.message;
+                    const needsTranslation = /^[A-Z0-9._-]+$/.test(messageKey);
+
+                    if (needsTranslation) {
+                        this.translate.get(messageKey).subscribe((translatedMessage) => {
+                            this.toastr.error(translatedMessage);
+                        });
+                    } else {
+                        this.toastr.error(messageKey, 'Error');
+                    }
+                } else {
+                    this.translate.get('ERRORS.GENERIC').subscribe((translatedMessage) => {
+                        this.toastr.error(translatedMessage);
+                    });
                 }
+
+                // may be unnecesary
+                if (status === 401) {
+                    this.router.navigate(['/auth/login']);
+                }
+
                 return throwError(() => error);
             })
         );
     }
+
 }

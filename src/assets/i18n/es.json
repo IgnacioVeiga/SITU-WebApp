@@ -1,4 +1,12 @@
 {
+  "ERRORS": {
+    "GENERIC": "Ocurrió un error inesperado.",
+    "AUTH.INVALID_CREDENTIALS": "Credenciales inválidas.",
+    "AUTH.COMPANY_EXISTS": "La empresa ya está registrada.",
+    "AUTH.DNI_EXISTS": "El DNI ya está ocupado en una empresa.",
+    "AUTH.PASSWORD_INCORRECT": "La contraseña actual es incorrecta.",
+    "AUTH.USER_NOT_FOUND": "Usuario no encontrado."
+  },
   "PAGE_NOT_FOUND_TITLE": "Página no encontrada",
   "PAGE_NOT_FOUND_TEXT": "Lo sentimos, la página que busca no existe.",
   "WELCOME": "¡Te damos la bienvenida a SITU!",

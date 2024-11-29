@@ -11,52 +11,47 @@ export class AuthService {
 
     private api = inject(GenericAPIService);
 
-    signup(form: SignUpForm): Observable<string> {
-        return this.api.POST<string>('auth/signup', form);
+    // TODO: don't use "any"
+    signup(form: SignUpForm): Observable<any> {
+        return this.api.POST<any>('auth/signup', form);
     }
 
-    login(form: LogInForm): Observable<any> {
-        return this.api.POST<any>('auth/login', form).pipe(
-            map(session => {
-                this._session = session;
+    login(form: LogInForm): Observable<void> {
+        return this.api.POST<SessionDTO>('auth/login', form).pipe(
+            map(resp => {
+                this._session = resp;
             })
         );
     }
 
     logout(): void {
         this.api.POST<any>('auth/logout', {}).subscribe({
-            next: (() => {
-                this._session = null;
-            })
+            next: () => this._session = null,
+            error: () => this._session = null
         });
     }
 
     updatePassword(form: ChangePasswordDTO): Observable<any> {
-        return this.api.POST<any>('auth/password', form)
+        return this.api.POST<any>('auth/password', form);
     }
 
-    public getSession(): Observable<SessionDTO> {
+    getSession(): Observable<SessionDTO | null> {
         if (this._session) {
             return of(this._session);
         }
 
         return this.api.GET<SessionDTO>('auth/session').pipe(
-            map(session => {
-                this._session = session;
-                return session;
+            map(resp => {
+                this._session = resp;
+                return resp;
             })
         );
     }
 
-    public isAuthenticated(): Observable<boolean> {
+    isAuthenticated(): Observable<boolean> {
         return this.getSession().pipe(
-            map(session => {
-                return (session) ? true : false;
-            }),
-            catchError(() => {
-                return of(false);
-            })
+            map(session => !!session),
+            catchError(() => of(false))
         );
     }
-
 }

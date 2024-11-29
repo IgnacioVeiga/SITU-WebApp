@@ -1,4 +1,14 @@
 {
+  "ERRORS": {
+    "GENERIC": "An unexpected error occurred.",
+    "AUTH": {
+      "INVALID_CREDENTIALS": "Invalid credentials.",
+      "COMPANY_EXISTS": "The company is already registered.",
+      "DNI_EXISTS": "The DNI is already used in another company.",
+      "PASSWORD_INCORRECT": "The current password is incorrect.",
+      "USER_NOT_FOUND": "User not found."
+    }
+  },
   "PAGE_NOT_FOUND_TITLE": "Page not found",
   "PAGE_NOT_FOUND_TEXT": "Sorry, the page you are looking for does not exist.",
   "WELCOME": "Welcome to SITU!",

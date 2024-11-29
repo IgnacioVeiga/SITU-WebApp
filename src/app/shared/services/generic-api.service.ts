@@ -3,6 +3,8 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +12,10 @@ import { environment } from 'src/environments/environment';
 export class GenericAPIService {
   private readonly _API_URL: string = environment.API_URL + '/api/situ';
   private readonly httpClient = inject(HttpClient);
+  private readonly toastr = inject(ToastrService);
+  private readonly translate = inject(TranslateService);
+
+  // TODO: use the new api-response interface and show toastr messages here
 
   GET<T>(endpoint: string, args?: any): Observable<T> {
     const url = `${this._API_URL}/${endpoint}`;
@@ -20,34 +26,30 @@ export class GenericAPIService {
 
   POST<T>(endpoint: string, body: any, args?: any): Observable<T> {
     const url = `${this._API_URL}/${endpoint}`;
-    return this.httpClient.post<T>(url, body, this.createHttpOptions(args))
-      .pipe(
-        catchError((error) => this.handleError(error))
-      );
+    return this.httpClient.post<T>(url, body, this.createHttpOptions(args)).pipe(
+      catchError((error) => this.handleError(error))
+    );
   }
 
   PUT<T>(endpoint: string, body: any): Observable<T> {
     const url = `${this._API_URL}/${endpoint}`;
-    return this.httpClient.put<T>(url, body)
-      .pipe(
-        catchError((error) => this.handleError(error))
-      );
+    return this.httpClient.put<T>(url, body).pipe(
+      catchError((error) => this.handleError(error))
+    );
   }
 
   PATCH<T>(endpoint: string, body: any): Observable<T> {
     const url = `${this._API_URL}/${endpoint}`;
-    return this.httpClient.patch<T>(url, body)
-      .pipe(
-        catchError((error) => this.handleError(error))
-      );
+    return this.httpClient.patch<T>(url, body).pipe(
+      catchError((error) => this.handleError(error))
+    );
   }
 
   DELETE<T>(endpoint: string): Observable<T> {
     const url = `${this._API_URL}/${endpoint}`;
-    return this.httpClient.delete<T>(url)
-      .pipe(
-        catchError((error) => this.handleError(error))
-      );
+    return this.httpClient.delete<T>(url).pipe(
+      catchError((error) => this.handleError(error))
+    );
   }
 
   private createHttpOptions(args?: any): { headers: HttpHeaders, params: HttpParams } {
@@ -69,7 +71,6 @@ export class GenericAPIService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    const errorMessage = `Error: ${error.status}, ${error.message}`;
-    return throwError(() => new Error(errorMessage));
+    return throwError(() => new Error(error.error));
   }
 }
