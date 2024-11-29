@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getSession().subscribe({
-      next: (session: SessionDTO) => {
+      next: (session: SessionDTO | null) => {
         if (session) {
           this.logoURL = session.logoImageURL;
         }

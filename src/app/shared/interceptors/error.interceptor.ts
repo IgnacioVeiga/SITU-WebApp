@@ -16,32 +16,22 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(
             catchError((error: HttpErrorResponse) => {
                 const { status, error: errorBody } = error;
-                // TODO: move, don't show all error messages here
-                if (errorBody && errorBody.message) {
-                    const messageKey = errorBody.message;
-                    const needsTranslation = /^[A-Z0-9._-]+$/.test(messageKey);
+                if (status === 401) {
+                    this.router.navigate(['/auth/login']);
+                }
 
-                    if (needsTranslation) {
-                        this.translate.get(messageKey).subscribe((translatedMessage) => {
-                            this.toastr.error(translatedMessage);
-                        });
-                    } else {
-                        this.toastr.error(messageKey, 'Error');
-                    }
+                if (errorBody && errorBody.message) {
+                    this.translate.get(errorBody.message).subscribe((translatedMessage) => {
+                        this.toastr.error(translatedMessage);
+                    });
                 } else {
                     this.translate.get('ERRORS.GENERIC').subscribe((translatedMessage) => {
                         this.toastr.error(translatedMessage);
                     });
                 }
 
-                // may be unnecesary
-                if (status === 401) {
-                    this.router.navigate(['/auth/login']);
-                }
-
                 return throwError(() => error);
             })
         );
     }
-
 }
