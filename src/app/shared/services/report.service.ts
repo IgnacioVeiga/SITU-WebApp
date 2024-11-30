@@ -11,10 +11,10 @@ export class ReportService {
   private api = inject(GenericAPIService);
 
   GetReports(pageIndex: number, pageSize: number): Observable<Page<Report>> {
-    return this.api.GET<any>(`reports/list/${pageIndex}/${pageSize}`);
+    return this.api.GET<any>(`reports/${pageIndex}/${pageSize}`);
   }
 
   GetReport(reportId: number): Observable<Report> {
-    return this.api.GET<Report>(`reports/get/${reportId}`);
+    return this.api.GET<Report>(`reports/${reportId}`);
   }
 }

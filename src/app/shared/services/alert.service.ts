@@ -11,10 +11,10 @@ export class AlertService {
   private api = inject(GenericAPIService);
 
   GetAlerts(pageIndex: number, pageSize: number): Observable<Page<Alert>> {
-    return this.api.GET<any>(`alerts/list/${pageIndex}/${pageSize}`);
+    return this.api.GET<any>(`alerts/${pageIndex}/${pageSize}`);
   }
 
   CreateAlert(alert: Alert): Observable<Alert> {
-    return this.api.POST<Alert>('alerts/create', alert);
+    return this.api.POST<Alert>('alerts', alert);
   }
 }

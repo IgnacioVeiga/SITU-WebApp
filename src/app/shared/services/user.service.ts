@@ -11,22 +11,25 @@ export class UserService {
   private api = inject(GenericAPIService);
 
   GetUsers(pageIndex: number, pageSize: number, companyId: number): Observable<Page<User>> {
-    return this.api.GET<any>(`users/list/${pageIndex}/${pageSize}/${companyId}`);
+    return this.api.GET<any>(`users/${pageIndex}/${pageSize}/${companyId}`);
   }
 
   GetUser(id: number): Observable<User> {
-    return this.api.GET<User>(`users/get/${id}`);
+    return this.api.GET<User>(`users/${id}`);
   }
 
   CreateUser(user: User): Observable<User> {
     return this.api.POST<User>('users', user);
   }
 
+  // TODO: implement on backend, don't send the entire user class
   EditUser(user: User): Observable<User> {
     return this.api.PUT<User>(`users/${user.id}`, user);
   }
 
+  // This could be moved to another "image" service?
   SetProfilePic(imgFile: File, dni: number, userId: number): Observable<any> {
+    // TODO: simplify
     const formData = new FormData();
     formData.append('imgFile', imgFile, imgFile.name);
     formData.append('dni', dni.toString());
@@ -35,6 +38,7 @@ export class UserService {
     return this.api.POST<any>('images/upload/user-profile', formData);
   }
 
+  // TODO: implement on backend
   RemoveUser(userId: number): Observable<boolean> {
     return this.api.DELETE<any>(`users/${userId}`);
   }
