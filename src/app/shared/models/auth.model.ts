@@ -12,8 +12,7 @@ export interface SignUpForm {
 
 export interface LogInForm {
     email: string,
-    password: string,
-    rememberMe: boolean // may be unnecesary
+    password: string
 }
 
 export interface ChangePasswordDTO {

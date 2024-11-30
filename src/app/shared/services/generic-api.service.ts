@@ -23,7 +23,7 @@ export class GenericAPIService {
         this.handleSuccess(response);
         return response.data!;
       }),
-      catchError((error) => this.handleError(error))
+      catchError((error) => throwError(() => error))
     );
   }
 
@@ -34,7 +34,7 @@ export class GenericAPIService {
         this.handleSuccess(response);
         return response.data!;
       }),
-      catchError((error) => this.handleError(error))
+      catchError((error) => throwError(() => error))
     );
   }
 
@@ -45,7 +45,7 @@ export class GenericAPIService {
         this.handleSuccess(response);
         return response.data!;
       }),
-      catchError((error) => this.handleError(error))
+      catchError((error) => throwError(() => error))
     );
   }
 
@@ -56,7 +56,7 @@ export class GenericAPIService {
         this.handleSuccess(response);
         return response.data!;
       }),
-      catchError((error) => this.handleError(error))
+      catchError((error) => throwError(() => error))
     );
   }
 
@@ -67,7 +67,7 @@ export class GenericAPIService {
         this.handleSuccess(response);
         return response.data!;
       }),
-      catchError((error) => this.handleError(error))
+      catchError((error) => throwError(() => error))
     );
   }
 
@@ -101,9 +101,5 @@ export class GenericAPIService {
         this.toastr.success(response.message);
       }
     }
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    return throwError(() => error);
   }
 }

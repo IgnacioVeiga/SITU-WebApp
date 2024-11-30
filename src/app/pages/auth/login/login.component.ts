@@ -31,10 +31,8 @@ import { MatCardModule } from '@angular/material/card';
 export class LoginComponent {
   form: LogInForm = {
     email: '',
-    password: '',
-    rememberMe: false
+    password: ''
   }
-  isLoading = false;
 
   private router = inject(Router);
   private authService = inject(AuthService);
@@ -44,15 +42,8 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.isLoading = true;
     this.authService.login(this.form).subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.router.navigate(['/dashboard'])
-      },
-      error: () => {
-        this.isLoading = false;
-      }
+      next: () => this.router.navigate(['/dashboard'])
     });
   }
 }
