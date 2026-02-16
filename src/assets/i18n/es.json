@@ -5,7 +5,16 @@
     "AUTH.COMPANY_EXISTS": "La empresa ya está registrada.",
     "AUTH.DNI_EXISTS": "El DNI ya está ocupado en una empresa.",
     "AUTH.PASSWORD_INCORRECT": "La contraseña actual es incorrecta.",
-    "AUTH.USER_NOT_FOUND": "Usuario no encontrado."
+    "AUTH.USER_NOT_FOUND": "Usuario no encontrado.",
+    "AUTH": {
+      "INVALID_CREDENTIALS": "Credenciales inválidas.",
+      "COMPANY_EXISTS": "La empresa ya está registrada.",
+      "DNI_EXISTS": "El DNI ya está ocupado en una empresa.",
+      "PASSWORD_INCORRECT": "La contraseña actual es incorrecta.",
+      "USER_NOT_FOUND": "Usuario no encontrado.",
+      "INSUFFICIENT_PERMISSIONS": "No tienes permisos suficientes para realizar esta acción.",
+      "EMAIL_DELIVERY_FAILED": "No se pudo enviar el correo de registro. Inténtalo nuevamente."
+    }
   },
   "PAGE_NOT_FOUND_TITLE": "Página no encontrada",
   "PAGE_NOT_FOUND_TEXT": "Lo sentimos, la página que busca no existe.",

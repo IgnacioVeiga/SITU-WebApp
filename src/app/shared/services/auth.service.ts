@@ -4,54 +4,61 @@ import { GenericAPIService } from './generic-api.service';
 import { ChangePasswordDTO, LogInForm, SessionDTO, SignUpForm } from '../models/auth.model';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class AuthService {
-    private _session: SessionDTO | null = null;
+  private session: SessionDTO | null = null;
 
-    private api = inject(GenericAPIService);
+  private readonly api = inject(GenericAPIService);
 
-    // TODO: don't use "any"
-    signup(form: SignUpForm): Observable<any> {
-        return this.api.POST<any>('auth/signup', form);
+  signup(form: SignUpForm): Observable<void> {
+    return this.api.POST<void>('auth/signup', form);
+  }
+
+  login(form: LogInForm): Observable<void> {
+    return this.api.POST<SessionDTO>('auth/login', form).pipe(
+      map((resp) => {
+        this.session = resp;
+      })
+    );
+  }
+
+  logout(): void {
+    this.api.POST<void>('auth/logout', {}).subscribe({
+      next: () => this.clearLocalSession(),
+      error: () => this.clearLocalSession()
+    });
+  }
+
+  clearLocalSession(): void {
+    this.session = null;
+  }
+
+  updatePassword(form: ChangePasswordDTO): Observable<void> {
+    return this.api.POST<void>('auth/password', form);
+  }
+
+  getSession(): Observable<SessionDTO | null> {
+    if (this.session) {
+      return of(this.session);
     }
 
-    login(form: LogInForm): Observable<void> {
-        return this.api.POST<SessionDTO>('auth/login', form).pipe(
-            map(resp => {
-                this._session = resp;
-            })
-        );
-    }
+    return this.api.GET<SessionDTO>('auth/session').pipe(
+      map((resp) => {
+        this.session = resp;
+        return resp;
+      })
+    );
+  }
 
-    logout(): void {
-        this.api.POST<any>('auth/logout', {}).subscribe({
-            next: () => this._session = null,
-            error: () => this._session = null
-        });
-    }
+  getSessionSnapshot(): SessionDTO | null {
+    return this.session;
+  }
 
-    updatePassword(form: ChangePasswordDTO): Observable<any> {
-        return this.api.POST<any>('auth/password', form);
-    }
-
-    getSession(): Observable<SessionDTO | null> {
-        if (this._session) {
-            return of(this._session);
-        }
-
-        return this.api.GET<SessionDTO>('auth/session').pipe(
-            map(resp => {
-                this._session = resp;
-                return resp;
-            })
-        );
-    }
-
-    isAuthenticated(): Observable<boolean> {
-        return this.getSession().pipe(
-            map(session => !!session),
-            catchError(() => of(false))
-        );
-    }
+  isAuthenticated(): Observable<boolean> {
+    return this.getSession().pipe(
+      map((session) => !!session),
+      catchError(() => of(false))
+    );
+  }
 }

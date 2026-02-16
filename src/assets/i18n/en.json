@@ -6,7 +6,9 @@
       "COMPANY_EXISTS": "The company is already registered.",
       "DNI_EXISTS": "The DNI is already used in another company.",
       "PASSWORD_INCORRECT": "The current password is incorrect.",
-      "USER_NOT_FOUND": "User not found."
+      "USER_NOT_FOUND": "User not found.",
+      "INSUFFICIENT_PERMISSIONS": "You do not have enough permissions to perform this action.",
+      "EMAIL_DELIVERY_FAILED": "Could not send the registration email. Please try again."
     }
   },
   "PAGE_NOT_FOUND_TITLE": "Page not found",

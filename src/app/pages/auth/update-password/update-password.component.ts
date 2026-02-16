@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
-import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { ChangePasswordDTO } from 'src/app/shared/models/auth.model';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ToastrService } from 'ngx-toastr';
 import { TranslateModule } from '@ngx-translate/core';
+import { ChangePasswordDTO } from 'src/app/shared/models/auth.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   templateUrl: './update-password.component.html',
@@ -28,19 +28,16 @@ export class UpdatePasswordComponent {
     newPassword: ''
   };
 
-  private toastr = inject(ToastrService);
-  private authService = inject(AuthService);
+  private readonly toastr = inject(ToastrService);
+  private readonly authService = inject(AuthService);
 
-  constructor(
-    public dialogRef: MatDialogRef<UpdatePasswordComponent>
-  ) { }
+  constructor(public dialogRef: MatDialogRef<UpdatePasswordComponent>) {}
 
-  sendForm() {
+  sendForm(): void {
     this.authService.updatePassword(this.form).subscribe({
-      next: (response: any) => {
-        // TODO: refactor
+      next: () => {
         this.dialogRef.close();
-        this.toastr.info(response.message);
+        this.toastr.success('Contraseña actualizada correctamente.');
       }
     });
   }
