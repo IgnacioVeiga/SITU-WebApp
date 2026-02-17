@@ -1,0 +1,44 @@
+<mat-card class="tracking-card">
+    <mat-card-header>
+        <mat-card-title>{{ 'TRACK_COMPLAINT' | translate }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <p>{{ 'TRACK_COMPLAINT_HELP' | translate }}</p>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>{{ 'TRACKING_TOKEN' | translate }}</mat-label>
+            <input
+                matInput
+                type="text"
+                id="trackingToken"
+                name="trackingToken"
+                [(ngModel)]="trackingToken"
+            />
+        </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button mat-button color="secondary" type="button" (click)="goToLogin()">
+            {{ 'GO_BACK' | translate }}
+        </button>
+        <button mat-raised-button color="primary" type="button" (click)="searchByToken()">
+            {{ 'SEARCH' | translate }}
+        </button>
+    </mat-card-actions>
+</mat-card>
+
+@if (complaint) {
+<mat-card class="tracking-card result-card">
+    <mat-card-header>
+        <mat-card-title>{{ 'DETAIL' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p><b>{{ 'TRACKING_TOKEN' | translate }}:</b> {{ complaint.trackingToken }}</p>
+        <p><b>{{ 'ACTUAL_STATE' | translate }}:</b> {{ getStateLabel(complaint.state) }}</p>
+        <p><b>{{ 'PRIORITY' | translate }}:</b> {{ complaint.priority }}</p>
+        <p><b>{{ 'DATETIME' | translate }}:</b> {{ complaint.createdAt | date: 'dd/MM/yyyy HH:mm' }}</p>
+        <p><b>{{ 'DESCRIPTION' | translate }}:</b> {{ complaint.description }}</p>
+    </mat-card-content>
+</mat-card>
+}

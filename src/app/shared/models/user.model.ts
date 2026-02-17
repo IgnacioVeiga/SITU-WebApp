@@ -8,11 +8,14 @@ export class User {
     dni: number = 0;
     firstName: string = '';
     lastName: string = '';
-    role: UserRole = UserRole.OTHER;
+    role: UserRole = UserRole.REGULAR;
 }
 
 export enum UserRole {
-    ADMIN = "Administrador",
-    DRIVER = "Chofer",
-    OTHER = "Otro"
+    ADMIN = "ADMIN",
+    SUPERVISOR = "SUPERVISOR",
+    EMPLOYEE = "EMPLOYEE",
+    DRIVER = "DRIVER",
+    PASSENGER = "PASSENGER",
+    REGULAR = "REGULAR"
 }

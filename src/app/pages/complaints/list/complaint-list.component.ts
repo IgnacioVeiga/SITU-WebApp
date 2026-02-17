@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Complaint, ComplaintState } from 'src/app/shared/models/report.model';
-import { ReportService } from 'src/app/shared/services/report.service';
-import { Router } from '@angular/router';
+import { Complaint, ComplaintState } from 'src/app/shared/models/complaint.model';
+import { ComplaintService } from 'src/app/shared/services/complaint.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TruncatePipe } from '../../../shared/pipes/truncate.pipe';
 import { DatePipe } from '@angular/common';
@@ -13,8 +13,8 @@ import { Page } from 'src/app/shared/models/page.model';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-    templateUrl: './report-list.component.html',
-    styleUrls: ['./report-list.component.scss'],
+    templateUrl: './complaint-list.component.html',
+    styleUrls: ['./complaint-list.component.scss'],
     imports: [
         MatTableModule,
         MatButtonModule,
@@ -25,35 +25,45 @@ import { TranslateModule } from '@ngx-translate/core';
         TruncatePipe
     ]
 })
-export class ReportListComponent implements AfterViewInit {
+export class ComplaintListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = ['date', 'claimant', 'description', 'actions'];
   dataSource: any = new MatTableDataSource<Complaint>;
+  listScope: 'all' | 'mine' = 'mine';
   
-  private reportService = inject(ReportService);
+  private complaintService = inject(ComplaintService);
   private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
   private toastr = inject(ToastrService);
 
   ngAfterViewInit(): void {
+    this.listScope = (this.activatedRoute.snapshot.data['scope'] ?? 'mine') as 'all' | 'mine';
     this.dataSource.paginator = this.paginator;
-    this.loadReports();
+    this.loadComplaints();
+    this.paginator.page.subscribe(() => this.loadComplaints());
   }
 
-  loadReports(): void {
-    this.reportService.GetReports(this.paginator.pageIndex, this.paginator.pageSize)
-      .subscribe({
+  loadComplaints(): void {
+    const source$ = this.listScope === 'all'
+      ? this.complaintService.getComplaints(this.paginator.pageIndex, this.paginator.pageSize)
+      : this.complaintService.getMyComplaints(this.paginator.pageIndex, this.paginator.pageSize);
+
+    source$.subscribe({
         next: (data: Page<Complaint>) => {
           this.dataSource.data = data.content;
         },
         error: () => {
-          // TODO: review, organize and translate all these types of toastr messages.
           this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
         }
       });
   }
 
-  openReport(id: number) {
-    this.router.navigate(['report/item/', id]);
+  openComplaint(id: number) {
+    this.router.navigate(['complaint/item/', id]);
+  }
+
+  getTitleKey(): string {
+    return this.listScope === 'all' ? 'ALL_COMPLAINTS' : 'MY_COMPLAINTS';
   }
 
   getStateLabel(state: ComplaintState): string {

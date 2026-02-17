@@ -31,12 +31,24 @@ export class EditUserComponent {
       value: 'ADMIN'
     },
     {
+      text: 'Supervisor',
+      value: 'SUPERVISOR'
+    },
+    {
+      text: 'Empleado',
+      value: 'EMPLOYEE'
+    },
+    {
       text: 'Chofer',
       value: 'DRIVER'
     },
     {
-      text: 'Otro',
-      value: 'OTHER'
+      text: 'Pasajero',
+      value: 'PASSENGER'
+    },
+    {
+      text: 'Regular',
+      value: 'REGULAR'
     }
   ]
 

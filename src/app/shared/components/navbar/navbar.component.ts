@@ -29,6 +29,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class NavbarComponent implements OnInit {
   textToSearch: string = (localStorage.getItem('textToSearch') || '');
   logoURL: string = './assets/images/bus_icon.png';
+  sessionRole: string | null = null;
 
   private dialog = inject(MatDialog);
   private authService = inject(AuthService);
@@ -39,9 +40,14 @@ export class NavbarComponent implements OnInit {
       next: (session: SessionDTO | null) => {
         if (session) {
           this.logoURL = session.logoImageURL;
+          this.sessionRole = String(session.role);
         }
       }
     });
+  }
+
+  canSeeCompanyScopes(): boolean {
+    return this.sessionRole === 'ADMIN' || this.sessionRole === 'SUPERVISOR' || this.sessionRole === 'EMPLOYEE';
   }
 
   doSearch() {

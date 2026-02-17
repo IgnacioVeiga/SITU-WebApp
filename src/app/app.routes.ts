@@ -23,8 +23,12 @@ export const routes: Routes = [
 
       },
       {
+        path: 'complaint',
+        loadChildren: () => import('./pages/complaints/complaints.routes').then(m => m.routes)
+      },
+      {
         path: 'report',
-        loadChildren: () => import('./pages/reports/reports.routes').then(m => m.routes)
+        loadChildren: () => import('./pages/complaints/complaints.routes').then(m => m.routes)
       },
       {
         path: 'alert',

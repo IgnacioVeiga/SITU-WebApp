@@ -24,6 +24,10 @@
                 {{ 'SIGNUP' | translate }}
             </button>
 
+            <button mat-button color="secondary" type="button" (click)="goTo('auth/complaint-tracking')">
+                {{ 'TRACK_COMPLAINT' | translate }}
+            </button>
+
             <button mat-raised-button color="primary" [disabled]="!loginForm.valid" type="submit">
                 <mat-icon>login</mat-icon>
                 {{ 'LOGIN' | translate }}

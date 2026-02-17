@@ -1,20 +1,24 @@
-# SITU WebApp (beta)
-Panel web administrativo para SITU.
+# SITU WebApp
+Angular 20 web client for SITU.
 
-## Requisitos
-- Node.js 20+
-- npm 10+
+This app is used as backoffice/admin UI and also includes authentication-facing screens.
 
-## Configuración de API
-La app arma la URL con:
+## Tech stack
+- Angular 20
+- Angular Material
+- ngx-translate
+- Leaflet + leaflet-draw
+
+## API configuration
+The frontend builds backend URLs using:
 - `API_URL`
 - `API_PREFIX`
 
-Por defecto:
-- `environment.development.ts` -> `http://localhost:8080` + `/api/v1`
-- `environment.ts` -> `https://server-situ-app.koyeb.app` + `/api/v1`
+Current defaults:
+- `src/environments/environment.development.ts` -> `http://localhost:8080` + `/api/v1`
+- `src/environments/environment.ts` -> `https://server-situ-app.koyeb.app` + `/api/v1`
 
-## Desarrollo
+## Run locally
 ```bash
 npm install
 npm start
@@ -25,6 +29,18 @@ npm start
 npm run build
 ```
 
-## Notas
-- El backend usa exclusivamente `/api/v1`.
-- Si cambia el dominio de backend, actualizar `API_URL` en los entornos.
+## Tests
+```bash
+npm test
+```
+
+CI-oriented command:
+```bash
+npm run test:ci
+```
+
+`test:ci` requires Chrome/Chromium available (`CHROME_BIN` in headless runners).
+
+## Documentation
+- `docs/routing.md`: route map and complaint navigation.
+- `docs/backend-contract.md`: frontend assumptions about backend payloads.

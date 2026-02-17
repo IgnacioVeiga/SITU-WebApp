@@ -1,33 +1,33 @@
 import { Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { Complaint, ComplaintState } from "src/app/shared/models/report.model";
-import { ReportService } from "src/app/shared/services/report.service";
+import { Complaint, ComplaintState } from "src/app/shared/models/complaint.model";
+import { ComplaintService } from "src/app/shared/services/complaint.service";
 import { DatePipe } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
-    templateUrl: './report-item.component.html',
-    styleUrls: ['./report-item.component.scss'],
+    templateUrl: './complaint-item.component.html',
+    styleUrls: ['./complaint-item.component.scss'],
     imports: [
         TranslateModule,
         DatePipe
     ]
 })
-export class ReportItemComponent implements OnInit {
+export class ComplaintItemComponent implements OnInit {
     data: Complaint = new Complaint();
 
     private route = inject(ActivatedRoute);
-    private reportService = inject(ReportService);
+    private complaintService = inject(ComplaintService);
     private toastr = inject(ToastrService);
 
     ngOnInit(): void {
-        this.LoadReport();
+        this.loadComplaint();
     }
 
-    LoadReport() {
-        const REPORT_ID = Number(this.route.snapshot.paramMap.get('id'));
-        this.reportService.GetReport(REPORT_ID).subscribe({
+    loadComplaint() {
+        const complaintId = Number(this.route.snapshot.paramMap.get('id'));
+        this.complaintService.getComplaint(complaintId).subscribe({
             next: (resp: Complaint) => {
                 this.data = resp;
             },

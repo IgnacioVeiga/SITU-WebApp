@@ -5,9 +5,14 @@
     </button>
     <mat-menu #menu="matMenu">
         <a mat-menu-item [routerLink]="'/dashboard'">{{'DASHBOARD' | translate}}</a>
-        <a mat-menu-item [routerLink]="'/report'">{{'REPORTS' | translate}}</a>
+        @if (canSeeCompanyScopes()) {
+        <a mat-menu-item [routerLink]="'/complaint/all'">{{'ALL_COMPLAINTS' | translate}}</a>
+        }
+        <a mat-menu-item [routerLink]="'/complaint/my'">{{'MY_COMPLAINTS' | translate}}</a>
         <a mat-menu-item [routerLink]="'/alert'">{{'ALERTS' | translate}}</a>
+        @if (canSeeCompanyScopes()) {
         <a mat-menu-item [routerLink]="'/user'">{{'USERS' | translate}}</a>
+        }
         <a mat-menu-item [routerLink]="'/bus'">{{'BUS_MAP' | translate}}</a>
         <a mat-menu-item (click)="confirmLogout()">{{'LOGOUT' | translate}}</a>
     </mat-menu>
@@ -17,9 +22,14 @@
     <!-- Desktop -->
     <div class="menu-items">
         <a mat-button [routerLink]="'/dashboard'">{{'DASHBOARD' | translate}}</a>
-        <a mat-button [routerLink]="'/report'">{{'REPORTS' | translate}}</a>
+        @if (canSeeCompanyScopes()) {
+        <a mat-button [routerLink]="'/complaint/all'">{{'ALL_COMPLAINTS' | translate}}</a>
+        }
+        <a mat-button [routerLink]="'/complaint/my'">{{'MY_COMPLAINTS' | translate}}</a>
         <a mat-button [routerLink]="'/alert'">{{'ALERTS' | translate}}</a>
+        @if (canSeeCompanyScopes()) {
         <a mat-button [routerLink]="'/user'">{{'USERS' | translate}}</a>
+        }
         <a mat-button [routerLink]="'/bus'">{{'BUS_MAP' | translate}}</a>
     </div>
 
