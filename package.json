@@ -6,35 +6,37 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadlessNoSandbox"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^18.2.14",
-    "@angular/cdk": "^18.2.14",
-    "@angular/common": "^18.2.14",
-    "@angular/compiler": "^18.2.14",
-    "@angular/core": "^18.2.14",
-    "@angular/forms": "^18.2.14",
-    "@angular/material": "^18.2.14",
-    "@angular/platform-browser": "^18.2.14",
-    "@angular/platform-browser-dynamic": "^18.2.14",
-    "@angular/router": "^18.2.14",
-    "@bluehalo/ngx-leaflet-draw": "^18.0.4",
+    "@angular/animations": "^20.3.16",
+    "@angular/cdk": "^20.2.14",
+    "@angular/common": "^20.3.16",
+    "@angular/compiler": "^20.3.16",
+    "@angular/core": "^20.3.16",
+    "@angular/forms": "^20.3.16",
+    "@angular/material": "^20.2.14",
+    "@angular/platform-browser": "^20.3.16",
+    "@angular/platform-browser-dynamic": "^20.3.16",
+    "@angular/router": "^20.3.16",
+    "@bluehalo/ngx-leaflet": "^20.0.0",
+    "@bluehalo/ngx-leaflet-draw": "^20.0.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "chart.js": "^4.4.4",
     "leaflet": "^1.9.4",
     "leaflet-draw": "^1.0.2",
-    "ngx-toastr": "^19.0.0",
+    "ngx-toastr": "^19.1.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.7.0",
-    "zone.js": "~0.14.10"
+    "zone.js": "~0.15.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^18.2.21",
-    "@angular/cli": "~18.2.21",
-    "@angular/compiler-cli": "^18.2.14",
+    "@angular-devkit/build-angular": "^20.3.16",
+    "@angular/cli": "~20.3.16",
+    "@angular/compiler-cli": "^20.3.16",
     "@types/jasmine": "~5.1.4",
     "@types/leaflet": "^1.9.12",
     "@types/leaflet-draw": "^1.0.11",
@@ -44,6 +46,6 @@
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.4.5"
+    "typescript": "~5.8.3"
   }
 }

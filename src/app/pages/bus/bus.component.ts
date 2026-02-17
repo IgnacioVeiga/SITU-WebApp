@@ -4,22 +4,20 @@ import { LineService } from 'src/app/shared/services/line.service';
 import { RouteService } from 'src/app/shared/services/route.service';
 import { MapComponent } from 'src/app/shared/components/map/map.component';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { StopService } from 'src/app/shared/services/stop.service';
 import { BusLine, BusRoute, BusStop } from 'src/app/shared/models/bus.model';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-bus',
-  templateUrl: './bus.component.html',
-  styleUrls: ['./bus.component.scss'],
-  standalone: true,
-  imports: [
+    selector: 'app-bus',
+    templateUrl: './bus.component.html',
+    styleUrls: ['./bus.component.scss'],
+    imports: [
     FormsModule,
-    CommonModule,
     TranslateModule,
     MapComponent
-  ]
+]
 })
 export class BusComponent {
   busLines: BusLine[] = [];

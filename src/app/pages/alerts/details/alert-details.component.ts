@@ -8,12 +8,11 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
     templateUrl: './alert-details.component.html',
     styleUrls: ['./alert-details.component.scss'],
-    standalone: true,
     imports: [
-      MatDialogModule,
-      MatButtonModule,
-      TranslateModule,
-      DatePipe
+        MatDialogModule,
+        MatButtonModule,
+        TranslateModule,
+        DatePipe
     ]
 })
 export class AlertDetailsComponent {

@@ -13,18 +13,17 @@ import { Page } from 'src/app/shared/models/page.model';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  templateUrl: './report-list.component.html',
-  styleUrls: ['./report-list.component.scss'],
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatButtonModule,
-    MatIconModule,
-    MatPaginatorModule,
-    TranslateModule,
-    DatePipe,
-    TruncatePipe
-  ]
+    templateUrl: './report-list.component.html',
+    styleUrls: ['./report-list.component.scss'],
+    imports: [
+        MatTableModule,
+        MatButtonModule,
+        MatIconModule,
+        MatPaginatorModule,
+        TranslateModule,
+        DatePipe,
+        TruncatePipe
+    ]
 })
 export class ReportListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;

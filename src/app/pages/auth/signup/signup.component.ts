@@ -14,19 +14,18 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss'],
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatIconModule,
-    MatInputModule,
-    MatCardModule,
-    FakeCaptchaComponent,
-    TranslateModule
-  ]
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.scss'],
+    imports: [
+        FormsModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatIconModule,
+        MatInputModule,
+        MatCardModule,
+        FakeCaptchaComponent,
+        TranslateModule
+    ]
 })
 export class SignupComponent {
   form: SignUpForm = {

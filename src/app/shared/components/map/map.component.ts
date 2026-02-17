@@ -2,39 +2,39 @@ import { Component, AfterViewInit, input } from '@angular/core';
 import { BusRoute, BusStop } from '../../models/bus.model';
 import { LeafletModule } from '@bluehalo/ngx-leaflet';
 import { LeafletDrawModule } from '@bluehalo/ngx-leaflet-draw';
-import { DrawEvents, featureGroup, FeatureGroup, latLng, tileLayer, polyline, marker, MapOptions, Control, icon, Icon, Layer } from 'leaflet';
+import * as L from 'leaflet';
+import 'leaflet-draw';
 
 @Component({
-  selector: 'app-map',
-  templateUrl: 'map.component.html',
-  standalone: true,
-  imports: [
-    LeafletModule,
-    LeafletDrawModule
-  ],
+    selector: 'app-map',
+    templateUrl: 'map.component.html',
+    imports: [
+        LeafletModule,
+        LeafletDrawModule
+    ]
 })
 export class MapComponent implements AfterViewInit {
   busRoutes = input<BusRoute[]>([]);
   busStops = input<BusStop[]>([]);
 
-  options: MapOptions = {
+  options: L.MapOptions = {
     layers: [
-      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
     ],
     zoom: 10,
-    center: latLng(-34.581231, -58.420862)
+    center: L.latLng(-34.581231, -58.420862)
   };
 
-  drawnItems: FeatureGroup = featureGroup();
+  drawnItems: L.FeatureGroup = L.featureGroup();
 
-  drawOptions: Control.DrawConstructorOptions = {
+  drawOptions: L.Control.DrawConstructorOptions = {
     edit: {
       featureGroup: this.drawnItems
     }
   };
 
-  public onDrawCreated(e: any) {
-    this.drawnItems.addLayer((e as DrawEvents.Created).layer);
+  public onDrawCreated(event: L.DrawEvents.Created): void {
+    this.drawnItems.addLayer(event.layer);
   }
 
   ngAfterViewInit(): void {
@@ -64,7 +64,7 @@ export class MapComponent implements AfterViewInit {
 
         // Make sure that polylinePoints has at least one valid point before drawing
         if (polylinePoints.length > 0) {
-          const routeLine = polyline(polylinePoints as L.LatLngTuple[], { color: 'blue' });
+          const routeLine = L.polyline(polylinePoints as L.LatLngTuple[], { color: 'blue' });
 
           this.attachClickEvent(routeLine);
           this.drawnItems.addLayer(routeLine);
@@ -83,9 +83,9 @@ export class MapComponent implements AfterViewInit {
           stopGeoJson.coordinates[0],
         ];
 
-        const stopMarker = marker(stopCoordinates, {
-          icon: icon({
-            ...Icon.Default.prototype.options,
+        const stopMarker = L.marker(stopCoordinates, {
+          icon: L.icon({
+            ...L.Icon.Default.prototype.options,
             iconUrl: 'assets/marker-icon.png',
             iconRetinaUrl: 'assets/marker-icon-2x.png',
             shadowUrl: 'assets/marker-shadow.png'
@@ -98,9 +98,9 @@ export class MapComponent implements AfterViewInit {
     });
   }
 
-  private attachClickEvent(layer: Layer): void {
-    layer.on('click', (event: any) => {
-      const layerType = layer instanceof polyline ? 'LineString' : 'Point';
+  private attachClickEvent(layer: L.Layer): void {
+    layer.on('click', (event: L.LeafletMouseEvent) => {
+      const layerType = layer instanceof L.Polyline ? 'LineString' : 'Point';
       const coordinates = event.latlng;
       console.log(layerType + "\n" + coordinates);
     });

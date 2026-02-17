@@ -8,18 +8,17 @@ import { Chart, registerables } from 'chart.js';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [
-    MatCardModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatGridListModule,
-    TranslateModule
-  ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+    selector: 'app-dashboard',
+    imports: [
+        MatCardModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatGridListModule,
+        TranslateModule
+    ],
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements AfterViewInit {
 

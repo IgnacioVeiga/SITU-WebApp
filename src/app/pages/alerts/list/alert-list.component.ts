@@ -15,19 +15,18 @@ import { Page } from 'src/app/shared/models/page.model';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  templateUrl: './alert-list.component.html',
-  styleUrls: ['./alert-list.component.scss'],
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatDialogModule,
-    MatIconModule,
-    MatTableModule,
-    MatPaginatorModule,
-    TranslateModule,
-    DatePipe,
-    TruncatePipe
-  ]
+    templateUrl: './alert-list.component.html',
+    styleUrls: ['./alert-list.component.scss'],
+    imports: [
+        MatButtonModule,
+        MatDialogModule,
+        MatIconModule,
+        MatTableModule,
+        MatPaginatorModule,
+        TranslateModule,
+        DatePipe,
+        TruncatePipe
+    ]
 })
 export class AlertListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;

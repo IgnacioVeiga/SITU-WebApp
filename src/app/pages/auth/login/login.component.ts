@@ -13,20 +13,19 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatInputModule,
-    MatCardModule,
-    FakeCaptchaComponent,
-    TranslateModule,
-    MatProgressSpinnerModule
-  ]
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    imports: [
+        FormsModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatIconModule,
+        MatInputModule,
+        MatCardModule,
+        FakeCaptchaComponent,
+        TranslateModule,
+        MatProgressSpinnerModule
+    ]
 })
 export class LoginComponent {
   form: LogInForm = {

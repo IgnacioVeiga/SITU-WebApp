@@ -12,19 +12,18 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  templateUrl: './create-alert.component.html',
-  styleUrls: ['./create-alert.component.scss'],
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatButtonModule,
-    TranslateModule
-  ]
+    templateUrl: './create-alert.component.html',
+    styleUrls: ['./create-alert.component.scss'],
+    imports: [
+        FormsModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatButtonModule,
+        TranslateModule
+    ]
 })
 export class CreateAlertComponent {
   alert: Alert = new Alert();

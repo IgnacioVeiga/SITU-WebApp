@@ -12,20 +12,19 @@ import { SessionDTO } from '../../models/auth.model';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'],
-  standalone: true,
-  imports: [
-    MatToolbarModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatMenuModule,
-    MatIconModule,
-    FormsModule,
-    TranslateModule,
-    RouterLink,
-  ]
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss'],
+    imports: [
+        MatToolbarModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatMenuModule,
+        MatIconModule,
+        FormsModule,
+        TranslateModule,
+        RouterLink,
+    ]
 })
 export class NavbarComponent implements OnInit {
   textToSearch: string = (localStorage.getItem('textToSearch') || '');

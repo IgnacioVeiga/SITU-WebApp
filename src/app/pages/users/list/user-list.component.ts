@@ -15,17 +15,16 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatDialogModule,
-    MatIconModule,
-    MatTableModule,
-    MatPaginatorModule,
-    TranslateModule
-  ]
+    templateUrl: './user-list.component.html',
+    styleUrls: ['./user-list.component.scss'],
+    imports: [
+        MatButtonModule,
+        MatDialogModule,
+        MatIconModule,
+        MatTableModule,
+        MatPaginatorModule,
+        TranslateModule
+    ]
 })
 export class UserListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;

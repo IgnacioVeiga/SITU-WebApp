@@ -10,17 +10,16 @@ import { ChangePasswordDTO } from 'src/app/shared/models/auth.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
-  templateUrl: './update-password.component.html',
-  styleUrls: ['./update-password.component.scss'],
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    TranslateModule
-  ]
+    templateUrl: './update-password.component.html',
+    styleUrls: ['./update-password.component.scss'],
+    imports: [
+        FormsModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        TranslateModule
+    ]
 })
 export class UpdatePasswordComponent {
   form: ChangePasswordDTO = {

@@ -6,7 +6,6 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
     selector: 'file-uploader',
     templateUrl: './file-uploader.component.html',
-    standalone: true,
     imports: [
         TranslateModule
     ]

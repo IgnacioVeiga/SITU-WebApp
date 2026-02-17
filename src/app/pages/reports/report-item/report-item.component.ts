@@ -9,7 +9,6 @@ import { TranslateModule } from "@ngx-translate/core";
 @Component({
     templateUrl: './report-item.component.html',
     styleUrls: ['./report-item.component.scss'],
-    standalone: true,
     imports: [
         TranslateModule,
         DatePipe

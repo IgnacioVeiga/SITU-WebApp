@@ -11,19 +11,18 @@ import { FileUploaderComponent } from '../../../shared/components/file-uploader/
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.scss'],
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    FileUploaderComponent,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatButtonModule,
-    FormsModule,
-    TranslateModule
-  ]
+    templateUrl: './edit-user.component.html',
+    styleUrls: ['./edit-user.component.scss'],
+    imports: [
+        MatDialogModule,
+        FileUploaderComponent,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatButtonModule,
+        FormsModule,
+        TranslateModule
+    ]
 })
 export class EditUserComponent {
   roleTypes = [

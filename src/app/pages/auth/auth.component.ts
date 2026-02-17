@@ -6,17 +6,16 @@ import { Router, RouterOutlet } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss'],
-  standalone: true,
-  imports: [
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    TranslateModule,
-    RouterOutlet
-  ]
+    selector: 'auth',
+    templateUrl: './auth.component.html',
+    styleUrls: ['./auth.component.scss'],
+    imports: [
+        MatIconModule,
+        MatButtonModule,
+        MatCardModule,
+        TranslateModule,
+        RouterOutlet
+    ]
 })
 export class AuthComponent {
   private router = inject(Router);
