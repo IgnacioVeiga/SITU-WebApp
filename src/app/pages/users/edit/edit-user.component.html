@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>({{user.lastName}} {{user.firstName}})</h1>
 
 <mat-dialog-content>
-  <file-uploader [imgUrl]="'/situ/images/user-profile/' + user.profileImage.filename"></file-uploader>
+  <file-uploader [imgUrl]="profileImageBaseUrl + user.profileImage.filename"></file-uploader>
 
   <div class="row">
     <label>DNI</label>

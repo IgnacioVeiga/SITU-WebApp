@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, input } from '@angular/core';
+import { AfterViewInit, Component, effect, input, signal } from '@angular/core';
 import { BusRoute, BusStop } from '../../models/bus.model';
 import { LeafletModule } from '@bluehalo/ngx-leaflet';
 import { LeafletDrawModule } from '@bluehalo/ngx-leaflet-draw';
@@ -33,18 +33,38 @@ export class MapComponent implements AfterViewInit {
     }
   };
 
+  private readonly viewInitialized = signal(false);
+
+  constructor() {
+    effect(() => {
+      const routes = this.busRoutes();
+      const stops = this.busStops();
+
+      if (!this.viewInitialized()) {
+        return;
+      }
+
+      this.redrawMap(routes, stops);
+    });
+  }
+
   public onDrawCreated(event: L.DrawEvents.Created): void {
     this.drawnItems.addLayer(event.layer);
   }
 
   ngAfterViewInit(): void {
-    if (this.busRoutes().length > 0) {
-      this.clearMap();
-      this.drawBusRoutes();
+    this.viewInitialized.set(true);
+  }
+
+  private redrawMap(routes: BusRoute[], stops: BusStop[]): void {
+    this.clearMap();
+
+    if (routes.length > 0) {
+      this.drawBusRoutes(routes);
     }
 
-    if (this.busStops().length > 0) {
-      this.drawBusStops();
+    if (stops.length > 0) {
+      this.drawBusStops(stops);
     }
   }
 
@@ -52,57 +72,78 @@ export class MapComponent implements AfterViewInit {
     this.drawnItems.clearLayers();
   }
 
-  private drawBusRoutes(): void {
-    this.busRoutes().forEach((route) => {
-      const geoJson = JSON.parse(route.coordinates);
+  private drawBusRoutes(routes: BusRoute[]): void {
+    routes.forEach((route) => {
+      const geoJson = this.parseGeoJson(route.coordinates);
 
-      if (geoJson.type === 'LineString') {
-        // Ensure that each coordinate has at least 2 values (lat, lng)
-        const polylinePoints = geoJson.coordinates
-          .filter((coord: any) => coord.length >= 2) // Filters out invalid coordinates
-          .map((coord: any) => [coord[1], coord[0]]); // We invert lat/lng only if they are valid.
+      if (!geoJson || geoJson.type !== 'LineString' || !Array.isArray(geoJson.coordinates)) {
+        return;
+      }
 
-        // Make sure that polylinePoints has at least one valid point before drawing
-        if (polylinePoints.length > 0) {
-          const routeLine = L.polyline(polylinePoints as L.LatLngTuple[], { color: 'blue' });
+      const polylinePoints = geoJson.coordinates
+        .filter((coord: unknown) => Array.isArray(coord) && coord.length >= 2)
+        .map((coord: [number, number]) => [coord[1], coord[0]]);
 
-          this.attachClickEvent(routeLine);
-          this.drawnItems.addLayer(routeLine);
-        }
+      if (polylinePoints.length > 0) {
+        const routeLine = L.polyline(polylinePoints as L.LatLngTuple[], { color: 'blue' });
+        this.attachClickEvent(routeLine);
+        this.drawnItems.addLayer(routeLine);
       }
     });
   }
 
-  private drawBusStops(): void {
-    this.busStops().forEach((stop) => {
-      const stopGeoJson = JSON.parse(stop.location);
+  private drawBusStops(stops: BusStop[]): void {
+    stops.forEach((stop) => {
+      const stopGeoJson = this.parseGeoJson(stop.location);
 
-      if (stopGeoJson.type === 'Point' && stopGeoJson.coordinates.length >= 2) {
-        const stopCoordinates: L.LatLngTuple = [
-          stopGeoJson.coordinates[1],
-          stopGeoJson.coordinates[0],
-        ];
-
-        const stopMarker = L.marker(stopCoordinates, {
-          icon: L.icon({
-            ...L.Icon.Default.prototype.options,
-            iconUrl: 'assets/marker-icon.png',
-            iconRetinaUrl: 'assets/marker-icon-2x.png',
-            shadowUrl: 'assets/marker-shadow.png'
-          })
-        }).bindPopup(`<b>${stop.name}</b>`);
-
-        this.attachClickEvent(stopMarker);
-        this.drawnItems.addLayer(stopMarker);
+      if (!stopGeoJson || stopGeoJson.type !== 'Point' || !Array.isArray(stopGeoJson.coordinates) || stopGeoJson.coordinates.length < 2) {
+        return;
       }
+
+      const stopCoordinates: L.LatLngTuple = [
+        stopGeoJson.coordinates[1],
+        stopGeoJson.coordinates[0],
+      ];
+
+      const stopMarker = L.marker(stopCoordinates, {
+        icon: L.icon({
+          ...L.Icon.Default.prototype.options,
+          iconUrl: 'assets/marker-icon.png',
+          iconRetinaUrl: 'assets/marker-icon-2x.png',
+          shadowUrl: 'assets/marker-shadow.png'
+        })
+      }).bindPopup(`<b>${stop.name}</b>`);
+
+      this.attachClickEvent(stopMarker);
+      this.drawnItems.addLayer(stopMarker);
     });
+  }
+
+  private parseGeoJson(raw: unknown): any | null {
+    if (raw == null) {
+      return null;
+    }
+
+    if (typeof raw === 'string') {
+      try {
+        return JSON.parse(raw);
+      } catch {
+        return null;
+      }
+    }
+
+    if (typeof raw === 'object') {
+      return raw;
+    }
+
+    return null;
   }
 
   private attachClickEvent(layer: L.Layer): void {
     layer.on('click', (event: L.LeafletMouseEvent) => {
       const layerType = layer instanceof L.Polyline ? 'LineString' : 'Point';
       const coordinates = event.latlng;
-      console.log(layerType + "\n" + coordinates);
+      console.log(layerType + '\n' + coordinates);
     });
   }
 }

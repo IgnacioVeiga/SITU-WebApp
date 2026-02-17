@@ -14,6 +14,11 @@
       "USER_NOT_FOUND": "Usuario no encontrado.",
       "INSUFFICIENT_PERMISSIONS": "No tienes permisos suficientes para realizar esta acción.",
       "EMAIL_DELIVERY_FAILED": "No se pudo enviar el correo de registro. Inténtalo nuevamente."
+    },
+    "USER": {
+      "NOT_FOUND": "Usuario no encontrado.",
+      "DNI_EXISTS": "El DNI ya está registrado.",
+      "CANNOT_DELETE_REFERENCED": "No se puede eliminar el usuario porque tiene datos asociados."
     }
   },
   "PAGE_NOT_FOUND_TITLE": "Página no encontrada",

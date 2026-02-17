@@ -9,6 +9,11 @@
       "USER_NOT_FOUND": "User not found.",
       "INSUFFICIENT_PERMISSIONS": "You do not have enough permissions to perform this action.",
       "EMAIL_DELIVERY_FAILED": "Could not send the registration email. Please try again."
+    },
+    "USER": {
+      "NOT_FOUND": "User not found.",
+      "DNI_EXISTS": "The DNI is already registered.",
+      "CANNOT_DELETE_REFERENCED": "Cannot delete this user because it has related records."
     }
   },
   "PAGE_NOT_FOUND_TITLE": "Page not found",

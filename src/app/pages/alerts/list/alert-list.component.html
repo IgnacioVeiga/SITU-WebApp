@@ -21,7 +21,7 @@
 
         <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef>{{'DATETIME' | translate}}</th>
-            <td mat-cell *matCellDef="let element"> {{element.alertDate | date: 'dd/MM/yyyy HH:MM'}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.alertDate | date: 'dd/MM/yyyy HH:mm'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="priority">

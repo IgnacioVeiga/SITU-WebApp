@@ -13,6 +13,7 @@ import { Page } from 'src/app/shared/models/page.model';
 import { User } from 'src/app/shared/models/user.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
     templateUrl: './user-list.component.html',
@@ -31,6 +32,7 @@ export class UserListComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['dni', 'firstname', 'lastname', 'photo', 'role', 'actions'];
   dataSource = new MatTableDataSource<User>();
+  readonly profileImageBaseUrl = `${environment.API_URL}${environment.API_PREFIX}/images/user-profile/`;
 
   private readonly dialog = inject(MatDialog);
   private readonly toastr = inject(ToastrService);

@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FileUploaderComponent } from '../../../shared/components/file-uploader/file-uploader.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
     templateUrl: './edit-user.component.html',
@@ -25,6 +26,8 @@ import { TranslateModule } from '@ngx-translate/core';
     ]
 })
 export class EditUserComponent {
+  readonly profileImageBaseUrl = `${environment.API_URL}${environment.API_PREFIX}/images/user-profile/`;
+
   roleTypes = [
     {
       text: 'Administrador',
@@ -50,7 +53,7 @@ export class EditUserComponent {
       text: 'Regular',
       value: 'REGULAR'
     }
-  ]
+  ];
 
   constructor(
     public dialogRef: MatDialogRef<EditUserComponent>,
