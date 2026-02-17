@@ -255,3 +255,48 @@ p {
     padding: 0.7rem 0.66rem;
   }
 }
+
+.dialog-shell {
+  width: min(680px, 96vw);
+}
+
+.dialog-body {
+  display: grid;
+  gap: 0.82rem;
+  width: min(640px, 100%);
+  padding-top: 0.35rem;
+}
+
+.dialog-grid-two {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.72rem;
+}
+
+.dialog-hint {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.dialog-divider {
+  margin: 0.12rem 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.55rem;
+  padding-top: 0.25rem;
+}
+
+.dialog-actions .mat-mdc-raised-button,
+.dialog-actions .mat-mdc-outlined-button {
+  min-width: 108px;
+}
+
+.mat-mdc-dialog-content .mat-mdc-form-field {
+  width: 100%;
+}

@@ -3,6 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { PageHeaderComponent } from 'src/app/shared/components/page-header/page-header.component';
 import { Complaint, ComplaintPriority, ComplaintState } from 'src/app/shared/models/complaint.model';
 import { ComplaintService } from 'src/app/shared/services/complaint.service';
 
@@ -12,7 +13,8 @@ import { ComplaintService } from 'src/app/shared/services/complaint.service';
     imports: [
         TranslateModule,
         DatePipe,
-        NgClass
+        NgClass,
+        PageHeaderComponent
     ]
 })
 export class ComplaintItemComponent implements OnInit {
@@ -92,5 +94,9 @@ export class ComplaintItemComponent implements OnInit {
             default:
                 return 'priority-medium';
         }
+    }
+
+    getPageSubtitle(): string {
+        return `Creada el ${new Date(this.data.createdAt).toLocaleString('es-AR')}`;
     }
 }

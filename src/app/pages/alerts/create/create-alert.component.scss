@@ -1,7 +1,4 @@
-mat-dialog-content {
-    width: 600px;
-}
-
-#description {
-    min-height: 150px;
+textarea[matInput] {
+  min-height: 130px;
+  resize: vertical;
 }

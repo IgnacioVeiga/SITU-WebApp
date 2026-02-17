@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
-import { Alert, AlertPriority } from 'src/app/shared/models/alert.model';
-import { AlertService } from 'src/app/shared/services/alert.service';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
-
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDialogModule } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { TranslateModule } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import { Alert, AlertPriority } from 'src/app/shared/models/alert.model';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
     templateUrl: './create-alert.component.html',
@@ -26,16 +26,32 @@ import { TranslateModule } from '@ngx-translate/core';
     ]
 })
 export class CreateAlertComponent {
-  alert: Alert = new Alert();
+  alert: Alert = {
+    ...new Alert(),
+    priority: AlertPriority.MEDIUM
+  };
   priorityTypes: AlertPriority[] = [AlertPriority.HIGH, AlertPriority.MEDIUM, AlertPriority.LOW];
+  isSubmitting: boolean = false;
 
-  constructor(
-    private alertService: AlertService
-  ) { }
+  private readonly alertService = inject(AlertService);
+  private readonly dialogRef = inject(MatDialogRef<CreateAlertComponent>);
+  private readonly toastr = inject(ToastrService);
 
-  onSubmit() {
+  onSubmit(): void {
+    if (this.isSubmitting) {
+      return;
+    }
+
+    this.isSubmitting = true;
+
     this.alertService.CreateAlert(this.alert).subscribe({
-      next: () => {}
+      next: () => {
+        this.dialogRef.close(true);
+      },
+      error: () => {
+        this.toastr.error('No se pudo crear la alerta.', 'Inténtelo nuevamente');
+        this.isSubmitting = false;
+      }
     });
   }
 

@@ -1,33 +1,36 @@
-<h1 mat-dialog-title>({{user.lastName}} {{user.firstName}})</h1>
+<div class="dialog-shell">
+  <h1 mat-dialog-title>{{ user.lastName }} {{ user.firstName }}</h1>
 
-<mat-dialog-content>
-  <file-uploader [imgUrl]="profileImageBaseUrl + user.profileImage.filename"></file-uploader>
+  <mat-dialog-content class="dialog-body">
+    <file-uploader
+      [imgUrl]="getProfileImageUrl()"
+      [userId]="user.id"
+      [dni]="user.dni"
+    ></file-uploader>
 
-  <div class="row">
-    <label>DNI</label>
-    <b>{{user.dni}}</b>
-  </div>
+    <div class="dialog-grid-two">
+      <div class="id-row">
+        <span>DNI</span>
+        <b>{{ user.dni }}</b>
+      </div>
 
-  <div class="row">
-    <mat-form-field>
-      <mat-label>{{'ROLE' | translate}}</mat-label>
-      <mat-select id="role" name="role" [(ngModel)]="user.role">
-        @for (option of roleTypes; track option) {
-        <mat-option [value]="option.value">
-          {{ option.text }}
-        </mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
-  </div>
+      <mat-form-field>
+        <mat-label>{{ 'ROLE' | translate }}</mat-label>
+        <mat-select id="role" name="role" [(ngModel)]="user.role">
+          @for (option of roleTypes; track option.value) {
+          <mat-option [value]="option.value">
+            {{ option.text }}
+          </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-  <div class="row">
-    <p>{{'CHANGE_ROLE_WARNING' | translate}}</p>
-  </div>
-</mat-dialog-content>
+    <p class="dialog-hint">{{ 'CHANGE_ROLE_WARNING' | translate }}</p>
+  </mat-dialog-content>
 
-<mat-dialog-actions align="center">
-  <button mat-raised-button color="primary" [mat-dialog-close]="user" type="button" cdkFocusInitial>{{'APPLY' |
-    translate}}</button>
-  <button mat-raised-button color="secondary" mat-dialog-close type="button">{{'CANCEL' | translate}}</button>
-</mat-dialog-actions>
+  <mat-dialog-actions align="end" class="dialog-actions">
+    <button mat-stroked-button mat-dialog-close type="button">{{ 'CANCEL' | translate }}</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="user" type="button" cdkFocusInitial>{{ 'APPLY' | translate }}</button>
+  </mat-dialog-actions>
+</div>

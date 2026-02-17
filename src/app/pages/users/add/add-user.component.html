@@ -1,41 +1,40 @@
-<form #addUserForm="ngForm">
-  <h1 mat-dialog-title>{{'ADD_USER' | translate}}</h1>
+<form #addUserForm="ngForm" class="dialog-shell">
+  <h1 mat-dialog-title>{{ 'ADD_USER' | translate }}</h1>
 
-  <mat-dialog-content>
-    <div class="row">
-      <label>{{'PHOTO' | translate}}</label>
-      <div class="column center">
-        <img [src]="user.profileImage.filename" alt="Foto de perfil" width="46">
-        <input type="file" id="photoURL" name="photoURL" placeholder="Cargar archivo"
-          (change)="onFileSelected($event)" />
+  <mat-dialog-content class="dialog-body">
+    <div class="photo-row">
+      <img [src]="getProfilePreview()" alt="Foto de perfil" class="profile-image" />
+      <div class="photo-controls">
+        <label for="photoURL">{{ 'PHOTO' | translate }}</label>
+        <input type="file" id="photoURL" name="photoURL" accept="image/*" (change)="onFileSelected($event)" />
       </div>
     </div>
 
-    <div class="row">
+    <div class="dialog-grid-two">
       <mat-form-field>
         <mat-label>DNI</mat-label>
-        <input matInput type="text" id="dni" name="dni" [(ngModel)]="user.dni" required
-          placeholder="00 000 000">
+        <input matInput type="number" id="dni" name="dni" [(ngModel)]="user.dni" required min="1" placeholder="00000000" />
       </mat-form-field>
-    </div>
 
-    <div class="row">
       <mat-form-field>
-        <mat-label>{{'ROLE' | translate}}</mat-label>
+        <mat-label>{{ 'ROLE' | translate }}</mat-label>
         <mat-select id="role" name="role" [(ngModel)]="user.role" required>
-          @for (option of roleTypes; track option) {
-            <mat-option [value]="option">
-              {{ option }}
+          @for (option of roleTypes; track option.value) {
+            <mat-option [value]="option.value">
+              {{ option.label }}
             </mat-option>
           }
         </mat-select>
       </mat-form-field>
     </div>
+
+    <p class="dialog-hint">El alta crea el usuario para la empresa actual y luego podrás editar su rol o foto.</p>
   </mat-dialog-content>
 
-  <mat-dialog-actions align="center">
-    <button mat-raised-button color="primary" [mat-dialog-close]="user" type="button"
-    [disabled]="!addUserForm.valid">{{'ADD' | translate}}</button>
-    <button mat-raised-button color="secondary" type="button" mat-dialog-close>{{'CANCEL' | translate}}</button>
+  <mat-dialog-actions align="end" class="dialog-actions">
+    <button mat-stroked-button type="button" mat-dialog-close>{{ 'CANCEL' | translate }}</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="user" type="button" [disabled]="!addUserForm.valid">
+      {{ 'ADD' | translate }}
+    </button>
   </mat-dialog-actions>
 </form>

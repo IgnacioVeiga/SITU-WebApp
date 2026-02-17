@@ -1,27 +1,27 @@
-<form #createAlertForm="ngForm" (ngSubmit)="onSubmit()">
-  <h1 mat-dialog-title>{{'ALERT' | translate}}</h1>
+<form #createAlertForm="ngForm" (ngSubmit)="onSubmit()" class="dialog-shell">
+  <h1 mat-dialog-title>{{ 'ALERTS' | translate }} · {{ 'CREATE' | translate }}</h1>
 
-  <mat-dialog-content class="row">
-    <div class="column">
+  <mat-dialog-content class="dialog-body">
+    <div class="dialog-grid-two">
       <mat-form-field>
-        <mat-label>{{'TITLE' | translate}}</mat-label>
-        <input matInput type="text" id="title" name="title" [(ngModel)]="alert.title" required>
+        <mat-label>{{ 'TITLE' | translate }}</mat-label>
+        <input matInput type="text" id="title" name="title" [(ngModel)]="alert.title" required maxlength="120">
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>{{'DESCRIPTION' | translate}}</mat-label>
-        <textarea matInput id="description" name="description" [(ngModel)]="alert.description" required></textarea>
+        <mat-label>{{ 'LOCATION' | translate }}</mat-label>
+        <input matInput type="text" id="location" name="location" [(ngModel)]="alert.location" placeholder="Ej: CABA">
       </mat-form-field>
     </div>
 
-    <div class="row">
-      <mat-form-field>
-        <mat-label>{{'LOCATION' | translate}}</mat-label>
-        <input matInput type="text" id="zone" name="zone" [(ngModel)]="alert.location" placeholder="Ej: CABA">
-      </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ 'DESCRIPTION' | translate }}</mat-label>
+      <textarea matInput id="description" name="description" [(ngModel)]="alert.description" required maxlength="2000"></textarea>
+    </mat-form-field>
 
+    <div class="dialog-grid-two">
       <mat-form-field>
-        <mat-label>{{'PRIORITY' | translate}}</mat-label>
+        <mat-label>{{ 'PRIORITY' | translate }}</mat-label>
         <mat-select id="priority" name="priority" [(ngModel)]="alert.priority" required>
           @for (option of priorityTypes; track option) {
             <mat-option [value]="option">
@@ -30,12 +30,15 @@
           }
         </mat-select>
       </mat-form-field>
+
+      <p class="dialog-hint">Las alertas son públicas para usuarios logueados y deben ser claras y breves.</p>
     </div>
   </mat-dialog-content>
 
-  <mat-dialog-actions align="center">
-    <button mat-raised-button color="primary" [mat-dialog-close]="true" type="submit"
-    [disabled]="!createAlertForm.valid">{{'CREATE' | translate}}</button>
-    <button mat-raised-button color="secondary" mat-dialog-close type="button">{{'CANCEL' | translate}}</button>
+  <mat-dialog-actions align="end" class="dialog-actions">
+    <button mat-stroked-button mat-dialog-close type="button" [disabled]="isSubmitting">{{ 'CANCEL' | translate }}</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!createAlertForm.valid || isSubmitting">
+      {{ 'CREATE' | translate }}
+    </button>
   </mat-dialog-actions>
 </form>

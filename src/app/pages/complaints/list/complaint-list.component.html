@@ -1,10 +1,5 @@
 <section class="page-shell">
-    <div class="title">
-        <div>
-            <h1>{{ getTitleKey() | translate }}</h1>
-            <p class="page-subtitle">{{ dataSource.data.length }} registros visibles de {{ paginator.length || 0 }} totales</p>
-        </div>
-    </div>
+    <app-page-header [titleKey]="getTitleKey()" [subtitle]="getPageSubtitle()"></app-page-header>
 
     <div class="mat-elevation-z8 table-shell">
         <table mat-table [dataSource]="dataSource" class="data-table">

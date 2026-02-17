@@ -1,15 +1,12 @@
 <section class="page-shell">
-    <div class="title">
-        <div>
-            <h1>{{ 'ALERTS' | translate }}</h1>
-            <p class="page-subtitle">{{ dataSource.data.length }} alertas visibles de {{ paginator.length || 0 }} totales</p>
+    <app-page-header titleKey="ALERTS" [subtitle]="getPageSubtitle()">
+        <div headerActions>
+            <button mat-raised-button color="primary" type="button" (click)="createAlertDialog()" class="header-action">
+                <mat-icon>add</mat-icon>
+                {{ 'CREATE' | translate }}
+            </button>
         </div>
-
-        <button mat-raised-button color="primary" type="button" (click)="createAlertDialog()" class="header-action">
-            <mat-icon>add</mat-icon>
-            {{ 'CREATE' | translate }}
-        </button>
-    </div>
+    </app-page-header>
 
     <div class="mat-elevation-z8 table-shell">
         <table mat-table [dataSource]="dataSource" class="data-table">

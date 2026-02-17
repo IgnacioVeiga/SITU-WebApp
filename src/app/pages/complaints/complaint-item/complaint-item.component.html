@@ -1,10 +1,5 @@
 <section class="page-shell">
-    <div class="title">
-        <div>
-            <h1>{{ 'DETAIL' | translate }} #{{ data.id }}</h1>
-            <p class="page-subtitle">Creada el {{ data.createdAt | date: 'dd/MM/yyyy HH:mm' }}</p>
-        </div>
-    </div>
+    <app-page-header titleKey="DETAIL" [subtitle]="getPageSubtitle()"></app-page-header>
 
     <article class="card-shell complaint-card">
         <header class="complaint-header">
@@ -16,6 +11,11 @@
         </header>
 
         <section class="meta-grid">
+            <div class="meta-item">
+                <h3>ID</h3>
+                <p>#{{ data.id }}</p>
+            </div>
+
             <div class="meta-item">
                 <h3>Denunciante</h3>
                 <p>{{ data.reporter?.fullName || 'Anónimo' }}</p>

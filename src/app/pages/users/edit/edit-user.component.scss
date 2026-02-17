@@ -1,5 +1,21 @@
-mat-dialog-content {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.id-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.18rem;
+  padding: 0.62rem 0.74rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface-soft);
+
+  span {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  b {
+    font-size: 1rem;
+  }
 }

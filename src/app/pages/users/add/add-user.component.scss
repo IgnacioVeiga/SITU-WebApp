@@ -1,5 +1,26 @@
-mat-dialog-content {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.photo-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.profile-image {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+}
+
+.photo-controls {
+  display: grid;
+  gap: 0.35rem;
+
+  label {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
 }

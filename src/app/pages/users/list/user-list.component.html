@@ -1,11 +1,6 @@
 <section class="page-shell">
-    <div class="title">
-        <div>
-            <h1>{{ 'USERS' | translate }}</h1>
-            <p class="page-subtitle">{{ dataSource.data.length }} usuarios visibles de {{ paginator.length || 0 }} totales</p>
-        </div>
-
-        <div class="header-actions">
+    <app-page-header titleKey="USERS" [subtitle]="getPageSubtitle()">
+        <div headerActions class="header-actions">
             <button mat-raised-button color="primary" type="button" (click)="addUser()">
                 <mat-icon>person_add</mat-icon>
                 {{ 'ADD_USER' | translate }}
@@ -16,7 +11,7 @@
                 {{ 'UPDATE_PASSWORD' | translate }}
             </button>
         </div>
-    </div>
+    </app-page-header>
 
     <div class="mat-elevation-z8 table-shell">
         <table mat-table [dataSource]="dataSource" class="data-table">

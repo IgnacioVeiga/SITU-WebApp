@@ -1,0 +1,55 @@
+.uploader-shell {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface-soft);
+}
+
+.preview-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.preview-image {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.field-row {
+  display: grid;
+  gap: 0.35rem;
+
+  label {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+}
+
+.actions-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.actions-row button {
+  border: 1px solid rgba(19, 122, 127, 0.35);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--primary-strong);
+  padding: 0.32rem 0.82rem;
+  cursor: pointer;
+}
+
+.actions-row span {
+  color: var(--text-muted);
+  font-size: 0.84rem;
+}

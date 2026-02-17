@@ -1,14 +1,13 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
-import { User } from 'src/app/shared/models/user.model';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
-
-import { FormsModule } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FileUploaderComponent } from '../../../shared/components/file-uploader/file-uploader.component';
+import { MatSelectModule } from '@angular/material/select';
 import { TranslateModule } from '@ngx-translate/core';
+import { FileUploaderComponent } from 'src/app/shared/components/file-uploader/file-uploader.component';
+import { User, UserRole } from 'src/app/shared/models/user.model';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -28,35 +27,29 @@ import { environment } from 'src/environments/environment';
 export class EditUserComponent {
   readonly profileImageBaseUrl = `${environment.API_URL}${environment.API_PREFIX}/images/user-profile/`;
 
-  roleTypes = [
-    {
-      text: 'Administrador',
-      value: 'ADMIN'
-    },
-    {
-      text: 'Supervisor',
-      value: 'SUPERVISOR'
-    },
-    {
-      text: 'Empleado',
-      value: 'EMPLOYEE'
-    },
-    {
-      text: 'Chofer',
-      value: 'DRIVER'
-    },
-    {
-      text: 'Pasajero',
-      value: 'PASSENGER'
-    },
-    {
-      text: 'Regular',
-      value: 'REGULAR'
-    }
+  roleTypes: { text: string; value: UserRole }[] = [
+    { text: 'Administrador', value: UserRole.ADMIN },
+    { text: 'Supervisor', value: UserRole.SUPERVISOR },
+    { text: 'Empleado', value: UserRole.EMPLOYEE },
+    { text: 'Chofer', value: UserRole.DRIVER },
+    { text: 'Pasajero', value: UserRole.PASSENGER },
+    { text: 'Regular', value: UserRole.REGULAR }
   ];
 
   constructor(
     public dialogRef: MatDialogRef<EditUserComponent>,
     @Inject(MAT_DIALOG_DATA) public user: User
-  ) { }
+  ) {}
+
+  getProfileImageUrl(): string {
+    if (!this.user.profileImage?.filename) {
+      return 'assets/images/user.png';
+    }
+
+    if (this.user.profileImage.filename.startsWith('data:image')) {
+      return this.user.profileImage.filename;
+    }
+
+    return `${this.profileImageBaseUrl}${this.user.profileImage.filename}`;
+  }
 }

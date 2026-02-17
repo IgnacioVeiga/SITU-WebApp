@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { User } from 'src/app/shared/models/user.model';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
-
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { TranslateModule } from '@ngx-translate/core';
+import { User, UserRole } from 'src/app/shared/models/user.model';
 
 @Component({
     templateUrl: './add-user.component.html',
@@ -25,17 +24,37 @@ import { TranslateModule } from '@ngx-translate/core';
     ]
 })
 export class AddUserComponent {
-  user: User = new User();
-  roleTypes: string[] = ['Administrador', 'Chofer', 'Otro']
+  readonly fallbackProfileImage = 'assets/images/user.png';
+  user: User = {
+    ...new User(),
+    role: UserRole.EMPLOYEE
+  };
 
-  onFileSelected(event: any): void {
-    const file: File = event.target.files[0];
+  roleTypes: { label: string; value: UserRole }[] = [
+    { label: 'Administrador', value: UserRole.ADMIN },
+    { label: 'Supervisor', value: UserRole.SUPERVISOR },
+    { label: 'Empleado', value: UserRole.EMPLOYEE },
+    { label: 'Chofer', value: UserRole.DRIVER },
+    { label: 'Pasajero', value: UserRole.PASSENGER }
+  ];
 
-    // Preview the image before uploading it to the server.
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    // Preview only. Upload is handled later by the backend endpoint.
     const reader = new FileReader();
-    reader.onload = (e) => {
-      this.user.profileImage.filename = e.target?.result as string;
+    reader.onload = (loadEvent) => {
+      this.user.profileImage.filename = String(loadEvent.target?.result || '');
     };
     reader.readAsDataURL(file);
+  }
+
+  getProfilePreview(): string {
+    return this.user.profileImage.filename || this.fallbackProfileImage;
   }
 }

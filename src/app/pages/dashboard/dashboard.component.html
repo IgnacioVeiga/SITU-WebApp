@@ -1,45 +1,59 @@
-<div class="title">
-    <h1>{{'DASHBOARD' | translate}}</h1>
-</div>
+<section class="page-shell">
+    <app-page-header titleKey="DASHBOARD" subtitle="Resumen general del estado operativo"></app-page-header>
 
-<mat-grid-list cols="2" rowHeight="4:3">
-    <mat-grid-tile>
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>{{'ALERTS' | translate}}</mat-card-title>
-                <mat-card-subtitle>Total: 5</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-                <div class="card-content">
-                    <div class="alert-info">
-                        <p>Nuevas alertas hoy: 2</p>
-                        <p>Alertas resueltas: 3</p>
-                    </div>
-                    <div class="chart-placeholder">
-                        <canvas #alertChart></canvas>
-                    </div>
-                </div>
-            </mat-card-content>
-        </mat-card>
-    </mat-grid-tile>
+    <section class="kpi-grid">
+        <article class="card-shell kpi-card">
+            <div class="kpi-icon"><mat-icon>campaign</mat-icon></div>
+            <div>
+                <p class="kpi-value">15</p>
+                <p class="kpi-label">Alertas activas</p>
+            </div>
+        </article>
 
-    <mat-grid-tile>
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>{{'REPORTS' | translate}}</mat-card-title>
-                <mat-card-subtitle>Total: 10</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-                <div class="card-content">
-                    <div class="report-info">
-                        <p>Reportes nuevos hoy: 4</p>
-                        <p>Reportes en progreso: 6</p>
-                    </div>
-                    <div class="chart-placeholder">
-                        <canvas #reportChart></canvas>
-                    </div>
-                </div>
-            </mat-card-content>
-        </mat-card>
-    </mat-grid-tile>
-</mat-grid-list>
+        <article class="card-shell kpi-card">
+            <div class="kpi-icon"><mat-icon>fact_check</mat-icon></div>
+            <div>
+                <p class="kpi-value">66</p>
+                <p class="kpi-label">Denuncias totales</p>
+            </div>
+        </article>
+
+        <article class="card-shell kpi-card">
+            <div class="kpi-icon"><mat-icon>pending_actions</mat-icon></div>
+            <div>
+                <p class="kpi-value">29</p>
+                <p class="kpi-label">Pendientes de revisión</p>
+            </div>
+        </article>
+
+        <article class="card-shell kpi-card">
+            <div class="kpi-icon"><mat-icon>task_alt</mat-icon></div>
+            <div>
+                <p class="kpi-value">33</p>
+                <p class="kpi-label">Cerradas esta semana</p>
+            </div>
+        </article>
+    </section>
+
+    <section class="chart-grid">
+        <article class="card-shell chart-card">
+            <div class="chart-header">
+                <h2>Evolución semanal de alertas</h2>
+                <p>Tendencia de los últimos 7 días</p>
+            </div>
+            <div class="chart-container">
+                <canvas #alertChart></canvas>
+            </div>
+        </article>
+
+        <article class="card-shell chart-card">
+            <div class="chart-header">
+                <h2>Estado actual de denuncias</h2>
+                <p>Distribución por estado</p>
+            </div>
+            <div class="chart-container">
+                <canvas #complaintChart></canvas>
+            </div>
+        </article>
+    </section>
+</section>

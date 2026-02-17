@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { CreateAlertComponent } from 'src/app/pages/alerts/create/create-alert.component';
 import { AlertDetailsComponent } from 'src/app/pages/alerts/details/alert-details.component';
+import { PageHeaderComponent } from 'src/app/shared/components/page-header/page-header.component';
 import { Alert, AlertPriority } from 'src/app/shared/models/alert.model';
 import { Page } from 'src/app/shared/models/page.model';
 import { TruncatePipe } from 'src/app/shared/pipes/truncate.pipe';
@@ -26,7 +27,8 @@ import { AlertService } from 'src/app/shared/services/alert.service';
         TranslateModule,
         DatePipe,
         TruncatePipe,
-        NgClass
+        NgClass,
+        PageHeaderComponent
     ]
 })
 export class AlertListComponent implements AfterViewInit {
@@ -103,5 +105,9 @@ export class AlertListComponent implements AfterViewInit {
       default:
         return 'Media';
     }
+  }
+
+  getPageSubtitle(): string {
+    return `${this.dataSource.data.length} alertas visibles de ${this.paginator?.length || 0} totales`;
   }
 }

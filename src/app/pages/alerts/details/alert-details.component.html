@@ -1,18 +1,28 @@
-<h1 mat-dialog-title>{{'DETAIL' | translate}}</h1>
+<div class="dialog-shell">
+    <h1 mat-dialog-title>{{ 'DETAIL' | translate }}</h1>
 
-<mat-dialog-content>
-    <h2>
-        {{ data.title }}
-    </h2>
-    <h4>
-        {{ data.alertDate | date: 'dd/MM/yyyy HH:mm'}} - {{ data.user.lastName }} {{ data.user.firstName }} -
-        {{'PRIORITY' | translate}}: {{ data.priority }}
-    </h4>
-    <p>
-        {{ data.description }}
-    </p>
-</mat-dialog-content>
+    <mat-dialog-content class="dialog-body">
+        <h2 class="dialog-title">{{ data.title }}</h2>
 
-<mat-dialog-actions align="center">
-    <button mat-raised-button color="primary" mat-dialog-close>{{'CLOSE' | translate}}</button>
-</mat-dialog-actions>
+        <div class="detail-row">
+            <span class="priority-chip" [ngClass]="getPriorityClass(data.priority)">
+                {{ 'PRIORITY' | translate }}: {{ getPriorityLabel(data.priority) }}
+            </span>
+            <span class="detail-date">{{ data.alertDate | date: 'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+
+        <p class="dialog-hint">Creada por: {{ data.user.lastName || '-' }} {{ data.user.firstName || '' }}</p>
+
+        @if (data.location) {
+        <p class="dialog-hint">{{ 'LOCATION' | translate }}: {{ data.location }}</p>
+        }
+
+        <hr class="dialog-divider" />
+
+        <p class="detail-description">{{ data.description }}</p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end" class="dialog-actions">
+        <button mat-raised-button color="primary" mat-dialog-close>{{ 'CLOSE' | translate }}</button>
+    </mat-dialog-actions>
+</div>

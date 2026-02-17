@@ -10,6 +10,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { UpdatePasswordComponent } from 'src/app/pages/auth/update-password/update-password.component';
 import { AddUserComponent } from 'src/app/pages/users/add/add-user.component';
 import { EditUserComponent } from 'src/app/pages/users/edit/edit-user.component';
+import { PageHeaderComponent } from 'src/app/shared/components/page-header/page-header.component';
 import { Page } from 'src/app/shared/models/page.model';
 import { User, UserRole } from 'src/app/shared/models/user.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -26,7 +27,8 @@ import { environment } from 'src/environments/environment';
         MatTableModule,
         MatPaginatorModule,
         TranslateModule,
-        NgClass
+        NgClass,
+        PageHeaderComponent
     ]
 })
 export class UserListComponent implements AfterViewInit {
@@ -181,5 +183,9 @@ export class UserListComponent implements AfterViewInit {
   useFallbackProfileImage(event: Event): void {
     const image = event.target as HTMLImageElement;
     image.src = this.fallbackProfileImage;
+  }
+
+  getPageSubtitle(): string {
+    return `${this.dataSource.data.length} usuarios visibles de ${this.paginator?.length || 0} totales`;
   }
 }

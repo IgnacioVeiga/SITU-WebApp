@@ -7,6 +7,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { PageHeaderComponent } from 'src/app/shared/components/page-header/page-header.component';
 import { Complaint, ComplaintState } from 'src/app/shared/models/complaint.model';
 import { Page } from 'src/app/shared/models/page.model';
 import { TruncatePipe } from 'src/app/shared/pipes/truncate.pipe';
@@ -23,7 +24,8 @@ import { ComplaintService } from 'src/app/shared/services/complaint.service';
         TranslateModule,
         DatePipe,
         TruncatePipe,
-        NgClass
+        NgClass,
+        PageHeaderComponent
     ]
 })
 export class ComplaintListComponent implements AfterViewInit {
@@ -73,6 +75,10 @@ export class ComplaintListComponent implements AfterViewInit {
 
   getTitleKey(): string {
     return this.listScope === 'all' ? 'ALL_COMPLAINTS' : 'MY_COMPLAINTS';
+  }
+
+  getPageSubtitle(): string {
+    return `${this.dataSource.data.length} registros visibles de ${this.paginator?.length || 0} totales`;
   }
 
   getStateLabel(state: ComplaintState): string {
