@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -11,13 +11,13 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root',
 })
 export class GenericAPIService {
-  private readonly _API_URL: string = environment.API_URL + '/api/situ';
+  private readonly apiBaseUrl: string = `${environment.API_URL}${environment.API_PREFIX}`;
   private readonly httpClient = inject(HttpClient);
   private readonly toastr = inject(ToastrService);
   private readonly translate = inject(TranslateService);
 
-  GET<T>(endpoint: string, args?: any): Observable<T> {
-    const url = `${this._API_URL}/${endpoint}`;
+  GET<T>(endpoint: string, args?: Record<string, string | number | boolean>): Observable<T> {
+    const url = `${this.apiBaseUrl}/${endpoint}`;
     return this.httpClient.get<ApiResponse<T>>(url, this.createHttpOptions(args)).pipe(
       map((response) => {
         this.handleSuccess(response);
@@ -27,8 +27,8 @@ export class GenericAPIService {
     );
   }
 
-  POST<T>(endpoint: string, body: any, args?: any): Observable<T> {
-    const url = `${this._API_URL}/${endpoint}`;
+  POST<T>(endpoint: string, body: unknown, args?: Record<string, string | number | boolean>): Observable<T> {
+    const url = `${this.apiBaseUrl}/${endpoint}`;
     return this.httpClient.post<ApiResponse<T>>(url, body, this.createHttpOptions(args)).pipe(
       map((response) => {
         this.handleSuccess(response);
@@ -38,8 +38,8 @@ export class GenericAPIService {
     );
   }
 
-  PUT<T>(endpoint: string, body: any): Observable<T> {
-    const url = `${this._API_URL}/${endpoint}`;
+  PUT<T>(endpoint: string, body: unknown): Observable<T> {
+    const url = `${this.apiBaseUrl}/${endpoint}`;
     return this.httpClient.put<ApiResponse<T>>(url, body).pipe(
       map((response) => {
         this.handleSuccess(response);
@@ -49,8 +49,8 @@ export class GenericAPIService {
     );
   }
 
-  PATCH<T>(endpoint: string, body: any): Observable<T> {
-    const url = `${this._API_URL}/${endpoint}`;
+  PATCH<T>(endpoint: string, body: unknown): Observable<T> {
+    const url = `${this.apiBaseUrl}/${endpoint}`;
     return this.httpClient.patch<ApiResponse<T>>(url, body).pipe(
       map((response) => {
         this.handleSuccess(response);
@@ -61,7 +61,7 @@ export class GenericAPIService {
   }
 
   DELETE<T>(endpoint: string): Observable<T> {
-    const url = `${this._API_URL}/${endpoint}`;
+    const url = `${this.apiBaseUrl}/${endpoint}`;
     return this.httpClient.delete<ApiResponse<T>>(url).pipe(
       map((response) => {
         this.handleSuccess(response);
@@ -71,7 +71,7 @@ export class GenericAPIService {
     );
   }
 
-  private createHttpOptions(args?: any): { headers: HttpHeaders, params: HttpParams } {
+  private createHttpOptions(args?: Record<string, string | number | boolean>): { headers: HttpHeaders; params: HttpParams; withCredentials: boolean } {
     const httpOptions = {
       headers: new HttpHeaders(),
       params: new HttpParams(),
@@ -79,16 +79,14 @@ export class GenericAPIService {
     };
 
     if (args) {
-      for (const key in args) {
-        if (args.hasOwnProperty(key)) {
-          httpOptions.params = httpOptions.params.set(key, args[key]);
-        }
+      for (const [key, value] of Object.entries(args)) {
+        httpOptions.params = httpOptions.params.set(key, String(value));
       }
     }
 
     return httpOptions;
   }
-  
+
   private handleSuccess<T>(response: ApiResponse<T>): void {
     if (response.message) {
       const needsTranslation = /^[A-Z0-9._-]+$/.test(response.message);
@@ -96,8 +94,7 @@ export class GenericAPIService {
         this.translate.get(response.message).subscribe((translatedMessage) => {
           this.toastr.success(translatedMessage);
         });
-      }
-      else {
+      } else {
         this.toastr.success(response.message);
       }
     }

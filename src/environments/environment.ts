@@ -1,4 +1,5 @@
 export const environment = {
-    production: true,
-    API_URL: 'https://server-situ-app.koyeb.app'
+  production: true,
+  API_URL: 'https://server-situ-app.koyeb.app',
+  API_PREFIX: '/api/v1'
 };
