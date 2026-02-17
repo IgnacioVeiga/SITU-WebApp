@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Alert } from 'src/app/shared/models/alert.model';
+import { Alert, AlertPriority } from 'src/app/shared/models/alert.model';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
@@ -27,7 +27,7 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class CreateAlertComponent {
   alert: Alert = new Alert();
-  priorityTypes: string[] = ['ALTA', 'MEDIA', 'BAJA'];
+  priorityTypes: AlertPriority[] = [AlertPriority.HIGH, AlertPriority.MEDIUM, AlertPriority.LOW];
 
   constructor(
     private alertService: AlertService
@@ -35,9 +35,20 @@ export class CreateAlertComponent {
 
   onSubmit() {
     this.alertService.CreateAlert(this.alert).subscribe({
-      next: (data: any) => {
-        console.log(data);
-      }
+      next: () => {}
     });
+  }
+
+  getPriorityLabel(priority: AlertPriority): string {
+    switch (priority) {
+      case AlertPriority.HIGH:
+        return 'Alta';
+      case AlertPriority.MEDIUM:
+        return 'Media';
+      case AlertPriority.LOW:
+        return 'Baja';
+      default:
+        return priority;
+    }
   }
 }

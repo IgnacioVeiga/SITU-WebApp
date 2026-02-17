@@ -3,12 +3,13 @@
 </div>
 
 <div class="center">
-    <h2>{{ data.reportDate | date: 'dd/MM/yyyy HH:MM'}}</h2>
+    <h2>{{ data.createdAt | date: 'dd/MM/yyyy HH:MM'}}</h2>
     <article>
-        <h5>{{ data.user.lastName }} {{ data.user.firstName }} - {{'ACTUAL_STATE' | translate}}: {{ data.state }}</h5>
+        <h5>{{ data.reporter?.fullName || 'Anónimo' }} - {{'ACTUAL_STATE' | translate}}: {{ getStateLabel(data.state) }}</h5>
         <p>{{ data.description }}</p>
+        <p>Token: {{ data.trackingToken }}</p>
     </article>
-    @if (data.reportImage.filename) {
-    <img [src]="data.reportImage.filename" alt="Imagen adjunta" />
+    @if (data.maskedContactEmail || data.maskedContactPhone) {
+    <p>Contacto enmascarado: {{ data.maskedContactEmail || '-' }} | {{ data.maskedContactPhone || '-' }}</p>
     }
 </div>

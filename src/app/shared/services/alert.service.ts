@@ -15,6 +15,14 @@ export class AlertService {
   }
 
   CreateAlert(alert: Alert): Observable<Alert> {
-    return this.api.POST<Alert>('alerts', alert);
+    const payload = {
+      title: alert.title,
+      description: alert.description,
+      location: alert.location,
+      priority: alert.priority,
+      startsAt: alert.startsAt,
+      endsAt: alert.endsAt
+    };
+    return this.api.POST<Alert>('alerts', payload);
   }
 }

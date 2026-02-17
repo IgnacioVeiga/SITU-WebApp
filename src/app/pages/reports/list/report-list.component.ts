@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Report } from 'src/app/shared/models/report.model';
+import { Complaint, ComplaintState } from 'src/app/shared/models/report.model';
 import { ReportService } from 'src/app/shared/services/report.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -28,7 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class ReportListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = ['date', 'claimant', 'description', 'actions'];
-  dataSource: any = new MatTableDataSource<Report>;
+  dataSource: any = new MatTableDataSource<Complaint>;
   
   private reportService = inject(ReportService);
   private router = inject(Router);
@@ -42,7 +42,7 @@ export class ReportListComponent implements AfterViewInit {
   loadReports(): void {
     this.reportService.GetReports(this.paginator.pageIndex, this.paginator.pageSize)
       .subscribe({
-        next: (data: Page<Report>) => {
+        next: (data: Page<Complaint>) => {
           this.dataSource.data = data.content;
         },
         error: () => {
@@ -54,5 +54,20 @@ export class ReportListComponent implements AfterViewInit {
 
   openReport(id: number) {
     this.router.navigate(['report/item/', id]);
+  }
+
+  getStateLabel(state: ComplaintState): string {
+    switch (state) {
+      case ComplaintState.PENDING_REVIEW:
+        return 'Pendiente de revisión';
+      case ComplaintState.IN_REVIEW:
+        return 'En revisión';
+      case ComplaintState.CLOSED:
+        return 'Cerrada';
+      case ComplaintState.REOPENED:
+        return 'Reabierta';
+      default:
+        return state;
+    }
   }
 }

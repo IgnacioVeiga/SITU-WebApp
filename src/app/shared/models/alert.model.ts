@@ -6,12 +6,15 @@ export class Alert {
     public title: string = '';
     public description: string = '';
     public alertDate: Date = new Date();
-    public alertPriority: AlertPriority = AlertPriority.HIGH;
+    public startsAt: Date = new Date();
+    public endsAt: Date | null = null;
+    public active: boolean = true;
+    public priority: AlertPriority = AlertPriority.HIGH;
     public location: string = '';
 }
 
 export enum AlertPriority {
-    HIGH = "Alta",
-    MEDIUM = "Media",
-    LOW = "Baja"
+    HIGH = "HIGH",
+    MEDIUM = "MEDIUM",
+    LOW = "LOW"
 }

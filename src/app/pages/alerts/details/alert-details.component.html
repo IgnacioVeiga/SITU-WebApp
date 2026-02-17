@@ -6,7 +6,7 @@
     </h2>
     <h4>
         {{ data.alertDate | date: 'dd/MM/yyyy HH:MM'}} - {{ data.user.lastName }} {{ data.user.firstName }} -
-        {{'PRIORITY' | translate}}: {{ data.alertPriority }}
+        {{'PRIORITY' | translate}}: {{ data.priority }}
     </h4>
     <p>
         {{ data.description }}

@@ -22,10 +22,10 @@
 
       <mat-form-field>
         <mat-label>{{'PRIORITY' | translate}}</mat-label>
-        <mat-select id="priority" name="priority" [(ngModel)]="alert.alertPriority" required>
+        <mat-select id="priority" name="priority" [(ngModel)]="alert.priority" required>
           @for (option of priorityTypes; track option) {
             <mat-option [value]="option">
-              {{ option }}
+              {{ getPriorityLabel(option) }}
             </mat-option>
           }
         </mat-select>
