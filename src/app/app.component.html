@@ -1,10 +1,13 @@
 <router-outlet></router-outlet>
 
-<div class="language-switcher">
-  <button (click)="toggleLanguage()">
-    🌐 {{ currentLanguage }}
-  </button>
-</div>
+<button
+  type="button"
+  class="language-switcher"
+  (click)="toggleLanguage()"
+  [attr.aria-label]="'Cambiar idioma a ' + nextLanguageLabel"
+>
+  {{ nextLanguageLabel }}
+</button>
 
 @if (isLoading) {
 <div class="spinner">

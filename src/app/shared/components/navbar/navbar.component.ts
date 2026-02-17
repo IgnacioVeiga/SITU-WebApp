@@ -1,8 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ConfirmLogoutComponent } from '../../../pages/auth/login/confirm-logout.component';
-import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,27 +20,35 @@ import { TranslateModule } from '@ngx-translate/core';
         MatDialogModule,
         MatMenuModule,
         MatIconModule,
-        FormsModule,
         TranslateModule,
         RouterLink,
+        RouterLinkActive
     ]
 })
 export class NavbarComponent implements OnInit {
-  textToSearch: string = (localStorage.getItem('textToSearch') || '');
-  logoURL: string = './assets/images/bus_icon.png';
+  private readonly defaultLogo = './assets/images/bus_icon.png';
+
+  logoURL: string = this.defaultLogo;
   sessionRole: string | null = null;
+  sessionFullName: string | null = null;
 
   private dialog = inject(MatDialog);
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.authService.getSession().subscribe({
       next: (session: SessionDTO | null) => {
-        if (session) {
-          this.logoURL = session.logoImageURL;
-          this.sessionRole = String(session.role);
+        if (!session) {
+          return;
         }
+
+        this.logoURL = session.logoImageURL || this.defaultLogo;
+        this.sessionRole = String(session.role);
+        this.sessionFullName = session.fullName;
+      },
+      error: () => {
+        this.logoURL = this.defaultLogo;
       }
     });
   }
@@ -50,14 +57,11 @@ export class NavbarComponent implements OnInit {
     return this.sessionRole === 'ADMIN' || this.sessionRole === 'SUPERVISOR' || this.sessionRole === 'EMPLOYEE';
   }
 
-  doSearch() {
-    localStorage.setItem('textToSearch', this.textToSearch);
-    if (this.textToSearch.length > 1) {
-      // TODO
-    }
+  useDefaultLogo(): void {
+    this.logoURL = this.defaultLogo;
   }
 
-  confirmLogout() {
+  confirmLogout(): void {
     const dialogRef = this.dialog.open(ConfirmLogoutComponent);
 
     dialogRef.afterClosed().subscribe(result => {

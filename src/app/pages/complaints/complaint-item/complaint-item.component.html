@@ -1,15 +1,74 @@
-<div class="title" id="myDiv">
-    <h1>{{'DETAIL' | translate}}</h1>
-</div>
+<section class="page-shell">
+    <div class="title">
+        <div>
+            <h1>{{ 'DETAIL' | translate }} #{{ data.id }}</h1>
+            <p class="page-subtitle">Creada el {{ data.createdAt | date: 'dd/MM/yyyy HH:mm' }}</p>
+        </div>
+    </div>
 
-<div class="center">
-    <h2>{{ data.createdAt | date: 'dd/MM/yyyy HH:mm'}}</h2>
-    <article>
-        <h5>{{ data.reporter?.fullName || 'Anónimo' }} - {{'ACTUAL_STATE' | translate}}: {{ getStateLabel(data.state) }}</h5>
-        <p>{{ data.description }}</p>
-        <p>Token: {{ data.trackingToken }}</p>
+    <article class="card-shell complaint-card">
+        <header class="complaint-header">
+            <div class="status-group">
+                <span class="state-badge" [ngClass]="getStateClass(data.state)">{{ getStateLabel(data.state) }}</span>
+                <span class="priority-chip" [ngClass]="getPriorityClass(data.priority)">Prioridad {{ getPriorityLabel(data.priority) }}</span>
+            </div>
+            <p class="updated-at">Última actualización: {{ data.updatedAt | date: 'dd/MM/yyyy HH:mm' }}</p>
+        </header>
+
+        <section class="meta-grid">
+            <div class="meta-item">
+                <h3>Denunciante</h3>
+                <p>{{ data.reporter?.fullName || 'Anónimo' }}</p>
+            </div>
+
+            <div class="meta-item">
+                <h3>Asignado</h3>
+                <p>{{ data.assignee?.fullName || 'Sin asignar' }}</p>
+            </div>
+
+            <div class="meta-item">
+                <h3>Primera respuesta</h3>
+                <p>{{ data.firstResponseAt ? (data.firstResponseAt | date: 'dd/MM/yyyy HH:mm') : 'Pendiente' }}</p>
+            </div>
+
+            <div class="meta-item">
+                <h3>Cierre</h3>
+                <p>{{ data.closedAt ? (data.closedAt | date: 'dd/MM/yyyy HH:mm') : 'No cerrada' }}</p>
+            </div>
+
+            <div class="meta-item">
+                <h3>Vencimiento de respuesta</h3>
+                <p>{{ data.responseDueAt ? (data.responseDueAt | date: 'dd/MM/yyyy HH:mm') : 'No definido' }}</p>
+            </div>
+
+            <div class="meta-item">
+                <h3>Vencimiento de resolución</h3>
+                <p>{{ data.resolutionDueAt ? (data.resolutionDueAt | date: 'dd/MM/yyyy HH:mm') : 'No definido' }}</p>
+            </div>
+        </section>
+
+        <section class="description-block">
+            <h3>{{ 'DESCRIPTION' | translate }}</h3>
+            <p>{{ data.description || 'Sin descripción' }}</p>
+        </section>
+
+        @if (data.reason) {
+        <section class="description-block">
+            <h3>Motivo de cierre/reapertura</h3>
+            <p>{{ data.reason }}</p>
+        </section>
+        }
+
+        <section class="token-block">
+            <h3>{{ 'TRACKING_TOKEN' | translate }}</h3>
+            <code>{{ data.trackingToken }}</code>
+        </section>
+
+        @if (data.maskedContactEmail || data.maskedContactPhone) {
+        <section class="contact-block">
+            <h3>Contacto enmascarado</h3>
+            <p>{{ data.maskedContactEmail || '-' }} | {{ data.maskedContactPhone || '-' }}</p>
+        </section>
+        }
     </article>
-    @if (data.maskedContactEmail || data.maskedContactPhone) {
-    <p>Contacto enmascarado: {{ data.maskedContactEmail || '-' }} | {{ data.maskedContactPhone || '-' }}</p>
-    }
-</div>
+</section>

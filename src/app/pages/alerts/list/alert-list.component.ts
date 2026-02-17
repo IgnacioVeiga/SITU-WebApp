@@ -1,18 +1,18 @@
 import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
+import { DatePipe, NgClass } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { CreateAlertComponent } from 'src/app/pages/alerts/create/create-alert.component';
-import { ToastrService } from 'ngx-toastr';
-import { AlertDetailsComponent } from 'src/app/pages/alerts/details/alert-details.component';
-import { Alert } from 'src/app/shared/models/alert.model';
-import { AlertService } from 'src/app/shared/services/alert.service';
-import { TruncatePipe } from '../../../shared/pipes/truncate.pipe';
-import { DatePipe } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { Page } from 'src/app/shared/models/page.model';
 import { TranslateModule } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import { CreateAlertComponent } from 'src/app/pages/alerts/create/create-alert.component';
+import { AlertDetailsComponent } from 'src/app/pages/alerts/details/alert-details.component';
+import { Alert, AlertPriority } from 'src/app/shared/models/alert.model';
+import { Page } from 'src/app/shared/models/page.model';
+import { TruncatePipe } from 'src/app/shared/pipes/truncate.pipe';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
     templateUrl: './alert-list.component.html',
@@ -25,20 +25,29 @@ import { TranslateModule } from '@ngx-translate/core';
         MatPaginatorModule,
         TranslateModule,
         DatePipe,
-        TruncatePipe
+        TruncatePipe,
+        NgClass
     ]
 })
 export class AlertListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns: string[] = ['title', 'description', 'date', 'priority', 'actions'];
-  dataSource: any = new MatTableDataSource<Alert>;
 
-  private dialog = inject(MatDialog);
-  private toastr = inject(ToastrService);
-  private alertService = inject(AlertService);
+  readonly defaultPageSize = 20;
+  displayedColumns: string[] = ['title', 'description', 'date', 'priority', 'actions'];
+  dataSource: MatTableDataSource<Alert> = new MatTableDataSource<Alert>();
+
+  private readonly dialog = inject(MatDialog);
+  private readonly toastr = inject(ToastrService);
+  private readonly alertService = inject(AlertService);
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+
+    if (!this.paginator.pageSize) {
+      this.paginator.pageSize = this.defaultPageSize;
+    }
+
+    this.paginator.page.subscribe(() => this.loadAlerts());
     this.loadAlerts();
   }
 
@@ -46,27 +55,53 @@ export class AlertListComponent implements AfterViewInit {
     this.alertService.GetAlerts(this.paginator.pageIndex, this.paginator.pageSize).subscribe({
       next: (data: Page<Alert>) => {
         this.dataSource.data = data.content;
+        this.paginator.length = data.totalElements;
       },
       error: () => {
-        // TODO: review, organize and translate all these types of toastr messages.
-        this.toastr.error("No se pudo conectar al servidor", 'Intentelo más tarde');
+        this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
       }
     });
   }
 
-  CreateAlertDialog() {
+  createAlertDialog(): void {
     const dialogRef = this.dialog.open(CreateAlertComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
         this.loadAlerts();
       }
     });
   }
 
-  seeAlertDialog(alert: Alert) {
+  seeAlertDialog(alert: Alert): void {
     this.dialog.open(AlertDetailsComponent, {
       data: alert
     });
+  }
+
+  getPriorityClass(priority: AlertPriority): string {
+    switch (priority) {
+      case AlertPriority.HIGH:
+        return 'priority-high';
+      case AlertPriority.MEDIUM:
+        return 'priority-medium';
+      case AlertPriority.LOW:
+        return 'priority-low';
+      default:
+        return 'priority-medium';
+    }
+  }
+
+  getPriorityLabel(priority: AlertPriority): string {
+    switch (priority) {
+      case AlertPriority.HIGH:
+        return 'Alta';
+      case AlertPriority.MEDIUM:
+        return 'Media';
+      case AlertPriority.LOW:
+        return 'Baja';
+      default:
+        return 'Media';
+    }
   }
 }

@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -12,38 +12,35 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 export class AppComponent implements OnInit {
   isLoading: boolean = true;
 
-  get currentLanguage() {
-    return this.translate.currentLang;
+  private readonly router = inject(Router);
+  private readonly translate = inject(TranslateService);
+
+  get currentLanguage(): string {
+    return this.translate.currentLang || this.translate.getDefaultLang() || 'es';
   }
 
-  private router = inject(Router);
-  private translate = inject(TranslateService);
+  get nextLanguageLabel(): string {
+    return this.currentLanguage === 'es' ? 'EN' : 'ES';
+  }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.translate.addLangs(['en', 'es']);
     this.translate.setDefaultLang('es');
     this.translate.use('es');
 
-    this.router.events.subscribe({
-      next: (event: any) => {
-        if (event instanceof NavigationStart) {
-          this.isLoading = true;
-        } else if (event instanceof NavigationEnd || event instanceof NavigationError || event instanceof NavigationCancel) {
-          this.isLoading = false;
-        }
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.isLoading = true;
+        return;
+      }
+
+      if (event instanceof NavigationEnd || event instanceof NavigationError || event instanceof NavigationCancel) {
+        this.isLoading = false;
       }
     });
   }
 
-  toggleLanguage() {
-    switch (this.currentLanguage) {
-      case 'es':
-        this.translate.use('en')
-        break;
-
-      default:
-        this.translate.use('es');
-        break;
-    }
+  toggleLanguage(): void {
+    this.translate.use(this.currentLanguage === 'es' ? 'en' : 'es');
   }
 }

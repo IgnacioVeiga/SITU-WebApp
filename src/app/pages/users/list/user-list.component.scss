@@ -1,0 +1,69 @@
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.user-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.62rem;
+}
+
+.profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+}
+
+.user-name {
+  font-weight: 600;
+}
+
+.role-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.2rem 0.56rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.role-admin {
+  background: #ffe0ea;
+  color: #8e1d49;
+}
+
+.role-supervisor {
+  background: #d5edf8;
+  color: #1f5e79;
+}
+
+.role-employee {
+  background: #d9f2e0;
+  color: #1a5e3a;
+}
+
+.role-default {
+  background: #eceff1;
+  color: #47525a;
+}
+
+.actions-cell {
+  width: 95px;
+  text-align: right;
+}
+
+@media (max-width: 760px) {
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-actions button {
+    flex: 1 1 220px;
+  }
+}

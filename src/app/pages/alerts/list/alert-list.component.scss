@@ -1,0 +1,28 @@
+.header-action {
+  box-shadow: 0 8px 18px rgba(19, 122, 127, 0.22);
+}
+
+.title-cell {
+  font-weight: 600;
+}
+
+.description-text {
+  color: var(--text);
+}
+
+.date-cell {
+  color: var(--text-muted);
+  font-size: 0.87rem;
+  white-space: nowrap;
+}
+
+.actions-cell {
+  width: 72px;
+  text-align: right;
+}
+
+@media (max-width: 920px) {
+  .date-cell {
+    white-space: normal;
+  }
+}

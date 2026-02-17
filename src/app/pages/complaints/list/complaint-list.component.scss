@@ -1,0 +1,30 @@
+.date-cell {
+  color: var(--text-muted);
+  font-size: 0.87rem;
+  white-space: nowrap;
+}
+
+.claimant-cell {
+  font-weight: 600;
+}
+
+.description-text {
+  margin-left: 0.55rem;
+  color: var(--text);
+}
+
+.actions-cell {
+  width: 70px;
+  text-align: right;
+}
+
+@media (max-width: 920px) {
+  .date-cell {
+    white-space: normal;
+  }
+
+  .description-text {
+    display: block;
+    margin: 0.4rem 0 0;
+  }
+}

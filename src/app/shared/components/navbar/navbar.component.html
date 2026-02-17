@@ -1,46 +1,53 @@
-<mat-toolbar color="primary">
-    <!-- Phone -->
-    <button mat-icon-button class="hamburger" [matMenuTriggerFor]="menu">
+<mat-toolbar class="app-toolbar">
+    <button mat-icon-button class="hamburger" [matMenuTriggerFor]="menu" aria-label="Open navigation menu">
         <mat-icon>menu</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
-        <a mat-menu-item [routerLink]="'/dashboard'">{{'DASHBOARD' | translate}}</a>
-        @if (canSeeCompanyScopes()) {
-        <a mat-menu-item [routerLink]="'/complaint/all'">{{'ALL_COMPLAINTS' | translate}}</a>
-        }
-        <a mat-menu-item [routerLink]="'/complaint/my'">{{'MY_COMPLAINTS' | translate}}</a>
-        <a mat-menu-item [routerLink]="'/alert'">{{'ALERTS' | translate}}</a>
-        @if (canSeeCompanyScopes()) {
-        <a mat-menu-item [routerLink]="'/user'">{{'USERS' | translate}}</a>
-        }
-        <a mat-menu-item [routerLink]="'/bus'">{{'BUS_MAP' | translate}}</a>
-        <a mat-menu-item (click)="confirmLogout()">{{'LOGOUT' | translate}}</a>
-    </mat-menu>
 
-    <img [src]="logoURL" alt="Logo" class="logo">
+    <a class="brand" [routerLink]="'/dashboard'">
+        <img [src]="logoURL" (error)="useDefaultLogo()" alt="SITU logo" class="logo" />
+        <span class="brand-text">SITU</span>
+    </a>
 
-    <!-- Desktop -->
-    <div class="menu-items">
-        <a mat-button [routerLink]="'/dashboard'">{{'DASHBOARD' | translate}}</a>
+    <nav class="menu-items">
+        <a mat-button [routerLink]="'/dashboard'" routerLinkActive="active-link">{{'DASHBOARD' | translate}}</a>
         @if (canSeeCompanyScopes()) {
-        <a mat-button [routerLink]="'/complaint/all'">{{'ALL_COMPLAINTS' | translate}}</a>
+        <a mat-button [routerLink]="'/complaint/all'" routerLinkActive="active-link">{{'ALL_COMPLAINTS' | translate}}</a>
         }
-        <a mat-button [routerLink]="'/complaint/my'">{{'MY_COMPLAINTS' | translate}}</a>
-        <a mat-button [routerLink]="'/alert'">{{'ALERTS' | translate}}</a>
+        <a mat-button [routerLink]="'/complaint/my'" routerLinkActive="active-link">{{'MY_COMPLAINTS' | translate}}</a>
+        <a mat-button [routerLink]="'/alert'" routerLinkActive="active-link">{{'ALERTS' | translate}}</a>
         @if (canSeeCompanyScopes()) {
-        <a mat-button [routerLink]="'/user'">{{'USERS' | translate}}</a>
+        <a mat-button [routerLink]="'/user'" routerLinkActive="active-link">{{'USERS' | translate}}</a>
         }
-        <a mat-button [routerLink]="'/bus'">{{'BUS_MAP' | translate}}</a>
+        <a mat-button [routerLink]="'/bus'" routerLinkActive="active-link">{{'BUS_MAP' | translate}}</a>
+    </nav>
+
+    <span class="spacer"></span>
+
+    @if (sessionFullName) {
+    <div class="session-info">
+        <span class="session-name">{{ sessionFullName }}</span>
+        @if (sessionRole) {
+        <span class="session-role">{{ sessionRole }}</span>
+        }
     </div>
+    }
 
-    <span class="spacer"></span>
-
-    <input class="searchbar" type='search' placeholder="{{'SEARCH' | translate}} ..." [(ngModel)]="textToSearch" (input)="doSearch()" />
-
-    <span class="spacer"></span>
-
-    <a mat-button id="logout" (click)="confirmLogout()">
+    <button mat-button id="logout" type="button" (click)="confirmLogout()">
         <mat-icon>exit_to_app</mat-icon>
         {{'LOGOUT' | translate}}
-    </a>
+    </button>
 </mat-toolbar>
+
+<mat-menu #menu="matMenu">
+    <a mat-menu-item [routerLink]="'/dashboard'">{{'DASHBOARD' | translate}}</a>
+    @if (canSeeCompanyScopes()) {
+    <a mat-menu-item [routerLink]="'/complaint/all'">{{'ALL_COMPLAINTS' | translate}}</a>
+    }
+    <a mat-menu-item [routerLink]="'/complaint/my'">{{'MY_COMPLAINTS' | translate}}</a>
+    <a mat-menu-item [routerLink]="'/alert'">{{'ALERTS' | translate}}</a>
+    @if (canSeeCompanyScopes()) {
+    <a mat-menu-item [routerLink]="'/user'">{{'USERS' | translate}}</a>
+    }
+    <a mat-menu-item [routerLink]="'/bus'">{{'BUS_MAP' | translate}}</a>
+    <button mat-menu-item type="button" (click)="confirmLogout()">{{'LOGOUT' | translate}}</button>
+</mat-menu>

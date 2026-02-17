@@ -1,67 +1,120 @@
-mat-toolbar {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 20px;
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 68px;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(120deg, var(--primary), var(--primary-strong));
+  color: #f5fbfc;
+  box-shadow: 0 10px 22px rgba(15, 101, 106, 0.35);
 }
 
-button.hamburger {
-    margin-right: 10px;
-    display: none;
+.hamburger {
+  display: none;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.14);
+  padding: 0.2rem;
+}
+
+.brand-text {
+  font-size: 1.08rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
 }
 
 .menu-items {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
-@media (max-width: 1200px) {
-    .menu-items {
-        display: none;
-    }
-
-    button.hamburger {
-        display: block;
-    }
-
-    .searchbar {
-        width: 10em;
-    }
+.menu-items a,
+#logout {
+  border-radius: 999px;
+  color: #f5fbfc;
 }
 
-@media (max-width: 750px) {
-    img {
-        display: none;
-    }
+.menu-items a.active-link {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
 
-    #logout {
-        display: none;
-    }
+#logout {
+  margin-left: 0.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
 
-    button.hamburger {
-        display: block;
-    }
-
-    .searchbar {
-        width: 24em;
-    }
+#logout:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
-.searchbar {
-    min-height: 32px;
-    padding: 0.15rem 1.5rem;
-    outline: none;
-    border: aliceblue;
-    line-height: 1.15;
-    box-shadow: 0px 10px 20px -15px;
-    width: 24em;
+.session-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 0.1rem;
 }
 
-img {
-    width: 132px;
-    height: 45px;
+.session-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.session-role {
+  border-radius: 999px;
+  padding: 0.18rem 0.56rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 1080px) {
+  .menu-items,
+  .session-info,
+  #logout {
+    display: none;
+  }
+
+  .hamburger {
+    display: inline-flex;
+    color: #ffffff;
+  }
+}
+
+@media (max-width: 620px) {
+  .app-toolbar {
+    min-height: 62px;
+    padding: 0.38rem 0.75rem;
+  }
+
+  .brand-text {
+    font-size: 0.98rem;
+  }
+
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
 }

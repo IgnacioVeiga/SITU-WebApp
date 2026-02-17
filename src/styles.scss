@@ -1,87 +1,257 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
-// @import "leaflet-draw/dist/leaflet.draw.css";
-// @import "leaflet/dist/leaflet.css";
 
-// background-color: #efa51d;
+:root {
+  --bg: #edf3f5;
+  --bg-accent: #d8e7ea;
+  --surface: #ffffff;
+  --surface-soft: #f6fafb;
+  --border: #d6e0e3;
+  --text: #1f2d36;
+  --text-muted: #5f707b;
+
+  --primary: #137a7f;
+  --primary-strong: #0f656a;
+  --primary-soft: #86cecb;
+  --accent: #e12885;
+  --danger: #d33b64;
+
+  --shadow-soft: 0 10px 30px rgba(31, 45, 54, 0.08);
+  --shadow-card: 0 12px 30px rgba(19, 122, 127, 0.08);
+  --radius-md: 14px;
+  --radius-lg: 18px;
+}
 
 html,
 body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'IBM Plex Sans', 'Trebuchet MS', 'Segoe UI', sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(134, 206, 203, 0.22), transparent 42%),
+    radial-gradient(circle at 100% 0%, rgba(225, 40, 133, 0.12), transparent 36%),
+    linear-gradient(180deg, var(--bg), var(--bg-accent));
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--primary-strong);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: 0;
 }
 
 .spinner {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 998;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background-color: rgba(20, 38, 49, 0.48);
+  backdrop-filter: blur(2px);
+  z-index: 998;
 
-    mat-spinner {
-        width: 6rem;
-        height: 6rem;
-    }
+  mat-spinner {
+    width: 6rem;
+    height: 6rem;
+  }
 }
 
-.logo {
-    width: 120;
+.app-main {
+  width: min(1240px, 100%);
+  margin: 1.4rem auto 2.2rem;
+  padding: 0 1rem;
 }
 
-.center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.row-buttons {
-    display: flex;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    gap: 20px;
+.page-shell {
+  display: grid;
+  gap: 1rem;
 }
 
 .title {
-    display: flex;
-    align-items: baseline;
-    margin: 10px;
-    gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0;
+
+  h1 {
+    font-size: clamp(1.35rem, 2.1vw, 1.85rem);
+    letter-spacing: 0.01em;
+  }
+}
+
+.page-subtitle {
+  margin-top: 0.25rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.card-shell,
+.mat-elevation-z8 {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.table-shell {
+  padding: 0.25rem 0;
+}
+
+.mat-mdc-table {
+  background: transparent;
+}
+
+.mat-mdc-header-row {
+  background: var(--surface-soft);
+}
+
+.mat-mdc-header-cell {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.mat-mdc-cell,
+.mat-mdc-header-cell {
+  padding: 0.9rem 0.95rem;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  background: rgba(134, 206, 203, 0.08);
+}
+
+.empty-row {
+  color: var(--text-muted);
+  text-align: center;
+  font-size: 0.93rem;
+  padding: 1.2rem 0.9rem;
+}
+
+.state-badge,
+.priority-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.22rem 0.62rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.state-pending {
+  background: #ffe9c7;
+  color: #8b5f17;
+}
+
+.state-in-review {
+  background: #d5eef8;
+  color: #1f5e79;
+}
+
+.state-closed {
+  background: #d9f2e0;
+  color: #1a5e3a;
+}
+
+.state-reopened {
+  background: #f7d8ea;
+  color: #83305d;
+}
+
+.priority-high {
+  background: #ffd7e3;
+  color: #8e1d49;
+}
+
+.priority-medium {
+  background: #d5edf8;
+  color: #1f5e79;
+}
+
+.priority-low {
+  background: #d9f2e0;
+  color: #1a5e3a;
+}
+
+.logo {
+  width: 120px;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row-buttons {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  gap: 20px;
 }
 
 .row {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
 }
 
 .column {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-// Fixes leaflet's icons
 .leaflet-container {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 ::-webkit-scrollbar {
-    width: 12px;
+  width: 11px;
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #3f51b5;
-    border-radius: 4px;
+  background: rgba(19, 122, 127, 0.55);
+  border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #3949ab;
+  background: var(--primary);
+}
+
+@media (max-width: 960px) {
+  .app-main {
+    margin-top: 1rem;
+  }
+
+  .mat-mdc-cell,
+  .mat-mdc-header-cell {
+    padding: 0.7rem 0.66rem;
+  }
 }
