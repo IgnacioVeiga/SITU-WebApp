@@ -5,13 +5,15 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     template: `
-    <h1 mat-dialog-title>{{'AFTER_SIGNUP_TITLE' | translate}}</h1>
-    <mat-dialog-content>
-      <p [innerHTML]="'AFTER_SIGNUP_TEXT' | translate: {email: email}"></p>
-    </mat-dialog-content>
-    <mat-dialog-actions align="center">
-      <button mat-raised-button color="primary" mat-dialog-close>{{'CLOSE' | translate}}</button>
-    </mat-dialog-actions>
+    <div class="dialog-shell">
+      <h1 mat-dialog-title>{{ 'AFTER_SIGNUP_TITLE' | translate }}</h1>
+      <mat-dialog-content class="dialog-body">
+        <p [innerHTML]="'AFTER_SIGNUP_TEXT' | translate: { email: email }"></p>
+      </mat-dialog-content>
+      <mat-dialog-actions align="end" class="dialog-actions">
+        <button mat-raised-button color="primary" mat-dialog-close>{{ 'CLOSE' | translate }}</button>
+      </mat-dialog-actions>
+    </div>
 `,
     imports: [
         MatButtonModule,
@@ -20,5 +22,5 @@ import { TranslateModule } from '@ngx-translate/core';
     ]
 })
 export class AfterSignUpComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public email: string) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public email: string) {}
 }

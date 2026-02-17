@@ -1,17 +1,18 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import { FakeCaptchaComponent } from 'src/app/shared/components/fake-captcha/fake-captcha.component';
+import { AuthPanelComponent } from 'src/app/shared/components/auth-panel/auth-panel.component';
+import { SignUpForm } from 'src/app/shared/models/auth.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { AfterSignUpComponent } from './after.signup.component';
-import { SignUpForm } from 'src/app/shared/models/auth.model';
-import { FakeCaptchaComponent } from 'src/app/shared/components/fake-captcha/fake-captcha.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { MatCardModule } from '@angular/material/card';
 
 @Component({
     templateUrl: './signup.component.html',
@@ -22,8 +23,9 @@ import { MatCardModule } from '@angular/material/card';
         MatDialogModule,
         MatIconModule,
         MatInputModule,
-        MatCardModule,
+        MatFormFieldModule,
         FakeCaptchaComponent,
+        AuthPanelComponent,
         TranslateModule
     ]
 })
@@ -36,28 +38,36 @@ export class SignupComponent {
     lastName: '',
     note: undefined,
     phone: ''
-  }
+  };
 
-  private toastr = inject(ToastrService);
-  private dialog = inject(MatDialog);
-  private router = inject(Router);
-  private authService = inject(AuthService);
+  isSubmitting: boolean = false;
 
-  goTo(route: string) {
+  private readonly toastr = inject(ToastrService);
+  private readonly dialog = inject(MatDialog);
+  private readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
+
+  goTo(route: string): void {
     this.router.navigate([route]);
   }
 
-  onSubmit() {
+  onSubmit(): void {
+    if (this.isSubmitting) {
+      return;
+    }
+
+    this.isSubmitting = true;
+
     this.authService.signup(this.form).subscribe({
-      next: (resp: any) => {
+      next: () => {
         this.dialog.open(AfterSignUpComponent, { data: this.form.email })
           .afterClosed().subscribe(() => {
             this.goTo('auth/login');
           });
       },
       error: () => {
-        // TODO: review, organize and translate all these types of toastr messages.
-        this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
+        this.isSubmitting = false;
+        this.toastr.error('No se pudo enviar el formulario.', 'Intentelo más tarde');
       }
     });
   }

@@ -1,74 +1,53 @@
-<form #signupForm="ngForm" (ngSubmit)="onSubmit()">
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>{{ 'SIGNUP' | translate }}</mat-card-title>
-        </mat-card-header>
+<form #signupForm="ngForm" (ngSubmit)="onSubmit()" class="auth-form">
+    <app-auth-panel titleKey="SIGNUP" subtitleKey="AUTH_SIGNUP_SUBTITLE">
+        <div class="signup-grid">
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'COMPANY' | translate }}</mat-label>
+                <input matInput id="companyName" name="companyName" required [(ngModel)]="form.companyName" />
+            </mat-form-field>
 
-        <mat-card-content>
-            <div class="form-group">
-                <div class="column">
-                    <mat-form-field appearance="fill">
-                        <mat-label>{{'COMPANY' | translate}}</mat-label>
-                        <input matInput id="companyName" name="companyName" required [(ngModel)]="form.companyName">
-                    </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" id="email" name="email" required [(ngModel)]="form.email" autocomplete="email" />
+            </mat-form-field>
 
-                    <mat-form-field appearance="fill">
-                        <mat-label>Email</mat-label>
-                        <input matInput type="email" id="email" name="email" required [(ngModel)]="form.email">
-                    </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'PHONE' | translate }}</mat-label>
+                <input matInput type="tel" id="phone" name="phone" [(ngModel)]="form.phone" autocomplete="tel" />
+            </mat-form-field>
 
-                    <!-- <mat-form-field appearance="fill">
-                    <mat-label>Teléfono</mat-label>
-                    <input matInput type="number" id="phone" name="phone" [(ngModel)]="form.phone">
-                </mat-form-field> -->
-                </div>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'FIRSTNAME' | translate }}</mat-label>
+                <input matInput required [(ngModel)]="form.firstName" name="firstName" autocomplete="given-name" />
+            </mat-form-field>
 
-                <div class="column">
-                    <mat-form-field appearance="fill">
-                        <mat-label>{{ 'FIRSTNAME' | translate }}</mat-label>
-                        <input matInput required [(ngModel)]="form.firstName" name="firstName" />
-                    </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'LASTNAME' | translate }}</mat-label>
+                <input matInput required [(ngModel)]="form.lastName" name="lastName" autocomplete="family-name" />
+            </mat-form-field>
 
-                    <mat-form-field appearance="fill">
-                        <mat-label>{{ 'LASTNAME' | translate }}</mat-label>
-                        <input matInput required [(ngModel)]="form.lastName" name="lastName" />
-                    </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>DNI</mat-label>
+                <input matInput type="number" id="dni" name="dni" required [(ngModel)]="form.dni" min="1" />
+            </mat-form-field>
+        </div>
 
-                    <mat-form-field appearance="fill">
-                        <mat-label>DNI</mat-label>
-                        <input matInput type="number" id="dni" name="dni" required [(ngModel)]="form.dni">
-                    </mat-form-field>
-                </div>
+        <section class="signup-note">
+            <p>{{ 'SIGNUP_NOTE' | translate }}</p>
+        </section>
 
-                <div class="column">
-                    <p class="note">
-                        {{'SIGNUP_NOTE' | translate}}
-                    </p>
+        <fake-captcha></fake-captcha>
 
-                    <!-- <mat-form-field appearance="fill">
-                        <mat-label>Notas</mat-label>
-                        <textarea matInput id="notes" name="notes" [(ngModel)]="form.note" placeholder="Notas"></textarea>
-                    </mat-form-field> -->
-
-                    <span class="center">
-                        <fake-captcha></fake-captcha>
-                    </span>
-
-                    <!-- TODO: checkbox de aceptar terminos y condiciones de uso y el enlace a donde leerlos -->
-                </div>
-            </div>
-        </mat-card-content>
-
-        <mat-card-actions>
-            <button mat-button color="secondary" type="button" (click)="goTo('auth/login')">
-                <mat-icon>keyboard_arrow_left</mat-icon>
+        <div panelActions class="auth-actions">
+            <button mat-stroked-button type="button" (click)="goTo('auth/login')">
+                <mat-icon>arrow_back</mat-icon>
                 {{ 'LOGIN' | translate }}
             </button>
 
-            <button mat-raised-button color="primary" [disabled]="!signupForm.valid" type="submit">
+            <button mat-raised-button color="primary" [disabled]="!signupForm.valid || isSubmitting" type="submit">
                 <mat-icon>send</mat-icon>
                 {{ 'SUBMIT' | translate }}
             </button>
-        </mat-card-actions>
-    </mat-card>
+        </div>
+    </app-auth-panel>
 </form>

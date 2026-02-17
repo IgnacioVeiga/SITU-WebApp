@@ -1,25 +1,51 @@
-mat-card {
-    .form-group {
-        display: flex;
-        gap: 1rem;
-    }
-
-    mat-card-title {
-        font-size: 1.5rem;
-        color: #3f51b5;
-    }
-
-    mat-card-actions {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 1rem;
-    }
+.auth-form {
+  width: min(860px, 100%);
 }
 
-.note {
-    color: gray;
-    padding: 10px;
-    border-radius: 3px;
-    margin-bottom: 5px;
-    text-align: justify;
+.signup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 0.72rem;
+}
+
+.signup-note {
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+  border-radius: 12px;
+  padding: 0.8rem 0.9rem;
+
+  p {
+    margin: 0;
+    line-height: 1.55;
+    text-align: left;
+    color: var(--text-muted);
+  }
+}
+
+.auth-actions {
+  display: flex;
+  gap: 0.55rem;
+}
+
+.auth-actions button:last-child {
+  margin-left: auto;
+}
+
+@media (max-width: 760px) {
+  .signup-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .auth-actions button {
+    flex: 1 1 180px;
+  }
+
+  .auth-actions button:last-child {
+    margin-left: 0;
+  }
 }

@@ -1,13 +1,56 @@
-.tracking-card {
-  width: 100%;
-  max-width: 640px;
-  margin: 1.5rem auto;
+.auth-form {
+  width: min(620px, 100%);
 }
 
-.result-card {
-  margin-top: 1rem;
+.auth-actions {
+  display: flex;
+  gap: 0.55rem;
+  width: 100%;
 }
 
-.full-width {
-  width: 100%;
+.auth-actions button:last-child {
+  margin-left: auto;
+}
+
+.tracking-result-shell {
+  margin-top: 0.85rem;
+  width: min(620px, 100%);
+}
+
+.tracking-result-grid {
+  display: grid;
+  gap: 0.5rem;
+
+  p {
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+.tracking-description {
+  margin-top: 0.2rem;
+}
+
+.tracking-empty {
+  margin-top: 0.85rem;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 0.7rem 0.85rem;
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  width: min(620px, 100%);
+}
+
+@media (max-width: 700px) {
+  .auth-actions {
+    flex-wrap: wrap;
+  }
+
+  .auth-actions button {
+    flex: 1 1 180px;
+  }
+
+  .auth-actions button:last-child {
+    margin-left: 0;
+  }
 }

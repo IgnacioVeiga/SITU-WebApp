@@ -1,0 +1,19 @@
+<section class="auth-panel card-shell">
+  <header class="auth-panel-header">
+    <h2>{{ titleKey | translate }}</h2>
+
+    @if (subtitleText) {
+    <p class="auth-panel-subtitle">{{ subtitleText }}</p>
+    } @else if (subtitleKey) {
+    <p class="auth-panel-subtitle">{{ subtitleKey | translate }}</p>
+    }
+  </header>
+
+  <div class="auth-panel-content">
+    <ng-content></ng-content>
+  </div>
+
+  <footer class="auth-panel-actions">
+    <ng-content select="[panelActions]"></ng-content>
+  </footer>
+</section>

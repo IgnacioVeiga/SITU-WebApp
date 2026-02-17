@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { TranslateModule } from "@ngx-translate/core";
+import { Component } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'fake-captcha',
@@ -7,6 +7,4 @@ import { TranslateModule } from "@ngx-translate/core";
     styleUrls: ['./fake-captcha.component.scss'],
     imports: [TranslateModule]
 })
-export class FakeCaptchaComponent {
-    
-}
+export class FakeCaptchaComponent {}

@@ -1,12 +1,6 @@
-<mat-card class="tracking-card">
-    <mat-card-header>
-        <mat-card-title>{{ 'TRACK_COMPLAINT' | translate }}</mat-card-title>
-    </mat-card-header>
-
-    <mat-card-content>
-        <p>{{ 'TRACK_COMPLAINT_HELP' | translate }}</p>
-
-        <mat-form-field appearance="fill" class="full-width">
+<form class="auth-form" (ngSubmit)="searchByToken()">
+    <app-auth-panel titleKey="TRACK_COMPLAINT" subtitleKey="AUTH_TRACKING_SUBTITLE">
+        <mat-form-field appearance="outline">
             <mat-label>{{ 'TRACKING_TOKEN' | translate }}</mat-label>
             <input
                 matInput
@@ -14,31 +8,41 @@
                 id="trackingToken"
                 name="trackingToken"
                 [(ngModel)]="trackingToken"
+                required
             />
         </mat-form-field>
-    </mat-card-content>
 
-    <mat-card-actions>
-        <button mat-button color="secondary" type="button" (click)="goToLogin()">
-            {{ 'GO_BACK' | translate }}
-        </button>
-        <button mat-raised-button color="primary" type="button" (click)="searchByToken()">
-            {{ 'SEARCH' | translate }}
-        </button>
-    </mat-card-actions>
-</mat-card>
+        <div panelActions class="auth-actions">
+            <button mat-stroked-button type="button" (click)="goToLogin()">{{ 'GO_BACK' | translate }}</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!trackingToken.trim() || isSearching">
+                {{ 'SEARCH' | translate }}
+            </button>
+        </div>
+    </app-auth-panel>
+</form>
 
 @if (complaint) {
-<mat-card class="tracking-card result-card">
-    <mat-card-header>
-        <mat-card-title>{{ 'DETAIL' | translate }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <p><b>{{ 'TRACKING_TOKEN' | translate }}:</b> {{ complaint.trackingToken }}</p>
-        <p><b>{{ 'ACTUAL_STATE' | translate }}:</b> {{ getStateLabel(complaint.state) }}</p>
-        <p><b>{{ 'PRIORITY' | translate }}:</b> {{ complaint.priority }}</p>
-        <p><b>{{ 'DATETIME' | translate }}:</b> {{ complaint.createdAt | date: 'dd/MM/yyyy HH:mm' }}</p>
-        <p><b>{{ 'DESCRIPTION' | translate }}:</b> {{ complaint.description }}</p>
-    </mat-card-content>
-</mat-card>
+<div class="tracking-result-shell">
+    <app-auth-panel titleKey="DETAIL" subtitleKey="TRACKING_RESULT_SUBTITLE">
+        <div class="tracking-result-grid">
+            <p><b>{{ 'TRACKING_TOKEN' | translate }}:</b> {{ complaint.trackingToken }}</p>
+            <p>
+                <b>{{ 'ACTUAL_STATE' | translate }}:</b>
+                <span class="state-badge" [ngClass]="getStateClass(complaint.state)">{{ getStateLabel(complaint.state) }}</span>
+            </p>
+            <p>
+                <b>{{ 'PRIORITY' | translate }}:</b>
+                <span class="priority-chip" [ngClass]="getPriorityClass(complaint.priority)">{{ getPriorityLabel(complaint.priority) }}</span>
+            </p>
+            <p><b>{{ 'DATETIME' | translate }}:</b> {{ complaint.createdAt | date: 'dd/MM/yyyy HH:mm' }}</p>
+            <p class="tracking-description"><b>{{ 'DESCRIPTION' | translate }}:</b> {{ complaint.description }}</p>
+        </div>
+    </app-auth-panel>
+</div>
+}
+
+@if (!complaint && hasSearched && !isSearching) {
+<div class="tracking-empty">
+    {{ 'TRACKING_NOT_FOUND' | translate }}
+</div>
 }

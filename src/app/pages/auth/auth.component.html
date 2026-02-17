@@ -1,9 +1,15 @@
-<div class="auth-container">
-    <div class="auth-header">
+<section class="auth-shell">
+    <aside class="auth-hero card-shell">
+        <div class="hero-brand">
+            <img src="assets/images/bus_icon.png" alt="SITU logo" />
+            <span>SITU</span>
+        </div>
+
         <h1>{{ 'WELCOME' | translate }}</h1>
-    </div>
-    
-    <div class="auth-content">
+        <p>{{ 'AUTH_PORTAL_DESCRIPTION' | translate }}</p>
+    </aside>
+
+    <div class="auth-view">
         <router-outlet></router-outlet>
     </div>
-</div>
+</section>
