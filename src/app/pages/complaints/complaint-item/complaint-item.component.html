@@ -59,10 +59,12 @@
         </section>
         }
 
+        @if (data.trackingToken) {
         <section class="token-block">
             <h3>{{ 'TRACKING_TOKEN' | translate }}</h3>
             <code>{{ data.trackingToken }}</code>
         </section>
+        }
 
         @if (data.maskedContactEmail || data.maskedContactPhone) {
         <section class="contact-block">

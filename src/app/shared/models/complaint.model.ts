@@ -20,7 +20,7 @@ export class Complaint {
     public anonymous: boolean = false;
     public maskedContactEmail: string | null = null;
     public maskedContactPhone: string | null = null;
-    public trackingToken: string = '';
+    public trackingToken: string | null = null;
     public reportImageId: number | null = null;
 }
 
