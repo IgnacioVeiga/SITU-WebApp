@@ -14,19 +14,44 @@ The frontend builds backend URLs using:
 - `API_URL`
 - `API_PREFIX`
 
-Current defaults:
-- `src/environments/environment.development.ts` -> `http://localhost:8080` + `/api/v1`
-- `src/environments/environment.ts` -> `https://server-situ-app.koyeb.app` + `/api/v1`
+Environment files:
+- `src/environments/environment.ts` (`dev`)
+- `src/environments/environment.qa.ts` (`qa`)
+- `src/environments/environment.prod.ts` (`prod`)
+- `src/environments/environment.mock.ts` (`mock`)
 
 ## Run locally
 ```bash
 npm install
-npm start
+npm run start:dev
+```
+
+Starter scripts:
+
+- Linux/macOS: `./run.sh [dev|qa|mock|prod] [local|docker]`
+- PowerShell: `./run.ps1 [dev|qa|mock|prod] [local|docker]`
+- CMD: `run.bat [dev|qa|mock|prod] [local|docker]`
+
+`docker` mode expects `docker-compose.<env>.yml` in this repository.
+
+Other runtime modes:
+```bash
+npm run start:qa
+npm run start:mock
+npm run start:prod
 ```
 
 ## Build
 ```bash
 npm run build
+```
+
+Environment-specific builds:
+```bash
+npm run build:dev
+npm run build:qa
+npm run build:mock
+npm run build:prod
 ```
 
 ## Tests
@@ -44,3 +69,10 @@ npm run test:ci
 ## Documentation
 - `docs/routing.md`: route map and complaint navigation.
 - `docs/backend-contract.md`: frontend assumptions about backend payloads.
+- `docs/environments.md`: dev/qa/mock/prod setup.
+
+## VSCode helpers
+Tracked editor helpers are available in `.vscode/`:
+- `launch.json`: browser launches for dev/qa/mock/prod.
+- `tasks.json`: npm tasks for start/build/test.
+- `extensions.json`: recommended extensions.

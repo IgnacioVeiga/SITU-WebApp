@@ -1,0 +1,40 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Frontend: Dev",
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "npm: start:dev",
+      "url": "http://localhost:4200/"
+    },
+    {
+      "name": "Frontend: QA",
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "npm: start:qa",
+      "url": "http://localhost:4200/"
+    },
+    {
+      "name": "Frontend: Mock",
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "npm: start:mock",
+      "url": "http://localhost:4200/"
+    },
+    {
+      "name": "Frontend: Prod",
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "npm: start:prod",
+      "url": "http://localhost:4200/"
+    },
+    {
+      "name": "Frontend: Unit Tests",
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "npm: test",
+      "url": "http://localhost:9876/debug.html"
+    }
+  ]
+}
