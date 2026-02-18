@@ -21,7 +21,7 @@ export class RouteService {
         return this.api.PUT<BusRoute>(`routes/${routeId}`, route);
     }
 
-    deleteRoute(routeId: number): Observable<any> {
-        return this.api.DELETE<any>(`routes/${routeId}`);
+    deleteRoute(routeId: number): Observable<void> {
+        return this.api.DELETE<void>(`routes/${routeId}`);
     }
 }

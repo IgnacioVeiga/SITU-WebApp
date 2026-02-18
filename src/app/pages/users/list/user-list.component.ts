@@ -45,8 +45,6 @@ export class UserListComponent implements AfterViewInit {
   private readonly userService = inject(UserService);
   private readonly authService = inject(AuthService);
 
-  private companyId: number | null = null;
-
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
 
@@ -63,7 +61,6 @@ export class UserListComponent implements AfterViewInit {
           return;
         }
 
-        this.companyId = session.companyId;
         this.loadUsers();
       },
       error: () => {
@@ -73,11 +70,7 @@ export class UserListComponent implements AfterViewInit {
   }
 
   loadUsers(): void {
-    if (!this.companyId) {
-      return;
-    }
-
-    this.userService.GetUsers(this.paginator.pageIndex, this.paginator.pageSize, this.companyId).subscribe({
+    this.userService.GetUsers(this.paginator.pageIndex, this.paginator.pageSize).subscribe({
       next: (data: Page<User>) => {
         this.dataSource.data = data.content;
         this.paginator.length = data.totalElements;

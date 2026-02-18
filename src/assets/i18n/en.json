@@ -11,8 +11,39 @@
       "INSUFFICIENT_PERMISSIONS": "You do not have enough permissions to perform this action.",
       "EMAIL_DELIVERY_FAILED": "Could not send the registration email. Please try again."
     },
+    "ALERT": {
+      "NOT_FOUND": "Alert not found.",
+      "INVALID_WINDOW": "Alert end date must be after the start date."
+    },
+    "LINE": {
+      "NOT_FOUND": "Line not found.",
+      "NUMBER_REQUIRED": "Line number is required.",
+      "NUMBER_EXISTS": "Line number is already in use.",
+      "INVALID_REQUEST": "Invalid line request."
+    },
+    "ROUTE": {
+      "NOT_FOUND": "Route not found.",
+      "LINE_REQUIRED": "A line is required for the route.",
+      "NAME_REQUIRED": "Route name is required.",
+      "COORDINATES_REQUIRED": "Route coordinates are required.",
+      "INVALID_REQUEST": "Invalid route request."
+    },
+    "STOP": {
+      "NOT_FOUND": "Stop not found.",
+      "NAME_REQUIRED": "Stop name is required.",
+      "LOCATION_REQUIRED": "Stop location is required.",
+      "LOCATION_INVALID": "Stop location format is invalid."
+    },
+    "IMAGE": {
+      "FILE_REQUIRED": "An image file is required.",
+      "INVALID_REQUEST": "Invalid image upload request.",
+      "INVALID_FORMAT": "Invalid image format.",
+      "NOT_FOUND": "Image not found."
+    },
     "USER": {
       "NOT_FOUND": "User not found.",
+      "DNI_REQUIRED": "DNI is required.",
+      "INVALID_REQUEST": "Invalid user request.",
       "DNI_EXISTS": "The DNI is already registered.",
       "CANNOT_DELETE_REFERENCED": "Cannot delete this user because it has related records."
     }

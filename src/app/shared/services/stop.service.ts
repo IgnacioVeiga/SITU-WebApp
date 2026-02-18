@@ -13,15 +13,15 @@ export class StopService {
         return this.api.GET<BusStop[]>(`stops/route/${routeId}`);
     }
 
-    createStop(stop: any): Observable<any> {
-        return this.api.POST<any>('stops', stop);
+    createStop(stop: { name: string; locationGeoJson: string }): Observable<BusStop> {
+        return this.api.POST<BusStop>('stops', stop);
     }
 
-    updateStop(stopId: number, stop: any): Observable<any> {
-        return this.api.PUT<any>(`stops/${stopId}`, stop);
+    updateStop(stopId: number, stop: { name: string; locationGeoJson: string }): Observable<BusStop> {
+        return this.api.PUT<BusStop>(`stops/${stopId}`, stop);
     }
 
-    deleteStop(stopId: number): Observable<any> {
-        return this.api.DELETE<any>(`stops/${stopId}`);
+    deleteStop(stopId: number): Observable<void> {
+        return this.api.DELETE<void>(`stops/${stopId}`);
     }
 }

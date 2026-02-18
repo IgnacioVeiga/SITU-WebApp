@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { GenericAPIService } from './generic-api.service';
 import { Observable } from 'rxjs';
+import { BusLine } from '../models/bus.model';
 
 @Injectable({
     providedIn: 'root'
@@ -8,24 +9,24 @@ import { Observable } from 'rxjs';
 export class LineService {
     private api = inject(GenericAPIService);
 
-    getAllLines(): Observable<any[]> {
-        return this.api.GET<any[]>('lines');
+    getAllLines(): Observable<BusLine[]> {
+        return this.api.GET<BusLine[]>('lines');
     }
 
-    getLineById(lineId: number): Observable<any> {
-        return this.api.GET<any>(`lines/${lineId}`);
+    getLineById(lineId: number): Observable<BusLine> {
+        return this.api.GET<BusLine>(`lines/${lineId}`);
     }
 
-    createLine(line: any): Observable<any> {
-        return this.api.POST<any>(`lines`, line);
+    createLine(line: Pick<BusLine, 'number' | 'name'>): Observable<BusLine> {
+        return this.api.POST<BusLine>(`lines`, line);
     }
 
-    updateLine(lineId: number, line: any): Observable<any> {
-        return this.api.PUT<any>(`lines/${lineId}`, line);
+    updateLine(lineId: number, line: Pick<BusLine, 'number' | 'name'>): Observable<BusLine> {
+        return this.api.PUT<BusLine>(`lines/${lineId}`, line);
     }
 
-    deleteLine(lineId: number): Observable<any> {
-        return this.api.DELETE<any>(`lines/${lineId}`);
+    deleteLine(lineId: number): Observable<void> {
+        return this.api.DELETE<void>(`lines/${lineId}`);
     }
 }
 

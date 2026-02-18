@@ -16,8 +16,39 @@
       "INSUFFICIENT_PERMISSIONS": "No tienes permisos suficientes para realizar esta acción.",
       "EMAIL_DELIVERY_FAILED": "No se pudo enviar el correo de registro. Inténtalo nuevamente."
     },
+    "ALERT": {
+      "NOT_FOUND": "Alerta no encontrada.",
+      "INVALID_WINDOW": "La fecha de finalización debe ser posterior a la de inicio."
+    },
+    "LINE": {
+      "NOT_FOUND": "Línea no encontrada.",
+      "NUMBER_REQUIRED": "El número de línea es obligatorio.",
+      "NUMBER_EXISTS": "Ese número de línea ya existe.",
+      "INVALID_REQUEST": "Solicitud de línea inválida."
+    },
+    "ROUTE": {
+      "NOT_FOUND": "Recorrido no encontrado.",
+      "LINE_REQUIRED": "Debes indicar una línea para el recorrido.",
+      "NAME_REQUIRED": "El nombre del recorrido es obligatorio.",
+      "COORDINATES_REQUIRED": "Las coordenadas del recorrido son obligatorias.",
+      "INVALID_REQUEST": "Solicitud de recorrido inválida."
+    },
+    "STOP": {
+      "NOT_FOUND": "Parada no encontrada.",
+      "NAME_REQUIRED": "El nombre de la parada es obligatorio.",
+      "LOCATION_REQUIRED": "La ubicación de la parada es obligatoria.",
+      "LOCATION_INVALID": "El formato de la ubicación no es válido."
+    },
+    "IMAGE": {
+      "FILE_REQUIRED": "Debes seleccionar un archivo de imagen.",
+      "INVALID_REQUEST": "Solicitud de imagen inválida.",
+      "INVALID_FORMAT": "Formato de imagen inválido.",
+      "NOT_FOUND": "Imagen no encontrada."
+    },
     "USER": {
       "NOT_FOUND": "Usuario no encontrado.",
+      "DNI_REQUIRED": "El DNI es obligatorio.",
+      "INVALID_REQUEST": "Solicitud de usuario inválida.",
       "DNI_EXISTS": "El DNI ya está registrado.",
       "CANNOT_DELETE_REFERENCED": "No se puede eliminar el usuario porque tiene datos asociados."
     }
