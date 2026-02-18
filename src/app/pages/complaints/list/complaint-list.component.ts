@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/core';
 import { DatePipe, NgClass } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -28,21 +28,26 @@ import { ComplaintService } from 'src/app/shared/services/complaint.service';
         PageHeaderComponent
     ]
 })
-export class ComplaintListComponent implements AfterViewInit {
+export class ComplaintListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   readonly defaultPageSize = 20;
   displayedColumns: string[] = ['date', 'claimant', 'description', 'actions'];
   dataSource: MatTableDataSource<Complaint> = new MatTableDataSource<Complaint>();
   listScope: 'all' | 'mine' = 'mine';
+  titleKey: 'ALL_COMPLAINTS' | 'MY_COMPLAINTS' = 'MY_COMPLAINTS';
 
   private readonly complaintService = inject(ComplaintService);
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly toastr = inject(ToastrService);
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.listScope = (this.activatedRoute.snapshot.data['scope'] ?? 'mine') as 'all' | 'mine';
+    this.titleKey = this.listScope === 'all' ? 'ALL_COMPLAINTS' : 'MY_COMPLAINTS';
+  }
+
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
 
     if (!this.paginator.pageSize) {
@@ -71,10 +76,6 @@ export class ComplaintListComponent implements AfterViewInit {
 
   openComplaint(id: number): void {
     this.router.navigate(['complaint/item/', id]);
-  }
-
-  getTitleKey(): string {
-    return this.listScope === 'all' ? 'ALL_COMPLAINTS' : 'MY_COMPLAINTS';
   }
 
   getPageSubtitle(): string {
