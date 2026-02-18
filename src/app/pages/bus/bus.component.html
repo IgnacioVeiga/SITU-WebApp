@@ -1,7 +1,7 @@
 <section class="page-shell">
     <app-page-header titleKey="BUS_MAP" [subtitle]="getPageSubtitle()">
         <div headerActions>
-            <button mat-stroked-button type="button" (click)="resetSelection()" [disabled]="isLoadingLines">
+            <button mat-stroked-button type="button" (click)="resetSelection()" [disabled]="isLoadingLines || isRouteEditMode || isSavingRouteChanges">
                 <mat-icon>restart_alt</mat-icon>
                 {{ 'CLEAR' | translate }}
             </button>
@@ -25,7 +25,12 @@
                     <div class="select-list">
                         @for (line of busLines; track trackByLineId($index, line)) {
                             <label class="select-item">
-                                <input type="checkbox" [(ngModel)]="line.selected" (change)="onLineSelectionChanged()" />
+                                <input
+                                    type="checkbox"
+                                    [(ngModel)]="line.selected"
+                                    (change)="onLineSelectionChanged()"
+                                    [disabled]="isRouteEditMode || isSavingRouteChanges"
+                                />
                                 <span class="item-title">{{ line.number }} · {{ line.name }}</span>
                             </label>
                         }
@@ -50,7 +55,12 @@
                     <div class="select-list">
                         @for (route of busRoutes; track trackByRouteId($index, route)) {
                             <label class="select-item">
-                                <input type="checkbox" [(ngModel)]="route.selected" (change)="onRouteSelectionChanged()" />
+                                <input
+                                    type="checkbox"
+                                    [(ngModel)]="route.selected"
+                                    (change)="onRouteSelectionChanged()"
+                                    [disabled]="isRouteEditMode || isSavingRouteChanges"
+                                />
                                 <span class="item-title">{{ route.name }}</span>
                                 <span class="item-subtitle">{{ route.lineNumber }} · {{ route.lineName }}</span>
                             </label>
@@ -61,11 +71,42 @@
 
             <section class="selector-block toggle-block">
                 <label class="toggle-row">
-                    <input type="checkbox" [(ngModel)]="showStops" />
+                    <input type="checkbox" [(ngModel)]="showStops" [disabled]="isRouteEditMode" />
                     <span>{{ 'BUS_MAP_SHOW_STOPS' | translate }}</span>
                 </label>
                 @if (isLoadingStops) {
                     <p class="loading-text">{{ 'BUS_MAP_LOADING_STOPS' | translate }}</p>
+                }
+            </section>
+
+            <section class="selector-block edit-block">
+                <div class="selector-head">
+                    <h2>3. {{ 'BUS_MAP_EDIT_ROUTE' | translate }}</h2>
+                </div>
+
+                @if (selectedRoutes.length !== 1) {
+                    <p class="empty-text">{{ 'BUS_MAP_EDIT_SELECT_ONE' | translate }}</p>
+                } @else if (!isRouteEditMode) {
+                    <p class="dialog-hint">{{ 'BUS_MAP_EDIT_HINT' | translate }}</p>
+                    <button mat-stroked-button type="button" (click)="startRouteEditing()">
+                        <mat-icon>edit</mat-icon>
+                        {{ 'BUS_MAP_EDIT_START' | translate }}
+                    </button>
+                } @else {
+                    <p class="dialog-hint">{{ 'BUS_MAP_EDIT_ACTIVE' | translate }}</p>
+                    <div class="edit-actions">
+                        <button mat-stroked-button type="button" (click)="undoEditedRoute()" [disabled]="isSavingRouteChanges">
+                            <mat-icon>undo</mat-icon>
+                            {{ 'BUS_MAP_EDIT_UNDO' | translate }}
+                        </button>
+                        <button mat-raised-button color="primary" type="button" (click)="saveEditedRoute()" [disabled]="isSavingRouteChanges">
+                            <mat-icon>save</mat-icon>
+                            {{ 'BUS_MAP_EDIT_SAVE' | translate }}
+                        </button>
+                        <button mat-button type="button" (click)="cancelRouteEditing()" [disabled]="isSavingRouteChanges">
+                            {{ 'BUS_MAP_EDIT_CANCEL' | translate }}
+                        </button>
+                    </div>
                 }
             </section>
         </aside>
@@ -77,7 +118,12 @@
                     <p>{{ 'BUS_MAP_EMPTY_TEXT' | translate }}</p>
                 </div>
             } @else {
-                <app-map [busRoutes]="selectedRoutes" [busStops]="showStops ? busStops : []"></app-map>
+                <app-map
+                    [busRoutes]="selectedRoutes"
+                    [busStops]="showStops ? busStops : []"
+                    [enableRouteEditing]="isRouteEditMode"
+                    [editableRouteId]="editingRouteId"
+                ></app-map>
                 <p class="map-legend">{{ 'BUS_MAP_LEGEND' | translate }}</p>
             }
         </section>

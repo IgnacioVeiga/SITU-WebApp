@@ -1,3 +1,14 @@
 <div class="map-shell">
-    <div leaflet class="leaflet-host" [leafletOptions]="options" [leafletLayers]="layers" (leafletMapReady)="onMapReady($event)"></div>
+    <div
+        leaflet
+        class="leaflet-host"
+        [leafletOptions]="options"
+        [leafletLayers]="layers"
+        leafletDraw
+        [leafletDrawOptions]="drawOptions"
+        (leafletMapReady)="onMapReady($event)"
+        (leafletDrawEdited)="onDrawEdited()"
+    >
+        <div [leafletLayer]="drawnItems"></div>
+    </div>
 </div>

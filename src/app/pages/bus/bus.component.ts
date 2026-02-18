@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,7 +10,7 @@ import { PageHeaderComponent } from 'src/app/shared/components/page-header/page-
 import { MapComponent } from 'src/app/shared/components/map/map.component';
 import { BusLine, BusRoute, BusStop } from 'src/app/shared/models/bus.model';
 import { LineService } from 'src/app/shared/services/line.service';
-import { RouteService } from 'src/app/shared/services/route.service';
+import { RouteService, RouteUpsertRequest } from 'src/app/shared/services/route.service';
 import { StopService } from 'src/app/shared/services/stop.service';
 
 @Component({
@@ -27,6 +27,8 @@ import { StopService } from 'src/app/shared/services/stop.service';
     ]
 })
 export class BusComponent implements OnInit {
+    @ViewChild(MapComponent) private mapComponent?: MapComponent;
+
     busLines: BusLine[] = [];
     busRoutes: BusRoute[] = [];
     busStops: BusStop[] = [];
@@ -35,6 +37,9 @@ export class BusComponent implements OnInit {
     isLoadingLines: boolean = false;
     isLoadingRoutes: boolean = false;
     isLoadingStops: boolean = false;
+    isRouteEditMode: boolean = false;
+    isSavingRouteChanges: boolean = false;
+    editingRouteId: number | null = null;
 
     private readonly toastr = inject(ToastrService);
     private readonly lineService = inject(LineService);
@@ -47,6 +52,13 @@ export class BusComponent implements OnInit {
 
     get selectedRoutes(): BusRoute[] {
         return this.busRoutes.filter((route) => route.selected);
+    }
+
+    get selectedRouteForEdition(): BusRoute | null {
+        if (this.selectedRoutes.length !== 1) {
+            return null;
+        }
+        return this.selectedRoutes[0];
     }
 
     ngOnInit(): void {
@@ -62,11 +74,13 @@ export class BusComponent implements OnInit {
     }
 
     onLineSelectionChanged(): void {
+        this.ensureEditingRouteStillSelected();
         this.busStops = [];
         this.loadRoutesForSelectedLines();
     }
 
     onRouteSelectionChanged(): void {
+        this.ensureEditingRouteStillSelected();
         this.loadStopsForSelectedRoutes();
     }
 
@@ -75,6 +89,70 @@ export class BusComponent implements OnInit {
         this.busRoutes = [];
         this.busStops = [];
         this.showStops = true;
+        this.exitRouteEditing();
+    }
+
+    startRouteEditing(): void {
+        const route = this.selectedRouteForEdition;
+        if (!route) {
+            this.toastr.warning('Seleccioná un único recorrido para editar.');
+            return;
+        }
+
+        this.isRouteEditMode = true;
+        this.editingRouteId = route.id;
+    }
+
+    undoEditedRoute(): void {
+        this.mapComponent?.resetEditableRoute();
+    }
+
+    cancelRouteEditing(): void {
+        this.exitRouteEditing();
+    }
+
+    saveEditedRoute(): void {
+        if (!this.isRouteEditMode || this.editingRouteId == null) {
+            return;
+        }
+
+        const route = this.busRoutes.find((item) => item.id === this.editingRouteId);
+        if (!route || route.lineId == null) {
+            this.toastr.error('No se pudo identificar el recorrido seleccionado.');
+            return;
+        }
+
+        const coordinates = this.mapComponent?.getEditableRouteCoordinatesLonLat();
+        if (!coordinates || coordinates.length < 2) {
+            this.toastr.warning('El recorrido debe tener al menos dos puntos.');
+            return;
+        }
+
+        const payload: RouteUpsertRequest = {
+            lineId: route.lineId,
+            name: route.name,
+            coordinates: JSON.stringify({
+                type: 'LineString',
+                coordinates
+            })
+        };
+
+        this.isSavingRouteChanges = true;
+
+        this.routeService
+            .updateRoute(route.id, payload)
+            .pipe(finalize(() => (this.isSavingRouteChanges = false)))
+            .subscribe({
+                next: (updatedRoute) => {
+                    this.busRoutes = this.busRoutes.map((item) =>
+                        item.id === updatedRoute.id ? { ...item, coordinates: updatedRoute.coordinates } : item
+                    );
+                    this.exitRouteEditing();
+                },
+                error: () => {
+                    this.toastr.error('No se pudieron guardar los cambios del recorrido.');
+                }
+            });
     }
 
     getPageSubtitle(): string {
@@ -167,6 +245,7 @@ export class BusComponent implements OnInit {
                     return;
                 }
 
+                this.ensureEditingRouteStillSelected();
                 this.busStops = [];
             });
     }
@@ -217,5 +296,21 @@ export class BusComponent implements OnInit {
                     this.toastr.warning('Algunas paradas no pudieron cargarse.');
                 }
             });
+    }
+
+    private ensureEditingRouteStillSelected(): void {
+        if (!this.isRouteEditMode || this.editingRouteId == null) {
+            return;
+        }
+
+        const routeStillSelected = this.selectedRoutes.some((route) => route.id === this.editingRouteId);
+        if (!routeStillSelected) {
+            this.exitRouteEditing();
+        }
+    }
+
+    private exitRouteEditing(): void {
+        this.isRouteEditMode = false;
+        this.editingRouteId = null;
     }
 }

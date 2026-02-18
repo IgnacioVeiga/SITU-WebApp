@@ -1,6 +1,8 @@
 import { Component, effect, input, signal } from '@angular/core';
 import * as L from 'leaflet';
+import 'leaflet-draw';
 import { LeafletModule } from '@bluehalo/ngx-leaflet';
+import { LeafletDrawModule } from '@bluehalo/ngx-leaflet-draw';
 import { BusRoute, BusStop } from '../../models/bus.model';
 
 type GeoJsonPoint = { type: 'Point'; coordinates: [number, number] };
@@ -19,13 +21,18 @@ type ParsedWkbHeader = {
     selector: 'app-map',
     templateUrl: './map.component.html',
     styleUrls: ['./map.component.scss'],
-    imports: [LeafletModule]
+    imports: [LeafletModule, LeafletDrawModule]
 })
 export class MapComponent {
     busRoutes = input<BusRoute[]>([]);
     busStops = input<BusStop[]>([]);
+    enableRouteEditing = input<boolean>(false);
+    editableRouteId = input<number | null>(null);
 
     layers: L.Layer[] = [];
+    drawnItems: L.FeatureGroup = L.featureGroup();
+
+    drawOptions: L.Control.DrawConstructorOptions = this.createDrawOptions(false);
 
     options: L.MapOptions = {
         layers: [
@@ -40,29 +47,67 @@ export class MapComponent {
 
     private readonly viewInitialized = signal(false);
     private map: L.Map | null = null;
+    private editableRouteLayer: L.Polyline | null = null;
+    private editableOriginalLonLat: [number, number][] = [];
 
     constructor() {
         effect(() => {
             const routes = this.busRoutes();
             const stops = this.busStops();
+            const editingEnabled = this.enableRouteEditing();
+            const editableRouteId = this.editableRouteId();
 
             if (!this.viewInitialized()) {
                 return;
             }
 
-            this.redrawMap(routes, stops);
+            this.redrawMap(routes, stops, editingEnabled, editableRouteId);
         });
     }
 
     onMapReady(map: L.Map): void {
         this.map = map;
         this.viewInitialized.set(true);
-        this.redrawMap(this.busRoutes(), this.busStops());
+        this.redrawMap(this.busRoutes(), this.busStops(), this.enableRouteEditing(), this.editableRouteId());
     }
 
-    private redrawMap(routes: BusRoute[], stops: BusStop[]): void {
+    onDrawEdited(): void {
+        // The edited geometry is read lazily from `getEditableRouteCoordinatesLonLat()`
+        // when the user explicitly clicks save in the page controls.
+    }
+
+    resetEditableRoute(): void {
+        if (!this.editableRouteLayer || this.editableOriginalLonLat.length < 2) {
+            return;
+        }
+
+        const latLngs = this.editableOriginalLonLat.map(
+            ([longitude, latitude]) => [latitude, longitude] as L.LatLngTuple
+        );
+
+        this.editableRouteLayer.setLatLngs(latLngs);
+    }
+
+    getEditableRouteCoordinatesLonLat(): [number, number][] | null {
+        if (!this.editableRouteLayer) {
+            return null;
+        }
+
+        const latLngs = this.extractPolylineLatLngs(this.editableRouteLayer);
+        if (latLngs.length < 2) {
+            return null;
+        }
+
+        return latLngs.map((point) => [this.roundCoordinate(point.lng), this.roundCoordinate(point.lat)]);
+    }
+
+    private redrawMap(routes: BusRoute[], stops: BusStop[], editingEnabled: boolean, editableRouteId: number | null): void {
         const nextLayers: L.Layer[] = [];
         const bounds = L.latLngBounds([]);
+
+        this.drawnItems.clearLayers();
+        this.editableRouteLayer = null;
+        this.editableOriginalLonLat = [];
 
         routes.forEach((route) => {
             const points = this.parseLineCoordinates(route.coordinates);
@@ -70,13 +115,23 @@ export class MapComponent {
                 return;
             }
 
+            const isEditable = editingEnabled && editableRouteId != null && route.id === editableRouteId;
             const routeLayer = L.polyline(points, {
-                color: this.getRouteColor(route.id),
-                weight: 4,
-                opacity: 0.9
+                color: isEditable ? '#e12885' : this.getRouteColor(route.id),
+                weight: isEditable ? 5 : 4,
+                opacity: 0.92
             }).bindPopup(`${route.lineNumber ?? '-'} · ${route.name}`);
 
-            nextLayers.push(routeLayer);
+            if (isEditable) {
+                this.drawnItems.addLayer(routeLayer);
+                this.editableRouteLayer = routeLayer;
+                this.editableOriginalLonLat = points.map(
+                    ([lat, lng]) => [this.roundCoordinate(lng), this.roundCoordinate(lat)]
+                );
+            } else {
+                nextLayers.push(routeLayer);
+            }
+
             bounds.extend(routeLayer.getBounds());
         });
 
@@ -99,6 +154,7 @@ export class MapComponent {
         });
 
         this.layers = nextLayers;
+        this.drawOptions = this.createDrawOptions(editingEnabled && this.editableRouteLayer != null);
 
         if (!this.map) {
             return;
@@ -110,6 +166,25 @@ export class MapComponent {
         }
 
         this.map.setView([-34.603722, -58.381592], 11, { animate: false });
+    }
+
+    private createDrawOptions(canEdit: boolean): L.Control.DrawConstructorOptions {
+        return {
+            position: 'topright',
+            draw: {
+                polyline: false,
+                polygon: false,
+                rectangle: false,
+                circle: false,
+                marker: false,
+                circlemarker: false
+            },
+            edit: {
+                featureGroup: this.drawnItems,
+                edit: canEdit ? {} : false,
+                remove: false
+            }
+        };
     }
 
     private parseLineCoordinates(raw: unknown): L.LatLngTuple[] {
@@ -295,6 +370,23 @@ export class MapComponent {
         }
 
         return bytes;
+    }
+
+    private extractPolylineLatLngs(polyline: L.Polyline): L.LatLng[] {
+        const latLngs = polyline.getLatLngs();
+        if (!Array.isArray(latLngs) || latLngs.length === 0) {
+            return [];
+        }
+
+        if (Array.isArray(latLngs[0])) {
+            return (latLngs[0] as L.LatLng[]) ?? [];
+        }
+
+        return latLngs as L.LatLng[];
+    }
+
+    private roundCoordinate(value: number): number {
+        return Math.round(value * 1_000_000) / 1_000_000;
     }
 
     private getRouteColor(routeId: number): string {
