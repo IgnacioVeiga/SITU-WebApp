@@ -2,7 +2,6 @@ import { Component, effect, input, signal } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-draw';
 import { LeafletModule } from '@bluehalo/ngx-leaflet';
-import { LeafletDrawModule } from '@bluehalo/ngx-leaflet-draw';
 import { BusRoute, BusStop } from '../../models/bus.model';
 
 type GeoJsonPoint = { type: 'Point'; coordinates: [number, number] };
@@ -21,7 +20,7 @@ type ParsedWkbHeader = {
     selector: 'app-map',
     templateUrl: './map.component.html',
     styleUrls: ['./map.component.scss'],
-    imports: [LeafletModule, LeafletDrawModule]
+    imports: [LeafletModule]
 })
 export class MapComponent {
     busRoutes = input<BusRoute[]>([]);
@@ -30,9 +29,6 @@ export class MapComponent {
     editableRouteId = input<number | null>(null);
 
     layers: L.Layer[] = [];
-    drawnItems: L.FeatureGroup = L.featureGroup();
-
-    drawOptions: L.Control.DrawConstructorOptions = this.createDrawOptions(false);
 
     options: L.MapOptions = {
         layers: [
@@ -71,11 +67,6 @@ export class MapComponent {
         this.redrawMap(this.busRoutes(), this.busStops(), this.enableRouteEditing(), this.editableRouteId());
     }
 
-    onDrawEdited(): void {
-        // The edited geometry is read lazily from `getEditableRouteCoordinatesLonLat()`
-        // when the user explicitly clicks save in the page controls.
-    }
-
     resetEditableRoute(): void {
         if (!this.editableRouteLayer || this.editableOriginalLonLat.length < 2) {
             return;
@@ -102,10 +93,11 @@ export class MapComponent {
     }
 
     private redrawMap(routes: BusRoute[], stops: BusStop[], editingEnabled: boolean, editableRouteId: number | null): void {
+        this.disableEditableLayerEditing();
+
         const nextLayers: L.Layer[] = [];
         const bounds = L.latLngBounds([]);
 
-        this.drawnItems.clearLayers();
         this.editableRouteLayer = null;
         this.editableOriginalLonLat = [];
 
@@ -123,15 +115,13 @@ export class MapComponent {
             }).bindPopup(`${route.lineNumber ?? '-'} · ${route.name}`);
 
             if (isEditable) {
-                this.drawnItems.addLayer(routeLayer);
                 this.editableRouteLayer = routeLayer;
                 this.editableOriginalLonLat = points.map(
                     ([lat, lng]) => [this.roundCoordinate(lng), this.roundCoordinate(lat)]
                 );
-            } else {
-                nextLayers.push(routeLayer);
             }
 
+            nextLayers.push(routeLayer);
             bounds.extend(routeLayer.getBounds());
         });
 
@@ -154,7 +144,10 @@ export class MapComponent {
         });
 
         this.layers = nextLayers;
-        this.drawOptions = this.createDrawOptions(editingEnabled && this.editableRouteLayer != null);
+
+        if (editingEnabled) {
+            this.enableEditableLayerEditing();
+        }
 
         if (!this.map) {
             return;
@@ -168,23 +161,31 @@ export class MapComponent {
         this.map.setView([-34.603722, -58.381592], 11, { animate: false });
     }
 
-    private createDrawOptions(canEdit: boolean): L.Control.DrawConstructorOptions {
-        return {
-            position: 'topright',
-            draw: {
-                polyline: false,
-                polygon: false,
-                rectangle: false,
-                circle: false,
-                marker: false,
-                circlemarker: false
-            },
-            edit: {
-                featureGroup: this.drawnItems,
-                edit: canEdit ? {} : false,
-                remove: false
-            }
+    private enableEditableLayerEditing(): void {
+        if (!this.editableRouteLayer) {
+            return;
+        }
+
+        // Leaflet Draw registers editing handlers on polyline instances.
+        // We enable it automatically so users can drag vertices right away,
+        // without relying on the toolbar controls.
+        setTimeout(() => {
+            const editableLayer = this.editableRouteLayer as unknown as {
+                editing?: { enable?: () => void; disable?: () => void };
+            };
+            editableLayer.editing?.enable?.();
+        });
+    }
+
+    private disableEditableLayerEditing(): void {
+        if (!this.editableRouteLayer) {
+            return;
+        }
+
+        const editableLayer = this.editableRouteLayer as unknown as {
+            editing?: { enable?: () => void; disable?: () => void };
         };
+        editableLayer.editing?.disable?.();
     }
 
     private parseLineCoordinates(raw: unknown): L.LatLngTuple[] {

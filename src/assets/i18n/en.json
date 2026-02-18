@@ -26,6 +26,7 @@
       "LINE_REQUIRED": "A line is required for the route.",
       "NAME_REQUIRED": "Route name is required.",
       "COORDINATES_REQUIRED": "Route coordinates are required.",
+      "COORDINATES_INVALID": "Route coordinates format is invalid.",
       "INVALID_REQUEST": "Invalid route request."
     },
     "STOP": {

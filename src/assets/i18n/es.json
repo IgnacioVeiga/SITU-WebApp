@@ -31,6 +31,7 @@
       "LINE_REQUIRED": "Debes indicar una línea para el recorrido.",
       "NAME_REQUIRED": "El nombre del recorrido es obligatorio.",
       "COORDINATES_REQUIRED": "Las coordenadas del recorrido son obligatorias.",
+      "COORDINATES_INVALID": "El formato de coordenadas del recorrido no es válido.",
       "INVALID_REQUEST": "Solicitud de recorrido inválida."
     },
     "STOP": {
