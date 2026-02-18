@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,7 +8,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { UpdatePasswordComponent } from 'src/app/pages/auth/update-password/update-password.component';
 import { AddUserComponent } from 'src/app/pages/users/add/add-user.component';
 import { EditUserComponent } from 'src/app/pages/users/edit/edit-user.component';
 import { PageHeaderComponent } from 'src/app/shared/components/page-header/page-header.component';
@@ -41,6 +41,7 @@ export class UserListComponent implements AfterViewInit {
   readonly profileImageBaseUrl = `${environment.API_URL}${environment.API_PREFIX}/images/user-profile/`;
 
   private readonly dialog = inject(MatDialog);
+  private readonly router = inject(Router);
   private readonly toastr = inject(ToastrService);
   private readonly userService = inject(UserService);
   private readonly authService = inject(AuthService);
@@ -82,7 +83,12 @@ export class UserListComponent implements AfterViewInit {
   }
 
   addUser(): void {
-    const dialogRef = this.dialog.open(AddUserComponent);
+    const dialogRef = this.dialog.open(AddUserComponent, {
+      autoFocus: false,
+      width: 'min(740px, 96vw)',
+      maxWidth: '96vw',
+      panelClass: 'app-dialog-panel'
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -100,7 +106,11 @@ export class UserListComponent implements AfterViewInit {
 
   editUser(userData: User): void {
     const dialogRef = this.dialog.open(EditUserComponent, {
-      data: { ...userData }
+      data: { ...userData },
+      autoFocus: false,
+      width: 'min(740px, 96vw)',
+      maxWidth: '96vw',
+      panelClass: 'app-dialog-panel'
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -118,10 +128,7 @@ export class UserListComponent implements AfterViewInit {
   }
 
   updatePassword(): void {
-    const dialogRef = this.dialog.open(UpdatePasswordComponent);
-    dialogRef.afterClosed().subscribe(() => {
-      // no-op
-    });
+    this.router.navigate(['/user/password']);
   }
 
   deleteUser(id: number): void {

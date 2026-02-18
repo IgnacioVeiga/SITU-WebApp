@@ -60,7 +60,13 @@ export class SignupComponent {
 
     this.authService.signup(this.form).subscribe({
       next: () => {
-        this.dialog.open(AfterSignUpComponent, { data: this.form.email })
+        this.dialog.open(AfterSignUpComponent, {
+          data: this.form.email,
+          autoFocus: false,
+          width: 'min(520px, 92vw)',
+          maxWidth: '92vw',
+          panelClass: 'app-dialog-panel'
+        })
           .afterClosed().subscribe(() => {
             this.goTo('auth/login');
           });

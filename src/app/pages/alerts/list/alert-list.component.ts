@@ -76,7 +76,12 @@ export class AlertListComponent implements AfterViewInit {
   }
 
   createAlertDialog(): void {
-    const dialogRef = this.dialog.open(CreateAlertComponent);
+    const dialogRef = this.dialog.open(CreateAlertComponent, {
+      autoFocus: false,
+      width: 'min(760px, 96vw)',
+      maxWidth: '96vw',
+      panelClass: 'app-dialog-panel'
+    });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
@@ -87,7 +92,11 @@ export class AlertListComponent implements AfterViewInit {
 
   seeAlertDialog(alert: Alert): void {
     this.dialog.open(AlertDetailsComponent, {
-      data: alert
+      data: alert,
+      autoFocus: false,
+      width: 'min(620px, 94vw)',
+      maxWidth: '94vw',
+      panelClass: 'app-dialog-panel'
     });
   }
 

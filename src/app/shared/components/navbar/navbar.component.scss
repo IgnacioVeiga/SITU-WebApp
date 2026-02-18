@@ -46,6 +46,7 @@
 }
 
 .menu-items a,
+.password-shortcut,
 #logout {
   border-radius: 999px;
   color: #f5fbfc;
@@ -59,6 +60,14 @@
 #logout {
   margin-left: 0.25rem;
   border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.password-shortcut {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.password-shortcut:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 #logout:hover {
@@ -93,6 +102,7 @@
 @media (max-width: 1080px) {
   .menu-items,
   .session-info,
+  .password-shortcut,
   #logout {
     display: none;
   }

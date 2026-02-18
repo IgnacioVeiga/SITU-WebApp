@@ -257,14 +257,27 @@ p {
 }
 
 .dialog-shell {
-  width: min(680px, 96vw);
+  width: 100%;
 }
 
 .dialog-body {
   display: grid;
-  gap: 0.82rem;
-  width: min(640px, 100%);
-  padding-top: 0.35rem;
+  gap: 0.9rem;
+  width: 100%;
+  padding-top: 0.3rem;
+}
+
+.dialog-section {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 .dialog-grid-two {
@@ -299,4 +312,19 @@ p {
 
 .mat-mdc-dialog-content .mat-mdc-form-field {
   width: 100%;
+}
+
+.app-dialog-panel .mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  background: var(--surface);
+}
+
+.app-dialog-panel .mat-mdc-dialog-title {
+  padding-top: 0.9rem;
+}
+
+.app-dialog-panel .mat-mdc-dialog-content {
+  padding-bottom: 0.55rem;
 }

@@ -2,31 +2,50 @@
   <h1 mat-dialog-title>{{ 'ADD_USER' | translate }}</h1>
 
   <mat-dialog-content class="dialog-body">
-    <div class="photo-row">
-      <img [src]="getProfilePreview()" alt="Foto de perfil" class="profile-image" />
-      <div class="photo-controls">
-        <label for="photoURL">{{ 'PHOTO' | translate }}</label>
-        <input type="file" id="photoURL" name="photoURL" accept="image/*" (change)="onFileSelected($event)" />
+    <section class="dialog-section">
+      <h2 class="section-title">Perfil inicial</h2>
+
+      <div class="photo-row">
+        <img [src]="getProfilePreview()" alt="Foto de perfil" class="profile-image" />
+        <div class="photo-controls">
+          <label for="photoURL">{{ 'PHOTO' | translate }}</label>
+          <input type="file" id="photoURL" name="photoURL" accept="image/*" (change)="onFileSelected($event)" />
+          <span class="field-note">Opcional. Podrás reemplazarla después.</span>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="dialog-grid-two">
-      <mat-form-field>
-        <mat-label>DNI</mat-label>
-        <input matInput type="number" id="dni" name="dni" [(ngModel)]="user.dni" required min="1" placeholder="00000000" />
-      </mat-form-field>
+    <section class="dialog-section">
+      <h2 class="section-title">Datos del usuario</h2>
 
-      <mat-form-field>
-        <mat-label>{{ 'ROLE' | translate }}</mat-label>
-        <mat-select id="role" name="role" [(ngModel)]="user.role" required>
-          @for (option of roleTypes; track option.value) {
-            <mat-option [value]="option.value">
-              {{ option.label }}
-            </mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-    </div>
+      <div class="dialog-grid-two">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName" required maxlength="80" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Apellido</mat-label>
+          <input matInput type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName" required maxlength="80" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>DNI</mat-label>
+          <input matInput type="number" id="dni" name="dni" [(ngModel)]="user.dni" required min="1" [max]="maxDni" placeholder="00000000" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'ROLE' | translate }}</mat-label>
+          <mat-select id="role" name="role" [(ngModel)]="user.role" required>
+            @for (option of roleTypes; track option.value) {
+              <mat-option [value]="option.value">
+                {{ option.label }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </section>
 
     <p class="dialog-hint">El alta crea el usuario para la empresa actual y luego podrás editar su rol o foto.</p>
   </mat-dialog-content>

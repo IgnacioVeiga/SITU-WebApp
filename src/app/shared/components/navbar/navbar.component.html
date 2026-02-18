@@ -32,6 +32,10 @@
     </div>
     }
 
+    <button mat-icon-button class="password-shortcut" [routerLink]="'/user/password'" [attr.aria-label]="'UPDATE_PASSWORD' | translate">
+        <mat-icon>lock_reset</mat-icon>
+    </button>
+
     <button mat-button id="logout" type="button" (click)="confirmLogout()">
         <mat-icon>exit_to_app</mat-icon>
         {{'LOGOUT' | translate}}
@@ -48,6 +52,7 @@
     @if (canSeeCompanyScopes()) {
     <a mat-menu-item [routerLink]="'/user'">{{'USERS' | translate}}</a>
     }
+    <a mat-menu-item [routerLink]="'/user/password'">{{'UPDATE_PASSWORD' | translate}}</a>
     <a mat-menu-item [routerLink]="'/bus'">{{'BUS_MAP' | translate}}</a>
     <button mat-menu-item type="button" (click)="confirmLogout()">{{'LOGOUT' | translate}}</button>
 </mat-menu>

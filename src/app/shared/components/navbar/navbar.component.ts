@@ -62,7 +62,12 @@ export class NavbarComponent implements OnInit {
   }
 
   confirmLogout(): void {
-    const dialogRef = this.dialog.open(ConfirmLogoutComponent);
+    const dialogRef = this.dialog.open(ConfirmLogoutComponent, {
+      autoFocus: false,
+      width: 'min(420px, 90vw)',
+      maxWidth: '90vw',
+      panelClass: 'app-dialog-panel'
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {

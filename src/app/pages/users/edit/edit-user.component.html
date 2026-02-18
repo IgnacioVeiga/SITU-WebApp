@@ -1,30 +1,47 @@
 <div class="dialog-shell">
-  <h1 mat-dialog-title>{{ user.lastName }} {{ user.firstName }}</h1>
+  <h1 mat-dialog-title>Editar usuario</h1>
+  <p class="dialog-hint">{{ user.lastName }} {{ user.firstName }}</p>
 
   <mat-dialog-content class="dialog-body">
-    <file-uploader
-      [imgUrl]="getProfileImageUrl()"
-      [userId]="user.id"
-      [dni]="user.dni"
-    ></file-uploader>
+    <section class="dialog-section">
+      <h2 class="section-title">Foto de perfil</h2>
+      <file-uploader
+        [imgUrl]="getProfileImageUrl()"
+        [userId]="user.id"
+        [dni]="user.dni"
+      ></file-uploader>
+    </section>
 
-    <div class="dialog-grid-two">
-      <div class="id-row">
-        <span>DNI</span>
-        <b>{{ user.dni }}</b>
+    <section class="dialog-section">
+      <h2 class="section-title">Datos principales</h2>
+      <div class="dialog-grid-two">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName" maxlength="80" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Apellido</mat-label>
+          <input matInput type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName" maxlength="80" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>DNI</mat-label>
+          <input matInput type="number" id="dni" name="dni" [(ngModel)]="user.dni" min="1" [max]="maxDni" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'ROLE' | translate }}</mat-label>
+          <mat-select id="role" name="role" [(ngModel)]="user.role">
+            @for (option of roleTypes; track option.value) {
+              <mat-option [value]="option.value">
+                {{ option.label }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
       </div>
-
-      <mat-form-field>
-        <mat-label>{{ 'ROLE' | translate }}</mat-label>
-        <mat-select id="role" name="role" [(ngModel)]="user.role">
-          @for (option of roleTypes; track option.value) {
-          <mat-option [value]="option.value">
-            {{ option.text }}
-          </mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-    </div>
+    </section>
 
     <p class="dialog-hint">{{ 'CHANGE_ROLE_WARNING' | translate }}</p>
   </mat-dialog-content>

@@ -25,6 +25,7 @@ import { User, UserRole } from 'src/app/shared/models/user.model';
 })
 export class AddUserComponent {
   readonly fallbackProfileImage = 'assets/images/user.png';
+  readonly maxDni = 99999999;
   user: User = {
     ...new User(),
     role: UserRole.EMPLOYEE
@@ -35,7 +36,8 @@ export class AddUserComponent {
     { label: 'Supervisor', value: UserRole.SUPERVISOR },
     { label: 'Empleado', value: UserRole.EMPLOYEE },
     { label: 'Chofer', value: UserRole.DRIVER },
-    { label: 'Pasajero', value: UserRole.PASSENGER }
+    { label: 'Pasajero', value: UserRole.PASSENGER },
+    { label: 'Regular', value: UserRole.REGULAR }
   ];
 
   onFileSelected(event: Event): void {

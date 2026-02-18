@@ -26,14 +26,15 @@ import { environment } from 'src/environments/environment';
 })
 export class EditUserComponent {
   readonly profileImageBaseUrl = `${environment.API_URL}${environment.API_PREFIX}/images/user-profile/`;
+  readonly maxDni = 99999999;
 
-  roleTypes: { text: string; value: UserRole }[] = [
-    { text: 'Administrador', value: UserRole.ADMIN },
-    { text: 'Supervisor', value: UserRole.SUPERVISOR },
-    { text: 'Empleado', value: UserRole.EMPLOYEE },
-    { text: 'Chofer', value: UserRole.DRIVER },
-    { text: 'Pasajero', value: UserRole.PASSENGER },
-    { text: 'Regular', value: UserRole.REGULAR }
+  roleTypes: { label: string; value: UserRole }[] = [
+    { label: 'Administrador', value: UserRole.ADMIN },
+    { label: 'Supervisor', value: UserRole.SUPERVISOR },
+    { label: 'Empleado', value: UserRole.EMPLOYEE },
+    { label: 'Chofer', value: UserRole.DRIVER },
+    { label: 'Pasajero', value: UserRole.PASSENGER },
+    { label: 'Regular', value: UserRole.REGULAR }
   ];
 
   constructor(
