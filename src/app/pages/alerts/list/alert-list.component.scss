@@ -2,6 +2,17 @@
   box-shadow: 0 8px 18px rgba(19, 122, 127, 0.22);
 }
 
+.filter-actions {
+  display: inline-flex;
+  gap: 0.4rem;
+  margin-right: 0.65rem;
+}
+
+.filter-actions button.filter-active {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
 .title-cell {
   font-weight: 600;
 }

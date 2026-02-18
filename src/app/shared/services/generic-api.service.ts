@@ -40,7 +40,7 @@ export class GenericAPIService {
 
   PUT<T>(endpoint: string, body: unknown): Observable<T> {
     const url = `${this.apiBaseUrl}/${endpoint}`;
-    return this.httpClient.put<ApiResponse<T>>(url, body).pipe(
+    return this.httpClient.put<ApiResponse<T>>(url, body, this.createHttpOptions()).pipe(
       map((response) => {
         this.handleSuccess(response);
         return response.data!;
@@ -51,7 +51,7 @@ export class GenericAPIService {
 
   PATCH<T>(endpoint: string, body: unknown): Observable<T> {
     const url = `${this.apiBaseUrl}/${endpoint}`;
-    return this.httpClient.patch<ApiResponse<T>>(url, body).pipe(
+    return this.httpClient.patch<ApiResponse<T>>(url, body, this.createHttpOptions()).pipe(
       map((response) => {
         this.handleSuccess(response);
         return response.data!;
@@ -62,7 +62,7 @@ export class GenericAPIService {
 
   DELETE<T>(endpoint: string): Observable<T> {
     const url = `${this.apiBaseUrl}/${endpoint}`;
-    return this.httpClient.delete<ApiResponse<T>>(url).pipe(
+    return this.httpClient.delete<ApiResponse<T>>(url, this.createHttpOptions()).pipe(
       map((response) => {
         this.handleSuccess(response);
         return response.data!;

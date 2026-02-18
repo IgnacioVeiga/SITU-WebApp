@@ -37,6 +37,7 @@ export class AlertListComponent implements AfterViewInit {
   readonly defaultPageSize = 20;
   displayedColumns: string[] = ['title', 'description', 'date', 'priority', 'actions'];
   dataSource: MatTableDataSource<Alert> = new MatTableDataSource<Alert>();
+  activeOnly: boolean = true;
 
   private readonly dialog = inject(MatDialog);
   private readonly toastr = inject(ToastrService);
@@ -54,7 +55,7 @@ export class AlertListComponent implements AfterViewInit {
   }
 
   loadAlerts(): void {
-    this.alertService.GetAlerts(this.paginator.pageIndex, this.paginator.pageSize).subscribe({
+    this.alertService.GetAlerts(this.paginator.pageIndex, this.paginator.pageSize, this.activeOnly).subscribe({
       next: (data: Page<Alert>) => {
         this.dataSource.data = data.content;
         this.paginator.length = data.totalElements;
@@ -63,6 +64,15 @@ export class AlertListComponent implements AfterViewInit {
         this.toastr.error('No se pudo conectar al servidor', 'Intentelo más tarde');
       }
     });
+  }
+
+  setActiveOnly(activeOnly: boolean): void {
+    if (this.activeOnly === activeOnly) {
+      return;
+    }
+    this.activeOnly = activeOnly;
+    this.paginator.firstPage();
+    this.loadAlerts();
   }
 
   createAlertDialog(): void {
@@ -108,6 +118,7 @@ export class AlertListComponent implements AfterViewInit {
   }
 
   getPageSubtitle(): string {
-    return `${this.dataSource.data.length} alertas visibles de ${this.paginator?.length || 0} totales`;
+    const filterLabel = this.activeOnly ? 'activas' : 'totales';
+    return `${this.dataSource.data.length} alertas ${filterLabel} visibles de ${this.paginator?.length || 0}`;
   }
 }

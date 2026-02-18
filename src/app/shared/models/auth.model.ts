@@ -7,7 +7,7 @@ export interface SignUpForm {
     firstName: string,
     lastName: string,
     dni: number | undefined,
-    note: string | undefined
+    notes: string | undefined
 }
 
 export interface LogInForm {

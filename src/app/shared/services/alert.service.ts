@@ -10,8 +10,8 @@ import { Page } from '../models/page.model';
 export class AlertService {
   private api = inject(GenericAPIService);
 
-  GetAlerts(pageIndex: number, pageSize: number): Observable<Page<Alert>> {
-    return this.api.GET<any>(`alerts/${pageIndex}/${pageSize}`);
+  GetAlerts(pageIndex: number, pageSize: number, activeOnly: boolean = true): Observable<Page<Alert>> {
+    return this.api.GET<Page<Alert>>(`alerts/${pageIndex}/${pageSize}`, { activeOnly });
   }
 
   CreateAlert(alert: Alert): Observable<Alert> {

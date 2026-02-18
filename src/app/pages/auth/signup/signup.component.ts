@@ -36,7 +36,7 @@ export class SignupComponent {
     email: '',
     firstName: '',
     lastName: '',
-    note: undefined,
+    notes: undefined,
     phone: ''
   };
 

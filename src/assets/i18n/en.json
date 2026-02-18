@@ -5,6 +5,7 @@
       "INVALID_CREDENTIALS": "Invalid credentials.",
       "COMPANY_EXISTS": "The company is already registered.",
       "DNI_EXISTS": "The DNI is already used in another company.",
+      "EMAIL_EXISTS": "The email is already registered.",
       "PASSWORD_INCORRECT": "The current password is incorrect.",
       "USER_NOT_FOUND": "User not found.",
       "INSUFFICIENT_PERMISSIONS": "You do not have enough permissions to perform this action.",

@@ -1,6 +1,24 @@
 <section class="page-shell">
     <app-page-header titleKey="ALERTS" [subtitle]="getPageSubtitle()">
         <div headerActions>
+            <div class="filter-actions">
+                <button
+                    mat-stroked-button
+                    type="button"
+                    [class.filter-active]="activeOnly"
+                    (click)="setActiveOnly(true)"
+                >
+                    Activas
+                </button>
+                <button
+                    mat-stroked-button
+                    type="button"
+                    [class.filter-active]="!activeOnly"
+                    (click)="setActiveOnly(false)"
+                >
+                    Todas
+                </button>
+            </div>
             <button mat-raised-button color="primary" type="button" (click)="createAlertDialog()" class="header-action">
                 <mat-icon>add</mat-icon>
                 {{ 'CREATE' | translate }}

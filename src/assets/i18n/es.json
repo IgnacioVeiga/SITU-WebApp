@@ -10,6 +10,7 @@
       "INVALID_CREDENTIALS": "Credenciales inválidas.",
       "COMPANY_EXISTS": "La empresa ya está registrada.",
       "DNI_EXISTS": "El DNI ya está ocupado en una empresa.",
+      "EMAIL_EXISTS": "El email ya está registrado.",
       "PASSWORD_INCORRECT": "La contraseña actual es incorrecta.",
       "USER_NOT_FOUND": "Usuario no encontrado.",
       "INSUFFICIENT_PERMISSIONS": "No tienes permisos suficientes para realizar esta acción.",
