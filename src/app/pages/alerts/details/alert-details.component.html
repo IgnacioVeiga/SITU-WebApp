@@ -2,24 +2,53 @@
     <h1 mat-dialog-title>{{ 'DETAIL' | translate }}</h1>
 
     <mat-dialog-content class="dialog-body">
-        <h2 class="dialog-title">{{ data.title }}</h2>
+        <section class="summary-block">
+            <h2 class="dialog-title">{{ data.title }}</h2>
+            <div class="chips-row">
+                <span class="priority-chip" [ngClass]="getPriorityClass(data.priority)">
+                    {{ 'PRIORITY' | translate }}: {{ getPriorityLabel(data.priority) }}
+                </span>
+                <span class="state-badge" [ngClass]="getActiveStateClass()">{{ getActiveStateLabel() }}</span>
+            </div>
+        </section>
 
-        <div class="detail-row">
-            <span class="priority-chip" [ngClass]="getPriorityClass(data.priority)">
-                {{ 'PRIORITY' | translate }}: {{ getPriorityLabel(data.priority) }}
-            </span>
-            <span class="detail-date">{{ data.alertDate | date: 'dd/MM/yyyy HH:mm' }}</span>
+        <div class="meta-grid">
+            <div class="meta-card">
+                <span class="meta-label">{{ 'DATETIME' | translate }}</span>
+                <span class="meta-value">{{ data.alertDate | date: 'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+
+            <div class="meta-card">
+                <span class="meta-label">Creada por</span>
+                <span class="meta-value">{{ data.user.lastName || '-' }} {{ data.user.firstName || '' }}</span>
+            </div>
+
+            @if (data.location) {
+                <div class="meta-card">
+                    <span class="meta-label">{{ 'LOCATION' | translate }}</span>
+                    <span class="meta-value">{{ data.location }}</span>
+                </div>
+            }
+
+            @if (data.startsAt) {
+                <div class="meta-card">
+                    <span class="meta-label">Inicio</span>
+                    <span class="meta-value">{{ data.startsAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+                </div>
+            }
+
+            @if (data.endsAt) {
+                <div class="meta-card">
+                    <span class="meta-label">Fin</span>
+                    <span class="meta-value">{{ data.endsAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+                </div>
+            }
         </div>
 
-        <p class="dialog-hint">Creada por: {{ data.user.lastName || '-' }} {{ data.user.firstName || '' }}</p>
-
-        @if (data.location) {
-        <p class="dialog-hint">{{ 'LOCATION' | translate }}: {{ data.location }}</p>
-        }
-
-        <hr class="dialog-divider" />
-
-        <p class="detail-description">{{ data.description }}</p>
+        <section class="description-block">
+            <h3>Descripción</h3>
+            <p class="detail-description">{{ data.description }}</p>
+        </section>
     </mat-dialog-content>
 
     <mat-dialog-actions align="end" class="dialog-actions">

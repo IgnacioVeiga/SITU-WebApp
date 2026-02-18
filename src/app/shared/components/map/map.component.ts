@@ -1,149 +1,304 @@
-import { AfterViewInit, Component, effect, input, signal } from '@angular/core';
-import { BusRoute, BusStop } from '../../models/bus.model';
-import { LeafletModule } from '@bluehalo/ngx-leaflet';
-import { LeafletDrawModule } from '@bluehalo/ngx-leaflet-draw';
+import { Component, effect, input, signal } from '@angular/core';
 import * as L from 'leaflet';
-import 'leaflet-draw';
+import { LeafletModule } from '@bluehalo/ngx-leaflet';
+import { BusRoute, BusStop } from '../../models/bus.model';
+
+type GeoJsonPoint = { type: 'Point'; coordinates: [number, number] };
+type GeoJsonLineString = { type: 'LineString'; coordinates: [number, number][] };
+type GeoJsonCandidate = { type?: unknown; coordinates?: unknown };
+
+type ParsedWkbHeader = {
+    littleEndian: boolean;
+    baseType: number;
+    hasZ: boolean;
+    hasM: boolean;
+    offset: number;
+};
 
 @Component({
     selector: 'app-map',
-    templateUrl: 'map.component.html',
-    imports: [
-        LeafletModule,
-        LeafletDrawModule
-    ]
+    templateUrl: './map.component.html',
+    styleUrls: ['./map.component.scss'],
+    imports: [LeafletModule]
 })
-export class MapComponent implements AfterViewInit {
-  busRoutes = input<BusRoute[]>([]);
-  busStops = input<BusStop[]>([]);
+export class MapComponent {
+    busRoutes = input<BusRoute[]>([]);
+    busStops = input<BusStop[]>([]);
 
-  options: L.MapOptions = {
-    layers: [
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
-    ],
-    zoom: 10,
-    center: L.latLng(-34.581231, -58.420862)
-  };
+    layers: L.Layer[] = [];
 
-  drawnItems: L.FeatureGroup = L.featureGroup();
+    options: L.MapOptions = {
+        layers: [
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; OpenStreetMap contributors'
+            })
+        ],
+        zoom: 11,
+        center: L.latLng(-34.603722, -58.381592)
+    };
 
-  drawOptions: L.Control.DrawConstructorOptions = {
-    edit: {
-      featureGroup: this.drawnItems
-    }
-  };
+    private readonly viewInitialized = signal(false);
+    private map: L.Map | null = null;
 
-  private readonly viewInitialized = signal(false);
+    constructor() {
+        effect(() => {
+            const routes = this.busRoutes();
+            const stops = this.busStops();
 
-  constructor() {
-    effect(() => {
-      const routes = this.busRoutes();
-      const stops = this.busStops();
+            if (!this.viewInitialized()) {
+                return;
+            }
 
-      if (!this.viewInitialized()) {
-        return;
-      }
-
-      this.redrawMap(routes, stops);
-    });
-  }
-
-  public onDrawCreated(event: L.DrawEvents.Created): void {
-    this.drawnItems.addLayer(event.layer);
-  }
-
-  ngAfterViewInit(): void {
-    this.viewInitialized.set(true);
-  }
-
-  private redrawMap(routes: BusRoute[], stops: BusStop[]): void {
-    this.clearMap();
-
-    if (routes.length > 0) {
-      this.drawBusRoutes(routes);
+            this.redrawMap(routes, stops);
+        });
     }
 
-    if (stops.length > 0) {
-      this.drawBusStops(stops);
-    }
-  }
-
-  private clearMap(): void {
-    this.drawnItems.clearLayers();
-  }
-
-  private drawBusRoutes(routes: BusRoute[]): void {
-    routes.forEach((route) => {
-      const geoJson = this.parseGeoJson(route.coordinates);
-
-      if (!geoJson || geoJson.type !== 'LineString' || !Array.isArray(geoJson.coordinates)) {
-        return;
-      }
-
-      const polylinePoints = geoJson.coordinates
-        .filter((coord: unknown) => Array.isArray(coord) && coord.length >= 2)
-        .map((coord: [number, number]) => [coord[1], coord[0]]);
-
-      if (polylinePoints.length > 0) {
-        const routeLine = L.polyline(polylinePoints as L.LatLngTuple[], { color: 'blue' });
-        this.attachClickEvent(routeLine);
-        this.drawnItems.addLayer(routeLine);
-      }
-    });
-  }
-
-  private drawBusStops(stops: BusStop[]): void {
-    stops.forEach((stop) => {
-      const stopGeoJson = this.parseGeoJson(stop.location);
-
-      if (!stopGeoJson || stopGeoJson.type !== 'Point' || !Array.isArray(stopGeoJson.coordinates) || stopGeoJson.coordinates.length < 2) {
-        return;
-      }
-
-      const stopCoordinates: L.LatLngTuple = [
-        stopGeoJson.coordinates[1],
-        stopGeoJson.coordinates[0],
-      ];
-
-      const stopMarker = L.marker(stopCoordinates, {
-        icon: L.icon({
-          ...L.Icon.Default.prototype.options,
-          iconUrl: 'assets/marker-icon.png',
-          iconRetinaUrl: 'assets/marker-icon-2x.png',
-          shadowUrl: 'assets/marker-shadow.png'
-        })
-      }).bindPopup(`<b>${stop.name}</b>`);
-
-      this.attachClickEvent(stopMarker);
-      this.drawnItems.addLayer(stopMarker);
-    });
-  }
-
-  private parseGeoJson(raw: unknown): any | null {
-    if (raw == null) {
-      return null;
+    onMapReady(map: L.Map): void {
+        this.map = map;
+        this.viewInitialized.set(true);
+        this.redrawMap(this.busRoutes(), this.busStops());
     }
 
-    if (typeof raw === 'string') {
-      try {
-        return JSON.parse(raw);
-      } catch {
+    private redrawMap(routes: BusRoute[], stops: BusStop[]): void {
+        const nextLayers: L.Layer[] = [];
+        const bounds = L.latLngBounds([]);
+
+        routes.forEach((route) => {
+            const points = this.parseLineCoordinates(route.coordinates);
+            if (points.length === 0) {
+                return;
+            }
+
+            const routeLayer = L.polyline(points, {
+                color: this.getRouteColor(route.id),
+                weight: 4,
+                opacity: 0.9
+            }).bindPopup(`${route.lineNumber ?? '-'} · ${route.name}`);
+
+            nextLayers.push(routeLayer);
+            bounds.extend(routeLayer.getBounds());
+        });
+
+        stops.forEach((stop) => {
+            const coordinates = this.parsePointCoordinates(stop.location);
+            if (!coordinates) {
+                return;
+            }
+
+            const stopLayer = L.circleMarker(coordinates, {
+                radius: 5,
+                color: '#ffffff',
+                weight: 1,
+                fillColor: '#137a7f',
+                fillOpacity: 0.94
+            }).bindPopup(stop.name);
+
+            nextLayers.push(stopLayer);
+            bounds.extend(stopLayer.getLatLng());
+        });
+
+        this.layers = nextLayers;
+
+        if (!this.map) {
+            return;
+        }
+
+        if (bounds.isValid()) {
+            this.map.fitBounds(bounds.pad(0.12), { animate: false });
+            return;
+        }
+
+        this.map.setView([-34.603722, -58.381592], 11, { animate: false });
+    }
+
+    private parseLineCoordinates(raw: unknown): L.LatLngTuple[] {
+        const geoJson = this.parseGeoJson(raw);
+
+        if (geoJson?.type === 'LineString') {
+            return geoJson.coordinates
+                .filter((coord): coord is [number, number] => Array.isArray(coord) && coord.length >= 2)
+                .map((coord) => [coord[1], coord[0]] as L.LatLngTuple);
+        }
+
+        if (typeof raw === 'string') {
+            return this.parseWkbLineString(raw);
+        }
+
+        return [];
+    }
+
+    private parsePointCoordinates(raw: unknown): L.LatLngTuple | null {
+        const geoJson = this.parseGeoJson(raw);
+
+        if (geoJson?.type === 'Point' && Array.isArray(geoJson.coordinates) && geoJson.coordinates.length >= 2) {
+            return [geoJson.coordinates[1], geoJson.coordinates[0]];
+        }
+
+        if (typeof raw === 'string') {
+            return this.parseWkbPoint(raw);
+        }
+
         return null;
-      }
     }
 
-    if (typeof raw === 'object') {
-      return raw;
+    private parseGeoJson(raw: unknown): GeoJsonPoint | GeoJsonLineString | null {
+        if (raw == null) {
+            return null;
+        }
+
+        if (typeof raw === 'object') {
+            const objectValue = raw as GeoJsonCandidate;
+            if (
+                (objectValue.type === 'Point' || objectValue.type === 'LineString') &&
+                objectValue.coordinates !== undefined
+            ) {
+                return objectValue as GeoJsonPoint | GeoJsonLineString;
+            }
+            return null;
+        }
+
+        if (typeof raw !== 'string') {
+            return null;
+        }
+
+        try {
+            const parsed = JSON.parse(raw) as GeoJsonCandidate;
+            if ((parsed.type === 'Point' || parsed.type === 'LineString') && parsed.coordinates !== undefined) {
+                return parsed as GeoJsonPoint | GeoJsonLineString;
+            }
+            return null;
+        } catch {
+            return null;
+        }
     }
 
-    return null;
-  }
+    private parseWkbLineString(rawHex: string): L.LatLngTuple[] {
+        const bytes = this.hexToBytes(rawHex);
+        if (!bytes) {
+            return [];
+        }
 
-  private attachClickEvent(layer: L.Layer): void {
-    layer.on('click', (event: L.LeafletMouseEvent) => {
-      const layerType = layer instanceof L.Polyline ? 'LineString' : 'Point';
-      const coordinates = event.latlng;
-      console.log(layerType + '\n' + coordinates);
-    });
-  }
+        const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+        const header = this.parseWkbHeader(view);
+        if (!header || header.baseType !== 2) {
+            return [];
+        }
+
+        let offset = header.offset;
+        if (offset + 4 > view.byteLength) {
+            return [];
+        }
+
+        const pointsCount = view.getUint32(offset, header.littleEndian);
+        offset += 4;
+
+        const points: L.LatLngTuple[] = [];
+
+        for (let index = 0; index < pointsCount; index++) {
+            if (offset + 16 > view.byteLength) {
+                return [];
+            }
+
+            const longitude = view.getFloat64(offset, header.littleEndian);
+            offset += 8;
+            const latitude = view.getFloat64(offset, header.littleEndian);
+            offset += 8;
+
+            points.push([latitude, longitude]);
+
+            if (header.hasZ) {
+                offset += 8;
+            }
+            if (header.hasM) {
+                offset += 8;
+            }
+        }
+
+        return points;
+    }
+
+    private parseWkbPoint(rawHex: string): L.LatLngTuple | null {
+        const bytes = this.hexToBytes(rawHex);
+        if (!bytes) {
+            return null;
+        }
+
+        const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+        const header = this.parseWkbHeader(view);
+        if (!header || header.baseType !== 1) {
+            return null;
+        }
+
+        let offset = header.offset;
+        if (offset + 16 > view.byteLength) {
+            return null;
+        }
+
+        const longitude = view.getFloat64(offset, header.littleEndian);
+        offset += 8;
+        const latitude = view.getFloat64(offset, header.littleEndian);
+
+        return [latitude, longitude];
+    }
+
+    private parseWkbHeader(view: DataView): ParsedWkbHeader | null {
+        if (view.byteLength < 5) {
+            return null;
+        }
+
+        let offset = 0;
+        const littleEndian = view.getUint8(offset) === 1;
+        offset += 1;
+
+        const rawType = view.getUint32(offset, littleEndian);
+        offset += 4;
+
+        const hasSrid = (rawType & 0x20000000) !== 0;
+        const explicitZ = (rawType & 0x80000000) !== 0;
+        const explicitM = (rawType & 0x40000000) !== 0;
+
+        const geometryType = rawType & 0x0fffffff;
+        const baseType = geometryType % 1000;
+        const dimensionCode = Math.floor(geometryType / 1000);
+
+        const hasZ = explicitZ || dimensionCode === 1 || dimensionCode === 3;
+        const hasM = explicitM || dimensionCode === 2 || dimensionCode === 3;
+
+        if (hasSrid) {
+            if (offset + 4 > view.byteLength) {
+                return null;
+            }
+            offset += 4;
+        }
+
+        return {
+            littleEndian,
+            baseType,
+            hasZ,
+            hasM,
+            offset
+        };
+    }
+
+    private hexToBytes(rawHex: string): Uint8Array | null {
+        const normalized = rawHex.replace(/^\\x/i, '').trim();
+
+        if (normalized.length === 0 || normalized.length % 2 !== 0 || !/^[0-9a-fA-F]+$/.test(normalized)) {
+            return null;
+        }
+
+        const bytes = new Uint8Array(normalized.length / 2);
+
+        for (let index = 0; index < normalized.length; index += 2) {
+            bytes[index / 2] = Number.parseInt(normalized.substring(index, index + 2), 16);
+        }
+
+        return bytes;
+    }
+
+    private getRouteColor(routeId: number): string {
+        const palette = ['#137a7f', '#1d8aa0', '#0f5f74', '#e12885', '#2f9f98', '#4a7f9f'];
+        return palette[Math.abs(routeId) % palette.length];
+    }
 }

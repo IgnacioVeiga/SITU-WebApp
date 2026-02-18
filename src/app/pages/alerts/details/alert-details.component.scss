@@ -1,20 +1,68 @@
 .dialog-title {
   margin: 0;
   font-size: 1.15rem;
-  line-height: 1.35;
+  line-height: 1.3;
 }
 
-.detail-row {
-  display: flex;
+.summary-block {
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+  border-radius: 12px;
+  padding: 0.75rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.chips-row {
+  display: inline-flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
   gap: 0.45rem;
 }
 
-.detail-date {
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.55rem;
+}
+
+.meta-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #f9fcfd;
+  padding: 0.6rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.meta-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.meta-value {
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.description-block {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.7rem;
+  background: #fdfefe;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.description-block h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 .detail-description {

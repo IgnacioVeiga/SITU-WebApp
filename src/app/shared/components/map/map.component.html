@@ -1,9 +1,3 @@
-<div leaflet style="height: 400px;"
-     leafletDraw
-     [leafletOptions]="options"
-     [leafletDrawOptions]="drawOptions"
-     (leafletDrawCreated)="onDrawCreated($event)">
-
-	<div [leafletLayer]="drawnItems"></div>
-
+<div class="map-shell">
+    <div leaflet class="leaflet-host" [leafletOptions]="options" [leafletLayers]="layers" (leafletMapReady)="onMapReady($event)"></div>
 </div>

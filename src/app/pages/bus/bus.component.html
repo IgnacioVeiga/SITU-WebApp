@@ -1,35 +1,85 @@
-<div class="container">
-  <div class="sidebar">
-    <div class="sidebar-content">
-      <h2>1. {{'BUS_LINES' | translate}}</h2>
-      <ul>
-        @for (line of busLines; track $index) {
-        <li>
-          <input type="checkbox" (change)="loadBusRoutes()" [(ngModel)]="line.selected" /> {{ line.name }}
-        </li>
-        }
-      </ul>
+<section class="page-shell">
+    <app-page-header titleKey="BUS_MAP" [subtitle]="getPageSubtitle()">
+        <div headerActions>
+            <button mat-stroked-button type="button" (click)="resetSelection()" [disabled]="isLoadingLines">
+                <mat-icon>restart_alt</mat-icon>
+                {{ 'CLEAR' | translate }}
+            </button>
+        </div>
+    </app-page-header>
+
+    <div class="map-layout">
+        <aside class="selection-panel card-shell">
+            <section class="selector-block">
+                <div class="selector-head">
+                    <h2>1. {{ 'BUS_LINES' | translate }}</h2>
+                    <span class="count-chip">{{ selectedLines.length }}/{{ busLines.length }}</span>
+                </div>
+                <p class="dialog-hint">{{ 'BUS_MAP_STEP_LINES_HINT' | translate }}</p>
+
+                @if (isLoadingLines) {
+                    <p class="loading-text">{{ 'BUS_MAP_LOADING_LINES' | translate }}</p>
+                } @else if (busLines.length === 0) {
+                    <p class="empty-text">{{ 'BUS_MAP_NO_LINES' | translate }}</p>
+                } @else {
+                    <div class="select-list">
+                        @for (line of busLines; track trackByLineId($index, line)) {
+                            <label class="select-item">
+                                <input type="checkbox" [(ngModel)]="line.selected" (change)="onLineSelectionChanged()" />
+                                <span class="item-title">{{ line.number }} · {{ line.name }}</span>
+                            </label>
+                        }
+                    </div>
+                }
+            </section>
+
+            <section class="selector-block">
+                <div class="selector-head">
+                    <h2>2. {{ 'BUS_ROUTES' | translate }}</h2>
+                    <span class="count-chip">{{ selectedRoutes.length }}/{{ busRoutes.length }}</span>
+                </div>
+                <p class="dialog-hint">{{ 'BUS_MAP_STEP_ROUTES_HINT' | translate }}</p>
+
+                @if (selectedLines.length === 0) {
+                    <p class="empty-text">{{ 'BUS_MAP_PICK_LINES_FIRST' | translate }}</p>
+                } @else if (isLoadingRoutes) {
+                    <p class="loading-text">{{ 'BUS_MAP_LOADING_ROUTES' | translate }}</p>
+                } @else if (busRoutes.length === 0) {
+                    <p class="empty-text">{{ 'BUS_MAP_NO_ROUTES' | translate }}</p>
+                } @else {
+                    <div class="select-list">
+                        @for (route of busRoutes; track trackByRouteId($index, route)) {
+                            <label class="select-item">
+                                <input type="checkbox" [(ngModel)]="route.selected" (change)="onRouteSelectionChanged()" />
+                                <span class="item-title">{{ route.name }}</span>
+                                <span class="item-subtitle">{{ route.lineNumber }} · {{ route.lineName }}</span>
+                            </label>
+                        }
+                    </div>
+                }
+            </section>
+
+            <section class="selector-block toggle-block">
+                <label class="toggle-row">
+                    <input type="checkbox" [(ngModel)]="showStops" />
+                    <span>{{ 'BUS_MAP_SHOW_STOPS' | translate }}</span>
+                </label>
+                @if (isLoadingStops) {
+                    <p class="loading-text">{{ 'BUS_MAP_LOADING_STOPS' | translate }}</p>
+                }
+            </section>
+        </aside>
+
+        <section class="map-panel card-shell">
+            @if (selectedRoutes.length === 0) {
+                <div class="map-empty">
+                    <h3>{{ 'BUS_MAP_EMPTY_TITLE' | translate }}</h3>
+                    <p>{{ 'BUS_MAP_EMPTY_TEXT' | translate }}</p>
+                </div>
+            } @else {
+                <app-map [busRoutes]="selectedRoutes" [busStops]="showStops ? busStops : []"></app-map>
+                <p class="map-legend">{{ 'BUS_MAP_LEGEND' | translate }}</p>
+            }
+        </section>
     </div>
-
-    <div class="sidebar-footer">
-      @if (busRoutes.length > 0) {
-      <h2>2. {{'BUS_ROUTES' | translate}}</h2>
-      <ul>
-        @for (route of busRoutes; track $index) {
-        <li>
-          <input type="checkbox" (change)="loadBusStops()" [(ngModel)]="route.selected" /> {{ route.name }}
-        </li>
-        }
-      </ul>
-
-      <button (click)="resetSelection()">{{'CLEAR' | translate}}</button>
-      }
-    </div>
-  </div>
-
-  <div class="map-container">
-    @if (busStops.length > 0) {
-    <app-map [busRoutes]="selectedRoutes" [busStops]="busStops"></app-map>
-    }
-  </div>
-</div>
+</section>

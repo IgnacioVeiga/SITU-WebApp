@@ -1,4 +1,33 @@
-textarea[matInput] {
-  min-height: 130px;
+:host {
+  display: block;
+}
+
+.intro-text {
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.55rem 0.65rem;
+}
+
+.description-field textarea[matInput] {
+  min-height: 140px;
   resize: vertical;
+}
+
+.metadata-row {
+  align-items: stretch;
+}
+
+.priority-preview {
+  border: 1px solid var(--border);
+  background: #f8fcfd;
+  border-radius: 10px;
+  padding: 0.7rem;
+  display: grid;
+  align-content: start;
+  gap: 0.4rem;
+}
+
+.priority-preview strong {
+  color: var(--text);
 }

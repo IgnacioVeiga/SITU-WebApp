@@ -1,102 +1,221 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { forkJoin, of } from 'rxjs';
+import { catchError, finalize, map } from 'rxjs/operators';
+import { PageHeaderComponent } from 'src/app/shared/components/page-header/page-header.component';
+import { MapComponent } from 'src/app/shared/components/map/map.component';
+import { BusLine, BusRoute, BusStop } from 'src/app/shared/models/bus.model';
 import { LineService } from 'src/app/shared/services/line.service';
 import { RouteService } from 'src/app/shared/services/route.service';
-import { MapComponent } from 'src/app/shared/components/map/map.component';
-import { FormsModule } from '@angular/forms';
-
 import { StopService } from 'src/app/shared/services/stop.service';
-import { BusLine, BusRoute, BusStop } from 'src/app/shared/models/bus.model';
-import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-bus',
     templateUrl: './bus.component.html',
     styleUrls: ['./bus.component.scss'],
     imports: [
-    FormsModule,
-    TranslateModule,
-    MapComponent
-]
+        FormsModule,
+        MatButtonModule,
+        MatIconModule,
+        TranslateModule,
+        PageHeaderComponent,
+        MapComponent
+    ]
 })
-export class BusComponent {
-  busLines: BusLine[] = [];
-  busRoutes: BusRoute[] = [];
-  busStops: BusStop[] = [];
+export class BusComponent implements OnInit {
+    busLines: BusLine[] = [];
+    busRoutes: BusRoute[] = [];
+    busStops: BusStop[] = [];
 
-  toastr = inject(ToastrService);
-  lineService = inject(LineService);
-  routeService = inject(RouteService);
-  stopService = inject(StopService);
+    showStops: boolean = true;
+    isLoadingLines: boolean = false;
+    isLoadingRoutes: boolean = false;
+    isLoadingStops: boolean = false;
 
-  get isLoadRoutesDisabled(): boolean {
-    return !this.busLines.some(line => line.selected);
-  }
+    private readonly toastr = inject(ToastrService);
+    private readonly lineService = inject(LineService);
+    private readonly routeService = inject(RouteService);
+    private readonly stopService = inject(StopService);
 
-  get isLoadStopsDisabled(): boolean {
-    return !this.busRoutes.some(route => route.selected);
-  }
+    get selectedLines(): BusLine[] {
+        return this.busLines.filter((line) => line.selected);
+    }
 
-  get selectedLines(): BusLine[] {
-    return this.busLines.filter(line => line.selected);
-  }
+    get selectedRoutes(): BusRoute[] {
+        return this.busRoutes.filter((route) => route.selected);
+    }
 
-  get selectedRoutes(): BusRoute[] {
-    return this.busRoutes.filter(route => route.selected);
-  }
+    ngOnInit(): void {
+        this.loadBusLines();
+    }
 
-  ngOnInit() {
-    this.loadBusLines();
-  }
+    trackByLineId(index: number, line: BusLine): number {
+        return line.id;
+    }
 
-  loadBusLines() {
-    this.lineService.getAllLines().subscribe({
-      next: (lines) => {
-        this.busLines = lines;
-      },
-      error: () => {
-        // TODO: review, organize and translate all these types of toastr messages.
-        this.toastr.error('Error al cargar líneas de autobuses');
-      }
-    });
-  }
+    trackByRouteId(index: number, route: BusRoute): number {
+        return route.id;
+    }
 
-  loadBusRoutes() {
-    this.busRoutes = [];
-    this.busStops = [];
+    onLineSelectionChanged(): void {
+        this.busStops = [];
+        this.loadRoutesForSelectedLines();
+    }
 
-    this.selectedLines.forEach(line => {
-      this.routeService.getRoutesByLine(line.id).subscribe({
-        next: (routes) => {
-          this.busRoutes.push(...routes);
-        },
-        error: () => {
-          // TODO: review, organize and translate all these types of toastr messages.
-          this.toastr.error('Error al cargar recorridos');
+    onRouteSelectionChanged(): void {
+        this.loadStopsForSelectedRoutes();
+    }
+
+    resetSelection(): void {
+        this.busLines = this.busLines.map((line) => ({ ...line, selected: false }));
+        this.busRoutes = [];
+        this.busStops = [];
+        this.showStops = true;
+    }
+
+    getPageSubtitle(): string {
+        const selectedLines = this.selectedLines.length;
+        const selectedRoutes = this.selectedRoutes.length;
+        return `${selectedLines} líneas seleccionadas · ${selectedRoutes} recorridos activos en mapa`;
+    }
+
+    private loadBusLines(): void {
+        this.isLoadingLines = true;
+
+        this.lineService
+            .getAllLines()
+            .pipe(finalize(() => (this.isLoadingLines = false)))
+            .subscribe({
+                next: (lines) => {
+                    this.busLines = lines
+                        .map((line) => ({ ...line, selected: false }))
+                        .sort((a, b) => a.number.localeCompare(b.number, undefined, { numeric: true }));
+                },
+                error: () => {
+                    this.toastr.error('No se pudieron cargar las líneas de la empresa.');
+                }
+            });
+    }
+
+    private loadRoutesForSelectedLines(): void {
+        const selectedLines = this.selectedLines;
+
+        if (selectedLines.length === 0) {
+            this.busRoutes = [];
+            this.busStops = [];
+            return;
         }
-      });
-    });
-  }
 
-  loadBusStops() {
-    this.busStops = [];
-    
-    this.selectedRoutes.forEach(route => {
-      this.stopService.getStopsByRoute(route.id).subscribe({
-        next: (stops) => {
-          this.busStops.push(...stops);
-        },
-        error: () => {
-          // TODO: review, organize and translate all these types of toastr messages.
-          this.toastr.error('Error al cargar paradas');
+        const previouslySelectedRouteIds = new Set(this.selectedRoutes.map((route) => route.id));
+        let hadErrors = false;
+
+        this.isLoadingRoutes = true;
+
+        forkJoin(
+            selectedLines.map((line) =>
+                this.routeService.getRoutesByLine(line.id).pipe(
+                    map((routes) =>
+                        routes.map((route) => ({
+                            ...route,
+                            lineId: line.id,
+                            lineName: line.name,
+                            lineNumber: line.number
+                        }))
+                    ),
+                    catchError(() => {
+                        hadErrors = true;
+                        return of([] as BusRoute[]);
+                    })
+                )
+            )
+        )
+            .pipe(finalize(() => (this.isLoadingRoutes = false)))
+            .subscribe((routeGroups) => {
+                const uniqueRoutes = new Map<number, BusRoute>();
+
+                routeGroups
+                    .flat()
+                    .forEach((route) => {
+                        if (!uniqueRoutes.has(route.id)) {
+                            uniqueRoutes.set(route.id, route);
+                        }
+                    });
+
+                this.busRoutes = Array.from(uniqueRoutes.values())
+                    .map((route) => ({
+                        ...route,
+                        selected: previouslySelectedRouteIds.has(route.id)
+                    }))
+                    .sort((a, b) => {
+                        const byLine = (a.lineNumber ?? '').localeCompare(b.lineNumber ?? '', undefined, { numeric: true });
+                        if (byLine !== 0) {
+                            return byLine;
+                        }
+                        return a.name.localeCompare(b.name);
+                    });
+
+                if (hadErrors) {
+                    this.toastr.warning('Algunos recorridos no pudieron cargarse.');
+                }
+
+                if (this.selectedRoutes.length > 0) {
+                    this.loadStopsForSelectedRoutes();
+                    return;
+                }
+
+                this.busStops = [];
+            });
+    }
+
+    private loadStopsForSelectedRoutes(): void {
+        const selectedRoutes = this.selectedRoutes;
+
+        if (selectedRoutes.length === 0) {
+            this.busStops = [];
+            return;
         }
-      });
-    });
-  }
 
-  resetSelection() {
-    this.busStops = [];
-    this.busRoutes = [];
-    this.busLines.forEach(line => line.selected = false);
-  }
+        let hadErrors = false;
+
+        this.isLoadingStops = true;
+
+        forkJoin(
+            selectedRoutes.map((route) =>
+                this.stopService.getStopsByRoute(route.id).pipe(
+                    map((stops) =>
+                        stops.map((stop) => ({
+                            ...stop,
+                            routeId: route.id
+                        }))
+                    ),
+                    catchError(() => {
+                        hadErrors = true;
+                        return of([] as BusStop[]);
+                    })
+                )
+            )
+        )
+            .pipe(finalize(() => (this.isLoadingStops = false)))
+            .subscribe((stopGroups) => {
+                const uniqueStops = new Map<number, BusStop>();
+
+                stopGroups
+                    .flat()
+                    .forEach((stop) => {
+                        if (!uniqueStops.has(stop.id)) {
+                            uniqueStops.set(stop.id, stop);
+                        }
+                    });
+
+                this.busStops = Array.from(uniqueStops.values());
+
+                if (hadErrors) {
+                    this.toastr.warning('Algunas paradas no pudieron cargarse.');
+                }
+            });
+    }
 }

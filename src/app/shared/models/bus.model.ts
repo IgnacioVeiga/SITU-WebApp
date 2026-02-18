@@ -15,6 +15,8 @@ export interface BusRoute {
     name: string;
     coordinates: any;
     lineId?: number;
+    lineName?: string;
+    lineNumber?: string;
     selected?: boolean;
 }
 
@@ -22,4 +24,5 @@ export interface BusStop {
     id: number;
     name: string;
     location: any;
+    routeId?: number;
 }
