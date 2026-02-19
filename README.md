@@ -32,7 +32,8 @@ Starter scripts:
 - PowerShell: `./run.ps1 [dev|qa|mock|prod] [local|docker]`
 - CMD: `run.bat [dev|qa|mock|prod] [local|docker]`
 
-`docker` mode expects `docker-compose.<env>.yml` in this repository.
+`docker` mode is optional and expects `docker-compose.<env>.yml` files.
+No default frontend compose files are currently tracked in this repository.
 
 Other runtime modes:
 ```bash
@@ -70,6 +71,7 @@ npm run test:ci
 - `docs/routing.md`: route map and complaint navigation.
 - `docs/backend-contract.md`: frontend assumptions about backend payloads.
 - `docs/environments.md`: dev/qa/mock/prod setup.
+- `docs/maps-postgis-leaflet.md`: bus map behavior and geospatial payload compatibility.
 
 ## VSCode helpers
 Tracked editor helpers are available in `.vscode/`:

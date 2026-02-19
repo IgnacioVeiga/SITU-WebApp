@@ -1,5 +1,9 @@
 # Routing overview
 
+Top-level behavior:
+- `/` redirects to `/auth`
+- unknown paths go to `NotFoundComponent` (`**`)
+
 ## Public/auth area
 - `/auth/login`
 - `/auth/signup`
@@ -12,9 +16,12 @@
 - `/complaint/all` (staff-focused)
 - `/complaint/my` (all authenticated users)
 - `/complaint/item/:id`
-- `/alert`
-- `/user`
+- `/alert/list`
+- `/user/list`
+- `/user/password`
 - `/bus`
+
+All authenticated routes are wrapped by `authGuard` and loaded inside the shared layout.
 
 ## Legacy compatibility
 - `/report/...` is still routed to complaint pages for backward compatibility.

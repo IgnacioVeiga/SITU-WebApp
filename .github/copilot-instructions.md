@@ -28,10 +28,13 @@ Human-facing onboarding and product docs are in `docs/`.
 
 ## 4. Architecture and conventions
 
-- Keep routing source of truth in `src/app/app-routing.module.ts` and related feature modules/routes.
+- Keep routing source of truth in `src/app/app.routes.ts` and feature route files (`*.routes.ts`).
 - Reuse shared services/components before creating new abstractions.
 - Keep strict typing and avoid `any` unless unavoidable.
 - Preserve naming migration from legacy `report` wording to canonical `complaint` wording when touching related code.
+- Keep map compatibility logic for route geometry parsing:
+  - support GeoJSON and EWKB-hex route payloads,
+  - preserve `lon,lat` (API) and `lat,lng` (Leaflet) conversion points.
 
 ## 5. UX and language constraints
 
@@ -67,4 +70,5 @@ For environment/routing changes, also verify:
 - `docs/environments.md`
 - `docs/backend-contract.md`
 - `docs/routing.md`
+- `docs/maps-postgis-leaflet.md`
 - `src/environments/environment.ts`

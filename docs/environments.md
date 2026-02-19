@@ -23,6 +23,21 @@ npm run build:mock
 npm run build:prod
 ```
 
+Cross-platform wrappers:
+
+```bash
+./run.sh dev local
+./run.sh qa local
+./run.sh mock local
+./run.sh prod local
+```
+
+PowerShell: `./run.ps1 <env> local`  
+CMD: `run.bat <env> local`
+
+`docker` mode in wrappers is optional and requires local `docker-compose.<env>.yml` files.
+This repository does not include default frontend compose files.
+
 ## Notes
 
 - `mock` profile currently keeps real endpoint shape but enables `useMockApi` flag for future in-app mock fallback wiring.
