@@ -5,6 +5,7 @@ import { provideRouter } from "@angular/router";
 import { routes } from "./app.routes";
 import { provideToastr } from "ngx-toastr";
 import { ErrorInterceptor } from "./shared/interceptors/error.interceptor";
+import { AuthHttpInterceptor } from "./shared/interceptors/auth-http.interceptor";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 
@@ -25,6 +26,11 @@ export const appConfig: ApplicationConfig = {
         {
             provide: HTTP_INTERCEPTORS,
             useClass: ErrorInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthHttpInterceptor,
             multi: true
         },
         importProvidersFrom([TranslateModule.forRoot({

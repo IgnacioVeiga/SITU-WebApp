@@ -25,7 +25,7 @@ import { environment } from 'src/environments/environment';
     ]
 })
 export class EditUserComponent {
-  readonly profileImageBaseUrl = `${environment.API_URL}${environment.API_PREFIX}/images/user-profile/`;
+  readonly profileImageBaseUrl = `${environment.apiBaseUrl.replace(/\/+$/, '')}/images/user-profile/`;
   readonly maxDni = 99999999;
 
   roleTypes: { label: string; value: UserRole }[] = [

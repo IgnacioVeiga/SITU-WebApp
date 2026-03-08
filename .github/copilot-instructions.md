@@ -1,6 +1,6 @@
-# LLM Coding Instructions - SITU WebApp
+# LLM Coding Instructions - SITU Frontend
 
-Machine-oriented guidance for automated code changes in `SITU-WebApp`.
+Machine-oriented guidance for automated code changes in `SITU-Frontend`.
 Human-facing onboarding and product docs are in `docs/`.
 
 ## 1. Repository purpose
@@ -16,7 +16,7 @@ Human-facing onboarding and product docs are in `docs/`.
   - `environment.ts` (`dev`)
   - `environment.qa.ts` (`qa`)
   - `environment.prod.ts` (`prod`)
-  - `environment.mock.ts` (`mock`, frontend-only flag)
+  - `environment.mock.ts` (`mock`; frontend-only via in-memory API adapters)
 - Do not add runtime `.env` resolution in browser code.
 
 ## 3. API and auth integration rules
@@ -24,7 +24,7 @@ Human-facing onboarding and product docs are in `docs/`.
 - Backend contract base is `/api/v1/**`.
 - Keep HTTP calls compatible with cookie-based auth (`withCredentials` where required by current services/interceptors).
 - Do not persist auth tokens in `localStorage`/`sessionStorage`.
-- Keep API URL composition centralized via environment values (`API_URL` + `API_PREFIX`).
+- Keep API URL composition centralized via environment value (`apiBaseUrl`).
 
 ## 4. Architecture and conventions
 

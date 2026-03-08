@@ -38,7 +38,7 @@ export class UserListComponent implements AfterViewInit {
   readonly fallbackProfileImage = 'assets/images/user.png';
   displayedColumns: string[] = ['dni', 'user', 'role', 'actions'];
   dataSource = new MatTableDataSource<User>();
-  readonly profileImageBaseUrl = `${environment.API_URL}${environment.API_PREFIX}/images/user-profile/`;
+  readonly profileImageBaseUrl = `${environment.apiBaseUrl.replace(/\/+$/, '')}/images/user-profile/`;
 
   private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);

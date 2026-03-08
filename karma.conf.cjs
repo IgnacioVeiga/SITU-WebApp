@@ -19,7 +19,7 @@ module.exports = function (config) {
       suppressAll: true,
     },
     coverageReporter: {
-      dir: path.join(__dirname, './coverage/situ-web-app'),
+      dir: path.join(__dirname, './coverage/situ-frontend'),
       subdir: '.',
       reporters: [{ type: 'html' }, { type: 'text-summary' }],
     },

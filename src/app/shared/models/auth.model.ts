@@ -28,3 +28,10 @@ export interface SessionDTO {
     fullName: string,
     role: UserRole
 }
+
+export interface AuthTokenPayload {
+    tokenType: string,
+    accessToken: string,
+    expiresAt: string,
+    session: SessionDTO
+}

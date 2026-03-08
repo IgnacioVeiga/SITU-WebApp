@@ -1,14 +1,20 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
+import { AuthTokenPayload, ChangePasswordDTO, LogInForm, SessionDTO, SignUpForm } from '../models/auth.model';
 import { GenericAPIService } from './generic-api.service';
-import { ChangePasswordDTO, LogInForm, SessionDTO, SignUpForm } from '../models/auth.model';
+
+interface AuthSession {
+  tokenType: string;
+  accessToken: string;
+  expiresAt: string;
+  session: SessionDTO;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private session: SessionDTO | null = null;
-
+  private authSession: AuthSession | null = null;
   private readonly api = inject(GenericAPIService);
 
   signup(form: SignUpForm): Observable<void> {
@@ -16,10 +22,16 @@ export class AuthService {
   }
 
   login(form: LogInForm): Observable<void> {
-    return this.api.POST<SessionDTO>('auth/login', form).pipe(
-      map((resp) => {
-        this.session = resp;
+    return this.api.POST<AuthTokenPayload>('auth/login', form).pipe(
+      map((payload) => {
+        this.setSessionFromPayload(payload);
       })
+    );
+  }
+
+  refreshSession(): Observable<AuthSession> {
+    return this.api.POST<AuthTokenPayload>('auth/refresh', {}).pipe(
+      map((payload) => this.setSessionFromPayload(payload))
     );
   }
 
@@ -31,7 +43,7 @@ export class AuthService {
   }
 
   clearLocalSession(): void {
-    this.session = null;
+    this.authSession = null;
   }
 
   updatePassword(form: ChangePasswordDTO): Observable<void> {
@@ -39,20 +51,23 @@ export class AuthService {
   }
 
   getSession(): Observable<SessionDTO | null> {
-    if (this.session) {
-      return of(this.session);
+    const currentSession = this.getValidAuthSession();
+    if (currentSession) {
+      return of(currentSession.session);
     }
 
-    return this.api.GET<SessionDTO>('auth/session').pipe(
-      map((resp) => {
-        this.session = resp;
-        return resp;
-      })
+    return this.refreshSession().pipe(
+      map((session) => session.session),
+      catchError(() => of(null))
     );
   }
 
   getSessionSnapshot(): SessionDTO | null {
-    return this.session;
+    return this.getValidAuthSession()?.session ?? null;
+  }
+
+  getAccessToken(): string | null {
+    return this.getValidAuthSession()?.accessToken ?? null;
   }
 
   isAuthenticated(): Observable<boolean> {
@@ -60,5 +75,34 @@ export class AuthService {
       map((session) => !!session),
       catchError(() => of(false))
     );
+  }
+
+  private setSessionFromPayload(payload: AuthTokenPayload): AuthSession {
+    this.authSession = {
+      tokenType: payload.tokenType,
+      accessToken: payload.accessToken,
+      expiresAt: payload.expiresAt,
+      session: payload.session
+    };
+
+    const validSession = this.getValidAuthSession();
+    if (!validSession) {
+      throw new Error('Invalid auth token expiration');
+    }
+    return validSession;
+  }
+
+  private getValidAuthSession(): AuthSession | null {
+    if (!this.authSession) {
+      return null;
+    }
+
+    const expiresAtMs = Date.parse(this.authSession.expiresAt);
+    if (Number.isNaN(expiresAtMs) || expiresAtMs <= Date.now()) {
+      this.clearLocalSession();
+      return null;
+    }
+
+    return this.authSession;
   }
 }

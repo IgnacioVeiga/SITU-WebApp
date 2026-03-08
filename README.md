@@ -1,4 +1,4 @@
-# SITU WebApp
+# SITU Frontend
 Angular 20 web client for SITU.
 
 This app is used as backoffice/admin UI and also includes authentication-facing screens.
@@ -11,14 +11,15 @@ This app is used as backoffice/admin UI and also includes authentication-facing 
 
 ## API configuration
 The frontend builds backend URLs using:
-- `API_URL`
-- `API_PREFIX`
+- `apiBaseUrl`
 
 Environment files:
 - `src/environments/environment.ts` (`dev`)
 - `src/environments/environment.qa.ts` (`qa`)
 - `src/environments/environment.prod.ts` (`prod`)
 - `src/environments/environment.mock.ts` (`mock`)
+
+`mock` runs frontend-only using an in-memory API adapter (`MockApiService`) without backend dependency.
 
 ## Run locally
 ```bash
@@ -28,9 +29,9 @@ npm run start:dev
 
 Starter scripts:
 
-- Linux/macOS: `./run.sh [dev|qa|mock|prod] [local|docker]`
-- PowerShell: `./run.ps1 [dev|qa|mock|prod] [local|docker]`
-- CMD: `run.bat [dev|qa|mock|prod] [local|docker]`
+- Linux/macOS: `./scripts/run.sh [dev|qa|mock|prod] [local|docker]`
+- PowerShell: `./scripts/run.ps1 [dev|qa|mock|prod] [local|docker]`
+- CMD: `scripts/run.bat [dev|qa|mock|prod] [local|docker]`
 
 `docker` mode is optional and expects `docker-compose.<env>.yml` files.
 No default frontend compose files are currently tracked in this repository.

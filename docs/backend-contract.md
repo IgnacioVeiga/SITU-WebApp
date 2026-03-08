@@ -2,8 +2,8 @@
 
 This file summarizes the payload shapes currently expected by the frontend.
 
-## Generic API envelope
-All requests sent through `GenericAPIService` expect:
+## Generic API payload handling
+`GenericAPIService` supports two success payload styles:
 
 ```json
 {
@@ -12,9 +12,22 @@ All requests sent through `GenericAPIService` expect:
 }
 ```
 
-`message` may be either:
+or raw DTO payloads (without envelope).
+
+When envelope is present, `message` may be either:
 - a translation key (for example `ERRORS.AUTH.INVALID_CREDENTIALS`), or
 - a plain human-readable message.
+
+Error payloads are expected in this format:
+
+```json
+{
+  "timestamp": "2026-03-08T13:48:13.3040484Z",
+  "status": 400,
+  "error": "Bad Request",
+  "message": "ERRORS.GENERIC"
+}
+```
 
 ## Auth and session model
 - Cookie-based authentication (`authToken` HttpOnly cookie).

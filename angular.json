@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "SITU-WebApp": {
+    "SITU-Frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist/situ-web-app"
+              "base": "dist/situ-frontend"
             },
             "index": "src/index.html",
             "polyfills": [
@@ -109,16 +109,16 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "SITU-WebApp:build:production"
+              "buildTarget": "SITU-Frontend:build:production"
             },
             "development": {
-              "buildTarget": "SITU-WebApp:build:development"
+              "buildTarget": "SITU-Frontend:build:development"
             },
             "qa": {
-              "buildTarget": "SITU-WebApp:build:qa"
+              "buildTarget": "SITU-Frontend:build:qa"
             },
             "mock": {
-              "buildTarget": "SITU-WebApp:build:mock"
+              "buildTarget": "SITU-Frontend:build:mock"
             }
           },
           "defaultConfiguration": "development"
@@ -126,7 +126,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "SITU-WebApp:build"
+            "buildTarget": "SITU-Frontend:build"
           }
         },
         "test": {
