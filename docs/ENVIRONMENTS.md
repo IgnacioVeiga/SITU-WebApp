@@ -1,11 +1,20 @@
-# Frontend environment strategy
+# Frontend Environments
 
-SITU Frontend uses Angular file replacements:
+Compile-time environment strategy for `SITU-Frontend`.
+
+## Angular file replacements
 
 - `development` -> `src/environments/environment.ts`
 - `qa` -> `src/environments/environment.qa.ts`
 - `mock` -> `src/environments/environment.mock.ts`
 - `production` -> `src/environments/environment.prod.ts`
+
+## Common fields
+
+- `name`
+- `production`
+- `apiBaseUrl`
+- `useMockApi`
 
 ## Commands
 
@@ -40,6 +49,6 @@ This repository does not include default frontend compose files.
 
 ## Notes
 
-- `mock` profile is frontend-only and now uses an in-memory API adapter (`MockApiService`) through `GenericAPIService`.
+- `mock` profile is frontend-only and uses an in-memory API adapter (`MockApiService`) through `GenericAPIService`.
 - In `mock`, authentication and domain data are simulated locally (session, users, complaints, alerts, lines/routes/stops).
 - `production` defaults to relative API (`/api/v1`) to support reverse proxy deployments.

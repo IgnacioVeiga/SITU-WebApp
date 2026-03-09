@@ -67,7 +67,13 @@ For environment/routing changes, also verify:
 ## 8. Read these files first
 
 - `README.md`
-- `docs/environments.md`
+- `docs/DEVELOPMENT_SETUP.md`
+- `docs/ENVIRONMENTS.md`
+- `docs/AUTH_FLOW.md`
+- `docs/API_CONTRACT.md`
+- `docs/PROJECT_MAP.md`
+- `docs/TROUBLESHOOTING.md`
+- `docs/ENVIRONMENTS.md`
 - `docs/backend-contract.md`
 - `docs/routing.md`
 - `docs/maps-postgis-leaflet.md`

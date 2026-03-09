@@ -69,9 +69,15 @@ npm run test:ci
 `test:ci` requires Chrome/Chromium available (`CHROME_BIN` in headless runners).
 
 ## Documentation
+- `docs/DEVELOPMENT_SETUP.md`: setup and run workflow.
+- `docs/ENVIRONMENTS.md`: standardized environment profile reference.
+- `docs/AUTH_FLOW.md`: login/refresh/logout frontend flow.
+- `docs/API_CONTRACT.md`: backend payload and endpoint assumptions.
+- `docs/PROJECT_MAP.md`: source navigation map.
+- `docs/TROUBLESHOOTING.md`: common frontend integration/runtime issues.
 - `docs/routing.md`: route map and complaint navigation.
 - `docs/backend-contract.md`: frontend assumptions about backend payloads.
-- `docs/environments.md`: dev/qa/mock/prod setup.
+- `docs/ENVIRONMENTS.md`: dev/qa/mock/prod setup.
 - `docs/maps-postgis-leaflet.md`: bus map behavior and geospatial payload compatibility.
 
 ## VSCode helpers
